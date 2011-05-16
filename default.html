@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>迷你三国杀</title>
+    <style type="text/css">
+        body
+        {
+            margin: 0;
+            padding: 0;
+        }
+        #main
+        {
+            position: relative;
+            width: 1100px;
+            height: 700px;
+            margin: 0 auto;
+            border: 1px solid #000;
+        }
+        .card, #cards img
+        {
+            position: absolute;
+            width: 130px;
+            height: 180px;
+            float: left;
+            cursor: pointer;
+        }
+        .role
+        {
+            border: 1px solid #000;
+        }
+        #role1
+        {
+            left: 320px;
+            top: 20px;
+        }
+        #role2
+        {
+            left: 560px;
+            top: 20px;
+        }
+        #role3
+        {
+            left: 80px;
+            top: 240px;
+        }
+        #cards_out /* 打出去的牌 */
+        {
+            position: absolute;
+            top: 220px;
+            left: 400px;
+            width: 240px;
+            height: 240px;
+            border: 1px dashed #000;
+        }
+        #gameinfo
+        {
+            position: absolute;
+            left: 270px;
+            top: 250px;
+            height: 180px;
+            width: 550px;
+            border: 1px solid #000;
+        }
+        #cards_last /* 发牌区 */
+        {
+            top: 240px;
+            right: 80px;
+            border: 1px dashed #000;
+        }
+        #player /* 玩家区域 */
+        {
+            position: absolute;
+            width: 1000px;
+            height: 180px;
+            left: 50px;
+            bottom: 20px;
+            border: 1px solid #000;
+        }
+        #equipment /* 装备区域 */
+        {
+            width: 190px;
+            height: 100%;
+            border-right: 1px solid #000;
+        }
+        #equipment table
+        {
+            width: 100%;
+            height: 100%;
+        }
+        #equipment td
+        {
+            width: 100%;
+            line-height: 100px;
+        }
+        #cards /* 玩家拥有的牌 */
+        {
+            position: absolute;
+            width: 520px;
+            height: 180px;
+            left: 220px;
+            bottom: 10px;
+        }
+        #confirm
+        {
+            position: absolute;
+            width: 50px;
+            height: 60px;
+            top: -10px;
+            right: 203px;
+            border: 1px dotted #ccc;
+        }
+        #confirm a
+        {
+            cursor: pointer;
+            display: block;
+            margin: 1px;
+        }
+        #confirm a:hover
+        {
+            background-color: #ccc;
+        }
+        #info /* 玩家信息 */
+        {
+            position: absolute;
+            background-color: #fff;
+            top: -40px;
+            right: -1px;
+            width: 200px;
+            height: 219px;
+            border: 1px solid #000;
+        }
+        #test a
+        {
+            display: block;
+            border: 1px solid #000;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #start_bak
+        {
+            position: fixed;
+            display: block;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.9;
+            background-color: #000;
+        }
+        #choose_role
+        {
+            position: fixed;
+            width: 900px;
+            height: 400px;
+            border: 2px solid #000;
+            background-color: #fff;
+            display:table-cell;
+        }
+        .choose_role_card
+        {
+            width: 200px;
+            height: 340px;
+            border: 2px outset #ccc;
+            background-color: #ccc;
+            float: left;
+            margin: 6px;
+        }
+        .choose_role_name
+        {
+            width: 100%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: @Dotum;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
+    <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            playerState.blod = 3;
+
+            /* Role Choose  */
+            $('.choose_role_card').dblclick(RoleChooseFn);
+            $('.choose_role_card').mousedown(function () {
+                $(this).css('border-style', 'inset');
+            });
+            $('.choose_role_card').mouseup(function () {
+                $(this).css('border-style', 'outset');
+            });
+            $('.choose_role_card').mouseout(function () {
+                $(this).css('border-style', 'outset');
+            });
+
+            /* Confirm Button Click Event */
+            $('#ok').click(OkClickFn);
+
+            /* Browser Resize Event */
+            $(window).resize(BrowserResizeFn);
+
+            /* Test Change Stage */
+            $('#test a').click(function () {
+                $('#test a').each(function (i, d) {
+                    $(d).css('background-color', '#fff');
+                });
+                $(this).css('background-color', '#ccc');
+                switch (this.text) {
+                    case '摸牌阶段':
+                        playerState.stage = 0;
+                        break;
+                    case '出牌阶段':
+                        playerState.stage = 1;
+                        break;
+                    case '弃牌阶段':
+                        playerState.stage = 2;
+                        break;
+                }
+                $('#cards img').each(function (i, d) {
+                    $(d).css('bottom', 0);
+                });
+            });
+
+            /* Test Get Cards */
+            $('#cards_last').click(function () {
+                var img = $('<img src="img/gnerals/card/slash.png" />');
+                img.appendTo($('#cards'));
+                playerState.cards.push(Card({ jqObj: img }));
+                var cc = $('#cards img').length;
+                if (cc * cardw < $('#cards').width()) {
+                    img.css('left', cardw * (cc - 1));
+                } else {
+                    $('#cards img').each(function (i, d) {
+                        $(d).css('left', ($('#cards').width() - cardw) / (cc - 1) * i);
+                    });
+                }
+                /* Bind Event */
+                img.click(CardClickFn);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="main">
+        <!-- test option -->
+        <div id="test" style="border: 1px solid red; width: 100px; height: 200px;">
+            <a>摸牌阶段</a> <a>出牌阶段</a> <a>弃牌阶段</a>
+        </div>
+        <!-- end -->
+        <div class="card" id="role1">
+        </div>
+        <div class="card" id="role2">
+        </div>
+        <div class="card" id="role3">
+        </div>
+        <div id="cards_out">
+        </div>
+        <div id="gameinfo">
+        </div>
+        <div class="card" id="cards_last">
+        </div>
+        <div id="player">
+            <div id="equipment">
+                <table>
+                    <tr>
+                        <td style="border-bottom: 3px solid #000;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom: 3px solid #000;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom: 3px solid #000;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="cards">
+            </div>
+            <div id="confirm">
+                <a id="ok">ok</a> <a id="cancel">cancel</a> <a id="finish">finish</a>
+            </div>
+            <div id="info">
+            </div>
+        </div>
+    </div>
+    <div id="start_bak">
+    </div>
+    <div id="choose_role">
+        <div class="choose_role_card">
+            <img src="img/gnerals/hero/sunquan.png" />
+            <div class="choose_role_name">
+                孙权
+            </div>
+        </div>
+        <div class="choose_role_card">
+            <img src="img/gnerals/hero/zhaoyun.png" />
+            <div class="choose_role_name">
+                赵云
+            </div>
+        </div>
+        <div class="choose_role_card">
+            <img src="img/gnerals/hero/guojia.png" />
+            <div class="choose_role_name">
+                郭嘉
+            </div>
+        </div>
+        <div class="choose_role_card">
+            <img src="img/gnerals/hero/huanggai.png" />
+            <div class="choose_role_name">
+                黄盖
+            </div>
+        </div>
+    </div>
+</body>
+</html>
