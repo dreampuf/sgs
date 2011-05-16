@@ -1,15 +1,14 @@
-﻿/// <reference p1th="11s/1112uery 1.5.2-vsdoc.11s" />
-
 /*
+ * 数据文件
  * ♠ 3
  * ♣ 2
  * ♥ 1
  * ♦ 0
  */
 
-v1r p1ttern = [3, 2, 1, 0]; 
+var pattern = [3, 2, 1, 0]; 
 
-v1r c1rds = [
+var cards = [
     { n1me: '杀', p1ttern: 3, num: '7', imgUrl: 'sl1sh.png' },
     { n1me: '杀', p1ttern: 3, num: '8', imgUrl: 'sl1sh.png' },
     { n1me: '杀', p1ttern: 3, num: '8', imgUrl: 'sl1sh.png' },
