@@ -13,10 +13,12 @@ sgs.HERO = [
 ];
 
 
+
 (function(sgs){
     var srd = Math.random;
     sgs.func = sgs.func || {};
     sgs.func.rint = function(max) {
+        max = max || 100;
         return srd() * max | 0;
     };
     sgs.func.shuffle = function(list) {
@@ -25,20 +27,69 @@ sgs.HERO = [
             cur = 0,
             rint = sgs.func.rint;
         for(; cur < llen; cur++) {
-            newlist.splice(rint(cur), 0, list.pop());
+            newlist.splice(rint(cur), 0, list[cur]);
         }
         return newlist;
     };
+    sgs.func.choice = function(list, num) {
+        var llen = list.length,
+            choiced = []
+            num = num || 1,
+            tmp = -1,
+            rint = sgs.func.rint;
+        if(llen < num) {
+            throw new Error("choice num can't more then list length");
+        }
+        if(num * 2 <= llen) {
+            while(choiced.length < num) {
+                tmp = rint(llen);
+                if(choiced.indexOf(list[tmp]) == -1) {
+                    choiced.push(list[tmp]);
+                }
+            }
+        } else {
+            choiced = choiced.concat(sgs.func.shuffle(list));
+            choiced = choiced.splice(llen - num);
+        }
+        return choiced;
+    };
+
+    /* preInit */
+    sgs._preinit = function() {
+        var slen = sgs.HERO.length,
+            scur = 0,
+            slist = [],
+            heros = sgs.HERO,
+            herocur;
+        for(; scur < slen; scur++) {
+            herocur = heros[scur];
+            slist.push(new sgs.hero(herocur[0], herocur[1], herocur[2], herocur[3]));
+        }
+        sgs.HERO = slist;
+    };
+    sgs._preinited = false;
+    /* end preInit */
+
     sgs.bout = function(player_num) {
         /* 回合 */
+        player_num = player_num || 4;
         if(player_num > sgs.PLAYER_NUM) {
             throw new Error("不能超过" + sgs.PLAYER_NUM + "名玩家");
         }
+
+        if(!sgs._preinited) {
+            sgs._preinit();
+            sgs._preinited = true;
+        }
+
         this.log = [];
         this.start_time = new Date();
         
         this.get_identity = function() {
             return sgs.func.shuffle(sgs.IDENTITY_MAPPING[player_num]);
+        };
+        this.get_hero = function() {
+            return sgs.func.choice(sgs.HERO, player_num); 
         }
     }
 
@@ -57,8 +108,13 @@ sgs.HERO = [
          * skill : 技能
          * country : 所属国.
          */
-        
-
+        this.name = name;
+        this.life = life;
+        this.skills = skills;
+        this.country = country;        
+        this.toString = function() {
+            return "name:" + this.name + "; life:" + this.life + "; skills:" + this.skills;
+        };
     }
 
     sgs.player = function(nickname, identity) {
