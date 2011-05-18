@@ -65,24 +65,46 @@ sgs.PLAYER_NUM = 4;
                 return;
         }
     };
+    sgs.func.format = function(source) {
+        var args = Array.prototype.slice.apply(arguments).splice(1);
+        return source.replace(/\{(\d+)\}/gm, function(m, i) {
+            return args[i]; 
+        });
+    };
+    sgs.func.filter = function(list, func) {
+        var result = []; 
+        sgs.func.each(list, function(n, i) {
+            if(func(i)) {
+                result.push(i);
+            }
+        });
+        return result;
+    };
 
     /*
      * 回合操作对象
      * 主要负责和界面交互,以及提供AI计算环境
      * */
+    var _ = sgs.func.format;
     sgs.bout = function(player) {
         /* 回合 */
         if(player.length > sgs.PLAYER_NUM) {
-            throw new Error("不能超过" + sgs.PLAYER_NUM + "名玩家");
+            throw new Error("can't more than " + sgs.PLAYER_NUM + " players.");
         }
 
-        this.log = []; /* 操作日志 */
+        var _bufflog = [], king = sgs.func.filter(player, function(i) { return i.identity == 0; })[0];
+        _bufflog.push("游戏开始:");
+        _bufflog.push("所有玩家身份已分配.");
+        _bufflog.push(_("主公{0}({1})出牌.", king.hero.name, king.nickname));
+
+        this._bufflog = _bufflog; /* 当前操作日志 */
+        this._log = []; /* 操作日志 */
         this.start_time = new Date(); /* 局开始时间 */
         this.player = player;/* 玩家 */
         this.curplayer = 0;/* 当前执行玩家 */
         var ccard = sgs.func.shuffle(sgs.CARD);
         this.card = ccard; /* 已经洗过的卡 */
-        this.opt_stack = []; /* 操作堆栈 */
+        this.opt = []; /* 操作堆栈 */
 
         /* 开局初始化 */
         sgs.func.range(player.length, function(i) {
@@ -100,14 +122,11 @@ sgs.PLAYER_NUM = 4;
         return sgs.func.choice(heros, player_num); 
     };
 
-    sgs.bout.prototype.init = function() {
-        /* 开局初始化 */
-        sgs.func.range(this.player.length, function(i) {
-            /* 初始化发牌 */
-            sgs.func.range(4, function(ii) {
-                this.player[i].card.push(this.card.shift());
-            });
-        });
+    sgs.bout.prototype.get_buff_log = function() {
+        var result = this._bufflog.slice(0);
+        this._log = this._log.concat(this._bufflog);
+        this._bufflog = []; 
+        return result;
     };
     sgs.bout.prototype.ishero = function(hero) {
         var pls = this.player, i = pls.length;
@@ -121,7 +140,7 @@ sgs.PLAYER_NUM = 4;
     
     sgs.bout.prototype.next = function(opt) {
         /* 进行下一步操作 */
-        
+        return sgs.interpreter(this, opt);
     };
     
     /*
@@ -175,7 +194,7 @@ sgs.PLAYER_NUM = 4;
         this.digit = digit;
     };
 
-    sgs.operate = function(id, source, target) {
+    sgs.operate = function(id, source, target, data) {
         /*
          * 操作对象
          * id : 操作标示
@@ -186,13 +205,39 @@ sgs.PLAYER_NUM = 4;
         this.id = id;
         this.source = source;
         this.target = target;
+        this.data = data || undefined;
     };
     
     sgs.interpreter = function(bout, opt) {
         /* 操作解释器 */
-        
+        commend = sgs.commend_mapping[opt.id];
+        if(commend == undefined) {
+            throw new Error("5555, i'm not strong enough operate " + opt.id);
+        }
+        return commend(bout, opt);
     };
+    
+    sgs.commend_mapping = {
+        "摸牌": function(bout, opt) {
+            
+            var slist = bout.card.splice(0, 2);
+            
+            
+            
+        },
+        "杀": function(bout, opt) {
 
+        },
+        "选择杀": function(bout, opt) {
+
+        },
+        "闪": function(bout, opt) {
+
+        },
+        "逃": function(bout, opt) {
+
+        },
+    };
 
     var slist = [];
     sgs.func.each(sgs.HERO, function(n, i) {

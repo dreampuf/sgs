@@ -21,7 +21,7 @@ test("Func", function(){
     equal(i, 18);
     
     deepEqual(sgs.func.range(4), [0, 1, 2, 3]);
-
+    equal(sgs.func.format("{0}牵着{1}的手", "五条杠", "档中痒"), "五条杠牵着档中痒的手");
 });
 
 test("Stage", function(){
@@ -47,6 +47,6 @@ test("Stage", function(){
                                     i != 0));
     }
     var about = new sgs.bout(players);
-    console.log(about);
     notEqual(about.ishero(players[2].hero), undefined, "根据英雄查找玩家,查找英雄:" + players[2].hero.name);
+    ok(true, about.get_buff_log());
 });
