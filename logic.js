@@ -42,10 +42,20 @@ sgs.PLAYER_NUM = 4;
         return choiced;
     };
     sgs.func.range = function(num, func) {
-        var i = num;
-        while(i-- > 0) {
-            func(i);
-        }
+        if(func) {
+            var i = 0;
+            while(i < num) {
+                if(func(i++) == false) {
+                    return ;
+                }
+            }
+        } else {
+            var i = 0, slist = [];
+            for(; i < num; i++) {
+                slist.push(i);
+            }
+            return slist;
+        };
     };
     sgs.func.each = function(list, func) {
         var llen = list.length,
@@ -56,57 +66,48 @@ sgs.PLAYER_NUM = 4;
         }
     };
 
-    /* preInit */
-    sgs._preinit = function() { /* 初始化英雄对象 */
-        var slist = [];
-        sgs.func.each(sgs.HERO, function(n, i) {
-            slist.push(new sgs.hero(i[0], i[1], i[2], i[3]));
-        });
-        sgs.HERO = slist;
-
-        slist = [];
-        sgs.func.each(sgs.CARD, function(n, i) {
-            slist.push(new sgs.card(i["name"], i["color"], i["digit"]));
-        });
-        sgs.CARD;
-    };
-    sgs._preinited = false;
-    /* end preInit */
-
     /*
      * 回合操作对象
      * 主要负责和界面交互,以及提供AI计算环境
      * */
-    sgs.bout = function(player_num) {
+    sgs.bout = function(player) {
         /* 回合 */
-        player_num = player_num || 4;
-        if(player_num > sgs.PLAYER_NUM) {
+        if(player.length > sgs.PLAYER_NUM) {
             throw new Error("不能超过" + sgs.PLAYER_NUM + "名玩家");
         }
 
-        if(!sgs._preinited) {
-            sgs._preinit();
-            sgs._preinited = true;
-        }
+        this.log = []; /* 操作日志 */
+        this.start_time = new Date(); /* 局开始时间 */
+        this.player = player;/* 玩家 */
+        this.curplayer = 0;/* 当前执行玩家 */
+        var ccard = sgs.func.shuffle(sgs.CARD);
+        this.card = ccard; /* 已经洗过的卡 */
+        this.opt_stack = []; /* 操作堆栈 */
 
-        this.log = [];
-        this.start_time = new Date();
-        this.player = [];
-        this.curplayer = 0;
+        /* 开局初始化 */
+        sgs.func.range(player.length, function(i) {
+            /* 初始化发牌 */
+            sgs.func.range(4, function(ii) {
+                player[i].card.push(ccard.shift());
+            });
+        });
     };
     sgs.bout.get_identity = function(player_num) {
         return sgs.func.shuffle(sgs.IDENTITY_MAPPING[player_num]);
     };
-    sgs.bout.get_hero = function(player_num) {
-        return sgs.func.choice(sgs.HERO, player_num); 
+    sgs.bout.get_hero = function(player_num, heros) {
+        heros = heros || sgs.HERO;
+        return sgs.func.choice(heros, player_num); 
     };
 
-    sgs.bout.prototype.set_player = function(players) {
-        /*  设定的位置即主公开始,右手方向 */
-        this.player = players;
-    };
-    sgs.bout.prototype.next = function(opt) {
-        /* 进行下一步操作 */
+    sgs.bout.prototype.init = function() {
+        /* 开局初始化 */
+        sgs.func.range(this.player.length, function(i) {
+            /* 初始化发牌 */
+            sgs.func.range(4, function(ii) {
+                this.player[i].card.push(this.card.shift());
+            });
+        });
     };
     sgs.bout.prototype.ishero = function(hero) {
         var pls = this.player, i = pls.length;
@@ -116,6 +117,11 @@ sgs.PLAYER_NUM = 4;
             }
         }
         return undefined;
+    };
+    
+    sgs.bout.prototype.next = function(opt) {
+        /* 进行下一步操作 */
+        
     };
     
     /*
@@ -133,6 +139,7 @@ sgs.PLAYER_NUM = 4;
         this.identity = identity;
         this.hero = hero;
         this.isAI = isAI || false;
+        this.card = [];
     };
     
     /*
@@ -185,6 +192,19 @@ sgs.PLAYER_NUM = 4;
         /* 操作解释器 */
         
     };
+
+
+    var slist = [];
+    sgs.func.each(sgs.HERO, function(n, i) {
+        slist.push(new sgs.hero(i[0], i[1], i[2], i[3]));
+    });
+    sgs.HERO = slist;
+
+    slist = [];
+    sgs.func.each(sgs.CARD, function(n, i) {
+        slist.push(new sgs.card(i["name"], i["color"], i["digit"]));
+    });
+    sgs.CARD = slist;
 
     var toString = function() {
         var tmp = "",

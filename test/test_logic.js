@@ -19,13 +19,15 @@ test("Func", function(){
         i += item;
     }); 
     equal(i, 18);
+    
+    deepEqual(sgs.func.range(4), [0, 1, 2, 3]);
 
 });
 
 test("Stage", function(){
     raises(
         function() {
-            new sgs.bout(sgs.PLAYER_NUM + 1);
+            new sgs.bout(new Array(sgs.PLAYER_NUM + 1));
         },
         "创建大于指定人数局"
     );
@@ -39,12 +41,12 @@ test("Stage", function(){
     players = [];
     var i = 4;
     while(i-- > 0) {
-        players.push(new sgs.player(sgs.func.choice("abcdefg".split(""), 4).join(""),
+        players.push(new sgs.player(sgs.func.choice("小明小刚小红".split(""), 4).join(""),
                                     idens[i],
                                     heros[i],
                                     i != 0));
     }
-    var about = new sgs.bout(4);
-    about.set_player(players);
+    var about = new sgs.bout(players);
+    console.log(about);
     notEqual(about.ishero(players[2].hero), undefined, "根据英雄查找玩家,查找英雄:" + players[2].hero.name);
 });
