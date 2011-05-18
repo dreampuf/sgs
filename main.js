@@ -3,9 +3,9 @@
 (function (sgs) {
     sgs.interface = sgs.interface || {};
     sgs.interface.cardinfo = {
-        width: 400,   /* 牌宽度 */
-        height: 562,  /* 牌高度 */
-        out: 35       /* 选中时突出的高度 */
+        width: 95,   /* 牌宽度 */
+        height: 133,  /* 牌高度 */
+        out: 16       /* 选中时突出的高度 */
     };
 
     sgs.interface.PlayerState = sgs.interface.PlayerState || {
@@ -84,10 +84,10 @@
             var targetL;
             var targetT = $('#cards').offset().top;
             var cc = sgs.interface.PlayerState.cards.length;
-            if (cc * sgs.interface.cardinfo.width / 3.2 < $('#cards').width())
-                tempL = sgs.interface.cardinfo.width / 3.2 * i;
+            if (cc * sgs.interface.cardinfo.width < $('#cards').width())
+                tempL = sgs.interface.cardinfo.width * i;
             else
-                tempL = ($('#cards').width() - sgs.interface.cardinfo.width / 3.2) / (cc - 1) * i;
+                tempL = ($('#cards').width() - sgs.interface.cardinfo.width) / (cc - 1) * i;
             targetL = $('#cards').offset().left + tempL;
             d.jqObj.animate({
                 left: targetL,
@@ -110,10 +110,10 @@
             if(d.jqObj[0].parentNode == document.body)
                 return true;
             var left;
-            if (cc * sgs.interface.cardinfo.width / 3.2 < $('#cards').width())
-                left = sgs.interface.cardinfo.width / 3.2 * i;
+            if (cc * sgs.interface.cardinfo.width < $('#cards').width())
+                left = sgs.interface.cardinfo.width * i;
             else
-                left = ($('#cards').width() - sgs.interface.cardinfo.width / 3.2) / (cc - 1) * i;
+                left = ($('#cards').width() - sgs.interface.cardinfo.width) / (cc - 1) * i;
             d.jqObj.animate({ left: left }, 'normal');
         });
     };
@@ -188,10 +188,10 @@
             var targetL;
             var targetT;
             if (sgs.interface.PlayerState.stage == 1) {
-                targetL = $('#equipment').offset().left + ($('#equipment').width() - sgs.interface.cardinfo.width / 3.2) / 2;
+                targetL = $('#equipment').offset().left + ($('#equipment').width() - sgs.interface.cardinfo.width) / 2;
                 targetT = $('#equipment').offset().top - 10;
             } else if (sgs.interface.PlayerState.stage == 2) {
-                targetL = $('#gameinfo').offset().left + ($('#gameinfo').width() - sgs.interface.cardinfo.width / 3.2) / 2;
+                targetL = $('#gameinfo').offset().left + ($('#gameinfo').width() - sgs.interface.cardinfo.width) / 2;
                 targetT = $('#gameinfo').offset().top;
             }
 
@@ -239,8 +239,8 @@
                         img.css('position', 'relative').css('top', '-13px').css('left', '-35px');
                         $('#ok').click(thisFn);
 
-                        var q = 2.2;
-                        console.log(400 / q + ' ' + 562 / q);
+//                        var q = 2.2;
+//                        console.log(400 / q + ' ' + 562 / q);
                     }
                     /* 装备武器等 */
                 });
