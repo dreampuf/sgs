@@ -112,18 +112,18 @@ sgs.HERO = [
         this.life = life;
         this.skills = skills;
         this.country = country;        
-        this.toString = function() {
-            return "name:" + this.name + "; life:" + this.life + "; skills:" + this.skills;
-        };
     }
 
-    sgs.player = function(nickname, identity) {
+    sgs.player = function(nickname, identity, hero) {
         /* 玩家 */ 
         /*
          * nickname : 昵称
          * identity : 身份
+         * hero : 英雄
          */
-
+        this.nickname = nickname;
+        this.identity = identity;
+        this.hero = hero;
     }
     
     sgs.card = function(name, color, digit, type, subject, operate) {
@@ -144,6 +144,18 @@ sgs.HERO = [
 
     }
     
-
- 
+    var toString = function() {
+        var tmp = "",
+            i;
+        for(i in this) {
+            if(this.hasOwnProperty(i)) {
+                tmp += " " + i + ":" + this[i] +"; ";
+            }
+        }
+        return tmp;
+    },
+        glass = [sgs.player, sgs.hero, sgs.operate, sgs.card], glen = glass.length;
+    while(glen-- > 0) {
+        glass[glen].prototype.toString = toString;
+    }
 })(window.sgs)

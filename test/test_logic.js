@@ -15,7 +15,6 @@ test("Func", function(){
 });
 
 test("Stage", function(){
-    equal(0, 0, "真的相等啦");
     raises(
         function() {
             console.log(window);
