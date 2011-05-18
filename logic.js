@@ -55,7 +55,7 @@ sgs.HERO = [
     };
 
     /* preInit */
-    sgs._preinit = function() {
+    sgs._preinit = function() { /* 初始化英雄对象 */
         var slen = sgs.HERO.length,
             scur = 0,
             slist = [],
@@ -84,13 +84,16 @@ sgs.HERO = [
 
         this.log = [];
         this.start_time = new Date();
-        
-        this.get_identity = function() {
-            return sgs.func.shuffle(sgs.IDENTITY_MAPPING[player_num]);
-        };
-        this.get_hero = function() {
-            return sgs.func.choice(sgs.HERO, player_num); 
-        }
+        this.player = [];
+    }
+    sgs.bout.prototype.set_player = function(players) {
+        this.player = players;
+    }
+    sgs.bout.get_identity = function(player_num) {
+        return sgs.func.shuffle(sgs.IDENTITY_MAPPING[player_num]);
+    };
+    sgs.bout.get_hero = function(player_num) {
+        return sgs.func.choice(sgs.HERO, player_num); 
     }
 
     /*
@@ -114,16 +117,18 @@ sgs.HERO = [
         this.country = country;        
     }
 
-    sgs.player = function(nickname, identity, hero) {
+    sgs.player = function(nickname, identity, hero, isAI) {
         /* 玩家 */ 
         /*
          * nickname : 昵称
          * identity : 身份
          * hero : 英雄
+         * isAI : 是否为AI控制
          */
         this.nickname = nickname;
         this.identity = identity;
         this.hero = hero;
+        this.isAI = isAI || false;
     }
     
     sgs.card = function(name, color, digit, type, subject, operate) {

@@ -23,8 +23,8 @@ test("Stage", function(){
         "创建大于指定人数局"
     );
     var about = new sgs.bout(4);
-    ok(true, about.get_identity())
-    equal(about.get_hero().length, 4, "指定人数随机英雄");
-    ok(true, "获得随机英雄" + about.get_hero());
+    ok(true, sgs.bout.get_identity(4))
+    equal(sgs.bout.get_hero(4).length, 4, "指定人数随机英雄");
+    ok(true, "获得随机英雄" + sgs.bout.get_hero(4));
 
 });
