@@ -3,16 +3,21 @@
 <head>
     <title>迷你三国杀</title>
     <link type="text/css" href="css.css" rel="stylesheet" media="screen" />
-    <script type="text/css" src="js/jquery-1.6.1.js"></script>
+    <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
     <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
 
-            playerState.blod = 3;
+            sgs.interface.PlayerState.blod = 1;
+
+            var GameStartFn = function (e) {
+                $('#choose_bak').css('display', 'block');
+                $('#choose_box').css('display', 'table');
+            };
 
             /* Role Choose  */
-            $('.choose_role_card').dblclick(RoleChooseFn);
+            $('.choose_role_card').dblclick(sgs.interface.operation.RoleChoose);
             $('.choose_role_card').mousedown(function () {
                 $(this).css('border-style', 'inset');
             });
@@ -24,12 +29,16 @@
             });
 
             /* Confirm Button Click Event */
-            $('#ok').click(OkClickFn);
+            $('#ok').click(sgs.interface.operation.OkClick);
 
             /* Browser Resize Event */
-            $(window).resize(BrowserResizeFn);
+            $(window).resize(sgs.interface.operation.BrowserResize);
 
-            /* Test Change Stage */
+
+
+            /* Test */
+            $('#test span').click(GameStartFn);
+
             $('#test a').click(function () {
                 $('#test a').each(function (i, d) {
                     $(d).css('background-color', '#fff');
@@ -37,35 +46,23 @@
                 $(this).css('background-color', '#ccc');
                 switch (this.text) {
                     case '摸牌阶段':
-                        playerState.stage = 0;
+                        sgs.interface.PlayerState.stage = 0;
                         break;
                     case '出牌阶段':
-                        playerState.stage = 1;
+                        sgs.interface.PlayerState.stage = 1;
                         break;
                     case '弃牌阶段':
-                        playerState.stage = 2;
+                        sgs.interface.PlayerState.stage = 2;
                         break;
                 }
-                $('#cards img').each(function (i, d) {
+                $('#cards .player_card').each(function (i, d) {
                     $(d).css('bottom', 0);
                 });
             });
 
-            /* Test Get Cards */
             $('#cards_last').click(function () {
-                var img = $('<img src="img/gnerals/card/slash.png" />');
-                img.appendTo($('#cards'));
-                playerState.cards.push(Card({ jqObj: img }));
-                var cc = $('#cards img').length;
-                if (cc * cardw < $('#cards').width()) {
-                    img.css('left', cardw * (cc - 1));
-                } else {
-                    $('#cards img').each(function (i, d) {
-                        $(d).css('left', ($('#cards').width() - cardw) / (cc - 1) * i);
-                    });
-                }
-                /* Bind Event */
-                img.click(CardClickFn);
+                sgs.interface.operation.Deal();
+                sgs.interface.operation.ArrangeCard();
             });
         });
     </script>
@@ -74,41 +71,89 @@
     <div id="main">
         <!-- test option -->
         <div id="test" style="border: 1px solid red; width: 100px; height: 200px;">
-            <a>摸牌阶段</a> <a>出牌阶段</a> <a>弃牌阶段</a>
+            <a>摸牌阶段</a> <a>出牌阶段</a> <a>弃牌阶段</a> <span style="display: block; cursor: pointer;
+                border: 2px solid #000; padding: 5px;">开始</span>
         </div>
         <!-- end -->
-        <div class="card" id="role1">
+        <div class="role" id="role1">
+            <div>
+                <div class="name" style="height: 15px;">
+                    名称
+                </div>
+                <div class="head_img">
+                    <img src="img/gnerals/small/huanggai.png" />
+                </div>
+                <div class="cc_bl" style="height: 30px;">
+                    <span>牌数</span> <span>血量</span> <span></span>
+                </div>
+                <div class="equip_other" style="height: 70px;">
+                    <div>
+                        <span>花色</span> <span>数值</span> <span>名称</span>
+                    </div>
+                    <div>
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div>
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div>
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="role_bak">
+            </div>
         </div>
-        <div class="card" id="role2">
+        <div class="role" id="role2">
+            <div>
+                <div>
+                </div>
+                <div>
+                </div>
+                <div>
+                    <span></span><span></span><span></span>
+                </div>
+                <div>
+                    <span></span><span></span>
+                </div>
+            </div>
+            <div class="role_bak">
+            </div>
         </div>
-        <div class="card" id="role3">
-        </div>
-        <div id="cards_out">
+        <div class="role" id="role3">
+            <div>
+                <div>
+                </div>
+                <div>
+                </div>
+                <div>
+                    <span></span><span></span><span></span>
+                </div>
+                <div>
+                    <span></span><span></span>
+                </div>
+            </div>
+            <div class="role_bak">
+            </div>
         </div>
         <div id="gameinfo">
         </div>
-        <div class="card" id="cards_last">
+        <div class="player_card" id="cards_last">
         </div>
         <div id="player">
             <div id="equipment">
-                <table>
-                    <tr>
-                        <td style="border-bottom: 3px solid #000;">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="border-bottom: 3px solid #000;">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="border-bottom: 3px solid #000;">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                    </tr>
-                </table>
+                <div id="attack" style="border-bottom:3px solid #ccc;">
+                    <div class="equip_icon"></div>
+                    <div class="equip_num"></div>
+                    <div class="equip_name"></div>
+                    <div class="equip_pattern"></div>
+                </div>
+                <div id="defend" style="border-bottom:3px solid #ccc;">
+                </div>
+                <div id="attack_horse" style="border-bottom:3px solid #ccc;">
+                </div>
+                <div id="defend_horse">
+                </div>
             </div>
             <div id="cards">
             </div>
@@ -116,34 +161,55 @@
                 <a id="ok">ok</a> <a id="cancel">cancel</a> <a id="finish">finish</a>
             </div>
             <div id="info">
+                <table>
+                    <tr>
+                        <td style="height: 20px; width: 141px;">
+                        </td>
+                        <td rowspan="2" style="width: 45px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height: 144px;">
+                            <img src="img/gnerals/big/sunquan.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="height: 43px;">
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
-    <div id="start_bak">
+    <div id="choose_bak">
     </div>
-    <div id="choose_role">
-        <div class="choose_role_card">
-            <img src="img/gnerals/hero/sunquan.png" />
-            <div class="choose_role_name">
-                孙权
-            </div>
-        </div>
-        <div class="choose_role_card">
-            <img src="img/gnerals/hero/zhaoyun.png" />
-            <div class="choose_role_name">
-                赵云
-            </div>
-        </div>
-        <div class="choose_role_card">
-            <img src="img/gnerals/hero/guojia.png" />
-            <div class="choose_role_name">
-                郭嘉
-            </div>
-        </div>
-        <div class="choose_role_card">
-            <img src="img/gnerals/hero/huanggai.png" />
-            <div class="choose_role_name">
-                黄盖
+    <div id="choose_box">
+        <div style="display: table-cell; vertical-align: middle;">
+            <div id="choose_role">
+                <div class="choose_role_card">
+                    <img src="img/gnerals/hero/sunquan.png" />
+                    <div class="choose_role_name">
+                        孙权
+                    </div>
+                </div>
+                <div class="choose_role_card">
+                    <img src="img/gnerals/hero/zhaoyun.png" />
+                    <div class="choose_role_name">
+                        赵云
+                    </div>
+                </div>
+                <div class="choose_role_card">
+                    <img src="img/gnerals/hero/guojia.png" />
+                    <div class="choose_role_name">
+                        郭嘉
+                    </div>
+                </div>
+                <div class="choose_role_card">
+                    <img src="img/gnerals/hero/huanggai.png" />
+                    <div class="choose_role_name">
+                        黄盖
+                    </div>
+                </div>
             </div>
         </div>
     </div>
