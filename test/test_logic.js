@@ -14,6 +14,11 @@ test("Func", function(){
     var i = 0;
     sgs.func.range(4, function(k) { i += k; });
     equal(i, 6, "sgs.func.range test pass");
+    var i = 0;
+    sgs.func.each([2, 3, 5, 8], function(n, item) {
+        i += item;
+    }); 
+    equal(i, 18);
 
 });
 

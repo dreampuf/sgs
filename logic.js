@@ -1,18 +1,6 @@
 var sgs = sgs || {};
 sgs.PLAYER_NUM = 4;
 
-sgs.IDENTITY_MAPPING = {
-    /* 0: "主公", 1: "忠臣", 2: "内奸", 3: "反贼" */
-    4: [0, 1, 2, 3],
-}
-sgs.HERO = [
-    ["赵云", 4, ["龙胆"], "吴"],
-    ["孙权", 4, ["救援", "制衡"], "吴"],
-    ["郭嘉", 3, ["天妒", "遗计"], "魏"],
-    ["黄盖", 4, ["苦肉"], "吴"],
-];
-
-
 
 (function(sgs){
     var srd = Math.random;
@@ -59,19 +47,28 @@ sgs.HERO = [
             func(i);
         }
     };
+    sgs.func.each = function(list, func) {
+        var llen = list.length,
+            cur = 0;
+        for(;cur < llen; cur++) {
+            if(func(cur, list[cur], llen) == false)
+                return;
+        }
+    };
 
     /* preInit */
     sgs._preinit = function() { /* 初始化英雄对象 */
-        var slen = sgs.HERO.length,
-            scur = 0,
-            slist = [],
-            heros = sgs.HERO,
-            herocur;
-        for(; scur < slen; scur++) {
-            herocur = heros[scur];
-            slist.push(new sgs.hero(herocur[0], herocur[1], herocur[2], herocur[3]));
-        }
+        var slist = [];
+        sgs.func.each(sgs.HERO, function(n, i) {
+            slist.push(new sgs.hero(i[0], i[1], i[2], i[3]));
+        });
         sgs.HERO = slist;
+
+        slist = [];
+        sgs.func.each(sgs.CARD, function(n, i) {
+            slist.push(new sgs.card(i["name"], i["color"], i["digit"]));
+        });
+        sgs.CARD;
     };
     sgs._preinited = false;
     /* end preInit */
@@ -95,6 +92,7 @@ sgs.HERO = [
         this.log = [];
         this.start_time = new Date();
         this.player = [];
+        this.curplayer = 0;
     };
     sgs.bout.get_identity = function(player_num) {
         return sgs.func.shuffle(sgs.IDENTITY_MAPPING[player_num]);
@@ -104,6 +102,7 @@ sgs.HERO = [
     };
 
     sgs.bout.prototype.set_player = function(players) {
+        /*  设定的位置即主公开始,右手方向 */
         this.player = players;
     };
     sgs.bout.prototype.next = function(opt) {
@@ -156,18 +155,17 @@ sgs.HERO = [
     /*
      * 卡牌对象
      * */
-    sgs.card = function(name, color, digit, type, subject, operate) {
+    sgs.card = function(name, color, digit) {
         /* 卡牌 */
         /*
          * name : 名称
          * color : 花色 (0 : 方块, 1 : 红桃, 2 : 梅花, 3 : 黑桃)
          * digit : 牌字 (A, 2, 3 ... 10, J, Q, K)
-         * type : 排类型 (基本, 锦囊, 装备)
-         * subject : 小分类
          * 操作 : 操作对象
          */
         this.name = name;
-
+        this.color = color;
+        this.digit = digit;
     };
 
     sgs.operate = function(id, source, target) {
