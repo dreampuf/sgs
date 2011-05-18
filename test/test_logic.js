@@ -11,20 +11,35 @@ test("Func", function(){
         },
         "从三个元素的数组中抽取5个随机,报错"
     );
+    var i = 0;
+    sgs.func.range(4, function(k) { i += k; });
+    equal(i, 6, "sgs.func.range test pass");
 
 });
 
 test("Stage", function(){
     raises(
         function() {
-            console.log(window);
             new sgs.bout(sgs.PLAYER_NUM + 1);
         },
         "创建大于指定人数局"
     );
-    var about = new sgs.bout(4);
     ok(true, sgs.bout.get_identity(4))
     equal(sgs.bout.get_hero(4).length, 4, "指定人数随机英雄");
     ok(true, "获得随机英雄" + sgs.bout.get_hero(4));
 
+    /**/
+    idens = sgs.bout.get_identity(4);
+    heros = sgs.bout.get_hero(4);
+    players = [];
+    var i = 4;
+    while(i-- > 0) {
+        players.push(new sgs.player(sgs.func.choice("abcdefg".split(""), 4).join(""),
+                                    idens[i],
+                                    heros[i],
+                                    i != 0));
+    }
+    var about = new sgs.bout(4);
+    about.set_player(players);
+    notEqual(about.ishero(players[2].hero), undefined, "根据英雄查找玩家,查找英雄:" + players[2].hero.name);
 });
