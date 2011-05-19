@@ -40,6 +40,29 @@ sgs.CARDIMAG_MAPING = {
     "麒麟弓": "kylin_bow.png",
 };
 
+sgs.HEROIMAG_MAPPING = {
+    "孙权": {
+        "hero": "img/generals/hero/sunquan.png",
+        "big": "img/generals/big/sunquan.png",
+        "small": "img/generals/small/sunquan.png"
+    },
+    "赵云": {
+        "hero": "img/generals/hero/zhaoyun.png",
+        "big": "img/generals/big/zhaoyun.png",
+        "small": "img/generals/small/zhaoyun.png"
+    },
+    "郭嘉": {
+        "hero": "img/generals/hero/guojia.png",
+        "big": "img/generals/big/guojia.png",
+        "small": "img/generals/small/guojia.png"
+    },
+    "黄盖": {
+        "hero": "img/generals/hero/huanggai.png",
+        "big": "img/generals/big/huanggai.png",
+        "small": "img/generals/small/huanggai.png"
+    }
+};
+
 sgs.CARD = [
     { 'name': '杀', 'color': 3, 'digit': '7', },
     { 'name': '杀', 'color': 3, 'digit': '8', },
@@ -154,7 +177,7 @@ sgs.CARD = [
 sgs.IDENTITY_MAPPING = { /* 人数对应角色数量 */
     /* 0: "主公", 1: "忠臣", 2: "内奸", 3: "反贼" */
     4: [0, 1, 2, 3],
-}
+};
 
 sgs.HERO = [
     ["赵云", 4, ["龙胆"], "吴"],
