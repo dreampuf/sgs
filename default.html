@@ -69,77 +69,53 @@
 </head>
 <body>
     <div id="main">
-        <!-- test option -->
+        <!-- 测试选项 Begin -->
         <div id="test" style="border: 1px solid red; width: 100px; height: 200px;">
             <a>摸牌阶段</a> <a>出牌阶段</a> <a>弃牌阶段</a> <span style="display: block; cursor: pointer;
                 border: 2px solid #000; padding: 5px;">开始</span>
         </div>
-        <!-- end -->
+        <!-- 测试选项 End -->
         <div class="role" id="role1">
-            <div>
-                <div class="name" style="height: 15px;">
-                    名称
-                </div>
-                <div class="head_img">
-                    <img src="img/gnerals/small/huanggai.png" />
-                </div>
-                <div class="cc_bl" style="height: 30px;">
-                    <span></span><span></span><span></span>
-                </div>
-                <div class="equip_other" style="height: 70px;">
-                    <div>
-                        <span></span><span></span><span></span>
-                    </div>
-                    <div>
-                        <span></span><span></span><span></span>
-                    </div>
-                    <div>
-                        <span></span><span></span><span></span>
-                    </div>
-                    <div>
-                        <span></span><span></span><span></span>
-                    </div>
-                </div>
+            <!-- 头像 -->
+            <div class="head_img">
+                <img src="img/gnerals/small/zhaoyun.png" />
             </div>
+            <!-- 牌数 -->
+            <div class="card_count">
+                <img src="img/card_count_bak.png" />
+                <span>0</span>
+            </div>
+            <!-- 血量 Begin -->
+            <div class="blods_0">
+                <img src="img/blod_0.png" />
+                <img src="img/blod_0.png" />
+                <img src="img/blod_0.png" />
+                <img src="img/blod_0.png" />
+            </div>
+            <div class="blods_1">
+                <img src="img/blod_1.png" />
+                <img src="img/blod_1.png" />
+                <img src="img/blod_1.png" />
+            </div>
+            <!-- 血量 End -->
+            <!-- 遮盖层 -->
             <div class="role_bak">
             </div>
         </div>
         <div class="role" id="role2">
-            <div>
-                <div>
-                </div>
-                <div>
-                </div>
-                <div>
-                    <span></span><span></span><span></span>
-                </div>
-                <div>
-                    <span></span><span></span>
-                </div>
-            </div>
-            <div class="role_bak">
-            </div>
         </div>
         <div class="role" id="role3">
-            <div>
-                <div>
-                </div>
-                <div>
-                </div>
-                <div>
-                    <span></span><span></span><span></span>
-                </div>
-                <div>
-                    <span></span><span></span>
-                </div>
-            </div>
-            <div class="role_bak">
-            </div>
         </div>
+
+        <!-- 游戏输出信息 -->
         <div id="gameinfo">
         </div>
-        <div class="player_card" id="cards_last">
+
+        <!-- 牌堆 -->
+        <div id="cards_last">
         </div>
+
+        <!-- 玩家部分 Begin -->
         <div id="player">
             <!--
             <div id="equipment">
@@ -163,20 +139,40 @@
             -->
             <div id="cards">
             </div>
-            <div id="confirm">
-                <a id="ok">ok</a> <a id="cancel">cancel</a> <a id="finish">finish</a>
-            </div>
             <div id="info">
+            </div>
+            <div id="ok_cancel_abandon">
+                <div id="ok">
+                    <img src="img/ok_press.png" />
+                    <img src="img/ok_hover.png" />
+                    <img src="img/ok.png" onmouseover="this.style.display='none'" />
+                </div>
+                <div id="cancel">
+                    <img src="img/cancel_press.png" />
+                    <img src="img/cancel_hover.png" />
+                    <img src="img/cancel.png" />
+                </div>
+                <div id="abandon">
+                    <img src="img/ok_press.png" />
+                    <img src="img/ok_hover.png" />
+                    <img src="img/ok.png" />
+                </div>
             </div>
             <div id="player_head">
                 <img src="img/gnerals/big/sunquan.png" />
-                <div id="player_name_bak">你是谁啊</div>
-                <div id="player_name">你是谁啊</div>
+                <div id="player_name_bak">
+                </div>
+                <div id="player_name">
+                    ↓擦，你是谁啊？</div>
             </div>
         </div>
+        <!-- 玩家部分 End -->
     </div>
-    <div id="choose_bak">
-    </div>
+
+    <!-- 选择英雄界面 遮盖层 -->
+    <div id="choose_bak"></div>
+
+    <!-- 选择英雄界面 Begin -->
     <div id="choose_box">
         <div style="display: table-cell; vertical-align: middle;">
             <div id="choose_role">
@@ -207,5 +203,6 @@
             </div>
         </div>
     </div>
+    <!-- 选择英雄界面 End -->
 </body>
 </html>

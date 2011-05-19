@@ -2,6 +2,7 @@ body
 {
     margin: 0;
     padding: 0;
+    font-family:@MS UI Gothic;
 }
 #main
 {
@@ -9,25 +10,31 @@ body
     width: 1100px;
     height: 700px;
     margin: 0 auto;
+    background: url("img/page_bg.png") no-repeat;
+    padding: 1px;
+    border: 2px solid #000;
 }
 
 /* 角色 */
 .role
 {
     position: absolute;
-    width: 137px;
-    height: 180px;
+    width: 136px;
+    height: 157px;
     float: left;
     cursor: pointer;
-    background: url("img/role_bak.png") no-repeat;
+    background: url("img/role_bak_1.png") no-repeat;
 }
+/* 其他角色遮盖层 */
 .role_bak
 {
     position: absolute;
     background-color: #000;
-    width: 100%;
-    height: 100%;
-    opacity: 0.2;
+    top:1px;
+    left:1px;
+    width: 94%;
+    height: 95%;
+    opacity: 0.5;
     display: none;
 }
 .role > div
@@ -36,9 +43,54 @@ body
 }
 .head_img img
 {
-    width: 126px;
+    position:absolute;
+    width: 117px;
+    height:49px;
+    left:4px;
+    top:28px;
     margin-left: 3px;
 }
+/* 牌数 */
+.card_count
+{
+    position:absolute;
+    top:70px;
+    left:2px;
+    width:18px;
+    height:19px;
+    text-align:center;
+}
+.card_count img
+{
+    position:absolute;
+    left:0;
+}
+.card_count span
+{
+    position:absolute;
+    left:0;
+    width:100%;
+    height:100%;
+    float:left;
+}
+/*  血量 */
+.blods_0, .blods_1
+{
+    position:absolute;
+    left:51px;
+    top:75px;
+    width:75px;
+    height:14px;
+}
+.blods_0 img, .blods_1 img
+{
+    margin-right:1px;
+    float:left;
+    width:13px;
+    height:14px;
+}
+
+/*  */
 .role .equip_other div
 {
     height: 25%;
@@ -65,13 +117,16 @@ body
     top: 250px;
     height: 180px;
     width: 550px;
-    border: 1px solid #000;
 }
 
-#cards_last /* 发牌区 */
+/* 发牌区 */
+#cards_last
 {
+    position: absolute;
     top: 240px;
     right: 80px;
+    width: 115px;
+    height: 158px;
     background: url("img/card_bak.png") no-repeat;
 }
 
@@ -128,15 +183,15 @@ body
 #cards
 {
     position: absolute;
-    width: 520px;
+    width: 560px;
     height: 133px;
     left: 163px;
-    top:7px;
+    top: 7px;
 }
 .player_card, .player_card img
 {
     position: absolute;
-    margin:1px;
+    margin: 1px;
     width: 93px;
     height: 131px;
     cursor: pointer;
@@ -153,7 +208,6 @@ body
     text-align: center;
     width: 20px;
     height: 40px;
-    font-family: @Terminal;
     font-weight: bold;
     color: Red;
     display: block;
@@ -164,16 +218,7 @@ body
     display: block;
     line-height: 20px;
 }
-/* 花色 */
-.pattern
-{
-    font-size: 28px;
-}
-/* 数值 */
-.num
-{
-    font-size: 20px;
-}
+
 /* 遮盖层 */
 .select_unable
 {
@@ -216,6 +261,39 @@ body
     width: 200px;
     height: 219px;
 }
+/* 按钮 */
+#ok_cancel_abandon
+{
+    position: absolute;
+    right: 163px;
+    width: 90px;
+    height: 144px;
+    top: 1px;
+}
+#ok_cancel_abandon img
+{
+    cursor:pointer;
+}
+#ok_cancel_abandon div, #ok_cancel_abandon img
+{
+    position: absolute;
+}
+#ok_cancel_abandon img
+{
+    display: block;
+}
+#ok, #cancel, #ok img, #cancel img
+{
+    width: 56px;
+    height: 68px;
+}
+#cancel
+{
+    left: 1px;
+    bottom: 0;
+}
+
+/* 玩家头像 */
 #player_head
 {
     position: absolute;
@@ -242,7 +320,7 @@ body
     width: 100%;
     height: 15px;
     color: #fff;
-    font-size:13px;
+    font-size: 13px;
 }
 
 /* 选择角色界面的遮盖背景 */
@@ -292,7 +370,6 @@ body
     line-height: 50px;
     font-size: 16px;
     font-weight: bold;
-    font-family: @Dotum;
 }
 
 
