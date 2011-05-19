@@ -3,7 +3,11 @@ sgs.PLAYER_NUM = 4;
 
 
 (function(sgs){
-    var srd = Math.random;
+    var srd = Math.random,
+        slice = Array.prototype.slice,
+        splice = Array.prototype.splice,
+        copy = function(ary){ return slice.apply(ary); };
+        
     sgs.func = sgs.func || {};
     sgs.func.rint = function(max) {
         max = max || 100;
@@ -66,7 +70,7 @@ sgs.PLAYER_NUM = 4;
         }
     };
     sgs.func.format = function(source) {
-        var args = Array.prototype.slice.apply(arguments).splice(1);
+        var args = copy(arguments).splice(1);
         return source.replace(/\{(\d+)\}/gm, function(m, i) {
             return args[i]; 
         });
@@ -80,69 +84,18 @@ sgs.PLAYER_NUM = 4;
         });
         return result;
     };
-
-    /*
-     * 回合操作对象
-     * 主要负责和界面交互,以及提供AI计算环境
-     * */
-    var _ = sgs.func.format;
-    sgs.bout = function(player) {
-        /* 回合 */
-        if(player.length > sgs.PLAYER_NUM) {
-            throw new Error("can't more than " + sgs.PLAYER_NUM + " players.");
-        }
-
-        var _bufflog = [], king = sgs.func.filter(player, function(i) { return i.identity == 0; })[0];
-        _bufflog.push("游戏开始:");
-        _bufflog.push("所有玩家身份已分配.");
-        _bufflog.push(_("主公{0}({1})出牌.", king.hero.name, king.nickname));
-
-        this._bufflog = _bufflog; /* 当前操作日志 */
-        this._log = []; /* 操作日志 */
-        this.start_time = new Date(); /* 局开始时间 */
-        this.player = player;/* 玩家 */
-        this.curplayer = 0;/* 当前执行玩家 */
-        var ccard = sgs.func.shuffle(sgs.CARD);
-        this.card = ccard; /* 已经洗过的卡 */
-        this.opt = []; /* 操作堆栈 */
-
-        /* 开局初始化 */
-        sgs.func.range(player.length, function(i) {
-            /* 初始化发牌 */
-            sgs.func.range(4, function(ii) {
-                player[i].card.push(ccard.shift());
-            });
+    sgs.func.exclude = function(list, func) {
+        var result = [];
+        sgs.func.each(list, function(n, i) {
+            if(!func(i)) {
+                result.push(i);
+            }
         });
-    };
-    sgs.bout.get_identity = function(player_num) {
-        return sgs.func.shuffle(sgs.IDENTITY_MAPPING[player_num]);
-    };
-    sgs.bout.get_hero = function(player_num, heros) {
-        heros = heros || sgs.HERO;
-        return sgs.func.choice(heros, player_num); 
-    };
-
-    sgs.bout.prototype.get_buff_log = function() {
-        var result = this._bufflog.slice(0);
-        this._log = this._log.concat(this._bufflog);
-        this._bufflog = []; 
         return result;
     };
-    sgs.bout.prototype.ishero = function(hero) {
-        var pls = this.player, i = pls.length;
-        while(i-- > 0) {
-            if(pls[i].hero.name == hero.name) {
-                return pls[i];
-            }
-        }
-        return undefined;
-    };
-    
-    sgs.bout.prototype.next = function(opt) {
-        /* 进行下一步操作 */
-        return sgs.interpreter(this, opt);
-    };
-    
+    var _ = sgs.func.format,
+        each = sgs.func.each;
+
     /*
      * 玩家对象
      * */
@@ -159,6 +112,17 @@ sgs.PLAYER_NUM = 4;
         this.hero = hero;
         this.isAI = isAI || false;
         this.card = [];
+
+        this.blood = hero.life; /* 玩家当前生命值 */
+        this.be_decision = []; /* 被施展的延迟技能 */
+        this.equip = []; /* 装备, 0:武器, 1:防具, 2:+1马, 3:-1马 */
+    };
+    sgs.player.prototype.range = function() {
+        var attack = 0, defend = 0, equip = this.equip;
+        attack = equip[0] ? sgs.EQUIP_RANGE_MAPPING[equip[0].name] : 1;
+        attack += equip[3] ? 1 : 0;
+        defend += equip[2] ? 1 : 0;
+        return [attack, defend];
     };
     
     /*
@@ -198,45 +162,15 @@ sgs.PLAYER_NUM = 4;
         /*
          * 操作对象
          * id : 操作标示
-         * source : 操作来源 (hero)
-         * target : 操作目标 (hero)
+         * source : 操作来源 (player)
+         * target : 操作目标 (player)
+         * data :  操作中的额外数据
          * */
 
         this.id = id;
         this.source = source;
         this.target = target;
         this.data = data || undefined;
-    };
-    
-    sgs.interpreter = function(bout, opt) {
-        /* 操作解释器 */
-        commend = sgs.commend_mapping[opt.id];
-        if(commend == undefined) {
-            throw new Error("5555, i'm not strong enough operate " + opt.id);
-        }
-        return commend(bout, opt);
-    };
-    
-    sgs.commend_mapping = {
-        "摸牌": function(bout, opt) {
-            
-            var slist = bout.card.splice(0, 2);
-            
-            
-            
-        },
-        "杀": function(bout, opt) {
-
-        },
-        "选择杀": function(bout, opt) {
-
-        },
-        "闪": function(bout, opt) {
-
-        },
-        "逃": function(bout, opt) {
-
-        },
     };
 
     var slist = [];
@@ -252,17 +186,134 @@ sgs.PLAYER_NUM = 4;
     sgs.CARD = slist;
 
     var toString = function() {
-        var tmp = "",
+        var tmp = "{",
             i;
         for(i in this) {
             if(this.hasOwnProperty(i)) {
-                tmp += " " + i + ":" + this[i] +"; ";
+                tmp += _("{0}: {1}, ", i, this[i]);
             }
         }
-        return tmp;
+        return tmp + "}";
     },
         glass = [sgs.player, sgs.hero, sgs.operate, sgs.card], glen = glass.length;
     while(glen-- > 0) {
         glass[glen].prototype.toString = toString;
     }
+
+    /*
+     * 回合操作对象
+     * 主要负责和界面交互,以及提供AI计算环境
+     * */
+    sgs.bout = function(player) {
+        /* 回合 */
+        if(player.length > sgs.PLAYER_NUM) {
+            throw new Error("can't more than " + sgs.PLAYER_NUM + " players.");
+        }
+
+        var _bufflog = [], 
+            king = sgs.func.filter(player, function(i) { return i.identity == 0; })[0],
+            ccard = sgs.func.shuffle(sgs.CARD);
+        
+        _bufflog.push("游戏开始:");
+        _bufflog.push("所有玩家身份已分配.");
+        _bufflog.push(_("主公{0}({1})出牌.", king.hero.name, king.nickname));
+
+        this._bufflog = _bufflog; /* 当前操作日志 */
+        this._log = []; /* 操作日志 */
+        this.start_time = new Date(); /* 局开始时间 */
+        this.player = player;/* 玩家 */
+        this.curplayer = 0;/* 当前执行玩家 */
+        this.card = ccard; /* 已经洗过的卡 */
+        this.opt = []; /* 操作堆栈 */
+
+        /* 开局初始化 */
+        sgs.func.range(player.length, function(i) {
+            /* 初始化发牌 */
+            sgs.func.range(4, function(ii) {
+                player[i].card.push(ccard.shift());
+            });
+        });
+    };
+    sgs.bout.get_identity = function(player_num) {
+        return sgs.func.shuffle(sgs.IDENTITY_MAPPING[player_num]);
+    };
+    sgs.bout.get_hero = function(player_num, heros) {
+        heros = heros || sgs.HERO;
+        return sgs.func.choice(heros, player_num); 
+    };
+
+    sgs.bout.prototype.get_buff_log = function() {
+        var result = this._bufflog.slice(0);
+        this._log = this._log.concat(this._bufflog);
+        this._bufflog = []; 
+        return result;
+    };
+    sgs.bout.prototype.ishero = function(hero) {
+        var pls = this.player, i = pls.length;
+        while(i-- > 0) {
+            if(pls[i].hero.name == hero.name) {
+                return pls[i];
+            }
+        }
+        return undefined;
+    };
+    sgs.bout.prototype.hero_range = function(pl, plrange) {
+        /* 获得英雄所能攻击得到的范围 */
+        var result = [], 
+            pos = 0,
+            pls = this.player,
+            plpos = pls.indexOf(pl), 
+            plrange = plrange || pl.range()[0],
+            selist = slice.call(pls, plpos+1).slice.call(pls, 0, plpos),
+            arlist = copy(selist).reverse();
+
+        each([selist, arlist], function(bn, bi) {
+        each(bi, function(n, i) {
+            pos = Math.abs(n - plpos) + (i.equip[2] ? 1 : 0);
+            if(plrange >= pos && result.indexOf(i) == -1) {
+                result.push(i);
+            }
+        });
+        });
+        return result;
+    };
+    
+    sgs.bout.prototype.decision = function(opt) {
+        /* 判定 */
+        var pl = opt.target;
+        if(pl.be_decision.length > 0) {
+
+        }
+        
+        return;
+    };
+    sgs.bout.prototype.getcard = function(opt) {
+        /* 摸牌 */
+        var pl = opt.target,
+            num = 2;
+
+        /** 张辽-奇袭 **/
+        /** end-奇袭 **/
+        
+        var cards = this.card.splice(0, 2); 
+        pl.card = pl.card.concat(cards);
+        return new sgs.operate("获得牌", undefined, pl, {"card": cards});
+    };
+    sgs.bout.prototype.selectcard = function(opt) {
+        /* 选牌 */
+        var pl = opt.source,
+            card = opt.data["card"];
+
+        return sgs.interpreter.select(this, opt);
+    };
+    sgs.bout.prototype.usecard = function(opt) {
+        /* 用牌 */
+    };
+    sgs.bout.prototype.discard = function(opt) {
+        /* 弃牌 */
+    };
+    
+
+    
+
 })(window.sgs);

@@ -22,6 +22,8 @@ test("Func", function(){
     
     deepEqual(sgs.func.range(4), [0, 1, 2, 3]);
     equal(sgs.func.format("{0}牵着{1}的手", "五条杠", "档中痒"), "五条杠牵着档中痒的手");
+    deepEqual(sgs.func.exclude([1, 2, 3, 4, 5, 6], function(i) { return i % 2 == 0; }),
+              [1, 3, 5]); 
 });
 
 test("Stage", function(){
@@ -41,12 +43,31 @@ test("Stage", function(){
     players = [];
     var i = 4;
     while(i-- > 0) {
-        players.push(new sgs.player(sgs.func.choice("小明小刚小红".split(""), 4).join(""),
+        players.push(new sgs.player(sgs.func.choice("明明小刚安红".split(""), 2).join(""),
                                     idens[i],
                                     heros[i],
                                     i != 0));
     }
+
+
     var about = new sgs.bout(players);
     notEqual(about.ishero(players[2].hero), undefined, "根据英雄查找玩家,查找英雄:" + players[2].hero.name);
     ok(true, about.get_buff_log());
+
+    equal(4, players[0].card.length, "初始化牌数等于4");
+    about.getcard(new sgs.operate("摸牌", undefined, players[0]));
+    equal(6, players[0].card.length, "摸排后牌数等于6");
+    
+    var ma = new sgs.card("的驴", 0, 4),
+        wuqi5 = new sgs.card("方天画戟", 0, 5); 
+    players[0].equip[3] = ma;
+    players[3].equip[0] = wuqi5;
+    equal(3, about.hero_range(players[3]).length, "装备了武器,都能攻击得到");
+    //equal(2, about.hero_range(players[1]).length, "只能攻击没有装备+1马的玩家");
+    
+
+
+
+
+
 });
