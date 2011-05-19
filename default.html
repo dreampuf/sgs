@@ -9,15 +9,15 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            sgs.interface.PlayerState.blod = 1;
+            sgs.interface.playerState.blod = 1;
 
             var GameStartFn = function (e) {
                 $('#choose_bak').css('display', 'block');
                 $('#choose_box').css('display', 'table');
             };
 
-            /* Role Choose  */
-            $('.choose_role_card').dblclick(sgs.interface.operation.RoleChoose);
+            /* 选择角色时修改样式  */
+            $('.choose_role_card').dblclick(sgs.interface.RoleChoose);
             $('.choose_role_card').mousedown(function () {
                 $(this).css('border-style', 'inset');
             });
@@ -28,11 +28,26 @@
                 $(this).css('border-style', 'outset');
             });
 
-            /* Confirm Button Click Event */
-            $('#ok').click(sgs.interface.operation.OkClick);
+            /* 按钮样式变化 */
+            $('#ok, #cancel, #abandon').hover(function (e) {
+                $(this).find('.normal').css('display', 'none');
+                $(this).find('.hover').css('display', 'block');
+            }, function (e) {
+                $(this).find('.normal').css('display', 'block');
+                $(this).find('.hover').css('display', 'none');
+            });
+            $('#ok, #cancel, #abandon').mousedown(function (e) {
+                $(this).find('.hover').css('display', 'none');
+            });
+            $('#ok, #cancel, #abandon').mouseup(function (e) {
+                $(this).find('.hover').css('display', 'block');
+            });
+
+            /* 确定按钮 */
+            $('#ok').mouseup(sgs.interface.OkClick);
 
             /* Browser Resize Event */
-            $(window).resize(sgs.interface.operation.BrowserResize);
+            $(window).resize(sgs.interface.BrowserResize);
 
 
 
@@ -46,13 +61,13 @@
                 $(this).css('background-color', '#ccc');
                 switch (this.text) {
                     case '摸牌阶段':
-                        sgs.interface.PlayerState.stage = 0;
+                        sgs.interface.playerState.stage = 0;
                         break;
                     case '出牌阶段':
-                        sgs.interface.PlayerState.stage = 1;
+                        sgs.interface.playerState.stage = 1;
                         break;
                     case '弃牌阶段':
-                        sgs.interface.PlayerState.stage = 2;
+                        sgs.interface.playerState.stage = 2;
                         break;
                 }
                 $('#cards .player_card').each(function (i, d) {
@@ -61,122 +76,121 @@
             });
 
             $('#cards_last').click(function () {
-                sgs.interface.operation.Deal();
-                sgs.interface.operation.ArrangeCard();
+                sgs.interface.Deal();
+                sgs.interface.ArrangeCard();
             });
         });
     </script>
 </head>
 <body>
     <div id="main">
-        <!-- test option -->
-        <div id="test" style="border: 1px solid red; width: 100px; height: 200px;">
+        <!-- 测试选项 Begin -->
+        <div id="test" style="width: 100px;">
             <a>摸牌阶段</a> <a>出牌阶段</a> <a>弃牌阶段</a> <span style="display: block; cursor: pointer;
                 border: 2px solid #000; padding: 5px;">开始</span>
         </div>
-        <!-- end -->
+        <!-- 测试选项 End -->
         <div class="role" id="role1">
-            <div>
-                <div class="name" style="height: 15px;">
-                    名称
-                </div>
-                <div class="head_img">
-                    <img src="img/gnerals/small/huanggai.png" />
-                </div>
-                <div class="cc_bl" style="height: 30px;">
-                    <span></span><span></span><span></span>
-                </div>
-                <div class="equip_other" style="height: 70px;">
-                    <div>
-                        <span></span><span></span><span></span>
-                    </div>
-                    <div>
-                        <span></span><span></span><span></span>
-                    </div>
-                    <div>
-                        <span></span><span></span><span></span>
-                    </div>
-                    <div>
-                        <span></span><span></span><span></span>
-                    </div>
-                </div>
+            <!-- 头像 -->
+            <div class="head_img">
+                <img src="img/gnerals/small/zhaoyun.png" />
             </div>
+            <!-- 牌数 -->
+            <div class="card_count">
+                <img src="img/card_count_bak.png" />
+                <span>0</span>
+            </div>
+            <!-- 血量 Begin -->
+            <div class="blods_0">
+                <img src="img/blod_0.png" />
+                <img src="img/blod_0.png" />
+                <img src="img/blod_0.png" />
+                <img src="img/blod_0.png" />
+            </div>
+            <div class="blods_1">
+                <img src="img/blod_1.png" />
+                <img src="img/blod_1.png" />
+                <img src="img/blod_1.png" />
+            </div>
+            <!-- 血量 End -->
+
+            <!-- 遮盖层 -->
             <div class="role_bak">
             </div>
         </div>
         <div class="role" id="role2">
-            <div>
-                <div>
-                </div>
-                <div>
-                </div>
-                <div>
-                    <span></span><span></span><span></span>
-                </div>
-                <div>
-                    <span></span><span></span>
-                </div>
-            </div>
-            <div class="role_bak">
-            </div>
         </div>
         <div class="role" id="role3">
-            <div>
-                <div>
-                </div>
-                <div>
-                </div>
-                <div>
-                    <span></span><span></span><span></span>
-                </div>
-                <div>
-                    <span></span><span></span>
-                </div>
-            </div>
-            <div class="role_bak">
-            </div>
         </div>
+        <!-- 游戏输出信息 -->
         <div id="gameinfo">
         </div>
-        <div class="player_card" id="cards_last">
+        <!-- 牌堆 -->
+        <div id="cards_last">
         </div>
+        <!-- 玩家部分 Begin -->
         <div id="player">
-            <!--
-            <div id="equipment">
-                <div id="attack">
-                    <div class="equip_icon">
-                    </div>
-                    <div class="equip_num">
-                    </div>
-                    <div class="equip_name">
-                    </div>
-                    <div class="equip_pattern">
-                    </div>
+            <!-- 装备区 Begin -->
+            <div id="attack">
+                <!--<div class="equip_icon">
+                </div>-->
+                <div class="equip_pattern">
+                    ♠
                 </div>
-                <div id="defend">
+                <div class="equip_num">
+                    10
                 </div>
-                <div id="attack_horse">
-                </div>
-                <div id="defend_horse">
+                <div class="equip_name">
+                    青釭剑
                 </div>
             </div>
-            -->
+            <div id="defend">
+            </div>
+            <div id="attack_horse">
+            </div>
+            <div id="defend_horse">
+            </div>
+            <!-- 装备区 End -->
+
+            <!-- 牌区 Begin -->
             <div id="cards">
             </div>
-            <div id="confirm">
-                <a id="ok">ok</a> <a id="cancel">cancel</a> <a id="finish">finish</a>
+            <!-- 牌区 End -->
+
+            <!-- 按钮 Begin -->
+            <div id="ok_cancel_abandon">
+                <div id="ok">
+                    <img class="press" src="img/ok_press.png" />
+                    <img class="hover" src="img/ok_hover.png" />
+                    <img class="normal" src="img/ok.png" />
+                </div>
+                <div id="cancel">
+                    <img class="press" src="img/cancel_press.png" />
+                    <img class="hover" src="img/cancel_hover.png" />
+                    <img class="normal" src="img/cancel.png" />
+                </div>
+                <div id="abandon">
+                    <img class="press" src="img/ok_press.png" />
+                    <img class="hover" src="img/ok_hover.png" />
+                    <img class="normal" src="img/ok.png" />
+                </div>
             </div>
-            <div id="info">
-            </div>
+            <!-- 按钮 End -->
+
             <div id="player_head">
                 <img src="img/gnerals/big/sunquan.png" />
-                <div id="player_name_bak">你是谁啊</div>
-                <div id="player_name">你是谁啊</div>
+                <div id="player_name_bak">
+                </div>
+                <div id="player_name">
+                    ↓擦，你是谁啊？</div>
             </div>
         </div>
+        <!-- 玩家部分 End -->
     </div>
+    <!-- 选择英雄界面 遮盖层 -->
     <div id="choose_bak">
     </div>
+    <!-- 选择英雄界面 Begin -->
     <div id="choose_box">
         <div style="display: table-cell; vertical-align: middle;">
             <div id="choose_role">
@@ -207,5 +221,6 @@
             </div>
         </div>
     </div>
+    <!-- 选择英雄界面 End -->
 </body>
 </html>

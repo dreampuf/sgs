@@ -2,6 +2,7 @@ body
 {
     margin: 0;
     padding: 0;
+    background: url("img/page_bg.png");
 }
 #main
 {
@@ -9,244 +10,12 @@ body
     width: 1100px;
     height: 700px;
     margin: 0 auto;
+    padding: 1px;
 }
 
-/* 角色 */
-.role
-{
-    position: absolute;
-    width: 137px;
-    height: 180px;
-    float: left;
-    cursor: pointer;
-    background: url("img/role_bak.png") no-repeat;
-}
-.role_bak
-{
-    position: absolute;
-    background-color: #000;
-    width: 100%;
-    height: 100%;
-    opacity: 0.2;
-    display: none;
-}
-.role > div
-{
-    float: left;
-}
-.head_img img
-{
-    width: 126px;
-    margin-left: 3px;
-}
-.role .equip_other div
-{
-    height: 25%;
-}
-#role1
-{
-    left: 320px;
-    top: 20px;
-}
-#role2
-{
-    left: 560px;
-    top: 20px;
-}
-#role3
-{
-    left: 80px;
-    top: 240px;
-}
-#gameinfo
-{
-    position: absolute;
-    left: 270px;
-    top: 250px;
-    height: 180px;
-    width: 550px;
-    border: 1px solid #000;
-}
 
-#cards_last /* 发牌区 */
-{
-    top: 240px;
-    right: 80px;
-    background: url("img/card_bak.png") no-repeat;
-}
-
-/* 玩家区域 */
-#player
-{
-    position: absolute;
-    width: 1000px;
-    height: 146px;
-    left: 50px;
-    bottom: 20px;
-    text-align: center;
-    background: url("img/player_info.bmp") no-repeat;
-}
-
-/* 装备区域 */
-#equipment
-{
-    width: 220px;
-    height: 100%;
-}
-.img_box
-{
-    width: 182px;
-    height: 255px;
-}
-#equipment #attack, #equipment #defend, #equipment #attack_horse, #equipment #defend_horse
-{
-    width: 98%;
-    height: 40px;
-    margin: 2px;
-    overflow: hidden;
-}
-#equipment .pattern
-{
-    display: inline-block;
-    width: 20px;
-    font-size: 32px;
-}
-#equipment .num
-{
-    display: inline-block;
-    width: 20px;
-    font-size: 24px;
-}
-.equip_name
-{
-    width: 55%;
-    height: 100%;
-    overflow: hidden;
-}
-
-/* 玩家拥有的牌 */
-#cards
-{
-    position: absolute;
-    width: 520px;
-    height: 133px;
-    left: 163px;
-    top:7px;
-}
-.player_card, .player_card img
-{
-    position: absolute;
-    margin:1px;
-    width: 93px;
-    height: 131px;
-    cursor: pointer;
-    display: block;
-}
-.player_card
-{
-    width: 95px;
-    height: 133px;
-}
-.pat_num
-{
-    position: absolute;
-    text-align: center;
-    width: 20px;
-    height: 40px;
-    font-family: @Terminal;
-    font-weight: bold;
-    color: Red;
-    display: block;
-    margin: 9px 0 0 9px;
-}
-.pat_num span
-{
-    display: block;
-    line-height: 20px;
-}
-/* 花色 */
-.pattern
-{
-    font-size: 28px;
-}
-/* 数值 */
-.num
-{
-    font-size: 20px;
-}
-/* 遮盖层 */
-.select_unable
-{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #000;
-    opacity: 0.5;
-    display: none;
-}
-
-#confirm
-{
-    position: absolute;
-    left: 35%;
-    top: -50px;
-    border: 1px solid #000;
-}
-#confirm a
-{
-    cursor: pointer;
-    display: block;
-    width: 80px;
-    float: left;
-    margin: 1px;
-    line-height: 30px;
-    background-color: #ccc;
-}
-#confirm a:hover
-{
-    background-color: #fff;
-}
-
-/* 玩家信息 */
-#info
-{
-    position: absolute;
-    top: -40px;
-    right: -1px;
-    width: 200px;
-    height: 219px;
-}
-#player_head
-{
-    position: absolute;
-    top: 8px;
-    right: 43px;
-    width: 113px;
-    height: 106px;
-}
-#player_head img
-{
-    float: left;
-    width: 113px;
-    height: 106px;
-}
-#player_name_bak
-{
-    background-color: #000;
-    opacity: 0.4;
-}
-#player_name_bak, #player_name
-{
-    position: absolute;
-    float: left;
-    width: 100%;
-    height: 15px;
-    color: #fff;
-    font-size:13px;
-}
-
-/* 选择角色界面的遮盖背景 */
-#choose_bak
+/***** 英雄选择界面 *****/
+#choose_back
 {
     position: fixed;
     display: none;
@@ -292,8 +61,335 @@ body
     line-height: 50px;
     font-size: 16px;
     font-weight: bold;
-    font-family: @Dotum;
 }
+
+/***** 角色 *****/
+.role
+{
+    position: absolute;
+    width: 136px;
+    height: 157px;
+    float: left;
+    cursor: pointer;
+    background: url("img/role_bg_1.png") no-repeat;
+}
+/* 角色遮盖层 */
+.role_back
+{
+    position: absolute;
+    background-color: #000;
+    top: 1px;
+    left: 1px;
+    width: 94%;
+    height: 95%;
+    opacity: 0.5;
+    display: none;
+}
+.role > div
+{
+    float: left;
+}
+/* 角色头像 */
+.head_img img
+{
+    position: absolute;
+    width: 117px;
+    height: 49px;
+    left: 4px;
+    top: 28px;
+    margin-left: 3px;
+}
+/* 角色牌数 */
+.card_count
+{
+    position: absolute;
+    top: 70px;
+    left: 2px;
+    width: 18px;
+    height: 19px;
+    text-align: center;
+}
+.card_count img
+{
+    position: absolute;
+    left: 0;
+}
+.card_count span
+{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+/* 角色血量 */
+.blods_0, .blods_1
+{
+    position: absolute;
+    left: 51px;
+    top: 75px;
+    width: 75px;
+    height: 14px;
+}
+.blods_0 img, .blods_1 img
+{
+    margin-right: 1px;
+    float: left;
+    width: 13px;
+    height: 14px;
+}
+/* 角色装备 */
+.role .equip_other div
+{
+    height: 25%;
+}
+#role1
+{
+    left: 320px;
+    top: 20px;
+}
+#role2
+{
+    left: 560px;
+    top: 20px;
+}
+#role3
+{
+    left: 80px;
+    top: 240px;
+}
+
+/***** 游戏输出信息 *****/
+#gameinfo
+{
+    position: absolute;
+    left: 270px;
+    top: 250px;
+    height: 180px;
+    width: 550px;
+}
+
+/***** 发牌区 *****/
+#cards_last
+{
+    position: absolute;
+    top: 240px;
+    right: 80px;
+    width: 115px;
+    height: 158px;
+    background: url("img/card_back_stack.png") no-repeat;
+}
+
+/***** 玩家区域 *****/
+#player
+{
+    position: absolute;
+    width: 1000px;
+    height: 146px;
+    left: 50px;
+    bottom: 20px;
+    text-align: center;
+    background: url("img/player_info.bmp") no-repeat;
+    border: 1px solid #000;
+}
+
+/*** 装备区域 ***/
+.img_box
+{
+    width: 182px;
+    height: 255px;
+}
+#attack, #defend, #attack_horse, #defend_horse
+{
+    position: absolute;
+    width: 140px;
+    height: 23px;
+    left: 9px;
+    background-color: #fff;
+    opacity: 0.4;
+}
+#attack
+{
+    top: 13px;
+}
+#attack div
+{
+    float: left;
+    font-weight: bold;
+}
+    .equip_pattern
+    {
+        font-size: 26px;
+        margin: 0 5px 0 10px;
+        width: 15px;
+        line-height: 22px;
+    }
+    .equip_num
+    {
+        font-size: 20px;
+        width: 20px;
+        line-height: 26px;
+    }
+    .equip_name
+    {
+        font-size: 16px;
+        line-height: 28px;
+    }
+
+#defend
+{
+    top: 45px;
+}
+#attack_horse
+{
+    top: 77px;
+}
+#defend_horse
+{
+    top: 109px;
+}
+.equip_name
+{
+    width: 55%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/** 玩家牌区* */
+#cards
+{
+    position: absolute;
+    width: 570px;
+    height: 133px;
+    left: 163px;
+    top: 7px;
+}
+.player_card, .player_card img
+{
+    position: absolute;
+    margin: 1px;
+    width: 93px;
+    height: 131px;
+    cursor: pointer;
+    display: block;
+}
+.player_card
+{
+    width: 95px;
+    height: 133px;
+}
+.pat_num
+{
+    position: absolute;
+    text-align: center;
+    width: 20px;
+    height: 40px;
+    font-weight: bold;
+    color: Red;
+    display: block;
+    margin: 6px 0 0 6px;
+}
+.pat_num span
+{
+    display: block;
+    line-height: 20px;
+}
+.pattern
+{
+    width: 20px;
+    font-size: 30px;
+}
+.num
+{
+    width: 20px;
+    font-size: 20px;
+}
+/* 遮盖层 */
+.select_unable
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.5;
+    display: none;
+}
+
+/*** 按钮 ***/
+#ok_cancel_abandon
+{
+    position: absolute;
+    right: 163px;
+    width: 90px;
+    height: 144px;
+    top: 1px;
+}
+#ok_cancel_abandon img
+{
+    cursor: pointer;
+    display: none;
+}
+#ok_cancel_abandon div, #ok_cancel_abandon img
+{
+    position: absolute;
+}
+#ok_cancel_abandon img
+{
+    display: block;
+}
+#ok, #cancel, #ok img, #cancel img
+{
+    width: 56px;
+    height: 68px;
+}
+/* 取消 */
+#cancel
+{
+    left: 1px;
+    bottom: 0;
+}
+/* 弃牌 */
+#abandon
+{
+    width: 32px;
+    right: 0;
+    display: none;
+}
+
+/*** 玩家信息 ***/
+
+/* 玩家头像 */
+#player_head
+{
+    position: absolute;
+    top: 8px;
+    right: 43px;
+    width: 113px;
+    height: 106px;
+}
+#player_head img
+{
+    float: left;
+    width: 113px;
+    height: 106px;
+}
+/* 名称 */
+#player_name_back
+{
+    background-color: #000;
+    opacity: 0.4;
+}
+#player_name_back, #player_name
+{
+    position: absolute;
+    float: left;
+    width: 100%;
+    height: 15px;
+    color: #fff;
+    font-size: 13px;
+}
+
+
 
 
 
