@@ -100,10 +100,9 @@ test("Stage", function(){
     players[3].equip[0] = wuqi5;
     equal(3, about.hero_range(players[3]).length, "装备了武器,都能攻击得到");
     equal(1, about.hero_range(players[1]).length, "只能攻击没有装备+1马的玩家");
-    
+});
 
-
-
+test("AI_1v1", function(){
 
 
 });
