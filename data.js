@@ -10,11 +10,11 @@ sgs.CARDIMAG_MAPING = {
     "丈八蛇矛": "spear.png",
     "乐不思蜀": "indulgence.png",
     "五谷丰登": "amazing_grace.png",
-    "仁王盾": "renw1ng_shield.png",
+    "仁王盾": "renwang_shield.png",
     "借刀杀人": "collateral.png",
     "八卦阵": "eight_diagram.png",
     "决斗": "duel.png",
-    "南蛮入侵": "s1v1ge_ass1ult.png",
+    "南蛮入侵": "savage_assault.png",
     "大宛": "dayuan.png",
     "寒冰剑": "ice_sword.png",
     "方天画戟": "halberd.png",
@@ -41,26 +41,10 @@ sgs.CARDIMAG_MAPING = {
 };
 
 sgs.HEROIMAG_MAPPING = {
-    "孙权": {
-        "hero": "img/generals/hero/sunquan.png",
-        "big": "img/generals/big/sunquan.png",
-        "small": "img/generals/small/sunquan.png"
-    },
-    "赵云": {
-        "hero": "img/generals/hero/zhaoyun.png",
-        "big": "img/generals/big/zhaoyun.png",
-        "small": "img/generals/small/zhaoyun.png"
-    },
-    "郭嘉": {
-        "hero": "img/generals/hero/guojia.png",
-        "big": "img/generals/big/guojia.png",
-        "small": "img/generals/small/guojia.png"
-    },
-    "黄盖": {
-        "hero": "img/generals/hero/huanggai.png",
-        "big": "img/generals/big/huanggai.png",
-        "small": "img/generals/small/huanggai.png"
-    }
+    "孙权": "sunquan.png",
+    "赵云": "zhaoyun.png",
+    "郭嘉": "guojia.png",
+    "黄盖": "huanggai.png"
 };
 
 sgs.CARD = [
@@ -177,6 +161,7 @@ sgs.CARD = [
 sgs.IDENTITY_MAPPING = { /* 人数对应角色数量 */
     /* 0: "主公", 1: "忠臣", 2: "内奸", 3: "反贼" */
     4: [0, 1, 2, 3],
+	"name": [  "主公", "忠臣", "内奸", "反贼" ]
 };
 
 sgs.HERO = [

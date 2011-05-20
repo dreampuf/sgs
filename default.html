@@ -9,22 +9,27 @@
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-
+			
             var bout,
+				role,
                 heros;
-
-            $('#test span').click(function (e) {
+			
+            $('#game_start').click(function (e) {
                 $('#choose_back').css('display', 'block');
                 $('#choose_box').css('display', 'table');
+				role = sgs.bout.get_identity(4);
+				
                 heros = sgs.bout.get_hero(4);
                 $('.choose_role_card').each(function (i, d) {
-                    $(this).find('img').attr('src', sgs.HEROIMAG_MAPPING[heros[i].name].hero);
+                    $(this).find('img').attr('src', 'img/generals/hero/' + sgs.HEROIMAG_MAPPING[heros[i].name]);
                     $(this).find('.choose_role_name').text(heros[i].name);
                 });
             });
 
             $('.choose_role_card').dblclick(function (e) {
-                
+                $('#choose_back').css('display', 'none');
+                $('#choose_box').css('display', 'none');
+               
                 var name = $(this).find('.choose_role_name').text(),
                     players = [],
                     temp = 0;
@@ -35,26 +40,24 @@
                 }
                 bout = new sgs.bout(players);
 
-                $('#choose_back').css('display', 'none');
-                $('#choose_box').css('display', 'none');
 
                 $(bout.player).each(function (i, d) {
                     var role_num = temp - i < 0 ? temp - i + 4 : temp - i;
                     if (role_num == 0) {
                         $('#player_name').text(this.nickname);
-                        $('#player_head img').attr('src', sgs.HEROIMAG_MAPPING[this.hero.name].big);
-                        sgs.interface.Deal(true, this.card);
+                        $('#player_head img').attr('src', 'img/generals/big/' + sgs.HEROIMAG_MAPPING[this.hero.name]);
+                        setTimeout(sgs.interface.Deal, 200, true, this.card);
                     } else {
                         var role_id_str = '#role' + role_num;
-                        $(role_id_str).find('.head_img img').attr('src', sgs.HEROIMAG_MAPPING[this.hero.name].small);
+                        $(role_id_str).find('.head_img img').attr('src', 'img/generals/small/' + sgs.HEROIMAG_MAPPING[this.hero.name]);
                         $(role_id_str).find('.card_count span').text(this.card.length);
                         for (var i = 0; i < this.hero.life; i++) {
                             $('<img src="img/blod_0.png" />').appendTo($(role_id_str).find('.blods_0'));
                             $('<img src="img/blod_1.png" />').appendTo($(role_id_str).find('.blods_1'));
                         }
+                        setTimeout(sgs.interface.Deal, 200, false, this.card, role_num);
                     }
                 });
-
             });
 
             /* 选择角色时修改样式  */
@@ -90,15 +93,25 @@
 <body>
     <div id="main">
         <!-- 测试选项 Begin -->
-        <div id="test" style="width: 100px;">
-            <a>摸牌阶段</a> <a>出牌阶段</a> <a>弃牌阶段</a> <span style="display: block; cursor: pointer;
-                border: 2px solid #000; padding: 5px;">开始</span>
-        </div>
+        <div id="game_start" style="
+				display: block;
+				text-align:center;
+				width:100px;
+				line-height:20px;
+				margin-top:50px;
+				cursor: pointer;
+				border: 2px solid #000;
+				padding: 5px;">
+			开始
+		</div>
         <!-- 测试选项 End -->
         <div class="role" id="role1">
+			<!-- 名称 -->
+			<div class="role_name">
+			</div>
             <!-- 头像 -->
             <div class="head_img">
-                <img src="" />
+                <img src="img/none.png" />
             </div>
             <!-- 牌数 -->
             <div class="card_count">
@@ -118,7 +131,7 @@
         </div>
         <div class="role" id="role2">
             <div class="head_img">
-                <img src="" />
+                <img src="img/none.png" />
             </div>
             <div class="card_count">
                 <img src="img/card_count_bg.png" />
@@ -133,7 +146,7 @@
         </div>
         <div class="role" id="role3">
             <div class="head_img">
-                <img src="" />
+                <img src="img/none.png" />
             </div>
             <div class="card_count">
                 <img src="img/card_count_bg.png" />
@@ -151,22 +164,12 @@
         </div>
         <!-- 牌堆 -->
         <div id="cards_last">
+            <img src="img/card_back_stack.png" />
         </div>
         <!-- 玩家部分 Begin -->
         <div id="player">
             <!-- 装备区 Begin -->
             <div id="attack">
-                <!--<div class="equip_icon">
-                </div>-->
-                <div class="equip_pattern">
-                    ♠
-                </div>
-                <div class="equip_num">
-                    10
-                </div>
-                <div class="equip_name">
-                    青釭剑
-                </div>
             </div>
             <div id="defend">
             </div>
@@ -200,9 +203,10 @@
                 </div>
             </div>
             <!-- 按钮 End -->
-
+			
+			<!-- 玩家英雄头像 -->
             <div id="player_head">
-                <img src="" />
+                <img src="img/none.png" />
                 <div id="player_name_back">
                 </div>
                 <div id="player_name">
@@ -219,22 +223,22 @@
         <div style="display: table-cell; vertical-align: middle;">
             <div id="choose_role">
                 <div class="choose_role_card">
-                    <img src="" />
+                    <img src="img/none.png" />
                     <div class="choose_role_name">
                     </div>
                 </div>
                 <div class="choose_role_card">
-                    <img src="" />
+                    <img src="img/none.png" />
                     <div class="choose_role_name">
                     </div>
                 </div>
                 <div class="choose_role_card">
-                    <img src="" />
+                    <img src="img/none.png" />
                     <div class="choose_role_name">
                     </div>
                 </div>
                 <div class="choose_role_card">
-                    <img src="" />
+                    <img src="img/none.png" />
                     <div class="choose_role_name">
                     </div>
                 </div>
