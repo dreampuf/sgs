@@ -6,6 +6,8 @@
     <link type="text/css" href="css.css" rel="stylesheet" media="screen" />
     <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
     <script type="text/javascript" src="data.js"></script>
+	<script type="text/javascript" src="logic_func.js"></script>
+    <script type="text/javascript" src="logic_interpreter.js"></script>
     <script type="text/javascript" src="logic.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript">
@@ -37,7 +39,7 @@
                 for (var i = 0; i < 4; i++) {
                     if (heros[i].name == name)
                         temp = i;
-                    players.push(new sgs.player("F_U_" + heros[i].name, i, heros[i], heros[i].name != name ? true : false));
+                    players.push(new sgs.Player("F_U_" + heros[i].name, i, heros[i], heros[i].name != name ? true : false));
                 }
                 bout = new sgs.bout(players);
 
