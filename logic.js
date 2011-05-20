@@ -27,6 +27,7 @@ var sgs = sgs || {};
         this.identity = identity;
         this.hero = hero;
         this.isAI = isAI || false;
+        this.AI = undefined; 
         this.card = [];
 
         this.blood = hero.life; /* 玩家当前生命值 */
@@ -40,12 +41,17 @@ var sgs = sgs || {};
         defend += equip[2] ? 1 : 0;
         return [attack, defend];
     };
-    sgs.Player.prototype.turn = function(opt) {
+    sgs.Player.prototype.turn = function(bout) {
         if(!this.isAI) throw new Error("sorry ! I'm computer.");
-        return "blablabla";
+        
+        if(!this.AI) this.AI = new sgs.Ai(bout, this); 
+        this.AI.turn(bout);
     };
     sgs.Player.prototype.choice_card = function(opt) {
-
+        if(!this.isAI) throw new Error("sorry ! I'm computer.");
+        
+        if(!this.AI) this.AI = new sgs.Ai(opt.bout, this); 
+        this.AI.choice_card(bout);
     };
     
     /*
@@ -93,7 +99,7 @@ var sgs = sgs || {};
 
         this.id = id;
         this.source = source;
-        this.target = target;
+        this.target = target || undefined;
         this.data = data || undefined;
     };
 
@@ -128,7 +134,7 @@ var sgs = sgs || {};
      * 回合操作对象
      * 主要负责和界面交互,以及提供AI计算环境
      * */
-    sgs.bout = function(player) {
+    sgs.bout = function(player, ailv) {
         /* 回合 */
         if(player.length > sgs.PLAYER_NUM) {
             throw new Error("can't more than " + sgs.PLAYER_NUM + " players.");
@@ -149,10 +155,12 @@ var sgs = sgs || {};
         this._bufflog = _bufflog; /* 当前操作日志 */
         this._log = []; /* 操作日志 */
         this.start_time = new Date(); /* 局开始时间 */
+        this.ailv = ailv || sgs.DEFAULT_AI_LV;
         this.player = player;/* 玩家 */
         this.curplayer = 0;/* 当前执行玩家 */
         this.card = ccard; /* 已经洗过的卡 */
         this.opt = []; /* 操作堆栈 */
+        this.attached = []; /* 绑定的事件 */
 
         /* 开局初始化 */
         range(player.length, function(i) {
@@ -163,7 +171,7 @@ var sgs = sgs || {};
         });
         /* 转入主公控制 */
         setTimeout((function(obj){ return function(){
-            //console.log("55555555555%%", obj);
+            obj.player[obj.curplayer].turn(obj);
         } })(this), 100);
     };
     sgs.bout.get_identity = function(player_num) {
@@ -179,6 +187,16 @@ var sgs = sgs || {};
         this._log = this._log.concat(this._bufflog);
         this._bufflog = []; 
         return result;
+    };
+    sgs.bout.prototype.attach = function(even_type, func) {
+        this.attached.push({"name":even_type, "func":func});
+    };
+    sgs.bout.prototype.notify = function(event_type) {
+        var args = slice.call(arguments, 1);
+        each(this.attached, function(n, i) {
+            if(i["name"] == event_type)
+                i["func"].apply({}, args);
+        });
     };
     sgs.bout.prototype.ishero = function(hero) {
         var pls = this.player, i = pls.length;
@@ -212,7 +230,7 @@ var sgs = sgs || {};
     
     sgs.bout.prototype.decision = function(opt) {
         /* 判定 */
-        var pl = opt.target;
+        var pl = opt.source;
         if(pl.be_decision.length > 0) {
 
         }
@@ -237,20 +255,34 @@ var sgs = sgs || {};
 
         return select(this, opt);
     } })(sgs.interpreter.select);
-    sgs.bout.prototype.usecard = (function(use){ return function(opt) {
+
+    sgs.bout.prototype.usecard = (function(use){ return function(opt, callback) {
         /* 用牌 */
 
-        return use(this, opt); 
+        callback(use(this, opt));
     } })(sgs.interpreter.use);
+
     sgs.bout.prototype.discard = function(opt) {
         /* 弃牌 */
-        var pl = opt.source;
+        var pl = opt.source,
+            cards;
         
         if(pl.blood > pl.card.length){
-            return new sgs.Operate("弃牌", undefined, pl, {"num": pl.card.length - pl.blood});
+            cards = opt.data["card"];
+            if(cards) {
+
+            } else {
+                return new sgs.Operate("弃牌", undefined, pl, {"num": pl.card.length - pl.blood});
+            }
         }
-        this.curplayer++;
-        this.player[this.curplayer].turn();
+        
+        setTimeout((function(bout){ return function(){
+            bout.curplayer++;
+            bout.curplayer %= bout.player.length;
+            
+            bout.player[bout.curplayer].turn(bout);
+        } })(this), 500);
+        return ;
     };
 
 })(window.sgs);
