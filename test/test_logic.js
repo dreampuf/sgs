@@ -47,15 +47,49 @@ test("Stage", function(){
         players.push(new sgs.Player(sgs.func.choice("明明小刚安红".split(""), 2).join(""),
                                     idens[i],
                                     heros[i],
-                                    i != 0));
+                                    i != 3)); /* player[4]为玩家.身份随机,英雄随机 */
     }
 
+    var single = "blablablablaaaa.";
+
+    players[3].turn = function(bout, opt) {
+        /* 重写玩家的trun方法 */
+        /* 现在轮到玩家 */
+        single = "yes i'm player";
+       
+        /*
+         * while(opt = bout.decision(opt)) {
+         *     //进行判定的操作.
+         * }
+         *
+         * while(opt = bout.getcard(opt)) {
+         *    //拿牌
+         * }
+         * 
+         * ....做其他事情......
+         *
+         * opt = bout.selectcard(opt);
+         * //根据opt返回的可选对象显示哪些英雄可以被选择.
+         *
+         * ....做其他事情.....
+         *
+         * bout.usecard(opt, function(opt) {
+         *     //...继续处理使用牌后的操作
+         * }); 
+         *
+         * ...
+         *
+         * bout.discard(opt);
+         */
+    };
+    
 
     var about = new sgs.bout(players);
     equal(about.player[0].identity, 0, "根据主公调整顺序");
     notEqual(about.ishero(players[2].hero), undefined, "根据英雄查找玩家,查找英雄:" + players[2].hero.name);
     ok(true, about.get_buff_log());
 
+    players = about.player;
     equal(4, players[0].card.length, "初始化牌数等于4");
     about.getcard(new sgs.Operate("摸牌", undefined, players[0]));
     equal(6, players[0].card.length, "摸排后牌数等于6");
