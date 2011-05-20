@@ -11,11 +11,11 @@ sgs.CARDIMAG_MAPING = {
     "丈八蛇矛": "spear.png",
     "乐不思蜀": "indulgence.png",
     "五谷丰登": "amazing_grace.png",
-    "仁王盾": "renw1ng_shield.png",
+    "仁王盾": "renwang_shield.png",
     "借刀杀人": "collateral.png",
     "八卦阵": "eight_diagram.png",
     "决斗": "duel.png",
-    "南蛮入侵": "s1v1ge_ass1ult.png",
+    "南蛮入侵": "savage_assault.png",
     "大宛": "dayuan.png",
     "寒冰剑": "ice_sword.png",
     "方天画戟": "halberd.png",
@@ -39,6 +39,13 @@ sgs.CARDIMAG_MAPING = {
     "青龙偃月刀": "blade.png",
     "顺手牵羊": "snatch.png",
     "麒麟弓": "kylin_bow.png",
+};
+
+sgs.HEROIMAG_MAPPING = {
+    "孙权": "sunquan.png",
+    "赵云": "zhaoyun.png",
+    "郭嘉": "guojia.png",
+    "黄盖": "huanggai.png"
 };
 
 sgs.CARD = [
@@ -167,7 +174,8 @@ sgs.EQUIP_RANGE_MAPPING = {
 sgs.IDENTITY_MAPPING = { /* 人数对应角色数量 */
     /* 0: "主公", 1: "忠臣", 2: "内奸", 3: "反贼" */
     4: [0, 1, 2, 3],
-}
+	"name": [  "主公", "忠臣", "内奸", "反贼" ]
+};
 
 sgs.HERO = [
     ["赵云", 4, ["龙胆"], "吴"],

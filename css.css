@@ -1,3 +1,8 @@
+﻿img
+{
+	border:none;
+}
+
 body
 {
     margin: 0;
@@ -89,6 +94,16 @@ body
 {
     float: left;
 }
+/* 名称 */
+.role_name
+{
+	position:absolute;
+	width:100%;
+	text-align:center;
+	font-size:13px;
+	height:15px;
+	top:5px;
+}
 /* 角色头像 */
 .head_img img
 {
@@ -126,7 +141,7 @@ body
 .blods_0, .blods_1
 {
     position: absolute;
-    left: 51px;
+    left: 53px;
     top: 75px;
     width: 75px;
     height: 14px;
@@ -175,9 +190,13 @@ body
     position: absolute;
     top: 240px;
     right: 80px;
-    width: 115px;
-    height: 158px;
-    background: url("img/card_back_stack.png") no-repeat;
+    width: 104px;
+    height: 142px;
+}
+#cards_last img
+{
+    width: 104px;
+    height: 142px;
 }
 
 /***** 玩家区域 *****/
@@ -199,18 +218,29 @@ body
     width: 182px;
     height: 255px;
 }
+.equip_box, .equip_back
+{
+	position:absolute;
+	width:142px;
+	height:25px;
+	cursor:pointer;
+}
+.equip_back
+{
+	background-color:#000;
+	opacity:0.5;
+	display:none;
+}
 #attack, #defend, #attack_horse, #defend_horse
 {
     position: absolute;
-    width: 140px;
-    height: 23px;
-    left: 9px;
-    background-color: #fff;
-    opacity: 0.4;
+    width: 142px;
+    height: 25px;
+    left: 8px;
 }
 #attack
 {
-    top: 13px;
+    top: 12px;
 }
 #attack div
 {
@@ -238,15 +268,15 @@ body
 
 #defend
 {
-    top: 45px;
+    top: 44px;
 }
 #attack_horse
 {
-    top: 77px;
+    top: 75px;
 }
 #defend_horse
 {
-    top: 109px;
+    top: 108px;
 }
 .equip_name
 {
@@ -387,16 +417,4 @@ body
     height: 15px;
     color: #fff;
     font-size: 13px;
-}
-
-
-
-
-
-#test a
-{
-    display: block;
-    border: 1px solid #000;
-    margin: 5px;
-    cursor: pointer;
 }
