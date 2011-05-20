@@ -39,6 +39,7 @@ test("Stage", function(){
 
     /**/
     idens = sgs.bout.get_identity(4);
+    king_num = idens.indexOf(0);
     heros = sgs.bout.get_hero(4);
     players = [];
     var i = 4;
@@ -51,6 +52,7 @@ test("Stage", function(){
 
 
     var about = new sgs.bout(players);
+    equal(about.player[0].identity, 0, "根据主公调整顺序");
     notEqual(about.ishero(players[2].hero), undefined, "根据英雄查找玩家,查找英雄:" + players[2].hero.name);
     ok(true, about.get_buff_log());
 

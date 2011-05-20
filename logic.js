@@ -136,7 +136,11 @@ var sgs = sgs || {};
 
         var _bufflog = [], 
             king = filter(player, function(i) { return i.identity == 0; })[0],
+            king_num = -1,
             ccard = shuffle(sgs.CARD);
+
+        each(player, function(n, i) { if(i == king) { king_num = n; return false; } });
+        player = slice.call(player, king_num).concat(slice.call(player, 0, king_num));
         
         _bufflog.push("游戏开始:");
         _bufflog.push("所有玩家身份已分配.");
@@ -245,7 +249,8 @@ var sgs = sgs || {};
         if(pl.blood > pl.card.length){
             return new sgs.Operate("弃牌", undefined, pl, {"num": pl.card.length - pl.blood});
         }
-        this.curplayer++
+        this.curplayer++;
+        this.player[this.curplayer].turn();
     };
 
 })(window.sgs);
