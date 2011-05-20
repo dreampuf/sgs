@@ -2,16 +2,16 @@
 
 (function (sgs) {
     sgs.interface = sgs.interface || {};
-	
+    
     sgs.interface.CARD_COLOR = {
         color: ["red", "red", "black", "black"],
         number: ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
     };
     var CARD_COLOR = sgs.interface.CARD_COLOR;
-	
-	sgs.interface.IDENTITY_INDEX = {
-		"name": [  "主公", "忠臣", "内奸", "反贼" ]
-	};
+    
+    sgs.interface.IDENTITY_INDEX = {
+        "name": [  "主公", "忠臣", "内奸", "反贼" ]
+    };
 
     sgs.interface.cardInfo = {
         /*
@@ -93,14 +93,14 @@
                 color = CARD_COLOR.color[pattern],
                 num = d.digit,
                 numStr = CARD_COLOR.number[num],
-				img = $(['<div class="player_card"><img src="img/generals/card/',
+                img = $(['<div class="player_card"><img src="img/generals/card/',
                         sgs.CARDIMAG_MAPING[d.name], '" /><div class="pat_num" style="color:',
                         color, ';"><span class="pattern"><img src="img/pattern_',
                         pattern, '.png" /></span><span class="num">',
                         numStr, '</span></div><div class="select_unable"></div></div>'].join('')),
                 left = $('#cards_last').offset().left,
                 top = $('#cards_last').offset().top;
-			
+            
             img.appendTo($(document.body));
             img.css({ left: left, top: top });
             img.css('position', 'absolute');
@@ -189,8 +189,8 @@
         /* 将选牌从DOM中抽出（方便牌整理） */
         $(playerState.selectedCards).each(function (i, d) {
             var temp = playerState.selectedCards[i].jqObj,
-				left = temp.offset().left,
-				top = temp.offset().top;
+                left = temp.offset().left,
+                top = temp.offset().top;
 
             playerState.selectedCards[i].jqObj.remove();
             temp.appendTo($(document.body));
@@ -231,11 +231,11 @@
                             numStr = CARD_COLOR.number[num],
                             color = CARD_COLOR.color[num],
                             img = $(['<div class="equip_box"><img src="img/generals/weapons/border.png" style="left:0; width:142px; height:25px;" /><img src="img/generals/weapons/',
-									'axe.png', '" style="position:absolute; left:0; width:137px; height:21px; margin:2px;" />',
-									'<img src="img/pattern_',
-									pattern, '.png" style="right:23px; position:absolute; height:13px; top:5px;" /><span style="right:3px; width:20px; position:absolute; font-weight:bold; top:2px; color:#111;">',
-									numStr, '</span></div><div class="equip_back"></div>'
-								].join(''));
+                                    'axe.png', '" style="position:absolute; left:0; width:137px; height:21px; margin:2px;" />',
+                                    '<img src="img/pattern_',
+                                    pattern, '.png" style="right:23px; position:absolute; height:13px; top:5px;" /><span style="right:3px; width:20px; position:absolute; font-weight:bold; top:2px; color:#111;">',
+                                    numStr, '</span></div><div class="equip_back"></div>'
+                                ].join(''));
 
                         if(pattern == 0) {
                             $('#attack').append(img);
@@ -246,10 +246,10 @@
                         } else if(pattern == 3) {
                             $('#defend_horse').append(img);
                         }
-						img.click(function() {
-							$(this).animate({ left: $(this).css('left') == '10px' ? '0px' : '10px' }, 100, function(){})
-						});
-						
+                        img.click(function() {
+                            $(this).animate({ left: $(this).css('left') == '10px' ? '0px' : '10px' }, 100, function(){})
+                        });
+                        
                         $('#ok').click(thisFn);
                     }
                 });

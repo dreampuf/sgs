@@ -1,6 +1,6 @@
 ﻿img
 {
-	border:none;
+    border:none;
 }
 
 body
@@ -44,7 +44,7 @@ body
 }
 #choose_role
 {
-	position:relative;
+    position:relative;
     width: 900px;
     height: 400px;
     margin: auto;
@@ -58,20 +58,20 @@ body
     background-color: #ccc;
     border: 2px outset #ccc;
     margin: 6px;
-	float:left;
+    float:left;
 }
 .choose_role_card, .choose_role_card_cover
 {
-	position:absolute;
-	float:left;
+    position:absolute;
+    float:left;
     width: 200px;
     height: 340px;
 }
 .choose_role_card_cover
 {
-	display:none;
+    display:none;
     background-color: #000;
-	opacity:0.5;
+    opacity:0.5;
 }
 .choose_role_name
 {
@@ -83,19 +83,19 @@ body
 }
 .choose_role_card_black
 {
-	background-color:#000;
-	opacity:0.5;
+    background-color:#000;
+    opacity:0.5;
 }
 
 /* 身份 */
 #identity
 {
-	position:absolute;
-	bottom:0;
-	left:0;
-	width:500px;
-	height:30px;
-	padding:0 20px;
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:500px;
+    height:30px;
+    padding:0 20px;
 }
 
 
@@ -128,13 +128,13 @@ body
 /* 名称 */
 .role_name
 {
-	position:absolute;
-	width:100%;
-	text-align:center;
-	font-size:13px;
-	height:15px;
-	top:7px;
-	color:#fff;
+    position:absolute;
+    width:100%;
+    text-align:center;
+    font-size:13px;
+    height:15px;
+    top:7px;
+    color:#fff;
 }
 /* 角色头像 */
 .head_img img
@@ -252,16 +252,16 @@ body
 }
 .equip_box, .equip_back
 {
-	position:absolute;
-	width:142px;
-	height:25px;
-	cursor:pointer;
+    position:absolute;
+    width:142px;
+    height:25px;
+    cursor:pointer;
 }
 .equip_back
 {
-	background-color:#000;
-	opacity:0.5;
-	display:none;
+    background-color:#000;
+    opacity:0.5;
+    display:none;
 }
 #attack, #defend, #attack_horse, #defend_horse
 {
@@ -358,18 +358,18 @@ body
 }
 .pattern
 {
-	width:12px;
-	height:15px;
+    width:12px;
+    height:15px;
 }
 .pattern img
 {
-	width:12px;
-	height:15px;
+    width:12px;
+    height:15px;
 }
 .num
 {
     width: 14px;
-	font-size:18px;
+    font-size:18px;
 }
 /* 遮盖层 */
 .select_unable
@@ -458,23 +458,23 @@ body
 #player_blods
 {
     position: absolute;
-	width:29px;
-	height:139px;
-	right:6px;
-	top:2px;
+    width:29px;
+    height:139px;
+    right:6px;
+    top:2px;
 }
 #player_blod_0, #player_blod_1
 {
-	width:100%;
-	height:100%;
-	position:absolute;
-	float:left;
+    width:100%;
+    height:100%;
+    position:absolute;
+    float:left;
 }
 #player_blods img
 {
-	width:21px;
-	height:21px;
-	margin:2px 0 5px 0;
+    width:21px;
+    height:21px;
+    margin:2px 0 5px 0;
 }
 
 
