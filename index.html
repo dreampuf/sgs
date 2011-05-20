@@ -1,79 +1,226 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset='utf-8'>
+    <title>迷你三国杀</title>
+    <link type="text/css" href="css.css" rel="stylesheet" media="screen" />
+    <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
+    <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-  <title>dreampuf/sgs @ GitHub</title>
+            sgs.interface.playerState.blod = 1;
 
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #0d719c;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #ffffff;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #f28e63; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #f28e63; }
-    h3 { text-align: center; color: #f28e63; }
-    a { color: #f28e63; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
+            var GameStartFn = function (e) {
+                $('#choose_bak').css('display', 'block');
+                $('#choose_box').css('display', 'table');
+            };
+
+            /* 选择角色时修改样式  */
+            $('.choose_role_card').dblclick(sgs.interface.RoleChoose);
+            $('.choose_role_card').mousedown(function () {
+                $(this).css('border-style', 'inset');
+            });
+            $('.choose_role_card').mouseup(function () {
+                $(this).css('border-style', 'outset');
+            });
+            $('.choose_role_card').mouseout(function () {
+                $(this).css('border-style', 'outset');
+            });
+
+            /* 按钮样式变化 */
+            $('#ok, #cancel, #abandon').hover(function (e) {
+                $(this).find('.normal').css('display', 'none');
+                $(this).find('.hover').css('display', 'block');
+            }, function (e) {
+                $(this).find('.normal').css('display', 'block');
+                $(this).find('.hover').css('display', 'none');
+            });
+            $('#ok, #cancel, #abandon').mousedown(function (e) {
+                $(this).find('.hover').css('display', 'none');
+            });
+            $('#ok, #cancel, #abandon').mouseup(function (e) {
+                $(this).find('.hover').css('display', 'block');
+            });
+
+            /* 确定按钮 */
+            $('#ok').mouseup(sgs.interface.OkClick);
+
+            /* Browser Resize Event */
+            $(window).resize(sgs.interface.BrowserResize);
+
+
+
+            /* Test */
+            $('#test span').click(GameStartFn);
+
+            $('#test a').click(function () {
+                $('#test a').each(function (i, d) {
+                    $(d).css('background-color', '#fff');
+                });
+                $(this).css('background-color', '#ccc');
+                switch (this.text) {
+                    case '摸牌阶段':
+                        sgs.interface.playerState.stage = 0;
+                        break;
+                    case '出牌阶段':
+                        sgs.interface.playerState.stage = 1;
+                        break;
+                    case '弃牌阶段':
+                        sgs.interface.playerState.stage = 2;
+                        break;
+                }
+                $('#cards .player_card').each(function (i, d) {
+                    $(d).css('bottom', 0);
+                });
+            });
+
+            $('#cards_last').click(function () {
+                sgs.interface.Deal();
+                sgs.interface.ArrangeCard();
+            });
+        });
+    </script>
 </head>
-
 <body>
-  <a href="http://github.com/dreampuf/sgs"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+    <div id="main">
+        <!-- 测试选项 Begin -->
+        <div id="test" style="width: 100px;">
+            <a>摸牌阶段</a> <a>出牌阶段</a> <a>弃牌阶段</a> <span style="display: block; cursor: pointer;
+                border: 2px solid #000; padding: 5px;">开始</span>
+        </div>
+        <!-- 测试选项 End -->
+        <div class="role" id="role1">
+            <!-- 头像 -->
+            <div class="head_img">
+                <img src="img/gnerals/small/zhaoyun.png" />
+            </div>
+            <!-- 牌数 -->
+            <div class="card_count">
+                <img src="img/card_count_bak.png" />
+                <span>0</span>
+            </div>
+            <!-- 血量 Begin -->
+            <div class="blods_0">
+                <img src="img/blod_0.png" />
+                <img src="img/blod_0.png" />
+                <img src="img/blod_0.png" />
+                <img src="img/blod_0.png" />
+            </div>
+            <div class="blods_1">
+                <img src="img/blod_1.png" />
+                <img src="img/blod_1.png" />
+                <img src="img/blod_1.png" />
+            </div>
+            <!-- 血量 End -->
 
-  <div id="container">
+            <!-- 遮盖层 -->
+            <div class="role_bak">
+            </div>
+        </div>
+        <div class="role" id="role2">
+        </div>
+        <div class="role" id="role3">
+        </div>
+        <!-- 游戏输出信息 -->
+        <div id="gameinfo">
+        </div>
+        <!-- 牌堆 -->
+        <div id="cards_last">
+        </div>
+        <!-- 玩家部分 Begin -->
+        <div id="player">
+            <!-- 装备区 Begin -->
+            <div id="attack">
+                <!--<div class="equip_icon">
+                </div>-->
+                <div class="equip_pattern">
+                    ♠
+                </div>
+                <div class="equip_num">
+                    10
+                </div>
+                <div class="equip_name">
+                    青釭剑
+                </div>
+            </div>
+            <div id="defend">
+            </div>
+            <div id="attack_horse">
+            </div>
+            <div id="defend_horse">
+            </div>
+            <!-- 装备区 End -->
 
-    <div class="download">
-      <a href="http://github.com/dreampuf/sgs/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/dreampuf/sgs/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+            <!-- 牌区 Begin -->
+            <div id="cards">
+            </div>
+            <!-- 牌区 End -->
+
+            <!-- 按钮 Begin -->
+            <div id="ok_cancel_abandon">
+                <div id="ok">
+                    <img class="press" src="img/ok_press.png" />
+                    <img class="hover" src="img/ok_hover.png" />
+                    <img class="normal" src="img/ok.png" />
+                </div>
+                <div id="cancel">
+                    <img class="press" src="img/cancel_press.png" />
+                    <img class="hover" src="img/cancel_hover.png" />
+                    <img class="normal" src="img/cancel.png" />
+                </div>
+                <div id="abandon">
+                    <img class="press" src="img/ok_press.png" />
+                    <img class="hover" src="img/ok_hover.png" />
+                    <img class="normal" src="img/ok.png" />
+                </div>
+            </div>
+            <!-- 按钮 End -->
+
+            <div id="player_head">
+                <img src="img/gnerals/big/sunquan.png" />
+                <div id="player_name_bak">
+                </div>
+                <div id="player_name">
+                    ↓擦，你是谁啊？</div>
+            </div>
+        </div>
+        <!-- 玩家部分 End -->
     </div>
-
-    <h1><a href="http://github.com/dreampuf/sgs">sgs</a>
-      <span class="small">by <a href="http://github.com/dreampuf">dreampuf</a></span></h1>
-
-    <div class="description">
-      单页三国杀
+    <!-- 选择英雄界面 遮盖层 -->
+    <div id="choose_bak">
     </div>
-
-    <h2>License</h2>
-<p>MIT</p>
-<h2>Authors</h2>
-<p>soddy (soddyque@gmail.com)<br/>x (x531tanxl@qq.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p> (soddyque@gmail.com)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/dreampuf/sgs/zipball/master">zip</a> or
-      <a href="http://github.com/dreampuf/sgs/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/dreampuf/sgs</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/dreampuf/sgs">dreampuf/sgs</a>
+    <!-- 选择英雄界面 Begin -->
+    <div id="choose_box">
+        <div style="display: table-cell; vertical-align: middle;">
+            <div id="choose_role">
+                <div class="choose_role_card">
+                    <img src="img/gnerals/hero/sunquan.png" />
+                    <div class="choose_role_name">
+                        孙权
+                    </div>
+                </div>
+                <div class="choose_role_card">
+                    <img src="img/gnerals/hero/zhaoyun.png" />
+                    <div class="choose_role_name">
+                        赵云
+                    </div>
+                </div>
+                <div class="choose_role_card">
+                    <img src="img/gnerals/hero/guojia.png" />
+                    <div class="choose_role_name">
+                        郭嘉
+                    </div>
+                </div>
+                <div class="choose_role_card">
+                    <img src="img/gnerals/hero/huanggai.png" />
+                    <div class="choose_role_name">
+                        黄盖
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-  </div>
-
-  
+    <!-- 选择英雄界面 End -->
 </body>
 </html>
