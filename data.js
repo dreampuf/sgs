@@ -1,4 +1,5 @@
 var sgs = sgs || {};
+sgs.PLAYER_NUM = 4;
 
 /*
  * 卡牌数据

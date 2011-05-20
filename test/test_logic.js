@@ -43,7 +43,7 @@ test("Stage", function(){
     players = [];
     var i = 4;
     while(i-- > 0) {
-        players.push(new sgs.player(sgs.func.choice("明明小刚安红".split(""), 2).join(""),
+        players.push(new sgs.Player(sgs.func.choice("明明小刚安红".split(""), 2).join(""),
                                     idens[i],
                                     heros[i],
                                     i != 0));
@@ -55,15 +55,15 @@ test("Stage", function(){
     ok(true, about.get_buff_log());
 
     equal(4, players[0].card.length, "初始化牌数等于4");
-    about.getcard(new sgs.operate("摸牌", undefined, players[0]));
+    about.getcard(new sgs.Operate("摸牌", undefined, players[0]));
     equal(6, players[0].card.length, "摸排后牌数等于6");
     
-    var ma = new sgs.card("的驴", 0, 4),
-        wuqi5 = new sgs.card("方天画戟", 0, 5); 
+    var ma = new sgs.Card("的驴", 0, 4),
+        wuqi5 = new sgs.Card("方天画戟", 0, 5); 
     players[0].equip[3] = ma;
     players[3].equip[0] = wuqi5;
     equal(3, about.hero_range(players[3]).length, "装备了武器,都能攻击得到");
-    //equal(2, about.hero_range(players[1]).length, "只能攻击没有装备+1马的玩家");
+    equal(1, about.hero_range(players[1]).length, "只能攻击没有装备+1马的玩家");
     
 
 

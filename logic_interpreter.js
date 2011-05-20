@@ -14,15 +14,11 @@ var sgs = sgs || {};
         }
         return commend(bout, opt);
     };
-    sgs.interpreter.select_mapping = {
-        "杀": function(bout, opt) {
-            return bout.hero_range(opt.source); 
-        },
-    };
     sgs.interpreter.select = function(bout, opt){
         var pl = opt.source,
             card = opt.data["card"];
         switch(card.name) {
+            /* 没闪 */
             case "杀":
                 return bout.hero_range(pl);
             case "桃":
@@ -45,6 +41,9 @@ var sgs = sgs || {};
             case "乐不思蜀":
                 return [];
         }
+    };
+    sgs.interpreter.use = function(bout, opt) {
+
     };
     sgs.commend_mapping = {
         "杀": function(bout, opt) {
