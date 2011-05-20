@@ -15,7 +15,7 @@ var sgs = sgs || {};
             newlist = [],
             cur = 0;
         for(; cur < llen; cur++) {
-            newlist.splice(rint(cur), 0, list[cur]);
+            newlist.splice(rint(cur+1), 0, list[cur]);
         }
         return newlist;
     } })(sgs.func.rint);
@@ -35,7 +35,7 @@ var sgs = sgs || {};
                 }
             }
         } else {
-            choiced = choiced.concat(sgs.func.shuffle(list));
+            choiced = sgs.func.shuffle(list);
             choiced = choiced.splice(llen - num);
         }
         return choiced;
