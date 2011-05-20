@@ -2,15 +2,18 @@
 
 (function (sgs) {
     sgs.interface = sgs.interface || {};
-
-    sgs.interface.CARD_COLOR = sgs.interface.CARD_COLOR || {
-        pattern: ["♦", "♥", "♣", "♠"],
+	
+    sgs.interface.CARD_COLOR = {
         color: ["red", "red", "black", "black"],
         number: ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
     };
     var CARD_COLOR = sgs.interface.CARD_COLOR;
+	
+	sgs.interface.IDENTITY_INDEX = {
+		"name": [  "主公", "忠臣", "内奸", "反贼" ]
+	};
 
-    sgs.interface.cardInfo = sgs.interface.cardInfo || {
+    sgs.interface.cardInfo = {
         /*
         *      牌信息
         *
@@ -24,7 +27,7 @@
     };
     var cardInfo = sgs.interface.cardInfo;
 
-    sgs.interface.playerState = sgs.interface.playerState || {
+    sgs.interface.playerState = {
         /*
         *      玩家状态
         *
@@ -80,21 +83,20 @@
                     top: $(role_id_str).offset().top + 10,
                     opacity: 0.8
                 }, 500, function() {
-                    img.animate({ opacity: 0 }, 'slow', function() { img.remove; });
+                    img.animate({ opacity: 0 }, 'slow', function() { img.remove(); });
                 });
             });
             return;
         }
         $(cards).each(function(i, d) {
             var pattern = d.color,
-                patternStr = CARD_COLOR.pattern[pattern],
                 color = CARD_COLOR.color[pattern],
                 num = d.digit,
                 numStr = CARD_COLOR.number[num],
 				img = $(['<div class="player_card"><img src="img/generals/card/',
                         sgs.CARDIMAG_MAPING[d.name], '" /><div class="pat_num" style="color:',
-                        color, ';"><span class="pattern">',
-                        patternStr, '</span><span class="num">',
+                        color, ';"><span class="pattern"><img src="img/pattern_',
+                        pattern, '.png" /></span><span class="num">',
                         numStr, '</span></div><div class="select_unable"></div></div>'].join('')),
                 left = $('#cards_last').offset().left,
                 top = $('#cards_last').offset().top;
@@ -225,7 +227,6 @@
                         /* 装备装备 */
                         var ran = Math.random,
                             pattern = parseInt(ran() * 4),
-                            patternStr = CARD_COLOR.pattern[pattern],
                             num = parseInt(ran() * 13),
                             numStr = CARD_COLOR.number[num],
                             color = CARD_COLOR.color[num],

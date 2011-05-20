@@ -44,20 +44,34 @@ body
 }
 #choose_role
 {
+	position:relative;
     width: 900px;
     height: 400px;
     margin: auto;
     background-color: #fff;
     padding: 5px;
 }
-.choose_role_card
+.card_box
 {
     width: 200px;
     height: 340px;
-    display: inline-block;
-    border: 2px outset #ccc;
     background-color: #ccc;
+    border: 2px outset #ccc;
     margin: 6px;
+	float:left;
+}
+.choose_role_card, .choose_role_card_cover
+{
+	position:absolute;
+	float:left;
+    width: 200px;
+    height: 340px;
+}
+.choose_role_card_cover
+{
+	display:none;
+    background-color: #000;
+	opacity:0.5;
 }
 .choose_role_name
 {
@@ -67,6 +81,23 @@ body
     font-size: 16px;
     font-weight: bold;
 }
+.choose_role_card_black
+{
+	background-color:#000;
+	opacity:0.5;
+}
+
+/* 身份 */
+#identity
+{
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:500px;
+	height:30px;
+	padding:0 20px;
+}
+
 
 /***** 角色 *****/
 .role
@@ -102,7 +133,8 @@ body
 	text-align:center;
 	font-size:13px;
 	height:15px;
-	top:5px;
+	top:7px;
+	color:#fff;
 }
 /* 角色头像 */
 .head_img img
@@ -158,12 +190,12 @@ body
 {
     height: 25%;
 }
-#role1
+#role2
 {
     left: 320px;
     top: 20px;
 }
-#role2
+#role1
 {
     left: 560px;
     top: 20px;
@@ -326,13 +358,18 @@ body
 }
 .pattern
 {
-    width: 20px;
-    font-size: 30px;
+	width:12px;
+	height:15px;
+}
+.pattern img
+{
+	width:12px;
+	height:15px;
 }
 .num
 {
-    width: 20px;
-    font-size: 20px;
+    width: 14px;
+	font-size:18px;
 }
 /* 遮盖层 */
 .select_unable
@@ -418,3 +455,26 @@ body
     color: #fff;
     font-size: 13px;
 }
+#player_blods
+{
+    position: absolute;
+	width:29px;
+	height:139px;
+	right:6px;
+	top:2px;
+}
+#player_blod_0, #player_blod_1
+{
+	width:100%;
+	height:100%;
+	position:absolute;
+	float:left;
+}
+#player_blods img
+{
+	width:21px;
+	height:21px;
+	margin:2px 0 5px 0;
+}
+
+

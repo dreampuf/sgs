@@ -43,10 +43,31 @@ sgs.CARDIMAG_MAPING = {
 };
 
 sgs.HEROIMAG_MAPPING = {
-    "孙权": "sunquan.png",
-    "赵云": "zhaoyun.png",
+	"曹操": "caocao.png",
+	"张辽": "zhangliao.png",
     "郭嘉": "guojia.png",
-    "黄盖": "huanggai.png"
+	"夏侯淳": "xiahoudun.png",
+	"司马懿": "simayi.png",
+	"许褚": "xuchu.png",
+	"甄姬": "zhenji.png",
+	"刘备": "liubei.png",
+	"关羽": "guanyu.png",
+	"张飞": "zhangfei.png",
+    "赵云": "zhaoyun.png",
+	"马超": "machao.png",
+	"诸葛亮": "zhugeliang.png",
+	"黄月英": "huangyueying.png",
+    "孙权": "sunquan.png",
+	"周瑜": "zhouyu.png",
+	"吕蒙": "lvmeng.png",
+	"陆逊": "luxun.png",
+	"甘宁": "ganning.png",
+    "黄盖": "huanggai.png",
+	"大乔": "daqiao.png",
+	"孙尚香": "sunshangxiang.png",
+	"吕布": "lvbu.png",
+	"华佗": "huatuo.png",
+	"貂蝉": "diaochan.png"
 };
 
 sgs.CARD = [
@@ -195,8 +216,7 @@ sgs.EQUIP_TYPE_MAPPING = {
 
 sgs.IDENTITY_MAPPING = { /* 人数对应角色数量 */
     /* 0: "主公", 1: "忠臣", 2: "内奸", 3: "反贼" */
-    4: [0, 1, 2, 3],
-	"name": [  "主公", "忠臣", "内奸", "反贼" ]
+    4: [0, 1, 2, 3]
 };
 
 sgs.HERO = [
