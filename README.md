@@ -22,7 +22,7 @@ LICENSE
 
 This project is made available under the following terms.(MIT LICENSE)
 
-Copyright (c) [HuangXin](mailto:soddyque@gmail.com) & [TanXiLiang]()
+Copyright (c) [HuangXin](http://huangxin.im) & [TanXiLiang]()
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
