@@ -1,292 +1,195 @@
-﻿var sgs = sgs || {};
-
-(function (sgs) {
-    sgs.interface = sgs.interface || {};
-    
-    sgs.interface.CARD_COLOR = {
-        color: ["red", "red", "black", "black"],
-        number: ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
-    };
-    var CARD_COLOR = sgs.interface.CARD_COLOR;
-    
-    sgs.interface.IDENTITY_INDEX = {
-        "name": [  "主公", "忠臣", "内奸", "反贼" ]
-    };
-
-    sgs.interface.cardInfo = {
-        /*
-        *      牌信息
-        *
-        * width       - 牌宽度
-        * height      - 牌高度
-        * out         - 选中时突出的高度
-        */
-        width: 95,
-        height: 133,
-        out: 20
-    };
-    var cardInfo = sgs.interface.cardInfo;
-
-    sgs.interface.playerState = {
-        /*
-        *      玩家状态
-        *
-        * width       - 牌宽度
-        * height      - 牌高度
-        * out         - 选中时突出的高度
-        */
-        stage: 1,
-        weapons: [],
-        cards: [],
-        selectedCards: [],
-        blod: 0
-    };
-    var playerState = sgs.interface.playerState;
-
-    sgs.interface.NewCard = function (o) {
-        /*
-        *      构造牌对象
-        *
-        * jqObj        - jQuery对象
-        * name         - 名称
-        * type         - 类型
-        * pattern        - 花色
-        * num          - 数值
-        * selected     - 是否选中
-        */
-        return {
-            jqObj: o.jqObj != undefined ? o.jqObj : null,
-            name: o.name != undefined ? o.name : '',
-            type: o.type != undefined ? o.type : '',
-            pattern: o.pattern != undefined ? o.pattern : '',
-            num: o.num != undefined ? o.num : '',
-            selected: false
-        };
-    };
-    var NewCard = sgs.interface.NewCard;
-
-    /* 发牌 */
-    sgs.interface.Deal = function (isPlayer, cards, role_id) {
-        if(!isPlayer) {
-            var len = cards.length,
-                role_id_str = '#role' + role_id;
-            $(cards).each(function(i, d) {
-                var img = $('<img src="img/card_back.png" style="width:93px; height:131px" />');
-                img.appendTo(document.body);
-                img.css({
-                    position: 'absolute',
-                    left: $('#cards_last').offset().left + 8,
-                    top: $('#cards_last').offset().top
-                });
-                img.animate({
-                    left: $(role_id_str).offset().left + (i + 1) * 10,
-                    top: $(role_id_str).offset().top + 10,
-                    opacity: 0.8
-                }, 500, function() {
-                    img.animate({ opacity: 0 }, 'slow', function() { img.remove(); });
-                });
-            });
-            return;
-        }
-        $(cards).each(function(i, d) {
-            var pattern = d.color,
-                color = CARD_COLOR.color[pattern],
-                num = d.digit,
-                numStr = CARD_COLOR.number[num],
-                img = $(['<div class="player_card"><img src="img/generals/card/',
-                        sgs.CARDIMAG_MAPING[d.name], '" /><div class="pat_num" style="color:',
-                        color, ';"><span class="pattern"><img src="img/pattern_',
-                        pattern, '.png" /></span><span class="num">',
-                        numStr, '</span></div><div class="select_unable"></div></div>'].join('')),
-                left = $('#cards_last').offset().left,
-                top = $('#cards_last').offset().top;
+﻿$(document).ready(function () {
             
-            img.appendTo($(document.body));
-            img.css({ left: left, top: top });
-            img.css('position', 'absolute');
-            img.find('.select_unable').css('display', i % 2 ? 'block' : 'none');
-            playerState.cards.push(NewCard({
-                jqObj: img,
-                pattern: pattern,
-                num: num
-            }));
+    var bout, /* 一局 */
+        identity, /* 身份列表 */
+        heros, /* 随机英雄列表 */
+        players = [
+            { "identity": -1, "hero": undefined },
+            { "identity": -1, "hero": undefined },
+            { "identity": -1, "hero": undefined },
+            { "identity": -1, "hero": undefined }
+        ]; /* 玩家对应的身份和英雄 */
+    
+    /* 游戏开始 */
+    $('#game_start').click(function (e) {
+        $('#game_start').unbind('click', arguments.callee);
+        $('#choose_back').css('display', 'block');
+        $('#choose_box').css('display', 'table');
+        
+        identity = sgs.bout.get_identity(4); /* 第0个表示玩家身份 */
+        heros = sgs.bout.get_hero(4);
+        $('.choose_role_card').each(function (i, d) {
+            $(this).find('img').attr('src', 'img/generals/hero/' + sgs.HEROIMAG_MAPPING[heros[i].name]);
+            $(this).find('.choose_role_name').text(heros[i].name);
         });
-
-        $(playerState.cards).each(function (i, d) {
-            if (d.jqObj[0].parentNode != document.body)
-                return true;
-
-            var cc = playerState.cards.length,
-                tempL = cc * cardInfo.width < $('#cards').width() ? cardInfo.width * i : ($('#cards').width() - cardInfo.width) / (cc - 1) * i,
-                targetL = $('#cards').offset().left + tempL,
-                targetT = $('#cards').offset().top;
-
-            d.jqObj.animate({
-                left: targetL,
-                top: targetT
-            }, 500, function () {
-                d.jqObj.appendTo($('#cards'));
-                d.jqObj.css('left', tempL);
-                d.jqObj.css('top', 'auto');
-                d.jqObj.css('bottom', 0);
-                /* 绑定事件 */
-                d.jqObj.click(CardClickFn);
-            });
-        });
-    };
-
-    /* 选牌 */
-    CardClickFn = function (e) {
-        if ($(this).find('.select_unable').css('display') == 'block')
-            return false;
-        if (playerState.stage == 1) {
-            playerState.selectedCards.splice(0, playerState.selectedCards.length);
-            if ($(this).css('bottom') == cardInfo.out + 'px') {
-                $(this).animate({ 'bottom': 0 }, 100);
-            } else {
-                $('#cards .player_card').each(function (i, d) {
-                    if ($(d).css('bottom') == cardInfo.out + 'px') {
-                        $(this).animate({ 'bottom': 0 }, 100);
-                        return false;
-                    }
-                });
-                $(this).animate({ 'bottom': cardInfo.out }, 100);
-                playerState.selectedCards.push(NewCard({ jqObj: $(this) }));
-            }
-        } else if (playerState.stage == 2) {
-            if (playerState.selectedCards.length == playerState.cards.length - playerState.blod && $(this).css('bottom') != (cardInfo.out + 'px')) /* 所选牌数够了并且所点击的牌没有被选中 */
-                return false;
-            else if ($(this).css('bottom') == (cardInfo.out + 'px')) {
-                $(this).css('bottom', 0);
-            } else if ($(this).css('bottom') != (cardInfo.out + 'px')) {
-                $(this).css('bottom', (cardInfo.out + 'px'));
-            }
-
-            playerState.selectedCards.splice(0, playerState.selectedCards.length);
-            $('#cards .player_card').each(function (i, d) {
-                if ($(d).css('bottom') == (cardInfo.out + 'px'))
-                    playerState.selectedCards.push(NewCard({ jqObj: $(d) }));
-            });
-        }
-    };
-
-    /* 出牌(点击确定) */
-    sgs.interface.OkClick = function (e) {
-        if (playerState.selectedCards.length == 0)
-            return false;
-        /* 从用户牌堆中删除打出去的牌 */
-        $(playerState.selectedCards).each(function (i, d) {
-            $(playerState.cards).each(function (ii, dd) {
-                if (d.jqObj[0] == dd.jqObj[0]) {
-                    playerState.cards.splice(ii, 1);
-                    return false;
-                }
-            });
-        });
-
-        var thisFn = arguments.callee;
-        $('#ok').unbind('click', thisFn);
-        /* 将选牌从DOM中抽出（方便牌整理） */
-        $(playerState.selectedCards).each(function (i, d) {
-            var temp = playerState.selectedCards[i].jqObj,
-                left = temp.offset().left,
-                top = temp.offset().top;
-
-            playerState.selectedCards[i].jqObj.remove();
-            temp.appendTo($(document.body));
-            temp.css({ left: left, top: top });
-            temp.css('position', 'absolute');
-        });
-
-        /* 记录选牌数（判断所有动画结束） */
-        var cardLength = playerState.selectedCards.length;
-        /* 动画 */
-        $(playerState.selectedCards).each(function (i, d) {
-            var temp = playerState.selectedCards[i].jqObj,
-                targetL,
-                targetT;
-
-            if (playerState.stage == 1) {
-                targetL = $('#cards').offset().left - 128;
-                targetT = $('#cards').offset().top - 20;
-            } else if (playerState.stage == 2) {
-                targetL = $('#gameinfo').offset().left + ($('#gameinfo').width() - cardInfo.width) / 2;
-                targetT = $('#gameinfo').offset().top;
-            }
-
-            /* 出牌动画 */
-            temp.animate({
-                left: targetL,
-                top: targetT,
-                bottom: 0,
-                opacity: 0.5
-            }, 'normal', function () {
-                temp.animate({ opacity: 0 }, 100, function () {
-                    if (cardLength == i + 1) {
-                        temp.remove();
-                        /* 装备装备 */
-                        var ran = Math.random,
-                            pattern = parseInt(ran() * 4),
-                            num = parseInt(ran() * 13),
-                            numStr = CARD_COLOR.number[num],
-                            color = CARD_COLOR.color[num],
-                            img = $(['<div class="equip_box"><img src="img/generals/weapons/border.png" style="left:0; width:142px; height:25px;" /><img src="img/generals/weapons/',
-                                    'axe.png', '" style="position:absolute; left:0; width:137px; height:21px; margin:2px;" />',
-                                    '<img src="img/pattern_',
-                                    pattern, '.png" style="right:23px; position:absolute; height:13px; top:5px;" /><span style="right:3px; width:20px; position:absolute; font-weight:bold; top:2px; color:#111;">',
-                                    numStr, '</span></div><div class="equip_back"></div>'
-                                ].join(''));
-
-                        if(pattern == 0) {
-                            $('#attack').append(img);
-                        } else if(pattern == 1) {
-                            $('#defend').append(img);
-                        } else if(pattern == 2) {
-                            $('#attack_horse').append(img);
-                        } else if(pattern == 3) {
-                            $('#defend_horse').append(img);
+        for(var i = 0; i < identity.length; i++)
+            players[i].identity = identity[i];
+        
+        if(identity[0] == 0) { /* 玩家是主公时 */
+            $('#identity').text('你的身份是 - ' + sgs.interface.IDENTITY_INDEX.name[identity[0]]);
+            /* 国家、身份 */
+        } else { /* 玩家不是主公时 */
+            /* 主公随机选英雄 */
+            var choose = parseInt(Math.random() * heros.length),
+                tempName;
+            for(var i = 0; i < identity.length; i++) {
+                if(identity[i] == 0) {
+                    players[i].hero = heros[choose];
+                    $('#choose_box').find('.card_box').each(function(j, d) {
+                        if($(this).find('.choose_role_name').text() == heros[choose].name) {
+                            $(this).find('.choose_role_card_cover').css('display', 'block');
+                            /* 填上主公信息 */
+                            var role_id_str = '#role' + i;
+                            $(role_id_str).find('.role_country img').attr('src', sgs.interface.COUNTRY_IMG[heros[choose].country]);
+                            $(role_id_str).find('.role_identity img').attr('src', 'img/king.png');
+                            $(role_id_str).find('.head_img img').attr('src', 'img/generals/small/' + sgs.HEROIMAG_MAPPING[heros[choose].name]);
+                            for(var k = 0; k < heros[choose].life; k++) {
+                                $(role_id_str).find('.blods_0').append('<img src="img/blod_0.png" />');
+                                $(role_id_str).find('.blods_1').append('<img src="img/blod_1.png" />');
+                            }
+                            return false;
                         }
-                        img.click(function() {
-                            $(this).animate({ left: $(this).css('left') == '10px' ? '0px' : '10px' }, 100, function(){})
-                        });
-                        
-                        $('#ok').click(thisFn);
+                    });
+                    tempName = heros[choose].name;
+                    heros.splice(choose, 1); /* 将已选英雄从 heros 中删除 */
+                    break;
+                }
+            }
+            $('#identity').append([
+                '你的身份是 - <span style="font-weight:bold;">',
+                sgs.interface.IDENTITY_INDEX.name[players[0].identity],
+                '</span>,     主公选择了 - <span style="font-weight:bold;">',
+                tempName,
+                '</span>'
+            ].join(''));
+        }
+    });
+    
+    /* 选择英雄 */
+    $('.card_box').dblclick(function (e) {
+        if($(this).find('.choose_role_card_cover').css('display') == 'block')
+            return false; /* 已被选 */
+            
+        $('#choose_back').css('display', 'none');
+        $('#choose_box').css('display', 'none');
+        
+        var name = $(this).find('.choose_role_name').text(), /* 所选英雄名称 */
+            pls = [], /* new bout() 所需参数 */
+            temp, /* 保存主公在 heros 中的位置 */
+            role_num; /* 出牌顺序编号 */
+        
+        for (var i = 0; i < heros.length; i++) { /* 玩家选择英雄 */
+            if (heros[i].name == name) {
+                players[0].hero = heros[i];
+                heros.splice(i, 1);
+                break;
+            }
+        }
+        for(var i = 1; i < players.length; i++) { /* 电脑随机选择英雄 */
+            if(!!players[i].hero)
+                continue;
+            players[i].hero = heros[0];
+            heros.splice(0, 1);
+        }
+        for(var i = 0; i < players.length; i++) { /* 查找主公在 heros 中的位置 */
+            if(players[i].identity == 0) {
+                temp = i;
+                break;
+            }
+        }
+        for(var i = 0; i < players.length; i++) { /* 从主公开始按顺序将 player 加到列表 */
+            role_num = temp - i < 0 ? temp - i + 4 : temp - i;
+            pls.push(new sgs.Player(
+                        "_" + players[role_num].hero.name + '_',
+                        players[role_num].identity,
+                        players[role_num].hero,
+                        role_num == 0 ? true : false));
+        }
+        bout = new sgs.bout(pls);
+        
+        /* 设置信息并发牌 */
+        $(bout.player).each(function (i, d) {
+            role_num = temp - i < 0 ? temp - i + 4 : temp - i;
+            if (role_num == 0) {
+                $('#player_country').attr('src', sgs.interface.COUNTRY_IMG[this.hero.country]);
+                $('#player_name').text(this.nickname);
+                $('#player_head_img').attr('src', 'img/generals/big/' + sgs.HEROIMAG_MAPPING[this.hero.name]);
+                for (var i = 0; i < this.hero.life; i++) {
+                    $('<img src="img/blod_0.png" />').appendTo($('#player_blod_0'));
+                    $('<img src="img/blod_1.png" />').appendTo($('#player_blod_1'));
+                }
+                $("#player_identity img").attr('src', sgs.interface.IDENTITY_IMG[this.identity]);
+                setTimeout(sgs.animation.Deal_Player, 200, this.card); /* 发牌 */
+            } else {
+                if(identity[role_num] != 0) {
+                    var role_id_str = '#role' + role_num;
+                    $(role_id_str).find('.role_country img').attr('src', sgs.interface.COUNTRY_IMG[this.hero.country]);
+                    $(role_id_str).find('.role_name').text(this.nickname);
+                    $(role_id_str).find('.head_img img').attr('src', 'img/generals/small/' + sgs.HEROIMAG_MAPPING[this.hero.name]);
+                    $(role_id_str).find('.card_count span').text(this.card.length);
+                    for (var i = 0; i < this.hero.life; i++) {
+                        $('<img src="img/blod_0.png" />').appendTo($(role_id_str).find('.blods_0'));
+                        $('<img src="img/blod_1.png" />').appendTo($(role_id_str).find('.blods_1'));
                     }
-                });
-            });
-
-            /* 整理牌 */
-            sgs.interface.ArrangeCard();
+                }
+                setTimeout(sgs.animation.Deal_Comp, 200, this.card.length, role_num); /* 发牌 */
+            }
         });
+    });
 
-        /* 清除选牌列表 */
-        playerState.selectedCards.splice(0, playerState.selectedCards.length);
-    };
+    /* 确定按钮 */
+    $('#ok').mouseup();
 
-    /* 整理牌 */
-    sgs.interface.ArrangeCard = function () {
-        var cc = playerState.cards.length;
 
-        $(playerState.cards).each(function (i, d) {
-            if (d.jqObj[0].parentNode == document.body)
-                return true;
-            var left;
-            if (cc * cardInfo.width < $('#cards').width())
-                left = cardInfo.width * i;
-            else
-                left = ($('#cards').width() - cardInfo.width) / (cc - 1) * i;
-            d.jqObj.animate({ left: left }, 'normal');
-        });
-    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    /* 选择角色时修改样式  */
+    $('.card_box').mousedown(function () {
+        if($(this).find('.choose_role_card_cover').css('display') == 'block')
+            return false;
+        $(this).css('border-style', 'inset');
+    }).mouseup(function () {
+        $(this).css('border-style', 'outset');
+    }).mouseout(function () {
+        $(this).css('border-style', 'outset');
+    });
+
+    /* 按钮样式变化 */
+    $('#ok, #cancel, #abandon').hover(function (e) {
+        $(this).find('.normal').css('display', 'none');
+        $(this).find('.hover').css('display', 'block');
+    }, function (e) {
+        $(this).find('.normal').css('display', 'block');
+        $(this).find('.hover').css('display', 'none');
+    }).mousedown(function (e) {
+        $(this).find('.hover').css('display', 'none');
+    }).mouseup(function (e) {
+        $(this).find('.hover').css('display', 'block');
+    });
 
     /* 浏览器改变大小 */
-    sgs.interface.BrowserResize = function (e) {
-        var des = $(window).height() - $('#main').height();
-
-        $('#main').css('margin-top', des > 0 ? (des < 80 ? des / 4 : cardInfo.out) : 0);
-        if ($('#chose_role').css('display') == 'block') {
-
-        }
-    };
-
-})(window.sgs);
+    $(window).resize(function (e) {
+        var des = $(window).height() - $('#main').height(),
+            val;
+        if(des < 0)
+            val = 0;
+        else if(des < 80)
+            val = des / 2;
+        else
+            val = 80;
+        $('#main').css('margin-top', val);
+    });
+});

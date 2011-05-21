@@ -9,158 +9,9 @@
     <script type="text/javascript" src="logic_func.js"></script>
     <script type="text/javascript" src="logic_interpreter.js"></script>
     <script type="text/javascript" src="logic.js"></script>
+    <script type="text/javascript" src="main_interface.js"></script>
+    <script type="text/javascript" src="main_animation.js"></script>
     <script type="text/javascript" src="main.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            
-            var bout, /* 一局 */
-                identity, /* 身份列表 */
-                heros, /* 随机英雄列表 */
-                players = [
-                    { "identity": -1, "hero": undefined },
-                    { "identity": -1, "hero": undefined },
-                    { "identity": -1, "hero": undefined },
-                    { "identity": -1, "hero": undefined }
-                ]; /* 玩家对应的身份和英雄 */
-            
-            $('#game_start').click(function (e) {
-                $('#game_start').unbind('click', arguments.callee);
-                $('#choose_back').css('display', 'block');
-                $('#choose_box').css('display', 'table');
-                
-                identity = sgs.bout.get_identity(4); /* 第0个表示玩家身份 */
-                heros = sgs.bout.get_hero(4);
-                $('.choose_role_card').each(function (i, d) {
-                    $(this).find('img').attr('src', 'img/generals/hero/' + sgs.HEROIMAG_MAPPING[heros[i].name]);
-                    $(this).find('.choose_role_name').text(heros[i].name);
-                });
-                for(var i = 0; i < identity.length; i++)
-                    players[i].identity = identity[i];
-                
-                if(identity[0] == 0) { /* 玩家是主公时 */
-                    $('#identity').text('你的身份是 - ' + sgs.interface.IDENTITY_INDEX.name[identity[0]]);
-                } else { /* 玩家不是主公时 */
-                    /* 主公随机选英雄 */
-                    var choose = parseInt(Math.random() * heros.length),
-                        tempName;
-                    for(var i = 0; i < identity.length; i++) {
-                        if(identity[i] == 0) {
-                            players[i].hero = heros[choose];
-                            $('#choose_box').find('.card_box').each(function(i, d) {
-                                if($(this).find('.choose_role_name').text() == heros[choose].name) {
-                                    $(this).find('.choose_role_card_cover').css('display', 'block');
-                                    return false;
-                                }
-                            });
-                            tempName = heros[choose].name;
-                            heros.splice(choose, 1); /* 将已选英雄从 heros 中删除 */
-                            break;
-                        }
-                    }
-                    $('#identity').append([
-                        '你的身份是 - <span style="font-weight:bold;">',
-                        sgs.interface.IDENTITY_INDEX.name[players[0].identity],
-                        '</span>,     主公选择了 - <span style="font-weight:bold;">',
-                        tempName,
-                        '</span>'
-                    ].join(''));
-                }
-            });
-            
-            /* 选择英雄 */
-            $('.card_box').dblclick(function (e) {
-                if($(this).find('.choose_role_card_cover').css('display') == 'block')
-                    return false; /* 已被选 */
-                    
-                $('#choose_back').css('display', 'none');
-                $('#choose_box').css('display', 'none');
-                
-                var name = $(this).find('.choose_role_name').text(), /* 所选英雄名称 */
-                    pls = [], /* new bout() 所需参数 */
-                    temp, /* 保存主公在 heros 中的位置 */
-                    role_num; /* 出牌顺序编号 */
-                
-                for (var i = 0; i < heros.length; i++) { /* 玩家选择英雄 */
-                    if (heros[i].name == name) {
-                        players[0].hero = heros[i];
-                        heros.splice(i, 1);
-                        break;
-                    }
-                }
-                for(var i = 1; i < players.length; i++) { /* 电脑随机选择英雄 */
-                    if(!!players[i].hero)
-                        continue;
-                    players[i].hero = heros[0];
-                    heros.splice(0, 1);
-                }
-                for(var i = 0; i < players.length; i++) { /* 查找主公在 heros 中的位置 */
-                    if(players[i].identity == 0) {
-                        temp = i;
-                        break;
-                    }
-                }
-                for(var i = 0; i < players.length; i++) { /* 从主公开始按顺序将 player 加到列表 */
-                    role_num = temp - i < 0 ? temp - i + 4 : temp - i;
-                    pls.push(new sgs.Player(
-                                "_" + players[role_num].hero.name + '_[' + sgs.interface.IDENTITY_INDEX.name[players[role_num].identity] + ']',
-                                players[role_num].identity,
-                                players[role_num].hero,
-                                role_num == 0 ? true : false));
-                }
-                bout = new sgs.bout(pls);
-
-
-                $(bout.player).each(function (i, d) {
-                    role_num = temp - i < 0 ? temp - i + 4 : temp - i;
-                    if (role_num == 0) {
-                        $('#player_name').text(this.nickname);
-                        $('#player_head img').attr('src', 'img/generals/big/' + sgs.HEROIMAG_MAPPING[this.hero.name]);
-                        setTimeout(sgs.interface.Deal, 200, true, this.card);
-                    } else {
-                        var role_id_str = '#role' + role_num;
-                        $(role_id_str).find('.role_name').text(this.nickname);
-                        $(role_id_str).find('.head_img img').attr('src', 'img/generals/small/' + sgs.HEROIMAG_MAPPING[this.hero.name]);
-                        $(role_id_str).find('.card_count span').text(this.card.length);
-                        for (var i = 0; i < this.hero.life; i++) {
-                            $('<img src="img/blod_0.png" />').appendTo($(role_id_str).find('.blods_0'));
-                            $('<img src="img/blod_1.png" />').appendTo($(role_id_str).find('.blods_1'));
-                        }
-                        setTimeout(sgs.interface.Deal, 200, false, this.card, role_num);
-                    }
-                });
-            });
-
-            /* 选择角色时修改样式  */
-            $('.card_box').mousedown(function () {
-                if($(this).find('.choose_role_card_cover').css('display') == 'block')
-                    return false;
-                $(this).css('border-style', 'inset');
-            }).mouseup(function () {
-                $(this).css('border-style', 'outset');
-            }).mouseout(function () {
-                $(this).css('border-style', 'outset');
-            });
-
-            /* 按钮样式变化 */
-            $('#ok, #cancel, #abandon').hover(function (e) {
-                $(this).find('.normal').css('display', 'none');
-                $(this).find('.hover').css('display', 'block');
-            }, function (e) {
-                $(this).find('.normal').css('display', 'block');
-                $(this).find('.hover').css('display', 'none');
-            }).mousedown(function (e) {
-                $(this).find('.hover').css('display', 'none');
-            }).mouseup(function (e) {
-                $(this).find('.hover').css('display', 'block');
-            });
-
-            /* 确定按钮 */
-            $('#ok').mouseup(sgs.interface.OkClick);
-
-            /* 浏览器改变大小 */
-            $(window).resize(sgs.interface.BrowserResize);
-        });
-    </script>
 </head>
 <body>
     <div id="main">
@@ -178,8 +29,16 @@
         </div>
         <!-- 测试选项 End -->
         <div class="role" id="role2">
+            <!-- 国家 -->
+            <div class="role_country">
+                <img src="img/none.png" />
+            </div>
             <!-- 名称 -->
             <div class="role_name">
+            </div>
+            <!-- 身份 -->
+            <div class="role_identity">
+                <img src="img/none.png" />
             </div>
             <!-- 头像 -->
             <div class="head_img">
@@ -202,7 +61,13 @@
             </div>
         </div>
         <div class="role" id="role1">
+            <div class="role_country">
+                <img src="img/none.png" />
+            </div>
             <div class="role_name">
+            </div>
+            <div class="role_identity">
+                <img src="img/none.png" />
             </div>
             <div class="head_img">
                 <img src="img/none.png" />
@@ -219,7 +84,13 @@
             </div>
         </div>
         <div class="role" id="role3">
+            <div class="role_country">
+                <img src="img/none.png" />
+            </div>
             <div class="role_name">
+            </div>
+            <div class="role_identity">
+                <img src="img/none.png" />
             </div>
             <div class="head_img">
                 <img src="img/none.png" />
@@ -277,35 +148,38 @@
                     <img class="hover" src="img/ok_hover.png" />
                     <img class="normal" src="img/ok.png" />
                 </div>
+                <div id="player_identity">
+                    <img src="img/none.png">
+                </div>
             </div>
             <!-- 按钮 End -->
             
-            <!-- 玩家英雄头像 -->
+            <!-- 玩家国家 -->
+            
+            <!-- 玩家英雄头像、国家、名称 -->
             <div id="player_head">
-                <img src="img/none.png" />
+                <img id="player_head_img" src="img/none.png" />
                 <div id="player_name_back">
                 </div>
                 <div id="player_name">
                 </div>
+                <img id="player_country" src="img/none.png" />
             </div>
             <!-- 玩家英雄血量 -->
             <div id="player_blods">
                 <div id="player_blod_0">
-                    <img src="img/blod_0.png" />
-                    <img src="img/blod_0.png" />
-                    <img src="img/blod_0.png" />
-                    <img src="img/blod_0.png" />
-                    <img src="img/blod_0.png" />
                 </div>
                 <div id="player_blod_1">
-                    <img src="img/blod_1.png" />
-                    <img src="img/blod_1.png" />
-                    <img src="img/blod_1.png" />
                 </div>
             </div>
         </div>
         <!-- 玩家部分 End -->
     </div>
+    <!-- 过河拆桥等 -->
+    <div>
+        
+    </div>
+    
     <!-- 选择英雄界面 遮盖层 -->
     <div id="choose_back">
     </div>
@@ -316,32 +190,28 @@
                 <div class="card_box">
                     <div class="choose_role_card">
                         <img src="img/none.png" />
-                        <div class="choose_role_name">
-                        </div>
+                        <span class="choose_role_name"></span>
                     </div>
                     <div class="choose_role_card_cover"></div>
                 </div>
                 <div class="card_box">
                     <div class="choose_role_card">
                         <img src="img/none.png" />
-                        <div class="choose_role_name">
-                        </div>
+                        <span class="choose_role_name"></span>
                     </div>
                     <div class="choose_role_card_cover"></div>
                 </div>
                 <div class="card_box">
                     <div class="choose_role_card">
                         <img src="img/none.png" />
-                        <div class="choose_role_name">
-                        </div>
+                        <span class="choose_role_name"></span>
                     </div>
                     <div class="choose_role_card_cover"></div>
                 </div>
                 <div class="card_box">
                     <div class="choose_role_card">
                         <img src="img/none.png" />
-                        <div class="choose_role_name">
-                        </div>
+                        <span class="choose_role_name"></span>
                     </div>
                     <div class="choose_role_card_cover"></div>
                 </div>

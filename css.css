@@ -28,7 +28,7 @@ body
     top: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.9;
+    opacity: 0.8;
     background-color: #000;
 }
 #choose_box
@@ -45,16 +45,16 @@ body
 #choose_role
 {
     position:relative;
-    width: 900px;
-    height: 400px;
+    width: 600px;
+    height: 270px;
     margin: auto;
     background-color: #fff;
     padding: 5px;
 }
 .card_box
 {
-    width: 200px;
-    height: 340px;
+    width: 133px;
+    height: 227px;
     background-color: #ccc;
     border: 2px outset #ccc;
     margin: 6px;
@@ -64,8 +64,13 @@ body
 {
     position:absolute;
     float:left;
-    width: 200px;
-    height: 340px;
+    width: 133px;
+    height: 227px;
+}
+.choose_role_card img
+{
+    width: 133px;
+    height: 227px;
 }
 .choose_role_card_cover
 {
@@ -75,11 +80,7 @@ body
 }
 .choose_role_name
 {
-    width: 100%;
-    text-align: center;
-    line-height: 50px;
-    font-size: 16px;
-    font-weight: bold;
+    display:none;
 }
 .choose_role_card_black
 {
@@ -125,6 +126,20 @@ body
 {
     float: left;
 }
+/* 国家 */
+.role_country
+{
+    position:absolute;
+    width:22px;
+    height:22px;
+    top:5px;
+    left:5px;
+}
+.role_country img
+{
+    width:22px;
+    height:22px;
+}
 /* 名称 */
 .role_name
 {
@@ -135,6 +150,20 @@ body
     height:15px;
     top:7px;
     color:#fff;
+}
+/* 身份 */
+.role_identity
+{
+    position:absolute;
+    width:25px;
+    height:26px;
+    right:7px;
+    top:1px;
+}
+.role_identity img
+{
+    width:25px;
+    height:26px;
 }
 /* 角色头像 */
 .head_img img
@@ -422,9 +451,29 @@ body
     right: 0;
     display: none;
 }
+#player_identity
+{
+    position:absolute;
+    right:2px;
+    top:2px;
+}
+#player_identity, #player_identity img
+{
+    width:25px;
+    height:26px;
+}
 
 /*** 玩家信息 ***/
 
+/* 玩家国家 */
+#player_country
+{
+    position:absolute;
+    top:2px;
+    left:2px;
+    width:22px;
+    height:22px;
+}
 /* 玩家头像 */
 #player_head
 {
@@ -434,7 +483,7 @@ body
     width: 113px;
     height: 106px;
 }
-#player_head img
+#player_head_img
 {
     float: left;
     width: 113px;
@@ -474,7 +523,7 @@ body
 {
     width:21px;
     height:21px;
-    margin:2px 0 5px 0;
+    margin:3px 0 4px 0;
 }
 
 
