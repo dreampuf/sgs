@@ -1,7 +1,8 @@
 var sgs = sgs || {};
 
 (function(sgs){
-    var each = sgs.func.each,
+    var _ = sgs.func.format,
+        each = sgs.func.each,
         exclude = sgs.func.exclude,
         filter = sgs.func.filter,
         copy = function(ary) { return Array.prototye.slice.apply(ary); };
@@ -42,8 +43,23 @@ var sgs = sgs || {};
                 return [];
         }
     };
-    sgs.interpreter.use = function(bout, opt) {
+    sgs.interpreter.usecard = function(bout, opt) {
+        var plsrc = opt.source,
+            pltar = opt.target,
+            card = opt.data,
+            tarcard;
+        console.log(_("{0} 对 {1} 使用 {2}", plsrc.nickname, pltar.nickname, card.name));
 
+        if(card.name == "杀") {
+            if(pltar.hascard("闪")) {
+                //bout.use(
+                //tarcard = pltar.choice_card(new sgs.Operate("闪", plsrc, pltar)); 
+            } else {
+                console.log(_("{0} 扣了一滴血", pltar.nickname));
+                pltar.blood--;
+                bout.usecard(new sgs.Operate("扣血", pltar)); 
+            }
+        }
     };
     sgs.commend_mapping = {
         "杀": function(bout, opt) {

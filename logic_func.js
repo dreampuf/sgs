@@ -88,4 +88,79 @@ var sgs = sgs || {};
         });
         return result;
     } })(sgs.func.each);
+    sgs.func.max = (function(each){ return function(list, func) {
+        var max;
+        each(list, function(n, i) {
+            i = func ? func(i) : i;
+            if(!max || max < i) {
+                max = i;
+            }
+        });
+        return max;
+    } })(sgs.func.each);
+    sgs.func.min = (function(each){ return function(list, func) {
+        var min;
+        each(list, function(n, i) {
+            i = func ? func(i) : i;
+            if(!min || min > i) {
+                min = i;
+            }
+        });
+        return min;
+    } })(sgs.func.each);
+    sgs.func.zip = (function(each, range, max){ return function() {
+        var alen = arguments.length,
+            args = slice.call(arguments, 0, alen - 1),
+            func = slice.call(arguments, alen - 1)[0],
+            maxlen = max(args, function(i) { return i.length; }),
+            tmpargs,
+            result = [];
+        range(maxlen, function(n) {
+            tmpargs = [];
+            each(args, function(nn, ii) {
+                tmpargs.push(args[nn][n]);
+            });
+            tmpargs.push(n);
+            result.push(func.apply({}, tmpargs));
+        });
+        return result;
+    } })(sgs.func.each, sgs.func.range, sgs.func.max);
+    sgs.func.map = (function(each){ return function(list, func) {
+        var result = [];
+        each(list, function(n, i) {
+           result.push(func(i, n));
+        });
+        return result;
+    } })(sgs.func.each); 
+    sgs.func.and = (function(each){ return function(list_a, list_b, func) {
+        var result = [];
+        each(list_a, function(n, i) {
+            each(list_b, function(nn, ii) {
+                if(func && func(i, ii) ||
+                   i == ii) {
+                    result.push(i);
+                }
+            });
+        });
+        return result;
+    } })(sgs.func.each);
+    sgs.func.or = (function(each){ return function(list_a, list_b, func) {
+        var result = [];
+        each(list_a.concat(list_b), function(n, i) {
+            if(result.indexOf(i) == -1) {
+                result.push(i);
+            }
+        });
+        return result;
+    } })(sgs.func.each);
+    sgs.func.sub = (function(each){ return function(list_a, list_b, func) {
+        var result = [];
+        each(list_a, function(n, i) {
+            if(func && func(i) ||
+               list_b.indexOf(i) == -1) {
+                result.push(i);
+            }
+        });
+        return result;
+    } })(sgs.func.each);
 })(window.sgs);
