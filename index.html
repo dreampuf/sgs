@@ -15,19 +15,9 @@
 </head>
 <body>
     <div id="main">
-        <!-- 测试选项 Begin -->
-        <div id="game_start" style="
-                display: block;
-                text-align:center;
-                width:100px;
-                line-height:20px;
-                margin-top:50px;
-                cursor: pointer;
-                border: 2px solid #000;
-                padding: 5px;">
-            开始
-        </div>
-        <!-- 测试选项 End -->
+        <!-- 游戏开始 -->
+        <div id="game_start">开始</div>
+        
         <div class="role" id="role2">
             <!-- 国家 -->
             <div class="role_country">
@@ -35,10 +25,6 @@
             </div>
             <!-- 名称 -->
             <div class="role_name">
-            </div>
-            <!-- 身份 -->
-            <div class="role_identity">
-                <img src="img/none.png" />
             </div>
             <!-- 头像 -->
             <div class="head_img">
@@ -54,7 +40,15 @@
             </div>
             <div class="blods_1">
             </div>
-            <!-- 血量 End -->
+            <!-- 身份 -->
+            <div class="role_identity">
+                <img src="img/none.png" />
+            </div>
+            <div class="role_identity_select">
+                <img src="img/liegeman.png" />
+                <img src="img/traitor.png" />
+                <img src="img/enemy.png" />
+            </div>
 
             <!-- 遮盖层 -->
             <div class="role_bak">
@@ -66,9 +60,6 @@
             </div>
             <div class="role_name">
             </div>
-            <div class="role_identity">
-                <img src="img/none.png" />
-            </div>
             <div class="head_img">
                 <img src="img/none.png" />
             </div>
@@ -81,6 +72,14 @@
             <div class="blods_1">
             </div>
             <div class="role_bak">
+            </div>
+            <div class="role_identity">
+                <img src="img/none.png" />
+            </div>
+            <div class="role_identity_select">
+                <img src="img/liegeman.png" />
+                <img src="img/traitor.png" />
+                <img src="img/enemy.png" />
             </div>
         </div>
         <div class="role" id="role3">
@@ -89,9 +88,6 @@
             </div>
             <div class="role_name">
             </div>
-            <div class="role_identity">
-                <img src="img/none.png" />
-            </div>
             <div class="head_img">
                 <img src="img/none.png" />
             </div>
@@ -104,6 +100,14 @@
             <div class="blods_1">
             </div>
             <div class="role_bak">
+            </div>
+            <div class="role_identity">
+                <img src="img/none.png" />
+            </div>
+            <div class="role_identity_select">
+                <img src="img/liegeman.png" />
+                <img src="img/traitor.png" />
+                <img src="img/enemy.png" />
             </div>
         </div>
         <!-- 游戏输出信息 -->
@@ -144,17 +148,15 @@
                     <img class="normal" src="img/cancel.png" />
                 </div>
                 <div id="abandon">
-                    <img class="press" src="img/ok_press.png" />
-                    <img class="hover" src="img/ok_hover.png" />
-                    <img class="normal" src="img/ok.png" />
+                    <img class="press" src="img/abandon_press.png" />
+                    <img class="hover" src="img/abandon_hover.png" />
+                    <img class="normal" src="img/abandon.png" />
                 </div>
                 <div id="player_identity">
                     <img src="img/none.png">
                 </div>
             </div>
             <!-- 按钮 End -->
-            
-            <!-- 玩家国家 -->
             
             <!-- 玩家英雄头像、国家、名称 -->
             <div id="player_head">
@@ -221,5 +223,20 @@
         </div>
     </div>
     <!-- 选择英雄界面 End -->
+    
+    <div id="explanation">
+        <div id="exp_top"></div>
+        <div id="exp_right"></div>
+        <div id="exp_bottom"></div>
+        <div id="exp_left"></div>
+        <div id="exp_content">
+            asdasdas sasadasd asdasdas sasadasd asdasdas sasad
+            asd asdasdas sasadasd asdasdas sasadasd asdasdas sasadas
+            d asdasdas sasadasd asdasdas sasadasd asdasdas sasadasd asd
+            asdas sasadasd asdasdas sasadasd asdasdas sasadasd asda
+            sdas sasadasd asdasdas sasadasd asdasdas sasadasd asdasdas sasadasd
+        </div>
+    </div>
+    
 </body>
 </html>

@@ -41,6 +41,7 @@
                             /* 填上主公信息 */
                             var role_id_str = '#role' + i;
                             $(role_id_str).find('.role_country img').attr('src', sgs.interface.COUNTRY_IMG[heros[choose].country]);
+                            $(role_id_str).find('.role_name').text('_' + heros[choose].name + '_');
                             $(role_id_str).find('.role_identity img').attr('src', 'img/king.png');
                             $(role_id_str).find('.head_img img').attr('src', 'img/generals/small/' + sgs.HEROIMAG_MAPPING[heros[choose].name]);
                             for(var k = 0; k < heros[choose].life; k++) {
@@ -66,7 +67,7 @@
     });
     
     /* 选择英雄 */
-    $('.card_box').dblclick(function (e) {
+    $('.card_box').mouseup(function (e) {
         if($(this).find('.choose_role_card_cover').css('display') == 'block')
             return false; /* 已被选 */
             
@@ -139,24 +140,10 @@
 
     /* 确定按钮 */
     $('#ok').mouseup();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
-    /* 选择角色时修改样式  */
+    
+    
+    /* 选择角色界面 */
     $('.card_box').mousedown(function () {
         if($(this).find('.choose_role_card_cover').css('display') == 'block')
             return false;
@@ -165,6 +152,35 @@
         $(this).css('border-style', 'outset');
     }).mouseout(function () {
         $(this).css('border-style', 'outset');
+    }).hover(function() { /* 显示技能解释 */
+        
+        $('#explanation').css('display', 'block');
+    }, function() {
+        $('#explanation').css('display', 'none');
+    });
+    
+    /* 身份按钮 */
+    $('#player_identity').click(function(e) {
+        var target = $(this).find('img');
+        target.css('display', target.css('display') == 'none' ? 'block' : 'none');
+    });
+    $('.role_identity').click(function(e) {
+        var imgSrcPart = $(this).find('img').attr('src').split('/');
+        if(imgSrcPart[imgSrcPart.length - 1] == 'king.png') {
+            if($(this).find('span').length == 0)
+                $(this).append($('<span style="display:none;"></span>'));
+            $(this).find('img').attr('src', 'img/none.png');
+        } else if($(this).find('span').length != 0) {
+            $(this).find('img').attr('src', 'img/king.png');
+        } else {
+            $(this).find('img').attr('src', 'img/none.png');
+            var target = $(this).next('.role_identity_select');
+            target.css('display', target.css('display') == 'none' ? 'block' : 'none');
+        }
+    });
+    $('.role_identity_select img').click(function(e) {
+        $(this).parent().prev().find('img').attr('src', $(this).attr('src'));
+        $(this).parent().css('display', 'none');
     });
 
     /* 按钮样式变化 */

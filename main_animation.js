@@ -25,7 +25,6 @@
             img.appendTo($(document.body));
             img.css({ left: left, top: top });
             img.css('position', 'absolute');
-            img.find('.select_unable').css('display', i % 2 ? 'block' : 'none');
             playerState.cards.push(new sgs.interface.Card(img, pattern, num ));
         });
     };
