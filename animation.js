@@ -11,9 +11,9 @@
     var get_card = function(cards) {
         $(cards).each(function(i, d) {
             var pattern = d.color,
-                color = sgs.interface.CARD_COLOR_NUM.color[pattern],
+                color = sgs.interface.CARD_COLOR_NUM_MAPPING.color[pattern],
                 num = d.digit,
-                numStr = sgs.interface.CARD_COLOR_NUM.number[num],
+                numStr = sgs.interface.CARD_COLOR_NUM_MAPPING.number[num],
                 img = $(['<div class="player_card"><img src="img/generals/card/',
                         sgs.CARDIMAG_MAPING[d.name], '" /><div class="pat_num" style="color:',
                         color, ';"><span class="pattern"><img src="img/pattern_',
@@ -77,11 +77,14 @@
                 left: $(role_id_str).offset().left + (i + 1) * 10,
                 top: $(role_id_str).offset().top + 10,
                 opacity: 0.8
-            }, 500, (function(img){ return function() {
-                img.animate({ opacity: 0 }, 'slow', function() {
-                    img.remove();
-                });
-            } })(img));
+            }, 500, (function(img){
+                return function() {
+                    $(role_id_str).find('.card_count span').text(parseInt($(role_id_str).find('.card_count span').text()) + 1);
+                    img.animate({ opacity: 0 }, 'slow', function() {
+                        img.remove();
+                    });
+                }
+            })(img));
         };
     };
     
@@ -127,7 +130,7 @@
     };
     
     /* 整理牌 */
-    sgs.animation.ArrangeCard = function (cards) {
+    sgs.animation.Arrange_Card = function (cards) {
         var cc = cards.length;
         $(cards).each(function (i, d) {
             if (d.jqObj[0].parentNode == document.body)
@@ -139,6 +142,65 @@
                 left = ($('#cards').width() - cardInfo.width) / (cc - 1) * i;
             d.jqObj.animate({ left: left }, 'normal');
         });
+    };
+    
+    /* 显示技能解释 */
+    sgs.animation.Skill_Explanation = function(name, isHero, clientX, clientY) {
+        /*
+         * name      - 技能（或英雄）名称
+         * isHero    - 是否为英雄
+         */
+        var hero_prop = sgs.interface.HERO_PROPERTY_MAPPING;
+            skill_exp = sgs.interface.SKILL_EXPLANATION_MAPPING;
+            explanation = '',
+            targetLeft = (clientX + $('#explanation').width()) > $(window).width() ?
+                        clientX - $('#explanation').width() : clientX,
+            targetTop = (clientY + $('#explanation').height()) > $(window).height() ?
+                        clientY - $('#explanation').height() : clientY;
+            
+        if(isHero) {
+            var skills = hero_prop[name].skill;
+            $(skills).each(function(i, d) {
+                explanation += [
+                    '<font style="font-weight:bold;">', d, '</font>: ', skill_exp[d],
+                    i + 1 == skills.length ? '' : '<br /><br />'
+                ].join('');
+            });
+        } else {
+            explanation = ['<font style="font-weight:bold;">', name, '</font>: ', skill_exp[name]].join('');
+        }
+        explanation = explanation.replace('★', '<br />★');
+        $('#explanation').html(explanation);
+        $('#explanation').css({
+            left: targetLeft,
+            top: targetTop
+        });
+    };
+    
+    /* 出牌剩余时间动画 test: javascript:sgs.animation.Time_Last(true, 5, 2) */
+    sgs.animation.Time_Last = function(isComp, seconds, comp_num) {
+        if(!isComp) {
+            $('#player_progress').width('296px');
+            $('#player_progress_bar').css({ display: 'block', opacity: 1 });
+            $('#player_progress').animate({
+                width: 0
+            }, (seconds || 15) * 1000, function() {
+                $('#player_progress_bar').animate({
+                    opacity: 0
+                }, 200);
+            });
+        } else {
+            var comp_id = "#role" + comp_num;
+            $(comp_id).find('.role_progress').width('123px');
+            $(comp_id).find('.role_progress_bar').css({ display: 'block', opacity: 1 });
+            $(comp_id).find('.role_progress').animate({
+                width: 0
+            }, (seconds || 15) * 1000, function() {
+                $(comp_id).find('.role_progress_bar').animate({
+                    opacity: 0
+                }, 200);
+            });
+        }
     };
     
 })(sgs);

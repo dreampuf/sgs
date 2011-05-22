@@ -9,12 +9,13 @@
     <script type="text/javascript" src="logic_func.js"></script>
     <script type="text/javascript" src="logic_interpreter.js"></script>
     <script type="text/javascript" src="logic.js"></script>
-    <script type="text/javascript" src="main_interface.js"></script>
-    <script type="text/javascript" src="main_animation.js"></script>
+    <script type="text/javascript" src="interface.js"></script>
+    <script type="text/javascript" src="animation.js"></script>
     <script type="text/javascript" src="main.js"></script>
 </head>
 <body>
     <div id="main">
+        <div id="" style="width:100%; position:absolute;"><img src="img/main_top.png" style="width:1000px;" /></div>
         <!-- 游戏开始 -->
         <div id="game_start">开始</div>
         
@@ -29,6 +30,7 @@
             <!-- 头像 -->
             <div class="head_img">
                 <img src="img/none.png" />
+                <font class="choose_hero_name"></font>
             </div>
             <!-- 牌数 -->
             <div class="card_count">
@@ -49,9 +51,14 @@
                 <img src="img/traitor.png" />
                 <img src="img/enemy.png" />
             </div>
-
             <!-- 遮盖层 -->
             <div class="role_bak">
+            </div>
+            <!-- 剩余时间 -->
+            <div class="role_progress_bar">
+                <img class="role_progress_bg" src="img/system/progress/small/progress_bg.png" />
+                <img class="role_progress" src="img/system/progress/small/progress.png" />
+                <img class="role_progress_bg" src="img/system/progress/small/progress_border.png" />
             </div>
         </div>
         <div class="role" id="role1">
@@ -62,6 +69,7 @@
             </div>
             <div class="head_img">
                 <img src="img/none.png" />
+                <font class="choose_hero_name"></font>
             </div>
             <div class="card_count">
                 <img src="img/card_count_bg.png" />
@@ -80,6 +88,13 @@
                 <img src="img/liegeman.png" />
                 <img src="img/traitor.png" />
                 <img src="img/enemy.png" />
+            </div>
+            <div class="role_bak">
+            </div>
+            <div class="role_progress_bar">
+                <img class="role_progress_bg" src="img/system/progress/small/progress_bg.png" />
+                <img class="role_progress" src="img/system/progress/small/progress.png" />
+                <img class="role_progress_bg" src="img/system/progress/small/progress_border.png" />
             </div>
         </div>
         <div class="role" id="role3">
@@ -90,6 +105,7 @@
             </div>
             <div class="head_img">
                 <img src="img/none.png" />
+                <font class="choose_hero_name"></font>
             </div>
             <div class="card_count">
                 <img src="img/card_count_bg.png" />
@@ -109,6 +125,13 @@
                 <img src="img/traitor.png" />
                 <img src="img/enemy.png" />
             </div>
+            <div class="role_bak">
+            </div>
+            <div class="role_progress_bar">
+                <img class="role_progress_bg" src="img/system/progress/small/progress_bg.png" />
+                <img class="role_progress" src="img/system/progress/small/progress.png" />
+                <img class="role_progress_bg" src="img/system/progress/small/progress_border.png" />
+            </div>
         </div>
         <!-- 游戏输出信息 -->
         <div id="gameinfo">
@@ -116,6 +139,12 @@
         <!-- 牌堆 -->
         <div id="cards_last">
             <img src="img/card_back_stack.png" />
+        </div>
+        <!-- 进度条 -->
+        <div id="player_progress_bar">
+            <img id="player_progress_bg" src="img/system/progress/big/progress_bg.png" />
+            <img id="player_progress" src="img/system/progress/big/progress.png" />
+            <img id="player_progress_bg" src="img/system/progress/big/progress_border.png" />
         </div>
         <!-- 玩家部分 Begin -->
         <div id="player">
@@ -138,19 +167,19 @@
             <!-- 按钮 Begin -->
             <div id="ok_cancel_abandon">
                 <div id="ok">
-                    <img class="press" src="img/ok_press.png" />
-                    <img class="hover" src="img/ok_hover.png" />
-                    <img class="normal" src="img/ok.png" />
+                    <img class="press" src="img/buttons/ok_press.png" />
+                    <img class="hover" src="img/buttons/ok_hover.png" />
+                    <img class="normal" src="img/buttons/ok.png" />
                 </div>
                 <div id="cancel">
-                    <img class="press" src="img/cancel_press.png" />
-                    <img class="hover" src="img/cancel_hover.png" />
-                    <img class="normal" src="img/cancel.png" />
+                    <img class="press" src="img/buttons/cancel_press.png" />
+                    <img class="hover" src="img/buttons/cancel_hover.png" />
+                    <img class="normal" src="img/buttons/cancel.png" />
                 </div>
                 <div id="abandon">
-                    <img class="press" src="img/abandon_press.png" />
-                    <img class="hover" src="img/abandon_hover.png" />
-                    <img class="normal" src="img/abandon.png" />
+                    <img class="press" src="img/buttons/abandon_press.png" />
+                    <img class="hover" src="img/buttons/abandon_hover.png" />
+                    <img class="normal" src="img/buttons/abandon.png" />
                 </div>
                 <div id="player_identity">
                     <img src="img/none.png">
@@ -161,6 +190,7 @@
             <!-- 玩家英雄头像、国家、名称 -->
             <div id="player_head">
                 <img id="player_head_img" src="img/none.png" />
+                <font class="choose_hero_name"></font>
                 <div id="player_name_back">
                 </div>
                 <div id="player_name">
@@ -176,67 +206,58 @@
             </div>
         </div>
         <!-- 玩家部分 End -->
-    </div>
-    <!-- 过河拆桥等 -->
-    <div>
         
-    </div>
-    
-    <!-- 选择英雄界面 遮盖层 -->
-    <div id="choose_back">
-    </div>
-    <!-- 选择英雄界面 Begin -->
-    <div id="choose_box">
-        <div style="display: table-cell; vertical-align: middle;">
-            <div id="choose_role">
-                <div class="card_box">
-                    <div class="choose_role_card">
-                        <img src="img/none.png" />
-                        <span class="choose_role_name"></span>
+        
+        <!-- 过河拆桥等 -->
+        <div>
+            
+        </div>
+        <!-- 选择英雄界面 遮盖层 -->
+        <div id="choose_back">
+        </div>
+        <!-- 选择英雄界面 Begin -->
+        <div id="choose_box">
+            <div style="display: table-cell; vertical-align: middle;">
+                <div id="choose_role">
+                    <div class="card_box">
+                        <div class="choose_role_card">
+                            <img src="img/none.png" />
+                            <font class="choose_hero_name"></font>
+                        </div>
+                        <div class="choose_role_card_cover"></div>
                     </div>
-                    <div class="choose_role_card_cover"></div>
-                </div>
-                <div class="card_box">
-                    <div class="choose_role_card">
-                        <img src="img/none.png" />
-                        <span class="choose_role_name"></span>
+                    <div class="card_box">
+                        <div class="choose_role_card">
+                            <img src="img/none.png" />
+                            <font class="choose_hero_name"></font>
+                        </div>
+                        <div class="choose_role_card_cover"></div>
                     </div>
-                    <div class="choose_role_card_cover"></div>
-                </div>
-                <div class="card_box">
-                    <div class="choose_role_card">
-                        <img src="img/none.png" />
-                        <span class="choose_role_name"></span>
+                    <div class="card_box">
+                        <div class="choose_role_card">
+                            <img src="img/none.png" />
+                            <font class="choose_hero_name"></font>
+                        </div>
+                        <div class="choose_role_card_cover"></div>
                     </div>
-                    <div class="choose_role_card_cover"></div>
-                </div>
-                <div class="card_box">
-                    <div class="choose_role_card">
-                        <img src="img/none.png" />
-                        <span class="choose_role_name"></span>
+                    <div class="card_box">
+                        <div class="choose_role_card">
+                            <img src="img/none.png" />
+                            <font class="choose_hero_name"></font>
+                        </div>
+                        <div class="choose_role_card_cover"></div>
                     </div>
-                    <div class="choose_role_card_cover"></div>
-                </div>
-                <div id="identity">
+                    <div id="identity">
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- 选择英雄界面 End -->
+        
+        <div id="explanation"></div>
     </div>
-    <!-- 选择英雄界面 End -->
     
-    <div id="explanation">
-        <div id="exp_top"></div>
-        <div id="exp_right"></div>
-        <div id="exp_bottom"></div>
-        <div id="exp_left"></div>
-        <div id="exp_content">
-            asdasdas sasadasd asdasdas sasadasd asdasdas sasad
-            asd asdasdas sasadasd asdasdas sasadasd asdasdas sasadas
-            d asdasdas sasadasd asdasdas sasadasd asdasdas sasadasd asd
-            asdas sasadasd asdasdas sasadasd asdasdas sasadasd asda
-            sdas sasadasd asdasdas sasadasd asdasdas sasadasd asdasdas sasadasd
-        </div>
-    </div>
+    
     
 </body>
 </html>

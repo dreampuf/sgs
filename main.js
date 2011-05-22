@@ -1,8 +1,9 @@
 ﻿$(document).ready(function () {
-            
+    
     var bout, /* 一局 */
         identity, /* 身份列表 */
         heros, /* 随机英雄列表 */
+        explanation_id, /* 技能解释 */
         players = [
             { "identity": -1, "hero": undefined },
             { "identity": -1, "hero": undefined },
@@ -20,13 +21,13 @@
         heros = sgs.bout.get_hero(4);
         $('.choose_role_card').each(function (i, d) {
             $(this).find('img').attr('src', 'img/generals/hero/' + sgs.HEROIMAG_MAPPING[heros[i].name]);
-            $(this).find('.choose_role_name').text(heros[i].name);
+            $(this).find('.choose_hero_name').text(heros[i].name);
         });
         for(var i = 0; i < identity.length; i++)
             players[i].identity = identity[i];
         
         if(identity[0] == 0) { /* 玩家是主公时 */
-            $('#identity').text('你的身份是 - ' + sgs.interface.IDENTITY_INDEX.name[identity[0]]);
+            $('#identity').text('你的身份是 - ' + sgs.interface.IDENTITY_INDEX_MAPPING.name[identity[0]]);
             /* 国家、身份 */
         } else { /* 玩家不是主公时 */
             /* 主公随机选英雄 */
@@ -36,18 +37,14 @@
                 if(identity[i] == 0) {
                     players[i].hero = heros[choose];
                     $('#choose_box').find('.card_box').each(function(j, d) {
-                        if($(this).find('.choose_role_name').text() == heros[choose].name) {
+                        if($(this).find('.choose_hero_name').text() == heros[choose].name) {
                             $(this).find('.choose_role_card_cover').css('display', 'block');
                             /* 填上主公信息 */
                             var role_id_str = '#role' + i;
-                            $(role_id_str).find('.role_country img').attr('src', sgs.interface.COUNTRY_IMG[heros[choose].country]);
-                            $(role_id_str).find('.role_name').text('_' + heros[choose].name + '_');
-                            $(role_id_str).find('.role_identity img').attr('src', 'img/king.png');
-                            $(role_id_str).find('.head_img img').attr('src', 'img/generals/small/' + sgs.HEROIMAG_MAPPING[heros[choose].name]);
-                            for(var k = 0; k < heros[choose].life; k++) {
-                                $(role_id_str).find('.blods_0').append('<img src="img/blod_0.png" />');
-                                $(role_id_str).find('.blods_1').append('<img src="img/blod_1.png" />');
-                            }
+                            sgs.interface.Set_RoleInfo(
+                                true,
+                                new sgs.Player('_' + heros[choose].name + '_', 0, heros[choose], true),
+                                role_id_str);
                             return false;
                         }
                     });
@@ -58,7 +55,7 @@
             }
             $('#identity').append([
                 '你的身份是 - <span style="font-weight:bold;">',
-                sgs.interface.IDENTITY_INDEX.name[players[0].identity],
+                sgs.interface.IDENTITY_INDEX_MAPPING.name[players[0].identity],
                 '</span>,     主公选择了 - <span style="font-weight:bold;">',
                 tempName,
                 '</span>'
@@ -74,7 +71,7 @@
         $('#choose_back').css('display', 'none');
         $('#choose_box').css('display', 'none');
         
-        var name = $(this).find('.choose_role_name').text(), /* 所选英雄名称 */
+        var name = $(this).find('.choose_hero_name').text(), /* 所选英雄名称 */
             pls = [], /* new bout() 所需参数 */
             temp, /* 保存主公在 heros 中的位置 */
             role_num; /* 出牌顺序编号 */
@@ -112,26 +109,12 @@
         $(bout.player).each(function (i, d) {
             role_num = temp - i < 0 ? temp - i + 4 : temp - i;
             if (role_num == 0) {
-                $('#player_country').attr('src', sgs.interface.COUNTRY_IMG[this.hero.country]);
-                $('#player_name').text(this.nickname);
-                $('#player_head_img').attr('src', 'img/generals/big/' + sgs.HEROIMAG_MAPPING[this.hero.name]);
-                for (var i = 0; i < this.hero.life; i++) {
-                    $('<img src="img/blod_0.png" />').appendTo($('#player_blod_0'));
-                    $('<img src="img/blod_1.png" />').appendTo($('#player_blod_1'));
-                }
-                $("#player_identity img").attr('src', sgs.interface.IDENTITY_IMG[this.identity]);
+                sgs.interface.Set_RoleInfo(false, this);
                 setTimeout(sgs.animation.Deal_Player, 200, this.card); /* 发牌 */
             } else {
                 if(identity[role_num] != 0) {
                     var role_id_str = '#role' + role_num;
-                    $(role_id_str).find('.role_country img').attr('src', sgs.interface.COUNTRY_IMG[this.hero.country]);
-                    $(role_id_str).find('.role_name').text(this.nickname);
-                    $(role_id_str).find('.head_img img').attr('src', 'img/generals/small/' + sgs.HEROIMAG_MAPPING[this.hero.name]);
-                    $(role_id_str).find('.card_count span').text(this.card.length);
-                    for (var i = 0; i < this.hero.life; i++) {
-                        $('<img src="img/blod_0.png" />').appendTo($(role_id_str).find('.blods_0'));
-                        $('<img src="img/blod_1.png" />').appendTo($(role_id_str).find('.blods_1'));
-                    }
+                    sgs.interface.Set_RoleInfo(true, this, role_id_str);
                 }
                 setTimeout(sgs.animation.Deal_Comp, 200, this.card.length, role_num); /* 发牌 */
             }
@@ -140,8 +123,6 @@
 
     /* 确定按钮 */
     $('#ok').mouseup();
-    
-    
     
     /* 选择角色界面 */
     $('.card_box').mousedown(function () {
@@ -152,10 +133,33 @@
         $(this).css('border-style', 'outset');
     }).mouseout(function () {
         $(this).css('border-style', 'outset');
-    }).hover(function() { /* 显示技能解释 */
-        
-        $('#explanation').css('display', 'block');
-    }, function() {
+    });
+    
+    /* 显示技能解释 */
+    $('.card_box, .head_img, #player_head').hover(function(e) {
+        if($(this).find('.choose_hero_name').text() == '')
+            return false;
+        var vthis = this,
+            isShow = $('#explanation').css('display') == 'block';
+        if(isShow && explanation_id != undefined)
+            clearTimeout(explanation_id);
+        explanation_id = setTimeout(function() {
+            sgs.animation.Skill_Explanation(
+                $(vthis).find('.choose_hero_name').text(),
+                true,
+                e.clientX,
+                e.clientY
+            );
+            $('#explanation').css('display', 'block');
+        }, isShow ? 0 : 1000);
+    }, function(e) {
+        explanation_id = setTimeout(function() {
+            $('#explanation').css('display', 'none');
+        }, 500);
+    });
+    $('#explanation').hover(function(e) {
+        clearTimeout(explanation_id);
+    }, function(e) {
         $('#explanation').css('display', 'none');
     });
     
@@ -171,7 +175,7 @@
                 $(this).append($('<span style="display:none;"></span>'));
             $(this).find('img').attr('src', 'img/none.png');
         } else if($(this).find('span').length != 0) {
-            $(this).find('img').attr('src', 'img/king.png');
+            $(this).find('img').attr('src', sgs.interface.IDENTITY_IMG_MAPPING[0]);
         } else {
             $(this).find('img').attr('src', 'img/none.png');
             var target = $(this).next('.role_identity_select');
@@ -198,6 +202,7 @@
 
     /* 浏览器改变大小 */
     $(window).resize(function (e) {
+        return false;
         var des = $(window).height() - $('#main').height(),
             val;
         if(des < 0)
