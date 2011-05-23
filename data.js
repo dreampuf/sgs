@@ -181,6 +181,14 @@ sgs.CARD = [
     { 'name': '无懈可击', 'color': 0, 'digit': '12', }
 ];
 
+sgs.CARD_CONTERACT_MAPPING = {
+    "杀": "闪",
+    "五谷丰登": "无懈可击",
+    "桃园结义": "无懈可击",
+    "南蛮入侵": "无懈可击",
+    "万箭齐发": "无懈可击",
+};
+
 
 sgs.EQUIP_RANGE_MAPPING = {
     "诸葛连弩": 1,

@@ -126,9 +126,9 @@ var sgs = sgs || {};
         return result;
     } })(sgs.func.each, sgs.func.range, sgs.func.max);
     sgs.func.map = (function(each){ return function(list, func) {
-        var result = [];
+        var result = [], func_len = func.length;
         each(list, function(n, i) {
-           result.push(func(i, n));
+            result.push(func_len == 2 ? func(n, i) : func(i));
         });
         return result;
     } })(sgs.func.each); 

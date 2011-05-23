@@ -43,24 +43,97 @@ var sgs = sgs || {};
                 return [];
         }
     };
-    sgs.interpreter.usecard = function(bout, opt) {
+    sgs.interpreter.choice_card = function(bout, opt) {
         var plsrc = opt.source,
             pltar = opt.target,
             card = opt.data,
-            tarcard;
-        console.log(_("{0} 对 {1} 使用 {2}", plsrc.nickname, pltar.nickname, card.name));
+            opt_top = bout.opt[0];
+        
+        console.log("操作堆栈:", map(bout.opt, function(i) { return i.data.name; }));
+        if(!card && opt_top) {
+            switch(opt_top.data.name) {
+                case "杀":
+                    bout.opt = [];
+                    plsrc.blood--;
+                    
+                    if(plsrc.blood < 1) {
+                        var pltar_pos = bout.playernum[pltar.nickname], save_opt = [];
+                        range(bout.playerlen, function(n) {  /* 临死求救 */
+                            console.log("::::向", bout.player[(pltar_pos+n)%bout.playerlen].nickname, "求救中....");
+                            save_opt.push(new sgs.Operate("求救", 
+                                                             plsrc,
+                                                             bout.player[(pltar_pos+n)%bout.playerlen]));
+                        });
+                        bout.choice = save_opt;
+                    };
 
-        if(card.name == "杀") {
-            if(pltar.hascard("闪")) {
-                //bout.use(
-                //tarcard = pltar.choice_card(new sgs.Operate("闪", plsrc, pltar)); 
-            } else {
-                console.log(_("{0} 扣了一滴血", pltar.nickname));
-                pltar.blood--;
-                bout.usecard(new sgs.Operate("扣血", pltar)); 
+                    console.log(_("{0} 扣一滴血,还剩下{1}滴血", plsrc.nickname, plsrc.blood));
+                    return bout.judge();
             }
+        } else if (!card) {
+            return pltar.choice_card(opt);
+        }
+
+        console.log(_("choice {0} 对 {1} 使用 {2}", plsrc.nickname, pltar.nickname, card.name));
+        
+        switch(card.name) {
+            case "杀":
+                //
+            case "闪":
+                console.log("OPT_TOP", opt_top.data.name);
+                if(opt_top.data.name == "杀") {
+                    bout.opt = [];
+                    return bout.continue(); 
+                }
         }
     };
+
+    sgs.interpreter.usecard = function(bout, opt) {
+        var plsrc = opt.source,
+            pltar = opt.target,
+            card = opt.data;
+        if(card) {
+            console.log(_("{0} 对 {1} 使用 {2}", plsrc.nickname, pltar.nickname, card.name));
+        } else {
+            console.log(_("{0} 对 {1} 表示没有卡牌", plsrc.nickname, pltar.nickname));
+            return bout.continue();
+        }
+
+        switch(card.name) {
+            case "杀":
+                /*if(bout.opt[0].data.name == " */
+                pltar.choice_card(new sgs.Operate("闪", plsrc, pltar));
+                break;
+            case "闪":
+                if(bout.opt[0].data.name == "杀") {
+                    pltar.choice_card();
+                } 
+        }
+    };
+    sgs.interpreter.judge = function(bout) {
+        var idens = bout.live_body_identity(),
+            live_idens = filter(idens, function(i) { return i != -1; }),
+            tmp;
+
+        tmp = filter(live_idens, function(i) { return i != 0 || i != 1; })
+        if(tmp.length == 0 && tmp.indexOf(0) != -1) { /* 主公忠臣判定 */ 
+            tmp = {"winner": filter(bout.player, function(i){ return i.identity == 0 || i.identity == 1; }),
+                   "msg": "主公胜利" };
+            return tmp;
+        } 
+        if(live_idens.length == 1 && live_idens[0] == 2) { /* 内奸判定 */
+            tmp = {"winner": filter(bout.player, function(i){ return i.identity == 2 && i.blood > 0; }),
+                   "msg": "内奸胜利" };
+            return tmp; 
+        }
+        if(tmp.indexOf(0) == -1) { /* 反贼胜利 */
+            tmp = {"winner": filter(bout.player, function(i){ return i.identity == 3; }),
+                   "msg": "反贼胜利" };
+            return tmp;
+        }
+        return;
+    };
+         
     sgs.commend_mapping = {
         "杀": function(bout, opt) {
 

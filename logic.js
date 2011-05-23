@@ -55,6 +55,16 @@ var sgs = sgs || {};
         });
         return has;
     };
+    sgs.Player.prototype.findcard = function(name) {
+        var result = undefined;
+        each(this.card, function(n, i){
+            if(i.name == name) {
+                result = i;
+                return false;
+            }
+        });
+        return result;
+    };
     sgs.Player.prototype.rmcard = function(card) {
         var cards = this.card,
             target_pos = cards.indexOf(card);
@@ -72,6 +82,11 @@ var sgs = sgs || {};
     sgs.Player.prototype.choice_card = function(opt) {
         if(!this.isAI) throw new Error("sorry ! I'm computer.");
         
+        this.AI.choice_card(opt);
+    };
+    sgs.Player.prototype.usecard = function(opt) {
+        if(!this.isAI) throw new Error("sorry ! I'm computer.");
+
         this.AI.usecard(opt);
     };
     
@@ -126,17 +141,8 @@ var sgs = sgs || {};
         this.data = data || undefined;
     };
 
-    var slist = [];
-    each(sgs.HERO, function(n, i) {
-        slist.push(new sgs.Hero(i[0], i[1], i[2], i[3], i[4]));
-    });
-    sgs.HERO = slist;
-
-    slist = [];
-    each(sgs.CARD, function(n, i) {
-        slist.push(new sgs.Card(i["name"], i["color"], i["digit"]));
-    });
-    sgs.CARD = slist;
+    sgs.HERO = map(sgs.HERO, function(i){ return new sgs.Hero(i[0], i[1], i[2], i[3], i[4]); });
+    sgs.CARD = map(sgs.CARD, function(i){ return new sgs.Card(i["name"], i["color"], i["digit"]); });
 
     var toString = function() {
         var tmp = "{",
@@ -148,10 +154,10 @@ var sgs = sgs || {};
         }
         return tmp + "}";
     },
-        glass = [sgs.Player, sgs.Hero, sgs.Operate, sgs.Card], glen = glass.length;
-    while(glen-- > 0) {
-        glass[glen].prototype.toString = toString;
-    }
+        glass = [sgs.Player, sgs.Hero, sgs.Operate, sgs.Card];
+    each(glass, function(n, i) {
+        i.prototype.toString = toString;
+    });
 
     /*
      * 回合操作对象
@@ -173,7 +179,7 @@ var sgs = sgs || {};
         player = slice.call(player, king_num).concat(slice.call(player, 0, king_num));
         
         each(player, function(n, i) { 
-            playernum[i] = n;
+            playernum[i.nickname] = n;
          });
         
         _bufflog.push("游戏开始:");
@@ -190,6 +196,7 @@ var sgs = sgs || {};
         this.curplayer = 0;/* 当前执行玩家 */
         this.card = ccard; /* 已经洗过的卡 */
         this.opt = []; /* 操作堆栈 */
+        this.choice = []; /* 要牌队列 */
         this.attached = []; /* 绑定的事件 */
         
         this.timer = 0;
@@ -274,6 +281,25 @@ var sgs = sgs || {};
         plpos = plpos < 0 ? (this.playerlen-1) : plpos;
         return pls[plpos];
     };
+    sgs.Bout.prototype.live_body_identity = function(){
+        return map(this.player, function(i){ return i.blood > 0 ? i.identity : -1 ; });
+    };
+    sgs.Bout.prototype.judge = (function(judge){ return function() {
+        var result = judge(this); 
+        if(result) { /* GAME OVER */
+            console.log(result["winner"], result["msg"]);
+        } else {
+            this.continue()
+        }   
+    } })(sgs.interpreter.judge);
+    sgs.Bout.prototype.continue = function() {
+        if(this.choice.length > 0) {
+            opt = this.choice.pop(); 
+            this.choice_card(opt);
+        } else {
+            this.player[this.curplayer].usecard();
+        }
+    };
     
     sgs.Bout.prototype.decision = function(opt) {
         /* 判定 */
@@ -294,7 +320,9 @@ var sgs = sgs || {};
         if(this.card.length < 5) { this.card = this.card.concat(shuffle(sgs.CARD)); }
         
         var cards = this.card.splice(0, 2); 
+        console.log(pl.nickname, "摸牌", map(cards, function(i) {return i.name; }));
         pl.card = pl.card.concat(cards);
+        console.log(pl.nickname, "手牌:", map(pl.card, function(i) {return i.name; }));
         return cards;
     };
     sgs.Bout.prototype.selectcard = (function(select){ return function(opt) {
@@ -305,22 +333,26 @@ var sgs = sgs || {};
         return select(this, opt);
     } })(sgs.interpreter.select);
 
+    sgs.Bout.prototype.choice_card = (function(choice_card){ return function(opt) {
+        var pl = opt.source,
+            card = opt.data;
+        if(card) {
+            this.opt.push(opt);
+            pl.rmcard(card);
+        }
+        choice_card(this, opt);
+    } })(sgs.interpreter.choice_card); 
+
     sgs.Bout.prototype.usecard = (function(usecard){ return function(opt) {
         /* 用牌 */
-        if(opt.id == "扣血") {
-            opt = this.opt.shift();
-            if(this.opt.length > 0) {
-                this.opt = [];
-            }
-            opt.source.choice_card();
-        } else {
-            var pl = opt.source,
-                card = opt.data;
+        var pl = opt.source,
+            card = opt.data;
 
+        if(card) {
             pl.rmcard(card);
             this.opt.push(opt);
-            usecard(this, opt);
         }
+        usecard(this, opt);
 
     } })(sgs.interpreter.usecard);
 
@@ -335,11 +367,10 @@ var sgs = sgs || {};
             if(!cards) {
                 return new sgs.Operate("弃牌", undefined, pl, {"num": pl.card.length - pl.blood});
             } else {
-                console.log(_("{0} 弃了牌", pl.nickname));
                 pl.card = sub(pl.card, cards); 
             }
 
-            console.log(cards[0].name, cards[1].name);
+            console.log(pl.nickname, "弃牌", map(cards, function(i) { return i.name; }));
         }
         
         setTimeout((function(bout){ return function(){

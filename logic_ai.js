@@ -21,6 +21,8 @@ var _ = sgs.func.format,
         this.player = player;
         this.bout = bout;
         this.lv = lv || bout.ailv;
+
+        this.hassha = false; /* 当前玩家是否已出杀 */
     };
     sgs.Ai.interpreter = function(bout, opt) {
 
@@ -66,23 +68,42 @@ var _ = sgs.func.format,
 
         this.usecard();
     };
-    sgs.Ai.prototype.usecard = (function(attack_deviation){ return function() {
-        /* 用牌策略 */
+    sgs.Ai.prototype.choice_card = (function(){ return function(opt) {
         var pl = this.player,
             bout = this.bout,
             use = false,
-            cards = pl.card,
-            use_id = -1;
-        
-        var sha = filter(cards, function(i) { return i.name == "杀"; }),
+            cards = pl.card;
+
+        if(!opt) {
+            return this.usecard();
+        }
+
+        if(opt && opt.id == "求救") {
+            if(opt.source == pl) { /* 自己 */
+                return bout.choice_card(new sgs.Operate("用牌", pl, pl, pl.findcard("桃")));
+            }
+            return bout.continue();
+        }
+
+        bout.usecard(new sgs.Operate("用牌", pl, opt.source, pl.findcard(opt.id))); 
+
+    } })();
+    sgs.Ai.prototype.usecard = (function(attack_deviation){ return function() {
+        var pl = this.player,
+            bout = this.bout,
+            use = false,
+            cards = pl.card;
+
+        var be_use_card = filter(cards, function(i) { return i.name == "杀"; }),
             pls_rela = attack_deviation(bout, pl),
             pls_max = max(pls_rela),
             pltar = bout.player[pls_rela.indexOf(pls_max)];
 
-        use = sha.length > 0 && !pltar.equip[2] ? true : false;
-
+        use = be_use_card.length > 0 && !pltar.equip[2] && !this.hassha ? true : false;
         if(use) {
-            bout.usecard(new sgs.Operate("用牌", pl, pltar, sha[0]));
+            this.hassha = true;
+            be_use_card = be_use_card[0];
+            bout.usecard(new sgs.Operate("用牌", pl, pltar, be_use_card));
         } else {
             this.discard();
         }
@@ -90,14 +111,16 @@ var _ = sgs.func.format,
     } })(sgs.Ai.interpreter.attack_deviation);
 
     sgs.Ai.prototype.discard = function() {
+        this.hassha = false;
         var bout = this.bout;
         /* 简单AI 啥也不做 */
-        console.log(this.player.nickname, "弃牌了");
-        while(opt = bout.discard(new sgs.Operate("弃牌", this.player))) {
-            bout.discard(new sgs.Operate("弃牌", 
+        opt = bout.discard(new sgs.Operate("弃牌", this.player));
+        while(opt) { 
+            console.log("需要弃牌", opt.data["num"], "张");
+            opt = bout.discard(new sgs.Operate("弃牌", 
                                          this.player,
                                          undefined, 
-                                         {"card": this.player.card.slice(0, 2) }));
+                                         {"card": choice(this.player.card, opt.data["num"]) }));
         }
     }; 
 })(window.sgs);
