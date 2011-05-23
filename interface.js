@@ -99,7 +99,7 @@
             $(id).find('.role_country img').attr('src', sgs.interface.COUNTRY_IMG_MAPPING[player.hero.country]);
             $(id).find('.role_name').text('_' + player.hero.name + '_');
             if(player.identity == 0)
-                $(id).find('.role_identity img').attr('src', 'img/king.png');
+                $(id).find('.role_identity img').attr('src', sgs.interface.IDENTITY_IMG_MAPPING[0]);
             $(id).find('.head_img img').attr('src', 'img/generals/small/' + sgs.HEROIMAG_MAPPING[player.hero.name]);
             $(id).find('.choose_hero_name').text(player.hero.name);
             for(var k = 0; k < player.hero.life; k++) {

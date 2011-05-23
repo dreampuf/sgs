@@ -136,12 +136,10 @@
     });
     
     /* 显示技能解释 */
-    $('.card_box, .head_img, #player_head').hover(function(e) {
-        if($(this).find('.choose_hero_name').text() == '')
-            return false;
-        var vthis = this,
-            isShow = $('#explanation').css('display') == 'block';
-        if(isShow && explanation_id != undefined)
+    $('.card_box, .head_img, #player_head').mousemove(function(e) {
+        var vthis = this;
+        $('#explanation').css('display', 'none');
+        if(explanation_id != undefined)
             clearTimeout(explanation_id);
         explanation_id = setTimeout(function() {
             sgs.animation.Skill_Explanation(
@@ -151,11 +149,11 @@
                 e.clientY
             );
             $('#explanation').css('display', 'block');
-        }, isShow ? 0 : 1000);
-    }, function(e) {
-        explanation_id = setTimeout(function() {
-            $('#explanation').css('display', 'none');
-        }, 500);
+        }, 1000);
+    });
+    $('.card_box, .head_img, #player_head').mouseout(function(e) {
+        if(explanation_id != undefined)
+            clearTimeout(explanation_id);
     });
     $('#explanation').hover(function(e) {
         clearTimeout(explanation_id);

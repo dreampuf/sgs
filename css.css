@@ -50,8 +50,8 @@ body
     display: none;
     left: 0;
     top: 0;
-    opacity: 0.5;
     background-color: #000;
+    opacity: 0;
 }
 #choose_box
 {
@@ -66,11 +66,14 @@ body
 #choose_role
 {
     position:relative;
-    width: 400px;
+    width: 390px;
     height: 150px;
     margin: auto;
     background-color: #fff;
     padding: 5px;
+    box-shadow: 3px 2px 8px 2px #000;
+    border-radius: 3px;
+    border-image: url(img/hero_choose.png) 0 12 0 12 stretch stretch;
 }
 .card_box
 {
@@ -185,7 +188,7 @@ body
     position:absolute;
     width:25px;
     height:26px;
-    right:7px;
+    right:1px;
     top:1px;
 }
 .role_identity img
@@ -199,7 +202,7 @@ body
     width:25px;
     height:100px;
     top:31px;
-    right:7px;
+    right:1px;
     cursor:default;
     display:none;
 }
