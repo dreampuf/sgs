@@ -141,14 +141,14 @@ body
     border-radius: 3px;
 }
 /* 角色遮盖层 */
-.role_back
+.role_cover
 {
     position: absolute;
     background-color: #000;
     top: 1px;
     left: 1px;
-    width: 94%;
-    height: 95%;
+    width: 99%;
+    height: 99%;
     cursor: pointer;
     opacity: 0.5;
     display: none;

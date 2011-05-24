@@ -4,6 +4,8 @@
         
     sgs.interface = sgs.interface || {};
 
+    sgs.interface.bout = sgs.interface.bout || {};
+    
     sgs.interface.FILE_LIST = {
         
     };
@@ -63,7 +65,7 @@
         blod: 0
     };
 
-    sgs.interface.Card = function (jqObj, name, type, pattern, num, selected) {
+    sgs.interface.Card = function (jqObj, card) {
         /*
          *      构造牌对象
          *
@@ -75,11 +77,7 @@
          * selected     - 是否选中
          */
         this.jqObj = jqObj;
-        this.name = name;
-        this.type = type;
-        this.pattern = pattern;
-        this.num = num;
-        this.selected = selected;
+        this.card = card;
     };
     
     /* 设置信息 */

@@ -1,9 +1,8 @@
 ﻿$(document).ready(function () {
     
-    sgs.interface.Load_Data();
+    //sgs.interface.Load_Data();
     
-    var bout, /* 一局 */
-        identity, /* 身份列表 */
+    var identity, /* 身份列表 */
         heros, /* 随机英雄列表 */
         explanation_id, /* 技能解释 */
         players = [
@@ -99,16 +98,18 @@
         }
         for(var i = 0; i < players.length; i++) { /* 从主公开始按顺序将 player 加到列表 */
             role_num = temp - i < 0 ? temp - i + 4 : temp - i;
-            pls.push(new sgs.Player(
+            var tempPlayer = new sgs.Player(
                         "_" + players[role_num].hero.name + '_',
                         players[role_num].identity,
                         players[role_num].hero,
-                        role_num == 0 ? true : false));
+                        role_num == 0 ? true : false);
+            
+            pls.push(tempPlayer);
         }
-        bout = new sgs.Bout(pls);
+        sgs.interface.bout = new sgs.Bout(pls);
         
         /* 设置信息并发牌 */
-        $(bout.player).each(function (i, d) {
+        $(sgs.interface.bout.player).each(function (i, d) {
             role_num = temp - i < 0 ? temp - i + 4 : temp - i;
             if (role_num == 0) {
                 sgs.interface.Set_RoleInfo(false, this);

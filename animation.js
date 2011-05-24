@@ -18,14 +18,17 @@
                         sgs.CARDIMAG_MAPING[d.name], '" /><div class="pat_num" style="color:',
                         color, ';"><span class="pattern"><img src="img/pattern_',
                         pattern, '.png" /></span><span class="num">',
-                        numStr, '</span></div><div class="select_unable"></div></div>'].join('')),
+                        numStr, '</span></div><div class="select_unable"></div><font style="display:none;"><font class="name_pass">',
+                        d.name, '</font><font class="pattern_pass">',
+                        d.color, '</font><font class="num_pass">',
+                        d.digit, '</font></font></div>'].join('')),
                 left = $('#cards_last').offset().left,
                 top = $('#cards_last').offset().top;
             
             img.appendTo($(document.body));
             img.css({ left: left, top: top });
             img.css('position', 'absolute');
-            playerState.cards.push(new sgs.interface.Card(img, pattern, num ));
+            playerState.cards.push(new sgs.interface.Card(img, d ));
         });
     };
     
@@ -46,8 +49,49 @@
     /* 选牌 */
     sgs.animation.Select_Card = function (cardDom) {
         var cardOut = cardInfo.out,
-            cssVal = $(cardDom).css('bottom') == cardOut + 'px' ? '0px' : cardOut + 'px';
-        $(cardDom).animate({ 'bottom': cssVal }, 100);
+            selected = $(cardDom).css('bottom') == cardOut + 'px' ? true : false;
+        $('#cards').find('.player_card').each(function() {
+            if(this == cardDom)
+                $(cardDom).animate({ 'bottom': selected ? '0px' : cardOut + 'px' }, 100);
+            else
+                $(this).animate({ 'bottom': '0px' }, 100);
+        });
+        
+        if(!selected) {
+            var selectCard;
+            $.each(playerState.cards, function(i, d) {
+                if(d.card.name == $(cardDom).find('.name_pass').text()
+                        && d.card.color == $(cardDom).find('.pattern_pass').text()
+                        && d.card.digit == $(cardDom).find('.num_pass').text()) {
+                    selectCard = d;
+                    return false;
+                }
+            })
+            
+            var playerIndex;
+            $.each(sgs.interface.bout.player, function(i, d) {
+                if(d.nickname == $('#player_name').text()) {
+                    playerIndex = i;
+                }
+            });
+            var targets = sgs.interface.bout.select_card(new sgs.Operate(selectCard.card.name, sgs.interface.bout.player[playerIndex], undefined, selectCard.card));
+            if(targets.length != 0) {
+                $('.role .role_cover').each(function(i, d) {
+                    $(this).css('display', 'block');
+                });
+            }
+            $.each(targets, function(i, d) {
+                $('.role').each(function(ii, dd) {
+                    if(d.nickname == $(this).find('.role_name').text()) {
+                        $(this).find('.role_cover').css('display', 'none');
+                    }
+                });
+            });
+        } else {
+            $('.role .role_cover').each(function(i, d) {
+                $(this).css('display', 'none');
+            });
+        }
     };
     
     /* 从牌堆中删除部分牌 */
@@ -110,6 +154,9 @@
                 d.jqObj.css('bottom', 0);
                 /* 绑定事件 */
                 d.jqObj.click(function(e) { sgs.animation.Select_Card(d.jqObj[0]); });
+                d.jqObj.mousedown(function(e) {
+                    
+                });
             });
         });
     };
@@ -200,6 +247,15 @@
                     opacity: 0
                 }, 200);
             });
+        }
+    };
+    
+    /* 卡牌拖动 */
+    sgs.animation.Card_Drag = function(isDrop) {
+        if(!isDrop) {
+            
+        } else {
+        
         }
     };
     

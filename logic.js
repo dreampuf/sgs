@@ -262,14 +262,14 @@ var sgs = sgs || {};
         var result = [], 
             pos = 0,
             pls = this.player,
-            plpos = pls.indexOf(pl), 
+            plpos = this.playernum[pl.nickname], 
             plrange = plrange || pl.range()[0],
-            selist = slice.call(pls, plpos+1).slice.call(pls, 0, plpos),
+            selist = slice.call(pls, plpos+1).concat(slice.call(pls, 0, plpos)),
             arlist = copy(selist).reverse();
 
         each([selist, arlist], function(bn, bi) {
         each(bi, function(n, i) {
-            pos = Math.abs(n - plpos) + (i.equip[2] ? 1 : 0); /* 有+1马还需要加1 */
+            pos = (n + 1) + (i.equip[2] ? 1 : 0); /* 有+1马还需要加1 */
             if(plrange >= pos && result.indexOf(i) == -1) {
                 result.push(i);
             }
