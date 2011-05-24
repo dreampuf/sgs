@@ -348,10 +348,10 @@ var sgs = sgs || {};
         this.step = 2;
         this.continue();
     };
-    sgs.Bout.prototype.selectcard = (function(select){ return function(opt) {
+    sgs.Bout.prototype.select_card = (function(select){ return function(opt) {
         /* 选牌 */
         var pl = opt.source,
-            card = opt.data["card"];
+            card = opt.data;
 
         return select(this, opt);
     } })(sgs.interpreter.select);

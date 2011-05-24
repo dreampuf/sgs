@@ -17,7 +17,7 @@ var sgs = sgs || {};
     };
     sgs.interpreter.select = function(bout, opt){
         var pl = opt.source,
-            card = opt.data["card"];
+            card = opt.data;
         switch(card.name) {
             /* 没闪 */
             case "杀":
