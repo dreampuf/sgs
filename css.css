@@ -672,9 +672,8 @@ body
 }
 #data_load_perc
 {
-    font-size: 60px;
+    font-size: 80px;
     font-weight: bold;
-    color: red;
     position: absolute;
     width: 200px;
     height: 60px;
@@ -683,6 +682,8 @@ body
     left: 400px;
     line-height: 60px;
     text-align: center;
+    color: #f7b257;
+    text-shadow: 2px 2px 2px #fff;
 }
 #load_imgs
 {

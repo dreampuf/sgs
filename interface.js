@@ -115,14 +115,20 @@
 
     /* 数据加载 */
     sgs.interface.Load_Data = function() {
+        $('#data_load').css('display', 'block');
         $.each(sgs.IMG_LIST, function(i, d) {
             $('#load_imgs').append($('<img src=' + d + ' />'));
         });
-        var count = sgs.IMG_LIST.length;
+        var count = 0;
         $('#load_imgs img').load(function() {
-            count--;
-            if(count == 0) {
-                alert('done');
+            count++;
+            $('#data_load_perc').text(parseInt(count / sgs.IMG_LIST.length * 100) + '%');
+            if(count == sgs.IMG_LIST.length) {
+                $('#data_load').animate({
+                    opacity: 0
+                }, 1000, function() {
+                    $('#data_load').css('display', 'none');
+                });
             }
         });
     }
