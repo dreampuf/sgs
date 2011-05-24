@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
     
+    sgs.interface.Load_Data();
+    
     var bout, /* 一局 */
         identity, /* 身份列表 */
         heros, /* 随机英雄列表 */

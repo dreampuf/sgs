@@ -3,6 +3,10 @@
 (function (sgs) {
         
     sgs.interface = sgs.interface || {};
+
+    sgs.interface.FILE_LIST = {
+        
+    };
     
     sgs.interface.CARD_COLOR_NUM_MAPPING = {
         "color": { 0: "red", 1: "red", 2: "black", 3: "black" },
@@ -108,6 +112,20 @@
             }
         }
     };
+
+    /* 数据加载 */
+    sgs.interface.Load_Data = function() {
+        $.each(sgs.IMG_LIST, function(i, d) {
+            $('#load_imgs').append($('<img src=' + d + ' />'));
+        });
+        var count = sgs.IMG_LIST.length;
+        $('#load_imgs img').load(function() {
+            count--;
+            if(count == 0) {
+                alert('done');
+            }
+        });
+    }
     
     sgs.interface.HERO_PROPERTY_MAPPING = {};
     $.each(sgs.HERO, (function(hero_mapping) {
