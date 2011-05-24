@@ -74,15 +74,20 @@ var sgs = sgs || {};
         }
         return false;
     };
-    sgs.Player.prototype.turn = function(bout) {
+    sgs.Player.prototype.turn = function() {
         if(!this.isAI) throw new Error("sorry ! I'm computer.");
         
-        this.AI.turn(bout);
+        this.AI.turn();
     };
     sgs.Player.prototype.choice_card = function(opt) {
         if(!this.isAI) throw new Error("sorry ! I'm computer.");
         
         this.AI.choice_card(opt);
+    };
+    sgs.Player.prototype.ask_card = function(opt) {
+        if(!this.isAI) throw new Error("sorry ! I'm computer.");
+        
+        this.AI.ask_card(opt);
     };
     sgs.Player.prototype.usecard = function(opt) {
         if(!this.isAI) throw new Error("sorry ! I'm computer.");
@@ -197,6 +202,7 @@ var sgs = sgs || {};
         this.card = ccard; /* 已经洗过的卡 */
         this.opt = []; /* 操作堆栈 */
         this.choice = []; /* 要牌队列 */
+        this.step = 0; /* 当前执行状态 0: 判定阶段, 1: 摸牌阶段, 2: 出牌阶段, 3: 弃牌阶段 */
         this.attached = []; /* 绑定的事件 */
         
         this.timer = 0;
@@ -215,7 +221,7 @@ var sgs = sgs || {};
                     i.AI = new sgs.Ai(obj, i);  
                 }
             });
-            obj.player[obj.curplayer].turn(obj);
+            obj.continue();
         } })(this), 100);
     };
     sgs.Bout.get_identity = function(player_num) {
@@ -287,31 +293,46 @@ var sgs = sgs || {};
     sgs.Bout.prototype.judge = (function(judge){ return function() {
         var result = judge(this); 
         if(result) { /* GAME OVER */
-            console.log(result["winner"], result["msg"]);
-        } else {
-            this.continue()
-        }   
-    } })(sgs.interpreter.judge);
-    sgs.Bout.prototype.continue = function() {
-        if(this.choice.length > 0) {
-            opt = this.choice.pop(); 
-            this.choice_card(opt);
-        } else {
-            this.player[this.curplayer].usecard();
+            console.log(result["winner"][0].nickname, result["msg"]);
+            return false;
         }
-    };
+        return true;
+    } })(sgs.interpreter.judge);
+    sgs.Bout.prototype.continue = (function(response_card){ return function() {
+        if(this.choice.length > 0) {
+            var opt = this.choice[this.choice.length-1],
+                pltar = opt.target;
+
+            pltar.ask_card(opt); 
+        } else {
+            if(this.judge()) {
+                switch(this.step) {
+                    case 0:
+                        return this.decision();
+                    case 1:
+                        return this.getcard();
+                    case 2:
+                        return this.usecard();
+                    case 3:
+                        return this.discard();
+                }
+            }
+        }
+    } })(sgs.interpreter.response_card);
     
     sgs.Bout.prototype.decision = function(opt) {
         /* 判定 */
-        var pl = opt.source;
+        var pl = this.player[this.curplayer];
         if(pl.be_decision.length > 0) {
 
         }
-        return;
+
+        this.step = 1;
+        this.continue();
     };
     sgs.Bout.prototype.getcard = function(opt) {
         /* 摸牌 */
-        var pl = opt.source,
+        var pl = this.player[this.curplayer],
             num = 2;
 
         /** 张辽-奇袭 **/
@@ -319,11 +340,13 @@ var sgs = sgs || {};
         
         if(this.card.length < 5) { this.card = this.card.concat(shuffle(sgs.CARD)); }
         
-        var cards = this.card.splice(0, 2); 
+        var cards = this.card.splice(0, num); 
         console.log(pl.nickname, "摸牌", map(cards, function(i) {return i.name; }));
         pl.card = pl.card.concat(cards);
         console.log(pl.nickname, "手牌:", map(pl.card, function(i) {return i.name; }));
-        return cards;
+        
+        this.step = 2;
+        this.continue();
     };
     sgs.Bout.prototype.selectcard = (function(select){ return function(opt) {
         /* 选牌 */
@@ -333,26 +356,30 @@ var sgs = sgs || {};
         return select(this, opt);
     } })(sgs.interpreter.select);
 
-    sgs.Bout.prototype.choice_card = (function(choice_card){ return function(opt) {
+    sgs.Bout.prototype.choice_card = (function(choice_card, response_card){ return function(opt) {
         var pl = opt.source,
             card = opt.data;
-        if(card) {
-            this.opt.push(opt);
+
+        if(card) { /* 移除所用卡牌 */
             pl.rmcard(card);
         }
+
+        this.opt.push(opt);
         choice_card(this, opt);
-    } })(sgs.interpreter.choice_card); 
 
-    sgs.Bout.prototype.usecard = (function(usecard){ return function(opt) {
-        /* 用牌 */
-        var pl = opt.source,
-            card = opt.data;
+    } })(sgs.interpreter.choice_card, sgs.interpreter.response_card); 
 
-        if(card) {
-            pl.rmcard(card);
-            this.opt.push(opt);
-        }
-        usecard(this, opt);
+    sgs.Bout.prototype.response_card = (function(response_card){ return function(opt) {
+        
+        response_card(this, opt);
+
+    } })(sgs.interpreter.response_card);
+
+    sgs.Bout.prototype.usecard = (function(usecard){ return function() {
+
+        var pl = this.player[this.curplayer];
+        console.log(pl, pl.choice_card);
+        pl.choice_card();
 
     } })(sgs.interpreter.usecard);
 
@@ -385,10 +412,9 @@ var sgs = sgs || {};
             }
 
             bout.curplayer %= bout.playerlen;
-            
-            bout.player[bout.curplayer].turn(bout);
+            bout.step = 0;
+            bout.continue();
         } })(this), 50);
-        return ;
     };
 
 })(window.sgs);

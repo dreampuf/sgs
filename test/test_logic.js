@@ -77,36 +77,13 @@ test("Stage", function(){
     });
     var single = "blablablablaaaa.";
 
-    players[0].turn = function() {
-        /* 重写玩家的trun方法 */
-        /* 现在轮到玩家 */
-        single = "yes i'm player";
-       
-        /*
-         * while(opt = bout.decision(opt)) {
-         *     //进行判定的操作.
-         * }
-         *
-         * while(opt = bout.getcard(opt)) {
-         *    //拿牌
-         * }
-         * 
-         * ....做其他事情......
-         *
-         * opt = bout.selectcard(opt);
-         * //根据opt返回的可选对象显示哪些英雄可以被选择.
-         *
-         * ....做其他事情.....
-         *
-         * bout.usecard(opt, function(opt) {
-         *     //...继续处理使用牌后的操作
-         * }); 
-         *
-         * ...
-         *
-         * bout.discard(opt);
-         */
-    };
+    each(filter(players, function(i) { return !i.isAI; }), function(n, i) {
+        i.choice_card = function() {
+            /* 重写玩家的trun方法 */
+            /* 现在轮到玩家 */
+            single = "yes i'm player";
+        };
+    });
     
 
     var about = new sgs.Bout(players);

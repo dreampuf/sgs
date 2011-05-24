@@ -68,25 +68,29 @@ var _ = sgs.func.format,
 
         this.usecard();
     };
+    sgs.Ai.prototype.ask_card = (function(){ return function(opt) {
+        var pl = this.player,
+            bout = this.bout,
+            cardname = opt.data;
+        switch(cardname) {
+            case "桃":
+                if(opt.source == pl) { /* 自己 */
+                    return bout.response_card(new sgs.Operate("用牌", pl, pl, pl.findcard(cardname)));
+                }
+        }
+        return bout.response_card(new sgs.Operate("用牌", pl, opt.source));
+    } })();
     sgs.Ai.prototype.choice_card = (function(){ return function(opt) {
         var pl = this.player,
             bout = this.bout,
             use = false,
             cards = pl.card;
 
-        if(!opt) {
+        if(!opt) { /* 主动出牌 */
             return this.usecard();
+        } else { /* 被动出牌 */
+            bout.choice_card(new sgs.Operate("用牌", pl, opt.source, pl.findcard(opt.id))); 
         }
-
-        if(opt && opt.id == "求救") {
-            if(opt.source == pl) { /* 自己 */
-                return bout.choice_card(new sgs.Operate("用牌", pl, pl, pl.findcard("桃")));
-            }
-            return bout.continue();
-        }
-
-        bout.usecard(new sgs.Operate("用牌", pl, opt.source, pl.findcard(opt.id))); 
-
     } })();
     sgs.Ai.prototype.usecard = (function(attack_deviation){ return function() {
         var pl = this.player,
@@ -103,7 +107,7 @@ var _ = sgs.func.format,
         if(use) {
             this.hassha = true;
             be_use_card = be_use_card[0];
-            bout.usecard(new sgs.Operate("用牌", pl, pltar, be_use_card));
+            bout.choice_card(new sgs.Operate("用牌", pl, pltar, be_use_card));
         } else {
             this.discard();
         }
