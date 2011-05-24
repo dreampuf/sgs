@@ -19,8 +19,8 @@
         $('#choose_back').css('display', 'block');
         $('#choose_box').css('display', 'table');
         
-        identity = sgs.bout.get_identity(4); /* 第0个表示玩家身份 */
-        heros = sgs.bout.get_hero(4);
+        identity = sgs.Bout.get_identity(4); /* 第0个表示玩家身份 */
+        heros = sgs.Bout.get_hero(4);
         $('.choose_role_card').each(function (i, d) {
             $(this).find('img').attr('src', 'img/generals/hero/' + sgs.HEROIMAG_MAPPING[heros[i].name]);
             $(this).find('.choose_hero_name').text(heros[i].name);
@@ -74,7 +74,7 @@
         $('#choose_box').css('display', 'none');
         
         var name = $(this).find('.choose_hero_name').text(), /* 所选英雄名称 */
-            pls = [], /* new bout() 所需参数 */
+            pls = [], /* new Bout() 所需参数 */
             temp, /* 保存主公在 heros 中的位置 */
             role_num; /* 出牌顺序编号 */
         
@@ -105,7 +105,7 @@
                         players[role_num].hero,
                         role_num == 0 ? true : false));
         }
-        bout = new sgs.bout(pls);
+        bout = new sgs.Bout(pls);
         
         /* 设置信息并发牌 */
         $(bout.player).each(function (i, d) {
