@@ -6,7 +6,7 @@ var sgs = sgs || {};
         copy = function(ary){ return slice.apply(ary); },
         _ = sgs.func.format,
         filter = sgs.func.filter,
-        excloude = sgs.func.excloude, 
+        exclude = sgs.func.exclude, 
         shuffle = sgs.func.shuffle,
         range = sgs.func.range,
         choice = sgs.func.choice,
@@ -237,7 +237,10 @@ var sgs = sgs || {};
         alway_king = filter(sgs.HERO, function(i) { return i.name == "曹操" || 
                                                            i.name == "刘备" ||
                                                            i.name == "孙权"; });
-        return alway_king.concat(choice(heros, other_num));
+        heros = exclude(choice(heros, other_num + 3),  function(i) { return i.name == "曹操" || 
+                                                                            i.name == "刘备" ||
+                                                                            i.name == "孙权"; });
+        return alway_king.concat(heros.slice(0, 2));
     };
 
     sgs.Bout.prototype.get_buff_log = function() {
@@ -386,7 +389,6 @@ var sgs = sgs || {};
     sgs.Bout.prototype.usecard = (function(usecard){ return function() {
 
         var pl = this.player[this.curplayer];
-        console.log(pl, pl.choice_card);
         pl.choice_card();
 
     } })(sgs.interpreter.usecard);

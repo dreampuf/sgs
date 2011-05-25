@@ -2,7 +2,7 @@ module("Logic");
 
 var _ = sgs.func.format,
     filter = sgs.func.filter,
-    excloude = sgs.func.excloude, 
+    exclude = sgs.func.exclude, 
     shuffle = sgs.func.shuffle,
     range = sgs.func.range,
     choice = sgs.func.choice,

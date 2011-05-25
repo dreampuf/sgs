@@ -79,7 +79,7 @@ var sgs = sgs || {};
                     pltar.blood++;
                     
                     if(pltar.blood > 0) { /* 健康了 */
-                        bout.choice = excloude(bout.choice, function(i) { return i.id == "桃" && i.target == pltar; });
+                        bout.choice = exclude(bout.choice, function(i) { return i.id == "桃" && i.target == pltar; });
                     }
             }
         } else { /* 无所作为 */
