@@ -17,31 +17,52 @@ var sgs = sgs || {};
     };
     sgs.interpreter.select = function(bout, opt){
         var pl = opt.source,
-            card = opt.data;
+            card = opt.data,
+            choiceable_pl = [],
+            choiceable_num = 0;
         switch(card.name) {
-            /* 没闪 */
             case "杀":
-                return bout.hero_range(pl);
+                choiceable_pl = bout.hero_range(pl);
+                choiceable_num = 1;
+                break;
             case "桃":
+                choiceable_pl = [pl];
+                choiceable_num = 1;
+                break;
             case "无中生有":
             case "闪电":
-                return [pl];
-            case "决斗":
-                return copy(bout.player);
+                choiceable_pl = [pl];
+                choiceable_num = 0;
+                break;
             case "顺手牵羊":
-                if(pl.hero.name == "黄月英") return copy(bout.player);
-                return bout.hero_range(pl, pl.equip[3] ? 2 : 1); 
+                if(pl.hero.name == "黄月英") { 
+                    choiceable_pl = copy(bout.player);
+                    choiceable_num = 1;
+                } else {
+                    choiceable_pl = bout.hero_range(pl, pl.equip[3] ? 2 : 1);
+                    choiceable_num = 1;
+                } 
+                break;
             case "借刀杀人":
-                return filter(bout.player, function(i) { return !!i.equip[1]; });
+                choiceable_pl = filter(bout.player, function(i) { return !!i.equip[1]; });
+                choiceable_num = 2;
+                break;
+            case "决斗":
+            case "过河拆桥":
+                choiceable_pl = copy(bout.player);
+                choiceable_num = 1;
+                break;
             case "五谷丰登":
             case "桃源结义":
             case "南蛮入侵":
             case "万箭齐发":
-            case "过河拆桥":
-            case "无懈可击":
+            /** case "无懈可击": **/
             case "乐不思蜀":
-                return [];
+                choiceable_pl = copy(bout.player);
+                choiceable_num = 0;
+                break;
         }
+        return [choiceable_pl, choiceable_num];
     };
 
     sgs.interpreter.response_card = function(bout, opt) {

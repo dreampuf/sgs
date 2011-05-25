@@ -231,6 +231,14 @@ var sgs = sgs || {};
         heros = heros || sgs.HERO;
         return choice(heros, player_num); 
     };
+    sgs.Bout.get_king_hero = function(other_num, heros) {
+        other_num = other_num || 2;
+        heros = heros || sgs.HERO;
+        alway_king = filter(sgs.HERO, function(i) { return i.name == "曹操" || 
+                                                           i.name == "刘备" ||
+                                                           i.name == "孙权"; });
+        return alway_king.concat(choice(heros, other_num));
+    };
 
     sgs.Bout.prototype.get_buff_log = function() {
         var result = this._bufflog.slice(0);

@@ -94,10 +94,10 @@ test("Stage", function(){
     ok(true, about.get_buff_log());
     ok(about.player[0].hascard(about.player[0].card[0].name), "恩,有牌");
 
-    players = about.player;
-    equal(4, players[0].card.length, "初始化牌数等于4");
-    about.getcard(new sgs.Operate("摸牌", players[0]));
-    equal(6, players[0].card.length, "摸排后牌数等于6");
+    //players = about.player;
+    //equal(4, players[0].card.length, "初始化牌数等于4");
+    //about.getcard(new sgs.Operate("摸牌", players[0]));
+    //equal(6, players[0].card.length, "摸排后牌数等于6");
     
     var ma = new sgs.Card("的驴", 0, 4),
         wuqi5 = new sgs.Card("方天画戟", 0, 5); 
@@ -105,6 +105,8 @@ test("Stage", function(){
     players[3].equip[0] = wuqi5;
     equal(3, about.hero_range(players[3]).length, "装备了武器,都能攻击得到");
     equal(1, about.hero_range(players[1]).length, "只能攻击没有装备+1马的玩家");
+    
+    
 });
 
 test("AI_1v1", function(){
