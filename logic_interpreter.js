@@ -5,7 +5,7 @@ var sgs = sgs || {};
         each = sgs.func.each,
         exclude = sgs.func.exclude,
         filter = sgs.func.filter,
-        copy = function(ary) { return Array.prototye.slice.apply(ary); };
+        copy = function(ary) { return Array.prototype.slice.apply(ary); };
 
     /* 操作解释器 */
     sgs.interpreter = function(bout, opt) {
