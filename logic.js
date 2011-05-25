@@ -74,11 +74,6 @@ var sgs = sgs || {};
         }
         return false;
     };
-    sgs.Player.prototype.turn = function() {
-        if(!this.isAI) throw new Error("sorry ! I'm computer.");
-        
-        this.AI.turn();
-    };
     sgs.Player.prototype.choice_card = function(opt) {
         if(!this.isAI) throw new Error("sorry ! I'm computer.");
         

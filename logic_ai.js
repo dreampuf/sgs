@@ -2,7 +2,7 @@ var sgs = sgs || {};
 
 var _ = sgs.func.format,
     filter = sgs.func.filter,
-    excloude = sgs.func.excloude, 
+    exclude = sgs.func.exclude, 
     shuffle = sgs.func.shuffle,
     range = sgs.func.range,
     choice = sgs.func.choice,
@@ -53,21 +53,6 @@ var _ = sgs.func.format,
         return pls_rel; 
     } })(sgs.Ai.identity_rela);
 
-    sgs.Ai.prototype.turn = function() {
-        var bout = this.bout,
-            pl = this.player,
-            opt = new sgs.Operate("判定", this.player);
-
-        while(opt = bout.decision(opt)) {
-            /* 对付延迟锦囊 */
-        }
-        
-        /* 摸牌 */
-        cards = bout.getcard(new sgs.Operate("摸牌", this.player));
-        pl.card = pl.card.concat(cards);
-
-        this.usecard();
-    };
     sgs.Ai.prototype.ask_card = (function(){ return function(opt) {
         var pl = this.player,
             bout = this.bout,
