@@ -1,14 +1,10 @@
 ﻿var sgs = sgs || {};
 
 (function (sgs) {
-        
-    sgs.interface = sgs.interface || {};
-
-    sgs.interface.bout = sgs.interface.bout || {};
     
-    sgs.interface.FILE_LIST = {
-        
-    };
+    sgs.interface = {};
+
+    sgs.interface.bout = {};
     
     sgs.interface.CARD_COLOR_NUM_MAPPING = {
         "color": { 0: "red", 1: "red", 2: "black", 3: "black" },
@@ -49,65 +45,32 @@
         height: 133,
         out: 20
     };
-
-    sgs.interface.playerState = {
-        /*
-         *      玩家状态
-         *
-         * width       - 牌宽度
-         * height      - 牌高度
-         * out         - 选中时突出的高度
-         */
-        stage: 1,
-        weapons: [],
-        cards: [],
-        selectedCards: [],
-        blod: 0
-    };
-
-    sgs.interface.Card = function (jqObj, card) {
-        /*
-         *      构造牌对象
-         *
-         * jqObj        - jQuery对象
-         * name         - 名称
-         * type         - 类型
-         * pattern        - 花色
-         * num          - 数值
-         * selected     - 是否选中
-         */
-        this.jqObj = jqObj;
-        this.card = card;
-    };
     
     /* 设置信息 */
-    sgs.interface.Set_RoleInfo = function(isComp, player, id) {
-        /*
-         * id              - id
-         * player          - 玩家
-         * isComp          - 是否为电脑
-         */
-        if(!isComp) {
+    sgs.interface.Set_RoleInfo = function(player, dom) {
+        if(dom != undefined)
+            player.dom = dom;
+        if(!player.isAI) {
             $('#player_country').attr('src', sgs.interface.COUNTRY_IMG_MAPPING[player.hero.country]);
-                $('#player_name').text(player.nickname);
-                $('#player_head_img').attr('src', 'img/generals/big/' + sgs.HEROIMAG_MAPPING[player.hero.name]);
-                $('#player_head .choose_hero_name').text(player.hero.name);
-                for (var i = 0; i < player.hero.life; i++) {
-                    $('<img src="img/blod_0.png" />').appendTo($('#player_blod_0'));
-                    $('<img src="img/blod_1.png" />').appendTo($('#player_blod_1'));
-                }
-                $("#player_identity img").attr('src', sgs.interface.IDENTITY_IMG_MAPPING[player.identity]);
-        } else {
-            $(id).find('.role_country img').attr('src', sgs.interface.COUNTRY_IMG_MAPPING[player.hero.country]);
-            $(id).find('.role_name').text('_' + player.hero.name + '_');
-            if(player.identity == 0)
-                $(id).find('.role_identity img').attr('src', sgs.interface.IDENTITY_IMG_MAPPING[0]);
-            $(id).find('.head_img img').attr('src', 'img/generals/small/' + sgs.HEROIMAG_MAPPING[player.hero.name]);
-            $(id).find('.choose_hero_name').text(player.hero.name);
-            for(var k = 0; k < player.hero.life; k++) {
-                $(id).find('.blods_0').append('<img src="img/blod_0.png" />');
-                $(id).find('.blods_1').append('<img src="img/blod_1.png" />');
+            $('#player_name').text(player.nickname);
+            $('#player_head_img').attr('src', 'img/generals/big/' + sgs.HEROIMAG_MAPPING[player.hero.name]);
+            for (var i = 0; i < player.hero.life; i++) {
+                $('<img src="img/blod_0.png" />').appendTo($('#player_blod_0'));
+                $('<img src="img/blod_1.png" />').appendTo($('#player_blod_1'));
             }
+            $("#player_identity img").attr('src', sgs.interface.IDENTITY_IMG_MAPPING[player.identity]);
+            $('#player_head')[0].name = player.hero.name;
+        } else {
+            $(player.dom).find('.role_country img').attr('src', sgs.interface.COUNTRY_IMG_MAPPING[player.hero.country]);
+            $(player.dom).find('.role_name').text('_' + player.hero.name + '_');
+            if(player.identity == 0)
+                $(player.dom).find('.role_identity img').attr('src', sgs.interface.IDENTITY_IMG_MAPPING[0]);
+            $(player.dom).find('.head_img img').attr('src', 'img/generals/small/' + sgs.HEROIMAG_MAPPING[player.hero.name]);
+            for(var k = 0; k < player.hero.life; k++) {
+                $(player.dom).find('.blods_0').append('<img src="img/blod_0.png" />');
+                $(player.dom).find('.blods_1').append('<img src="img/blod_1.png" />');
+            }
+            $(player.dom).find('.head_img')[0].name = player.hero.name;
         }
     };
 
@@ -120,6 +83,8 @@
         var count = 0;
         $('#load_imgs img').load(function() {
             count++;
+            if(/data_load_bg.jpg/.test($(this).attr('src')))
+                $('#main').css('display', 'block');
             $('#data_load_perc').text(parseInt(count / sgs.IMG_LIST.length * 100) + '%');
             if(count == sgs.IMG_LIST.length) {
                 $('#data_load').animate({

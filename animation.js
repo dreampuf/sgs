@@ -4,8 +4,7 @@
 
     sgs.animation = sgs.animation || {};
     
-    var playerState = sgs.interface.playerState,
-        cardInfo = sgs.interface.cardInfo;
+    var cardInfo = sgs.interface.cardInfo;
     
     /* 将牌放置到牌堆位置 */
     var get_card = function(cards) {
@@ -18,24 +17,22 @@
                         sgs.CARDIMAG_MAPING[d.name], '" /><div class="pat_num" style="color:',
                         color, ';"><span class="pattern"><img src="img/pattern_',
                         pattern, '.png" /></span><span class="num">',
-                        numStr, '</span></div><div class="select_unable"></div><font style="display:none;"><font class="name_pass">',
-                        d.name, '</font><font class="pattern_pass">',
-                        d.color, '</font><font class="num_pass">',
-                        d.digit, '</font></font></div>'].join('')),
+                        numStr, '</span></div><div class="select_unable"></div></div>'].join('')),
                 left = $('#cards_last').offset().left,
                 top = $('#cards_last').offset().top;
             
             img.appendTo($(document.body));
             img.css({ left: left, top: top });
             img.css('position', 'absolute');
-            playerState.cards.push(new sgs.interface.Card(img, d ));
+            img[0].card = d;
+            d.dom = img[0];
         });
     };
     
     /* 将选牌从DOM中抽出（方便牌整理） */
     var drag_out = function(cards) {
         $(cards).each(function (i, d) {
-            var temp = this.jqObj,
+            var temp = $(this.dom),
                 left = temp.offset().left,
                 top = temp.offset().top;
 
@@ -51,54 +48,55 @@
         var cardOut = cardInfo.out,
             selected = $(cardDom).css('bottom') == cardOut + 'px' ? true : false;
         $('#cards').find('.player_card').each(function() {
-            if(this == cardDom)
-                $(cardDom).animate({ 'bottom': selected ? '0px' : cardOut + 'px' }, 100);
-            else
+            if(this == cardDom) {
+                if(selected) {
+                    $(cardDom).animate({ 'bottom': '0px' }, 100);
+                    cardDom.card.selected = false;
+                    /* 设置玩家为可选状态 */
+                    $('.role .role_cover').each(function(i, d) {
+                        $(this).css('display', 'none');
+                    });
+                } else {
+                    cardDom.card.selected = true;
+                    $(cardDom).animate({ 'bottom': cardOut + 'px' }, 100);
+                }
+            } else {
+                this.card.selected = false;
                 $(this).animate({ 'bottom': '0px' }, 100);
+            }
         });
         
-        if(!selected) {
-            var selectCard;
-            $.each(playerState.cards, function(i, d) {
-                if(d.card.name == $(cardDom).find('.name_pass').text()
-                        && d.card.color == $(cardDom).find('.pattern_pass').text()
-                        && d.card.digit == $(cardDom).find('.num_pass').text()) {
-                    selectCard = d;
-                    return false;
-                }
-            })
-            
-            var playerIndex;
-            $.each(sgs.interface.bout.player, function(i, d) {
-                if(d.nickname == $('#player_name').text()) {
-                    playerIndex = i;
-                }
-            });
-            var targets = sgs.interface.bout.select_card(new sgs.Operate(selectCard.card.name, sgs.interface.bout.player[playerIndex], undefined, selectCard.card));
-            if(targets.length != 0) {
-                $('.role .role_cover').each(function(i, d) {
-                    $(this).css('display', 'block');
-                });
+        if(selected)
+            return;
+        
+        var selectCard,
+            player = $('#player')[0].player;
+        $.each(player.card, function(i, d) {
+            if(d == cardDom.card) {
+                selectCard = d;
+                return false;
             }
-            $.each(targets, function(i, d) {
-                $('.role').each(function(ii, dd) {
-                    if(d.nickname == $(this).find('.role_name').text()) {
-                        $(this).find('.role_cover').css('display', 'none');
-                    }
-                });
+        });
+        
+        player.targets = sgs.interface.bout.select_card(new sgs.Operate(selectCard.name, player, undefined, selectCard));
+        player.targets.selected = [];
+        $('.role .role_cover').each(function(i, d) {
+            $(d).css('display', 'block');
+        });
+        $.each(player.targets[0], function(i, d) {
+            $('.role').each(function(ii, dd) {
+                if(d.nickname == dd.player.nickname) {
+                    $(dd).find('.role_cover').css('display', 'none');
+                }
             });
-        } else {
-            $('.role .role_cover').each(function(i, d) {
-                $(this).css('display', 'none');
-            });
-        }
+        });
     };
     
     /* 从牌堆中删除部分牌 */
     sgs.animation.Del_Out = function(card_stack, del_cards) {
         $(del_cards).each(function (i, d) {
             $(card_stack).each(function (ii, dd) {
-                if (d.jqObj[0] == dd.jqObj[0]) {
+                if (d.dom == dd.dom) {
                     card_stack.splice(ii, 1);
                     return false;
                 }
@@ -107,8 +105,7 @@
     };
     
     /* 给电脑发牌 */
-    sgs.animation.Deal_Comp = function(card_count, role_id) {
-        var role_id_str = '#role' + role_id;
+    sgs.animation.Deal_Comp = function(card_count, player) {
         for(var i = 0; i < card_count; i++) {
             var img = $('<img src="img/card_back.png" style="width:93px; height:131px" />');
             img.appendTo(document.body);
@@ -118,12 +115,12 @@
                 top: $('#cards_last').offset().top
             });
             img.animate({
-                left: $(role_id_str).offset().left + (i + 1) * 10,
-                top: $(role_id_str).offset().top + 10,
+                left: $(player.dom).offset().left + (i + 1) * 10,
+                top: $(player.dom).offset().top + 10,
                 opacity: 0.8
             }, 500, (function(img){
                 return function() {
-                    $(role_id_str).find('.card_count span').text(parseInt($(role_id_str).find('.card_count span').text()) + 1);
+                    $(player.dom).find('.card_count span').text(parseInt($(player.dom).find('.card_count span').text()) + 1);
                     img.animate({ opacity: 0 }, 'slow', function() {
                         img.remove();
                     });
@@ -133,30 +130,54 @@
     };
     
     /* 给玩家发牌 */
-    sgs.animation.Deal_Player = function(cards) {
-        get_card(cards);
-        $(playerState.cards).each(function (i, d) {
-            if (d.jqObj[0].parentNode != document.body)
+    sgs.animation.Deal_Player = function() {
+        get_card($('#player')[0].player.card);
+        
+        var cc = $('#player')[0].player.card.length;
+        $.each($('#player')[0].player.card, function (i, d) {
+            if (d.dom.parentNode != document.body)
                 return true;
 
-            var cc = playerState.cards.length,
-                tempL = cc * cardInfo.width < $('#cards').width() ? cardInfo.width * i : ($('#cards').width() - cardInfo.width) / (cc - 1) * i,
+            var tempL = cc * cardInfo.width < $('#cards').width() ? cardInfo.width * i : ($('#cards').width() - cardInfo.width) / (cc - 1) * i,
                 targetL = $('#cards').offset().left + tempL,
                 targetT = $('#cards').offset().top;
 
-            d.jqObj.animate({
+            $(d.dom).animate({
                 left: targetL,
                 top: targetT
             }, 500, function () {
-                d.jqObj.appendTo($('#cards'));
-                d.jqObj.css('left', tempL);
-                d.jqObj.css('top', 'auto');
-                d.jqObj.css('bottom', 0);
-                /* 绑定事件 */
-                d.jqObj.click(function(e) { sgs.animation.Select_Card(d.jqObj[0]); });
-                d.jqObj.mousedown(function(e) {
+                $(d.dom).appendTo($('#cards'));
+                $(d.dom).css('left', tempL);
+                $(d.dom).css('top', 'auto');
+                $(d.dom).css('bottom', 0);
+                
+                /*var isDrag = false,
+                    mouse_left,
+                    mouse_top,
+                    first_left,
+                    first_top;
+                $(d.dom).mousedown(function(e) {
+                    isDrag = true;
+                    mouse_left = e.clientX;
+                    mouse_top = e.clientY;
+                    first_left = $(this).offset().left - $('#cards').offset().left - 1;
+                    first_top = $(this).offset().top - $('#cards').offset().top - 1;
                     
-                });
+                }).mousemove(function(e) {
+                    if(isDrag) {
+                        $(this).css({
+                            cursor: 'pointer',
+                            left: e.clientX - mouse_left + first_left,
+                            top: e.clientY - mouse_top + first_top
+                        });
+                    }
+                }).mouseup(function(e) {
+                    isDrag = false;
+                    $(this).animate({
+                        left: first_left,
+                        top: first_top
+                    }, 500);
+                });*/
             });
         });
     };
@@ -172,7 +193,6 @@
             opacity: 0.5
         }, 'normal', function () {
             card.jqObj[0].remove();
-            
         });
     };
     
@@ -224,7 +244,7 @@
         });
     };
     
-    /* 出牌剩余时间动画 test: javascript:sgs.animation.Time_Last(true, 5, 2) */
+    /* 出牌剩余时间动画 javascript:sgs.animation.Time_Last(true, 5, 2) */
     sgs.animation.Time_Last = function(isComp, seconds, comp_num) {
         if(!isComp) {
             $('#player_progress').width('296px');
@@ -250,13 +270,19 @@
         }
     };
     
-    /* 卡牌拖动 */
-    sgs.animation.Card_Drag = function(isDrop) {
-        if(!isDrop) {
-            
+    /* 掉血动画 javascript:sgs.animation.Get_Damage(true, '_aaa_') */
+    sgs.animation.Get_Damage = function(isComp, nickname) {
+        if(isComp) {
+            $('.role').each(function(i, d) {
+                if($(this).find('.role_name').text() == nickname) {
+                    var leftNum = parseInt($(this).css('left'));
+                    $(this).animate({ left: leftNum - 3 }, 50).animate({ left: leftNum }, 50);
+                    $(this).find('.blods_1 img').last().remove();
+                }
+            });
         } else {
-        
+            
         }
-    };
+    }
     
 })(sgs);
