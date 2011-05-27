@@ -77,11 +77,21 @@ var _ = sgs.func.format,
             bout.choice_card(new sgs.Operate("用牌", pl, opt.source, pl.findcard(opt.id))); 
         }
     } })();
-    sgs.Ai.prototype.usecard = (function(attack_deviation){ return function() {
+    sgs.Ai.prototype.usecard = (function(attack_deviation, EQUIP_TYPE_MAPPING){ return function() {
         var pl = this.player,
             bout = this.bout,
             use = false,
             cards = pl.card;
+
+        /* 有装备就装备 */
+        var equips = filter(cards, function(i) { return EQUIP_TYPE_MAPPING[i.name] != undefined; });
+        if(equips.length) {
+            var the_equip = equips[0], 
+                equip_pos = EQUIP_TYPE_MAPPING[the_equip.name];
+            
+            bout.choice_card(new sgs.Operate("装备", pl, pl, the_equip));
+            return ;
+        }
 
         var be_use_card = filter(cards, function(i) { return i.name == "杀"; }),
             pls_rela = attack_deviation(bout, pl),
@@ -90,14 +100,14 @@ var _ = sgs.func.format,
 
         use = be_use_card.length > 0 && !pltar.equip[2] && !this.hassha ? true : false;
         if(use) {
-            this.hassha = true;
+            this.hassha = pl.equip[0] && pl.equip[0].name == "诸葛连弩" ? false : true; /* 诸葛连弩连杀 */
             be_use_card = be_use_card[0];
             bout.choice_card(new sgs.Operate("用牌", pl, pltar, be_use_card));
         } else {
             this.discard();
         }
 
-    } })(sgs.Ai.interpreter.attack_deviation);
+    } })(sgs.Ai.interpreter.attack_deviation, sgs.EQUIP_TYPE_MAPPING);
 
     sgs.Ai.prototype.discard = function() {
         this.hassha = false;

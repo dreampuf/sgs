@@ -1,10 +1,13 @@
 # 逻辑实现设计
 
-  logic.js 为逻辑部分主要实现.
+  logic.js 为逻辑部分主要实现.  
+  逻辑实现部分分为 `游戏流程` , `人物操作` , `卡牌功能`  
+  视图主要与 sgs.bout 交互.传递操作结果,经过逻辑运算后,将返回下一个选择的 sgs.operate . 
 
-  逻辑实现部分分为 `游戏流程` , `人物操作` , `卡牌功能` 
+# 参数设置
 
-  视图主要与 sgs.bout 交互.传递操作结果,经过逻辑运算后,将返回下一个选择的 sgs.operate .
+- **sgs.PLAYER\_NUM** 最大玩家数.
+- **sgs.DELAY** 操作延迟,默认1000ms.
 
 # 游戏流程
 
@@ -34,6 +37,11 @@
   **get\_card(Player, Card[])** 玩家拿牌.
 
 ### 出牌
+
+- 事件
+
+  **equip\_on(Player, Card)** 玩家装备装备.
+  **choice\_card(Player\_Source or Player\_Source[], Player\_Target or Player\_Target[], Card)** 源目标对目标使用卡牌. 
 
 ### 弃牌 
 

@@ -20,47 +20,52 @@ var sgs = sgs || {};
             card = opt.data,
             choiceable_pl = [],
             choiceable_num = 0;
-        switch(card.name) {
-            case "杀":
-                choiceable_pl = bout.hero_range(pl);
-                choiceable_num = 1;
-                break;
-            case "桃":
-                choiceable_pl = [pl];
-                choiceable_num = 1;
-                break;
-            case "无中生有":
-            case "闪电":
-                choiceable_pl = [pl];
-                choiceable_num = 0;
-                break;
-            case "顺手牵羊":
-                if(pl.hero.name == "黄月英") { 
+        if(sgs.EQUIP_TYPE_MAPPING[card.name]) {
+            choiceable_pl = [pl];
+            choiceable_num = 1;
+        } else {
+            switch(card.name) {
+                case "杀":
+                    choiceable_pl = bout.hero_range(pl);
+                    choiceable_num = 1;
+                    break;
+                case "桃":
+                    choiceable_pl = [pl];
+                    choiceable_num = 1;
+                    break;
+                case "无中生有":
+                case "闪电":
+                    choiceable_pl = [pl];
+                    choiceable_num = 0;
+                    break;
+                case "顺手牵羊":
+                    if(pl.hero.name == "黄月英") { 
+                        choiceable_pl = copy(bout.player);
+                        choiceable_num = 1;
+                    } else {
+                        choiceable_pl = bout.hero_range(pl, pl.equip[3] ? 2 : 1);
+                        choiceable_num = 1;
+                    } 
+                    break;
+                case "借刀杀人":
+                    choiceable_pl = filter(bout.player, function(i) { return !!i.equip[1]; });
+                    choiceable_num = 2;
+                    break;
+                case "决斗":
+                case "过河拆桥":
                     choiceable_pl = copy(bout.player);
                     choiceable_num = 1;
-                } else {
-                    choiceable_pl = bout.hero_range(pl, pl.equip[3] ? 2 : 1);
-                    choiceable_num = 1;
-                } 
-                break;
-            case "借刀杀人":
-                choiceable_pl = filter(bout.player, function(i) { return !!i.equip[1]; });
-                choiceable_num = 2;
-                break;
-            case "决斗":
-            case "过河拆桥":
-                choiceable_pl = copy(bout.player);
-                choiceable_num = 1;
-                break;
-            case "五谷丰登":
-            case "桃源结义":
-            case "南蛮入侵":
-            case "万箭齐发":
-            /** case "无懈可击": **/
-            case "乐不思蜀":
-                choiceable_pl = copy(bout.player);
-                choiceable_num = 0;
-                break;
+                    break;
+                case "五谷丰登":
+                case "桃源结义":
+                case "南蛮入侵":
+                case "万箭齐发":
+                /** case "无懈可击": **/
+                case "乐不思蜀":
+                    choiceable_pl = copy(bout.player);
+                    choiceable_num = 0;
+                    break;
+            }
         }
         return [choiceable_pl, choiceable_num];
     };
@@ -123,38 +128,27 @@ var sgs = sgs || {};
             
         } else { /* 主动用牌 */
 
-            console.log(_("choice {0} 对 {1} 使用 {2}", plsrc.nickname, pltar.nickname, card.name));
             
-            switch(card.name) {
-                case "杀":
-                    pltar.choice_card(new sgs.Operate("闪", plsrc, pltar));
+            var equip_pos = sgs.EQUIP_TYPE_MAPPING[card.name];
+            if(equip_pos != undefined) {
+                console.log(_("{0} 装备了 {1}", pltar.nickname, card.name));
+                pltar.equip[equip_pos] = card;
+                bout.notify("equip_on", pltar, card); 
+
+                bout.opt = [];
+            } else {
+                console.log(_("choice {0} 对 {1} 使用 {2}", plsrc.nickname, pltar.nickname, card.name));
+                bout.notify("choice_card", plsrc, pltar, card);
+                switch(card.name) {
+                    case "杀":
+                        pltar.choice_card(new sgs.Operate("闪", plsrc, pltar));
+                        
+                }
             }
-
         }
+        bout.continue();
     };
 
-    sgs.interpreter.usecard = function(bout, opt) {
-        var plsrc = opt.source,
-            pltar = opt.target,
-            card = opt.data;
-        if(card) {
-            console.log(_("{0} 对 {1} 使用 {2}", plsrc.nickname, pltar.nickname, card.name));
-        } else {
-            console.log(_("{0} 对 {1} 表示没有卡牌", plsrc.nickname, pltar.nickname));
-            return bout.continue();
-        }
-
-        switch(card.name) {
-            case "杀":
-                /*if(bout.opt[0].data.name == " */
-                pltar.choice_card(new sgs.Operate("闪", plsrc, pltar));
-                break;
-            case "闪":
-                if(bout.opt[0].data.name == "杀") {
-                    pltar.choice_card();
-                } 
-        }
-    };
     sgs.interpreter.judge = function(bout) {
         var idens = bout.live_body_identity(),
             live_idens = filter(idens, function(i) { return i != -1; }),
