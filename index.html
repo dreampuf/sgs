@@ -2,12 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <title>迷你三国杀</title>
+    <title>三国杀</title>
     <link type="text/css" href="css.css" rel="stylesheet" media="screen" />
+    <link type="text/css" href="choose_hero.css" rel="stylesheet" media="screen" />
+    <link type="text/css" href="player.css" rel="stylesheet" media="screen" />
     <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
     <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="logic_func.js"></script>
     <script type="text/javascript" src="logic_interpreter.js"></script>
+    <script type="text/javascript" src="logic_ai.js"></script>
     <script type="text/javascript" src="logic.js"></script>
     <script type="text/javascript" src="interface.js"></script>
     <script type="text/javascript" src="animation.js"></script>
@@ -22,15 +25,14 @@
         <div class="role" id="role2">
             <!-- 国家 -->
             <div class="role_country">
-                <img src="img/none.png" />
+                <img src="img/system/none.png" />
             </div>
             <!-- 名称 -->
             <div class="role_name">
             </div>
             <!-- 头像 -->
             <div class="head_img">
-                <img src="img/none.png" />
-                <font class="choose_hero_name"></font>
+                <img src="img/system/none.png" />
             </div>
             <!-- 牌数 -->
             <div class="card_count">
@@ -47,7 +49,7 @@
             </div>
             <!-- 身份 -->
             <div class="role_identity">
-                <img src="img/none.png" />
+                <img src="img/system/none.png" />
             </div>
             <div class="role_identity_select">
                 <img src="img/identity/liegeman.png" />
@@ -63,13 +65,12 @@
         </div>
         <div class="role" id="role1">
             <div class="role_country">
-                <img src="img/none.png" />
+                <img src="img/system/none.png" />
             </div>
             <div class="role_name">
             </div>
             <div class="head_img">
-                <img src="img/none.png" />
-                <font class="choose_hero_name"></font>
+                <img src="img/system/none.png" />
             </div>
             <div class="card_count">
                 <img src="img/card_count_bg.png" />
@@ -82,7 +83,7 @@
             <div class="role_cover">
             </div>
             <div class="role_identity">
-                <img src="img/none.png" />
+                <img src="img/system/none.png" />
             </div>
             <div class="role_identity_select">
                 <img src="img/identity/liegeman.png" />
@@ -97,13 +98,12 @@
         </div>
         <div class="role" id="role3">
             <div class="role_country">
-                <img src="img/none.png" />
+                <img src="img/system/none.png" />
             </div>
             <div class="role_name">
             </div>
             <div class="head_img">
-                <img src="img/none.png" />
-                <font class="choose_hero_name"></font>
+                <img src="img/system/none.png" />
             </div>
             <div class="card_count">
                 <img src="img/card_count_bg.png" />
@@ -116,7 +116,7 @@
             <div class="role_cover">
             </div>
             <div class="role_identity">
-                <img src="img/none.png" />
+                <img src="img/system/none.png" />
             </div>
             <div class="role_identity_select">
                 <img src="img/identity/liegeman.png" />
@@ -137,10 +137,10 @@
             <img src="img/card_back_stack.png" />
         </div>
         <!-- 进度条 -->
-        <div id="player_progress_bar">
-            <img id="player_progress_bg" src="img/system/progress/big/progress_bg.png" />
-            <img id="player_progress" src="img/system/progress/big/progress.png" />
-            <img id="player_progress_bg" src="img/system/progress/big/progress_border.png" />
+        <div class="player_progress_bar">
+            <img class="player_progress_bg" src="img/system/progress/big/progress_bg.png" />
+            <img class="player_progress" src="img/system/progress/big/progress.png" />
+            <img class="player_progress_bg" src="img/system/progress/big/progress_border.png" />
         </div>
         <!-- 玩家部分 Begin -->
         <div id="player">
@@ -178,20 +178,19 @@
                     <img class="normal" src="img/buttons/abandon.png" />
                 </div>
                 <div id="player_identity">
-                    <img src="img/none.png">
+                    <img src="img/system/none.png">
                 </div>
             </div>
             <!-- 按钮 End -->
             
             <!-- 玩家英雄头像、国家、名称 -->
             <div id="player_head">
-                <img id="player_head_img" src="img/none.png" />
-                <font class="choose_hero_name"></font>
+                <img id="player_head_img" src="img/system/none.png" />
                 <div id="player_name_back">
                 </div>
                 <div id="player_name">
                 </div>
-                <img id="player_country" src="img/none.png" />
+                <img id="player_country" src="img/system/none.png" />
             </div>
             <!-- 玩家英雄血量 -->
             <div id="player_blods">
@@ -201,13 +200,11 @@
                 </div>
             </div>
         </div>
+        <div id="player_cover"></div>
         <!-- 玩家部分 End -->
         
-        
         <!-- 过河拆桥等 -->
-        <div>
-            
-        </div>
+        <div></div>
         <!-- 选择英雄界面 遮盖层 -->
         <div id="choose_back">
         </div>
@@ -215,33 +212,16 @@
         <div id="choose_box">
             <div style="display: table-cell; vertical-align: middle;">
                 <div id="choose_role">
-                    <div class="card_box">
-                        <div class="choose_role_card">
-                            <img src="img/none.png" />
-                            <font class="choose_hero_name"></font>
-                        </div>
-                        <div class="choose_role_card_cover"></div>
+                    <div id="choose_role_img">
+                        <img id="choose_role_title" src="img/system/hero_choose_title.png" />
+                        <img id="choose_role_bg" src="img/system/hero_choose.png" />
                     </div>
-                    <div class="card_box">
-                        <div class="choose_role_card">
-                            <img src="img/none.png" />
-                            <font class="choose_hero_name"></font>
-                        </div>
-                        <div class="choose_role_card_cover"></div>
+                    <div id="choose_role_content">
                     </div>
-                    <div class="card_box">
-                        <div class="choose_role_card">
-                            <img src="img/none.png" />
-                            <font class="choose_hero_name"></font>
-                        </div>
-                        <div class="choose_role_card_cover"></div>
-                    </div>
-                    <div class="card_box">
-                        <div class="choose_role_card">
-                            <img src="img/none.png" />
-                            <font class="choose_hero_name"></font>
-                        </div>
-                        <div class="choose_role_card_cover"></div>
+                    <div class="player_progress_bar">
+                        <img class="player_progress_bg" src="img/system/progress/big/progress_bg.png" />
+                        <img class="player_progress" src="img/system/progress/big/progress.png" />
+                        <img class="player_progress_bg" src="img/system/progress/big/progress_border.png" />
                     </div>
                     <div id="identity">
                     </div>
@@ -255,11 +235,8 @@
             <img src="img/system/data_load_bg.jpg" />
             <div id="data_load_perc"></div>
         </div>
-        
         <div id="explanation"></div>
     </div>
     <div id="load_imgs"></div>
-    
-    
 </body>
 </html>
