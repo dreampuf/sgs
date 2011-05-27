@@ -350,6 +350,7 @@ var sgs = sgs || {};
         console.log(pl.nickname, "摸牌", map(cards, function(i) {return i.name; }));
         pl.card = pl.card.concat(cards);
         console.log(pl.nickname, "手牌:", map(pl.card, function(i) {return i.name; }));
+        this.notify("get_card", pl, cards);
         
         this.step = 2;
         this.continue();
