@@ -47,22 +47,29 @@
     sgs.animation.Select_Card = function (cardDom) {
         var cardOut = cardInfo.out,
             selected = $(cardDom).css('bottom') == cardOut + 'px' ? true : false;
-        $('#cards').find('.player_card').each(function() {
-            if(this == cardDom) {
+        $('#cards').find('.player_card').each(function(i, d) {
+            if(d == cardDom) {
                 if(selected) {
                     $(cardDom).animate({ 'bottom': '0px' }, 100);
                     cardDom.card.selected = false;
                     /* 设置玩家为可选状态 */
-                    $('.role .role_cover').each(function(i, d) {
-                        $(this).css('display', 'none');
+                    $('.role').each(function(i, d) {
+                        $(d).find('.role_cover').css('display', 'none');
+                        if($(d).css('box-shadow') == 'rgb(255, 0, 0) 0px 0px 15px 5px') {
+                            $(d).css({
+                                'box-shadow': '2px 2px 2px #000',
+                                left: parseInt($(d).css('left')) + 1,
+                                top: parseInt($(d).css('top')) + 1
+                            });
+                        }
                     });
                 } else {
                     cardDom.card.selected = true;
                     $(cardDom).animate({ 'bottom': cardOut + 'px' }, 100);
                 }
             } else {
-                this.card.selected = false;
-                $(this).animate({ 'bottom': '0px' }, 100);
+                d.card.selected = false;
+                $(d).animate({ 'bottom': '0px' }, 100);
             }
         });
         
@@ -130,18 +137,24 @@
     };
     
     /* 给玩家发牌 */
-    sgs.animation.Deal_Player = function() {
-        get_card($('#player')[0].player.card);
+    sgs.animation.Deal_Player = function(cards) {
+        get_card(cards);
         
         var cc = $('#player')[0].player.card.length;
-        $.each($('#player')[0].player.card, function (i, d) {
+        $.each(cards, function (i, d) {
             if (d.dom.parentNode != document.body)
                 return true;
 
-            var tempL = cc * cardInfo.width < $('#cards').width() ? cardInfo.width * i : ($('#cards').width() - cardInfo.width) / (cc - 1) * i,
-                targetL = $('#cards').offset().left + tempL,
+            var tempL,
+                targetL,
                 targetT = $('#cards').offset().top;
-
+            
+            if(cc * cardInfo.width < $('#cards').width())
+                tempL = cardInfo.width * (i + cc - cards.length);
+            else
+                tempL = ($('#cards').width() - cardInfo.width) / (cc - 1) * (i + cc - cards.length);
+            targetL = $('#cards').offset().left + tempL;
+            
             $(d.dom).animate({
                 left: targetL,
                 top: targetT

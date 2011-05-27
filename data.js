@@ -1,6 +1,7 @@
 ﻿var sgs = sgs || {};
 sgs.PLAYER_NUM = 4;
 sgs.DEFAULT_AI_LV = 0;
+sgs.DELAY = 1000;
 
 /*
 * 卡牌数据

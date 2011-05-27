@@ -177,6 +177,9 @@ var sgs = sgs || {};
 
         each(player, function(n, i) { if(i == king) { king_num = n; return false; } });
         player = slice.call(player, king_num).concat(slice.call(player, 0, king_num));
+        if(player.length >= 4) { /* 超过四位玩家,主公血量+1 */
+            player[0].blood++;
+        }
         
         each(player, function(n, i) { 
             playernum[i.nickname] = n;
@@ -217,7 +220,7 @@ var sgs = sgs || {};
                 }
             });
             obj.continue();
-        } })(this), 100);
+        } })(this), 16);
     };
     sgs.Bout.get_identity = function(player_num) {
         return shuffle(sgs.IDENTITY_MAPPING[player_num]);
@@ -304,27 +307,28 @@ var sgs = sgs || {};
         }
         return true;
     } })(sgs.interpreter.judge);
-    sgs.Bout.prototype.continue = (function(response_card){ return function() {
-        if(this.choice.length > 0) {
-            var opt = this.choice[this.choice.length-1],
-                pltar = opt.target;
+    sgs.Bout.prototype.continue = (function(DELAY, response_card){ return function() { 
+        setTimeout((function(bout){ return function() {
+            if(bout.choice.length > 0) {
+                var opt = bout.choice[bout.choice.length-1],
+                    pltar = opt.target;
 
-            pltar.ask_card(opt); 
-        } else {
-            if(this.judge()) {
-                switch(this.step) {
-                    case 0:
-                        return this.decision();
-                    case 1:
-                        return this.getcard();
-                    case 2:
-                        return this.usecard();
-                    case 3:
-                        return this.discard();
+                pltar.ask_card(opt); 
+            } else {
+                if(bout.judge()) {
+                    switch(bout.step) {
+                        case 0:
+                            return bout.decision();
+                        case 1:
+                            return bout.getcard();
+                        case 2:
+                            return bout.usecard();
+                        case 3:
+                            return bout.discard();
+                    }
                 }
             }
-        }
-    } })(sgs.interpreter.response_card);
+        } })(this), DELAY); } })(sgs.DELAY, sgs.interpreter.response_card);
     
     sgs.Bout.prototype.decision = function(opt) {
         /* 判定 */
@@ -363,31 +367,46 @@ var sgs = sgs || {};
         return select(this, opt);
     } })(sgs.interpreter.select);
 
-    sgs.Bout.prototype.choice_card = (function(choice_card, response_card){ return function(opt) {
+    sgs.Bout.prototype.choice_card = (function(choice_card, response_card, EQUIP_TYPE_MAPPING){ return function(opt) {
         var pl = opt.source,
             card = opt.data;
 
         if(card) { /* 移除所用卡牌 */
-            pl.rmcard(card);
+            if(!pl.rmcard(card)) {
+                throw new Error("有没有搞错!明明都用过这牌了!你以为电脑是好欺负的?");
+                return ;
+            }
         }
-
-        this.opt.push(opt);
+        if(EQUIP_TYPE_MAPPING[card.name] == undefined) { /* 非道具 */
+            this.opt.push(opt);
+        }
         choice_card(this, opt);
 
-    } })(sgs.interpreter.choice_card, sgs.interpreter.response_card); 
+    } })(sgs.interpreter.choice_card, 
+         sgs.interpreter.response_card,
+         sgs.EQUIP_TYPE_MAPPING ); 
 
     sgs.Bout.prototype.response_card = (function(response_card){ return function(opt) {
+        var pl = opt.source,
+            card = opt.data;
         
+        if(card) { /* 移除所用卡牌 */
+            if(!pl.rmcard(card)) {
+                throw new Error("有没有搞错!明明都用过这牌了!你以为电脑是好欺负的?");
+                return ;
+            }
+        }
+
         response_card(this, opt);
 
     } })(sgs.interpreter.response_card);
 
-    sgs.Bout.prototype.usecard = (function(usecard){ return function() {
+    sgs.Bout.prototype.usecard = (function(){ return function() {
 
         var pl = this.player[this.curplayer];
         pl.choice_card();
 
-    } })(sgs.interpreter.usecard);
+    } })();
 
     sgs.Bout.prototype.discard = function(opt) {
         /* 弃牌 */

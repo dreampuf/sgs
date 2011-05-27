@@ -19,12 +19,12 @@
             choose_heros = sgs.Bout.get_hero((player_count - 1) * 3 + 1);
         
         identity = sgs.Bout.get_identity(player_count); /* 第0个表示玩家身份 */
-        
+        /*
         identity[0] = 0;
         identity[1] = 1;
         identity[2] = 2;
         identity[3] = 3;
-        
+        */
         for(var i = 0; i < player_count; i++) {
             players.push({
                 "identity": identity[i],
@@ -39,7 +39,7 @@
             $('#choose_role_title').css('left', '195px');
             $('.player_progress_bar').css('left', '125px');
             
-            player_heros = sgs.Bout.get_king_hero();
+            player_heros = sgs.func.shuffle(sgs.Bout.get_king_hero());
             
             $('#identity').append('你的身份是 - <font style="font-weight:bold;">' + sgs.interface.IDENTITY_INDEX_MAPPING.name[0] + '</font>');
         } else { /* 玩家不是主公时 */
@@ -123,11 +123,13 @@
             if(i == 0) {
                 tempPlayer.choice_card = function() {
                     $('#player_cover').css('display', 'none');
+                    $('#abandon').css('display', 'block');
                 };
             }
             pls.push(tempPlayer);
         }
         sgs.interface.bout = new sgs.Bout(pls);
+        bing_event();
         
         /*** 测试用 ***/
         $.each(sgs.interface.bout.player, function(i, d) {
@@ -144,11 +146,21 @@
         $(sgs.interface.bout.player).each(function (i, d) {
             if (d.dom == $('#player')[0]) {
                 sgs.interface.Set_RoleInfo(d);
-                setTimeout(sgs.animation.Deal_Player, 200, d); /* 发牌 */
+                setTimeout(sgs.animation.Deal_Player, 200, d.card); /* 发牌 */
             } else {
                 if(d.identity != 0)
                     sgs.interface.Set_RoleInfo(d);
                 setTimeout(sgs.animation.Deal_Comp, 200, d.card.length, d); /* 发牌 */
+            }
+        });
+    };
+    
+    var bing_event = function() {
+        sgs.interface.bout.attach("get_card", function(pl, cards) {
+            if(pl.dom == $('#player')[0]) {
+                setTimeout(sgs.animation.Deal_Player, 200, cards);
+            } else {
+                setTimeout(sgs.animation.Deal_Comp, 200, cards.length, pl);
             }
         });
     };
