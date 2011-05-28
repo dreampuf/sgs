@@ -57,13 +57,21 @@ var _ = sgs.func.format,
         var pl = this.player,
             bout = this.bout,
             cardname = opt.data;
-        switch(cardname) {
-            case "桃":
-                if(opt.source == pl) { /* 自己 */
-                    return bout.response_card(new sgs.Operate("用牌", pl, pl, pl.findcard(cardname)));
-                }
+        
+        if(opt.id == "技能") {
+            switch(cardname) {
+                case "洛神":
+                    return bout.response_card(new sgs.Operate("技能", pl, pl, true));
+            }
+        } else {
+            switch(cardname) {
+                case "桃":
+                    if(opt.source == pl) { /* 自己 */
+                        return bout.response_card(new sgs.Operate(cardname, pl, pl, pl.findcard(cardname)));
+                    }
+            }
         }
-        return bout.response_card(new sgs.Operate("用牌", pl, opt.source));
+        return bout.response_card(new sgs.Operate(cardname, pl, opt.source));
     } })();
     sgs.Ai.prototype.choice_card = (function(){ return function(opt) {
         var pl = this.player,
@@ -74,7 +82,7 @@ var _ = sgs.func.format,
         if(!opt) { /* 主动出牌 */
             return this.usecard();
         } else { /* 被动出牌 */
-            bout.choice_card(new sgs.Operate("用牌", pl, opt.source, pl.findcard(opt.id))); 
+            bout.choice_card(new sgs.Operate(opt.id, pl, opt.source, pl.findcard(opt.id))); 
         }
     } })();
     sgs.Ai.prototype.usecard = (function(attack_deviation, EQUIP_TYPE_MAPPING){ return function() {
@@ -92,6 +100,12 @@ var _ = sgs.func.format,
             bout.choice_card(new sgs.Operate("装备", pl, pl, the_equip));
             return ;
         }
+        /* 缺血有桃就桃 */
+        var peachs = filter(cards, function(i) { return i.name == "桃"; });
+        if(peachs.length && pl.blood < pl.hero.life) {
+            bout.choice_card(new sgs.Operate("桃", pl, pl, peachs[0]));    
+            return ;
+        }
 
         var be_use_card = filter(cards, function(i) { return i.name == "杀"; }),
             pls_rela = attack_deviation(bout, pl),
@@ -102,7 +116,7 @@ var _ = sgs.func.format,
         if(use) {
             this.hassha = pl.equip[0] && pl.equip[0].name == "诸葛连弩" ? false : true; /* 诸葛连弩连杀 */
             be_use_card = be_use_card[0];
-            bout.choice_card(new sgs.Operate("用牌", pl, pltar, be_use_card));
+            bout.choice_card(new sgs.Operate(be_use_card.name, pl, pltar, be_use_card));
         } else {
             this.discard();
         }

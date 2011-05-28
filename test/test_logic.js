@@ -13,6 +13,9 @@ var _ = sgs.func.format,
     or = sgs.func.or,
     sub = sgs.func.sub;
 
+/* Test Setting */
+sgs.DELAY = 0;
+
 test("Func", function(){
     equal(sgs.func.shuffle([1,2,3,4]).length, 4); 
     ok(true, "抽取1个随机对象" + sgs.func.choice([1,2,3,4,5,6,7,8,9,0]));
@@ -120,7 +123,8 @@ test("AI_1v1", function(){
         players = [],
         about;
 
-    
+    heros[0] = filter(sgs.HERO, function(i) { return i.name == "甄姬"; })[0];
+    console.log(heros);
     range(2, function(n) {
         players.push(new sgs.Player(heros[n].name,
                                     idens[n],
