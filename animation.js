@@ -13,10 +13,10 @@
                 color = sgs.interface.CARD_COLOR_NUM_MAPPING.color[pattern],
                 num = d.digit,
                 numStr = sgs.interface.CARD_COLOR_NUM_MAPPING.number[num],
-                img = $(['<div class="player_card"><img src="img/generals/card/',
+                img = $(['<div class="player_card"><img src="',
                         sgs.CARDIMAG_MAPING[d.name], '" /><div class="pat_num" style="color:',
-                        color, ';"><span class="pattern"><img src="img/pattern_',
-                        pattern, '.png" /></span><span class="num">',
+                        color, ';"><span class="pattern"><img src="',
+                        sgs.interface.PATTERN_IMG_MAPPING[pattern], '" /></span><span class="num">',
                         numStr, '</span></div><div class="select_unable"></div></div>'].join('')),
                 left = $('#cards_last').offset().left,
                 top = $('#cards_last').offset().top;
@@ -195,18 +195,59 @@
         });
     };
     
+    sgs.animation.Play_Card = function(player, card) {
+        if(player == $('#player')[0].player) {
+            
+        } else {
+            
+        }
+    };
+    
     /* 装备装备动画 */
-    sgs.animation.Equip_Equipment = function(card) {
+    sgs.animation.Equip_Equipment = function(player, card, type) {
+        if(player == $('#player')[0].player) {
+            
+        } else {
+            var cardJqObj = $('<img src="' + sgs.CARDIMAG_MAPING[card.name] + '" />');
+            cardJqObj.appendTo($(document.body));
+            cardJqObj.css({
+                position: 'absolute',
+                width: sgs.interface.cardInfo.width + 'px',
+                height: sgs.interface.cardInfo.height + 'px',
+                left: ($(player.dom).offset().left - 60) + 'px',
+                top: ($(player.dom).offset().top - 30) + 'px'
+            });
+            cardJqObj.animate({
+                left: ($(player.dom).offset().left + 20) + 'px',
+                top: ($(player.dom).offset().top + 10) + 'px'
+            }, 500, function() {
+                cardJqObj.animate({ opacity: 0 }, 200, function() {
+                    cardJqObj.remove();
+                });
+            });
+            
+            var equip_id = type == 0 ? '.attack' : (type == 1 ? '.defend' : (type == 2 ? '.attack_horse' : '.defend_horse')),
+                characher_mapping = sgs.interface.NUMBER_CHARACHER_MAPPING,
+                number_mapping = sgs.interface.CARD_COLOR_NUM_MAPPING.number,
+                pattern_img = sgs.interface.PATTERN_IMG_MAPPING;
+            console.log(card);
+            $(player.dom).find(equip_id).html(['<img style="width:13px; height:13px; position:absolute; left:0;" /><font style="position:absolute; left:18px;">',
+                    type == 2 ? '+1' : (type == 3 ? '-1' : characher_mapping[sgs.EQUIP_RANGE_MAPPING[card.name]]), '</font><font>',
+                    card.name, '</font><font style="position:absolute; right:18px; line-height:15px;">',
+                    number_mapping[card.digit], '</font><img src="',
+                    pattern_img[type], '" style="width:11px; height:11px; position:absolute; top:1px; right:2px;"/>'
+                ].join(''));
+        }
+        /*
         var left = $('#cards').offset().left - 128,
             top = $('#cards').offset().top - 20;
         card.jqObj.animate({
             left: targetL,
-            top: targetT,
-            bottom: 0,
+            top: targetT, bottom: 0,
             opacity: 0.5
         }, 'normal', function () {
             card.jqObj[0].remove();
-        });
+        });*/
     };
     
     /* 整理牌 */

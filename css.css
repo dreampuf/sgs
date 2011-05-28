@@ -71,6 +71,21 @@ body
 {
     float: left;
 }
+#role2
+{
+    left: 320px;
+    top: 30px;
+}
+#role1
+{
+    left: 560px;
+    top: 30px;
+}
+#role3
+{
+    left: 80px;
+    top: 240px;
+}
 /* 国家 */
 .role_country
 {
@@ -177,24 +192,23 @@ body
     height: 14px;
 }
 /* 角色装备 */
-.role .equip_other div
+.equipment
 {
-    height: 25%;
+    position:absolute;
+    width:125px;
+    height:56px;
+    left:3px;
+    bottom:3px;
+    text-align:center;
+    text-shadow:0 0 2px #ccc;
+    font-size:12px;
+    font-weight:bold;
 }
-#role2
+.equipment>div
 {
-    left: 320px;
-    top: 30px;
-}
-#role1
-{
-    left: 560px;
-    top: 30px;
-}
-#role3
-{
-    left: 80px;
-    top: 240px;
+    position:relative;
+    width:125px;
+    height:14px;
 }
 /* 角色出牌剩余时间 */
 .role_progress_bar

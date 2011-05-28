@@ -19,12 +19,12 @@
             choose_heros = sgs.Bout.get_hero((player_count - 1) * 3 + 1);
         
         identity = sgs.Bout.get_identity(player_count); /* 第0个表示玩家身份 */
-        /*
-        identity[0] = 0;
-        identity[1] = 1;
-        identity[2] = 2;
-        identity[3] = 3;
-        */
+        
+        identity[0] = 3;
+        identity[1] = 0;
+        identity[2] = 1;
+        identity[3] = 2;
+        
         for(var i = 0; i < player_count; i++) {
             players.push({
                 "identity": identity[i],
@@ -133,12 +133,16 @@
         
         /*** 测试用 ***/
         $.each(sgs.interface.bout.player, function(i, d) {
-            if(!this.isAI) {
-                this.card[0].name = '杀';
-                this.card[1].name = '决斗';
-                this.card[2].name = '南蛮入侵';
-                this.card[3].name = '万箭齐发';
-                return false;
+            if(!d.isAI) {
+                d.card[0].name = '杀';
+                d.card[1].name = '决斗';
+                d.card[2].name = '南蛮入侵';
+                d.card[3].name = '万箭齐发';
+            } else {
+                d.card[0].name = '诸葛连弩';
+                d.card[1].name = '八卦阵';
+                d.card[2].name = '的卢';
+                d.card[3].name = '赤兔';
             }
         });
         
@@ -156,13 +160,14 @@
     };
     
     var bing_event = function() {
-        sgs.interface.bout.attach("get_card", function(pl, cards) {
-            if(pl.dom == $('#player')[0]) {
-                setTimeout(sgs.animation.Deal_Player, 200, cards);
+        sgs.interface.bout.attach("get_card", function(player, cards) {
+            if(player.dom == $('#player')[0]) {
+                sgs.animation.Deal_Player(cards);
             } else {
-                setTimeout(sgs.animation.Deal_Comp, 200, cards.length, pl);
+                sgs.animation.Deal_Comp(cards.length, player);
             }
         });
+        sgs.interface.bout.attach("equip_on", sgs.animation.Equip_Equipment);
     };
     
     /* 选牌 */

@@ -133,7 +133,7 @@ var sgs = sgs || {};
             if(equip_pos != undefined) {
                 console.log(_("{0} 装备了 {1}", pltar.nickname, card.name));
                 pltar.equip[equip_pos] = card;
-                bout.notify("equip_on", pltar, card); 
+                bout.notify("equip_on", pltar, card, equip_pos); 
 
                 bout.opt = [];
             } else {
