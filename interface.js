@@ -8,7 +8,7 @@
     
     sgs.interface.CARD_COLOR_NUM_MAPPING = {
         "color": { 0: "red", 1: "red", 2: "black", 3: "black" },
-        "number": [ "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" ]
+        "number": { 1: "A", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10", 11: "J", 12: "Q", 13: "K" },
     };
     
     sgs.interface.IDENTITY_INDEX_MAPPING = {
@@ -28,9 +28,25 @@
         "吴": "img/country/wu.png",
         "群": "img/country/qun.png"
     };
+
+    sgs.interface.PATTERN_IMG_MAPPING = {
+        0: "img/pattern/diamond.png",
+        1: "img/pattern/heart.png",
+        2: "img/pattern/club.png",
+        3: "img/pattern/spade.png",
+    };
     
-    sgs.interface.EQUIPMENT_TYPE_MAPPING = {
-        "name": { 0: "武器", 1: "防具", 2: "+1马", 3: "-1马" }
+    sgs.interface.NUMBER_CHARACHER_MAPPING = {
+        1: "一",
+        2: "二",
+        3: "三",
+        4: "四",
+        5: "五",
+        6: "六",
+        7: "七",
+        8: "八",
+        9: "九",
+        10: "十",
     };
 
     sgs.interface.cardInfo = {
