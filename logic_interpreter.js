@@ -78,17 +78,32 @@ var sgs = sgs || {};
             opt_top = bout.opt[0], /* 本次操作源 */
             choice_top = bout.choice[bout.choice.length-1]; /* 对应操作 */
         
-        if(card) {
-            switch(card.name) {
-                case "桃":
-                    pltar.blood++;
-                    
-                    if(pltar.blood > 0) { /* 健康了 */
-                        bout.choice = exclude(bout.choice, function(i) { return i.id == "桃" && i.target == pltar; });
+        if(opt.id == "技能") {
+            switch(choice_top.data) {
+                case "洛神":
+                    the_card = bout.card.shift();
+                    pltar.card.push(the_card);
+                    if(the_card.color < 2) {
+                        pltar.status["zhenji.luoshen"] = -1;
                     }
+                    bout.notify("skill", "洛神", pltar, the_card);
+                    console.log(_("{0} 发动了技能洛神,获得{1}卡牌", pltar.nickname, the_card.name));
             }
-        } else { /* 无所作为 */
             bout.choice.pop();
+        } else {
+            if(card) {
+                switch(card.name) {
+                    case "桃":
+                        pltar.blood++;
+                        
+                        if(pltar.blood > 0) { /* 健康了 */
+                            bout.choice = exclude(bout.choice, 
+                                                  function(i) { return i.id == "桃" && i.target == pltar; });
+                        }
+                }
+            } else { /* 无所作为 */
+                bout.choice.pop();
+            }
         }
         
         bout.continue();
@@ -106,11 +121,14 @@ var sgs = sgs || {};
                 case "杀":
                     bout.opt = [];
                     if(card && card.name == "闪") {
-                        
+                        console.log(_("{0} 打出了闪", plsrc.nickname)); 
                     } else {
-                        plsrc.blood--;
+                        pltar = opt_top.target;
+                        plsrc = opt_top.source;
+
+                        pltar.blood--;
                         
-                        if(plsrc.blood < 1) {
+                        if(pltar.blood < 1) {
                             var pltar_pos = bout.playernum[pltar.nickname], save_opt = [];
                             range(bout.playerlen, function(n) {  /* 临死求救 */
                                 console.log("::::向", bout.player[(pltar_pos+n)%bout.playerlen].nickname, "求救中....");
@@ -120,7 +138,7 @@ var sgs = sgs || {};
                             });
                             bout.choice = save_opt;
                         };
-                        console.log(_("{0} 扣一滴血,还剩下{1}滴血", plsrc.nickname, plsrc.blood));
+                        console.log(_("{0} 扣一滴血,还剩下{1}滴血", pltar.nickname, pltar.blood));
                     }
             }
 
@@ -128,12 +146,11 @@ var sgs = sgs || {};
             
         } else { /* 主动用牌 */
 
-            
             var equip_pos = sgs.EQUIP_TYPE_MAPPING[card.name];
             if(equip_pos != undefined) {
                 console.log(_("{0} 装备了 {1}", pltar.nickname, card.name));
                 pltar.equip[equip_pos] = card;
-                bout.notify("equip_on", pltar, card); 
+                bout.notify("equip_on", pltar, card, equip_pos); 
 
                 bout.opt = [];
             } else {
@@ -141,7 +158,13 @@ var sgs = sgs || {};
                 bout.notify("choice_card", plsrc, pltar, card);
                 switch(card.name) {
                     case "杀":
+                        bout.opt.push(opt);
                         pltar.choice_card(new sgs.Operate("闪", plsrc, pltar));
+                        break;
+                    case "桃":
+                        pltar.blood++;
+                        console.log(_("{0} 恢复一滴血,还剩下{1}滴血", pltar.nickname, pltar.blood));
+                        break;
                         
                 }
             }

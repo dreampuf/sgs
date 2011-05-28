@@ -40,8 +40,8 @@
 
 - 事件
 
-  **equip\_on(Player, Card)** 玩家装备装备.
-  **choice\_card(Player\_Source or Player\_Source[], Player\_Target or Player\_Target[], Card)** 源目标对目标使用卡牌. 
+  **equip\_on(Player, Card, EquipType)** 玩家装备装备.
+  **choice\_card(PlayerSource, PlayerTarget or PlayerTarget[], Card)** 源目标对目标使用卡牌. 
 
 ### 弃牌 
 

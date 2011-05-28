@@ -37,6 +37,7 @@ var sgs = sgs || {};
         this.blood = hero.life; /* 玩家当前生命值 */
         this.be_decision = []; /* 被施展的延迟技能 */
         this.equip = []; /* 装备, 0:武器, 1:防具, 2:+1马, 3:-1马 */
+        this.status = {}; /* 临时状态 */
     };
     sgs.Player.prototype.range = function() {
         var attack = 0, defend = 0, equip = this.equip;
@@ -179,6 +180,7 @@ var sgs = sgs || {};
         player = slice.call(player, king_num).concat(slice.call(player, 0, king_num));
         if(player.length >= 4) { /* 超过四位玩家,主公血量+1 */
             player[0].blood++;
+            player[0].hero.life++;
         }
         
         each(player, function(n, i) { 
@@ -333,6 +335,15 @@ var sgs = sgs || {};
     sgs.Bout.prototype.decision = function(opt) {
         /* 判定 */
         var pl = this.player[this.curplayer];
+
+        /** 甄姬-洛神 **/
+        if(pl.hero.name == "甄姬" && (pl.status["zhenji.luoshen"] | 0) != -1) {
+            pl.status["zhenji.luoshen"] = (pl.status["zhenji.luoshen"] | 0) + 1;
+            this.choice.push(new sgs.Operate("技能", pl, pl, "洛神"));
+            return this.continue();
+        }
+        /** end-洛神 **/
+
         if(pl.be_decision.length > 0) {
 
         }
@@ -377,20 +388,17 @@ var sgs = sgs || {};
                 return ;
             }
         }
-        if(EQUIP_TYPE_MAPPING[card.name] == undefined) { /* 非道具 */
-            this.opt.push(opt);
-        }
         choice_card(this, opt);
 
     } })(sgs.interpreter.choice_card, 
          sgs.interpreter.response_card,
          sgs.EQUIP_TYPE_MAPPING ); 
 
-    sgs.Bout.prototype.response_card = (function(response_card){ return function(opt) {
+    sgs.Bout.prototype.response_card = (function(response_card, Card){ return function(opt) {
         var pl = opt.source,
             card = opt.data;
         
-        if(card) { /* 移除所用卡牌 */
+        if(card && (card instanceof Card)) { /* 移除所用卡牌 */
             if(!pl.rmcard(card)) {
                 throw new Error("有没有搞错!明明都用过这牌了!你以为电脑是好欺负的?");
                 return ;
@@ -399,7 +407,7 @@ var sgs = sgs || {};
 
         response_card(this, opt);
 
-    } })(sgs.interpreter.response_card);
+    } })(sgs.interpreter.response_card, sgs.Card);
 
     sgs.Bout.prototype.usecard = (function(){ return function() {
 
@@ -414,6 +422,7 @@ var sgs = sgs || {};
             cards,
             isdis = false;
         
+        console.log(pl.nickname, "弃牌了");
         if(pl.blood < pl.card.length){
             cards = opt.data && opt.data["card"];
             if(!cards) {
@@ -424,6 +433,8 @@ var sgs = sgs || {};
 
             console.log(pl.nickname, "弃牌", map(cards, function(i) { return i.name; }));
         }
+
+        pl.status = {};
         
         setTimeout((function(bout){ return function(){
             bout.curplayer++;
