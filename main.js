@@ -20,10 +20,10 @@
         
         identity = sgs.Bout.get_identity(player_count); /* 第0个表示玩家身份 */
         
-        identity[0] = 3;
-        identity[1] = 0;
-        identity[2] = 1;
-        identity[3] = 2;
+        identity[0] = 0;
+        identity[1] = 2;
+        identity[2] = 3;
+        identity[3] = 1;
         
         for(var i = 0; i < player_count; i++) {
             players.push({
@@ -119,6 +119,7 @@
                 tempDom = (i == 0 ? $('#player') : $('#role' + i))[0];
             
             tempPlayer.dom = tempDom;
+            tempPlayer.selected = false;
             tempDom.player = tempPlayer;
             if(i == 0) {
                 tempPlayer.choice_card = function() {
@@ -133,7 +134,8 @@
         
         /*** 测试用 ***/
         $.each(sgs.interface.bout.player, function(i, d) {
-            if(!d.isAI) {
+            return false;
+            if(0 == 1) {
                 d.card[0].name = '杀';
                 d.card[1].name = '决斗';
                 d.card[2].name = '南蛮入侵';
@@ -171,21 +173,22 @@
     };
     
     /* 选牌 */
-    $('.player_card').live('click', function() {
-        sgs.animation.Select_Card(this);
-    });
+    $('.player_card').live('click', sgs.animation.Select_Card);
     
     /* 选择目标 */
     $('.role').click(function(e) {
         if($(this).find('.role_cover').css('display') == 'block')
             return false;
         
-        var selected = $(this).css('box-shadow') == 'rgb(0, 0, 0) 2px 2px 2px 0px' ? false : true,
-            leftNum = parseInt($(this).css('left')),
+        var leftNum = parseInt($(this).css('left')),
             topNum = parseInt($(this).css('top')),
             player = $('#player')[0].player;
         
-        if(!selected) {
+        if(player.targets == undefined)
+            return false;
+        
+        if(!this.player.selected) {
+            this.player.selected = true;
             player.targets.selected.push(this.player);
             if(player.targets.selected.length == player.targets[1]) {
                 /* 选择目标达到【目标数量】时，将其他可选目标设为不可选状态 */
@@ -196,11 +199,12 @@
                 $('#ok').css('display', 'block');
             }
             $(this).css({
-                'box-shadow': '0px 0px 15px 5px red',
+                'box-shadow': '0px 0px 15px 5px #dd0200',
                 left: leftNum - 1,
                 top: topNum - 1
             });
         } else {
+            this.player.selected = false;
             player.targets.selected = sgs.func.sub(player.targets.selected, [this.player]);
             if(player.targets.selected.length == player.targets[1] - 1) {
                 /* 【已选目标数量】比【可选目标数量】刚好小【1】时将其他可选目标设为可选状态 */

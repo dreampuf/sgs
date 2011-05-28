@@ -15,25 +15,38 @@
         "name": {  0: "主公", 1: "忠臣", 2: "内奸", 3: "反贼" }
     };
     
-    sgs.interface.IDENTITY_IMG_MAPPING = {
-        0: "img/identity/king.png",
-        1: "img/identity/liegeman.png",
-        2: "img/identity/traitor.png",
-        3: "img/identity/enemy.png"
+    sgs.interface.COUNTRY_IMG_MAPPING = {
+        "魏": "img/system/country/wei.png",
+        "蜀": "img/system/country/shu.png",
+        "吴": "img/system/country/wu.png",
+        "群": "img/system/country/qun.png"
     };
     
-    sgs.interface.COUNTRY_IMG_MAPPING = {
-        "魏": "img/country/wei.png",
-        "蜀": "img/country/shu.png",
-        "吴": "img/country/wu.png",
-        "群": "img/country/qun.png"
+    sgs.interface.WEAPON_ICON_MAPPING = {
+        0: "img/generals/weapons/icon/attack.png",
+        1: "img/generals/weapons/icon/defend.png",
+        2: "img/generals/weapons/icon/horse.png",
+        3: "img/generals/weapons/icon/horse.png",
+    };
+    
+    sgs.interface.DEAD_IDENTITY_MAPPING = {
+        1: "img/system/dead/liegeman_dead.png",
+        2: "img/system/dead/traitor_dead.png",
+        3: "img/system/dead/enemy_dead.png",
+    };
+    
+    sgs.interface.IDENTITY_IMG_MAPPING = {
+        0: "img/system/identity/king.png",
+        1: "img/system/identity/liegeman.png",
+        2: "img/system/identity/traitor.png",
+        3: "img/system/identity/enemy.png"
     };
 
     sgs.interface.PATTERN_IMG_MAPPING = {
-        0: "img/pattern/diamond.png",
-        1: "img/pattern/heart.png",
-        2: "img/pattern/club.png",
-        3: "img/pattern/spade.png",
+        0: "img/system/pattern/diamond.png",
+        1: "img/system/pattern/heart.png",
+        2: "img/system/pattern/club.png",
+        3: "img/system/pattern/spade.png",
     };
     
     sgs.interface.NUMBER_CHARACHER_MAPPING = {
@@ -71,8 +84,8 @@
             $('#player_name').text(player.nickname);
             $('#player_head_img').attr('src', 'img/generals/big/' + sgs.HEROIMAG_MAPPING[player.hero.name]);
             for (var i = 0; i < player.hero.life; i++) {
-                $('<img src="img/blod_0.png" />').appendTo($('#player_blod_0'));
-                $('<img src="img/blod_1.png" />').appendTo($('#player_blod_1'));
+                $('<img src="img/system/blod_0.png" />').appendTo($('#player_blod_0'));
+                $('<img src="img/system/blod_1.png" />').appendTo($('#player_blod_1'));
             }
             $("#player_identity img").attr('src', sgs.interface.IDENTITY_IMG_MAPPING[player.identity]);
             $('#player_head')[0].name = player.hero.name;
@@ -83,8 +96,8 @@
                 $(player.dom).find('.role_identity img').attr('src', sgs.interface.IDENTITY_IMG_MAPPING[0]);
             $(player.dom).find('.head_img img').attr('src', 'img/generals/small/' + sgs.HEROIMAG_MAPPING[player.hero.name]);
             for(var k = 0; k < player.hero.life; k++) {
-                $(player.dom).find('.blods_0').append('<img src="img/blod_0.png" />');
-                $(player.dom).find('.blods_1').append('<img src="img/blod_1.png" />');
+                $(player.dom).find('.blods_0').append('<img src="img/system/blod_0.png" />');
+                $(player.dom).find('.blods_1').append('<img src="img/system/blod_1.png" />');
             }
             $(player.dom).find('.head_img')[0].name = player.hero.name;
         }

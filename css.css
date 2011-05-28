@@ -18,7 +18,7 @@ body
     margin: 0 auto;
     padding: 1px;
     border:1px solid #060100;
-    background: url("img/page_bg.png");
+    background: url("img/system/page_bg.png");
     display:none;
     -moz-box-shadow:1px 1px 1px #000;
     box-shadow:1px 1px 1px #000;
@@ -50,7 +50,7 @@ body
     height: 152px;
     float: left;
     cursor:pointer;
-    background: url("img/role_bg.png") no-repeat;
+    background: url("img/system/role_bg.png") no-repeat;
     box-shadow:2px 2px 2px #000;
     border-radius: 3px;
 }
@@ -210,6 +210,21 @@ body
     width:125px;
     height:14px;
 }
+.stage
+{
+    display:none;
+    position:absolute;
+    right:0;
+    bottom:-6px;
+    width:100px;
+    height:12px;
+}
+.stage>div
+{
+    position:absolute;
+    width:100%;
+    height:100%;
+}
 /* 角色出牌剩余时间 */
 .role_progress_bar
 {
@@ -242,10 +257,10 @@ body
 #gameinfo
 {
     position: absolute;
-    left: 270px;
-    top: 250px;
+    left: 260px;
+    top: 220px;
     height: 180px;
-    width: 550px;
+    width: 500px;
 }
 
 /***** 发牌区 *****/

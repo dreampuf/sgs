@@ -26,6 +26,7 @@
             img.css('position', 'absolute');
             img[0].card = d;
             d.dom = img[0];
+            d.selected = false;
         });
     };
     
@@ -44,23 +45,25 @@
     };
     
     /* 选牌 */
-    sgs.animation.Select_Card = function (cardDom) {
-        var cardOut = cardInfo.out,
-            selected = $(cardDom).css('bottom') == cardOut + 'px' ? true : false;
+    sgs.animation.Select_Card = function (e) {
+        var cardDom = this,
+            cardOut = cardInfo.out;
         $('#cards').find('.player_card').each(function(i, d) {
             if(d == cardDom) {
-                if(selected) {
+                if(cardDom.card.selected) {
                     $(cardDom).animate({ 'bottom': '0px' }, 100);
                     cardDom.card.selected = false;
+                    $('#player')[0].player.targets = undefined;
                     /* 设置玩家为可选状态 */
                     $('.role').each(function(i, d) {
                         $(d).find('.role_cover').css('display', 'none');
-                        if($(d).css('box-shadow') == 'rgb(255, 0, 0) 0px 0px 15px 5px') {
+                        if(d.player.selected) {
                             $(d).css({
                                 'box-shadow': '2px 2px 2px #000',
                                 left: parseInt($(d).css('left')) + 1,
                                 top: parseInt($(d).css('top')) + 1
                             });
+                            d.player.selected = false;
                         }
                     });
                 } else {
@@ -73,7 +76,7 @@
             }
         });
         
-        if(selected)
+        if(!cardDom.card.selected)
             return;
         
         var selectCard,
@@ -114,7 +117,7 @@
     /* 给电脑发牌 */
     sgs.animation.Deal_Comp = function(card_count, player) {
         for(var i = 0; i < card_count; i++) {
-            var img = $('<img src="img/card_back.png" style="width:93px; height:131px" />');
+            var img = $('<img src="img/system/card_back.png" style="width:93px; height:131px" />');
             img.appendTo(document.body);
             img.css({
                 position: 'absolute',
@@ -195,8 +198,27 @@
         });
     };
     
-    sgs.animation.Play_Card = function(player, card) {
+    /* 出牌动画 */
+    sgs.animation.Play_Card = function(player, cards) {
         if(player == $('#player')[0].player) {
+            drag_out(cards);
+            $.each(cards, function(i, d) {
+                $(d.dom).animate({
+                    left: $('#main').offset().left + $('#main').width() / 2 - 200,
+                    top: $('#main').offset().top + $('#main').height() / 2 - 60
+                    
+                    
+                }, 200);
+            
+            
+            
+            });
+            
+            //sgs.animation.Arrange_Card(player.card);
+            
+            
+            
+            
             
         } else {
             
@@ -231,12 +253,14 @@
                 number_mapping = sgs.interface.CARD_COLOR_NUM_MAPPING.number,
                 pattern_img = sgs.interface.PATTERN_IMG_MAPPING;
             console.log(card);
-            $(player.dom).find(equip_id).html(['<img style="width:13px; height:13px; position:absolute; left:0;" /><font style="position:absolute; left:18px;">',
+            $(player.dom).find(equip_id).html(['<img src="',
+                    sgs.interface.WEAPON_ICON_MAPPING[type], '" style="width:13px; height:13px; position:absolute; left:0;" /><font style="position:absolute; left:18px;">',
                     type == 2 ? '+1' : (type == 3 ? '-1' : characher_mapping[sgs.EQUIP_RANGE_MAPPING[card.name]]), '</font><font>',
                     card.name, '</font><font style="position:absolute; right:18px; line-height:15px;">',
                     number_mapping[card.digit], '</font><img src="',
                     pattern_img[type], '" style="width:11px; height:11px; position:absolute; top:1px; right:2px;"/>'
                 ].join(''));
+            $(player.dom).find('.card_count span').text(($(player.dom).find('.card_count span').text() | 0) - 1);
         }
         /*
         var left = $('#cards').offset().left - 128,
@@ -283,12 +307,12 @@
             var skills = hero_prop[name].skill;
             $(skills).each(function(i, d) {
                 explanation += [
-                    '<font style="font-weight:bold;">', d, '</font>: ', skill_exp[d],
+                    '<font style="font-weight:bold; color:#65ffcc;">', d, '</font>: ', skill_exp[d],
                     i + 1 == skills.length ? '' : '<br /><br />'
                 ].join('');
             });
         } else {
-            explanation = ['<font style="font-weight:bold;">', name, '</font>: ', skill_exp[name]].join('');
+            explanation = ['<font style="font-weight:bold; color:#65ffcc;">', name, '</font>: ', skill_exp[name]].join('');
         }
         explanation = explanation.replace('★', '<br />★');
         $('#explanation').html(explanation);

@@ -159,8 +159,7 @@ var sgs = sgs || {};
                 switch(card.name) {
                     case "杀":
                         bout.opt.push(opt);
-                        pltar.choice_card(new sgs.Operate("闪", plsrc, pltar));
-                        break;
+                        return pltar.choice_card(new sgs.Operate("闪", plsrc, pltar));
                     case "桃":
                         pltar.blood++;
                         console.log(_("{0} 恢复一滴血,还剩下{1}滴血", pltar.nickname, pltar.blood));
