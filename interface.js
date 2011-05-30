@@ -133,6 +133,70 @@
             };
         }
     })(sgs.interface.HERO_PROPERTY_MAPPING));
+
+    /* 显示选牌框(选将/五谷/观星/..) */
+    sgs.interface.Show_CardChooseBox = function(title, cards, identity_info) {
+        var card_count = cards.length,
+            title_width = title.length * 18 + 20,
+            title_height = 24,
+            card_padding = 3,
+            box_width = card_count * 93 + (card_count - 1) * card_padding * 2 + 40, 
+            box_height = 210,
+            card_choose_bg = $('<div id="choose_box_bgcover"></div>'),
+            card_choose_box = $([
+                '<div id="choose_box">',
+                    '<div>',
+                        '<div id="choose_box_content">',
+                            '<div id="choose_box_bgimgs">',
+                                '<img id="choose_box_bg" src="img/system/card_choose_bg.png" />',
+                                '<div id="choose_box_title">',
+                                    '<img src="img/system/card_choose_title.png" />',
+                                    '<font></font>',
+                                '</div>',
+                            '</div>',
+                            '<div id="choose_cards"></div>',
+                        '</div>',
+                    '</div>',
+                '</div>'
+            ].join(''));
+        
+        card_choose_box.find('#choose_box_title').css({
+            width: title_width + 'px',
+            height: title_height + 'px',
+            left: (box_width - title_width) / 2 + 'px',
+        });
+        card_choose_box.find('#choose_box_title font').css('line-height', title_height + 'px');
+        card_choose_box.find('#choose_box_content').css({
+            width: box_width + 'px',
+            height: box_height + 'px',
+        });
+        card_choose_box.find('#choose_box_title font').text(title);
+        if(identity_info != undefined) {
+            $.each(cards, function(i, d) {
+                var card = $('<div class="choose_role_card"><img src="img/generals/hero/' +
+                        sgs.HEROIMAG_MAPPING[d.name] + '" /></div>');
+                card[0].name = d.name;
+                card.css('left', i * (93 + card_padding * 2) + 'px');
+                card_choose_box.find('#choose_cards').append(card);
+            });
+            card_choose_box.find('#choose_box_content').append([
+                    '<div class="player_progress_bar" style="display:block; bottom:25px; left:20px;">',
+                        '<img class="player_progress_bg" src="img/system/progress/big/progress_bg.png" />',
+                        '<img class="player_progress" src="img/system/progress/big/progress.png" />',
+                        '<img class="player_progress_bg" src="img/system/progress/big/progress_border.png" />',
+                    '</div>'
+                ].join('')).append('<div id="identity">' + identity_info + '</div>');
+            card_choose_box.find('.player_progress_bar').css({
+                height: '15px',
+                left: (box_width - 300) / 2 + 'px',
+                bottom: '30px',
+            });
+        } else {
+            
+        }
+        card_choose_bg.appendTo($('#main'));
+        card_choose_box.appendTo($('#main'));
+    };
     
     sgs.interface.SKILL_EXPLANATION_MAPPING = {
         "护驾": "主公技，当你需要使用（或打出）一张【闪】时，你可以发动护驾。所有魏势力角色按行动顺序依次选择是否打出一张【闪】“提供”给你（视为由你使用或打出），直到有一名角色或没有任何角色决定如此做时为止",

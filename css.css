@@ -214,10 +214,12 @@ body
 {
     display:none;
     position:absolute;
-    right:0;
-    bottom:-6px;
-    width:100px;
+    right:5px;
+    bottom:-3px;
+    width:70px;
     height:12px;
+    color:#fff;
+    text-align:right;
 }
 .stage>div
 {
@@ -333,10 +335,6 @@ body
 {
     display: none;
 }
-
-
-
-
 
 
 

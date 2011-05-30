@@ -48,9 +48,9 @@
     sgs.animation.Select_Card = function (e) {
         var cardDom = this,
             cardOut = cardInfo.out;
-        $('#cards').find('.player_card').each(function(i, d) {
+        $('#cards').find('.player_card').each(function(i, d) { /* 设置卡牌选中状态与玩家选中状态 */
             if(d == cardDom) {
-                if(cardDom.card.selected) {
+                if(cardDom.card.selected) { /* 卡牌已被选中时则取消选中 */
                     $(cardDom).animate({ 'bottom': '0px' }, 100);
                     cardDom.card.selected = false;
                     $('#player')[0].player.targets = undefined;
@@ -66,7 +66,7 @@
                             d.player.selected = false;
                         }
                     });
-                } else {
+                } else { /* 卡牌没有被选中时 */
                     cardDom.card.selected = true;
                     $(cardDom).animate({ 'bottom': cardOut + 'px' }, 100);
                 }
@@ -76,20 +76,15 @@
             }
         });
         
+        /* 取消选中卡牌时不需要进行下一步 */
         if(!cardDom.card.selected)
             return;
         
-        var selectCard,
+        var selectCard = cardDom.card,
             player = $('#player')[0].player;
-        $.each(player.card, function(i, d) {
-            if(d == cardDom.card) {
-                selectCard = d;
-                return false;
-            }
-        });
-        
         player.targets = sgs.interface.bout.select_card(new sgs.Operate(selectCard.name, player, undefined, selectCard));
-        player.targets.selected = [];
+        player.targets.selected = []; /* 已选目标列表 */
+        /* 设置目标可选状态 */
         $('.role .role_cover').each(function(i, d) {
             $(d).css('display', 'block');
         });
@@ -100,6 +95,10 @@
                 }
             });
         });
+        
+        /* 如果是对自己使用的卡牌则激活“确定”按钮 */
+        if(targets[0][0] == $('#player')[0].player)
+            $('#ok').css('display', 'block');
     };
     
     /* 从牌堆中删除部分牌 */

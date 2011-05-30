@@ -5,7 +5,9 @@
     var identity, /* 身份列表 */
         explanation_id, /* 技能解释 */
         player_count,
-        players = [];
+        players = [],
+        player_heros,
+        choose_heros;
     
     /* 游戏开始 */
     $('#game_start').click(function (e) {
@@ -14,9 +16,7 @@
         $('#choose_box').css('display', 'table');
         
         player_count = 4;
-        
-        var player_heros,
-            choose_heros = sgs.Bout.get_hero((player_count - 1) * 3 + 1);
+        choose_heros = sgs.Bout.get_hero((player_count - 1) * 3 + 1);
         
         identity = sgs.Bout.get_identity(player_count); /* 第0个表示玩家身份 */
         
@@ -39,9 +39,7 @@
             $('#choose_role_title').css('left', '195px');
             $('.player_progress_bar').css('left', '125px');
             
-            player_heros = sgs.func.shuffle(sgs.Bout.get_king_hero());
-            
-            $('#identity').append('你的身份是 - <font style="font-weight:bold;">' + sgs.interface.IDENTITY_INDEX_MAPPING.name[0] + '</font>');
+            player_heros = sgs.Bout.get_king_hero();
         } else { /* 玩家不是主公时 */
             $('#choose_role_bg, #choose_role').css('width', '340px');
             $('#choose_role_content').css('width', '310px');
@@ -49,7 +47,7 @@
             $('.player_progress_bar').css('left', '20px');
             
             /* 主公随机选英雄 */
-            var king_hero = sgs.func.choice(sgs.Bout.get_king_hero())[0];
+            king_hero = sgs.func.choice(sgs.Bout.get_king_hero())[0];
             
             $.each(identity, function(i, d) {
                 if(d == 0) {
@@ -61,40 +59,20 @@
             });
             choose_heros = sgs.func.sub(choose_heros, [king_hero]);
             player_heros = choose_heros.slice(0, 3);
-            
-            $('#identity').append([
-                '你的身份是 - <font style="font-weight:bold;">',
-                sgs.interface.IDENTITY_INDEX_MAPPING.name[identity[0]],
-                '</font>,     主公选择了 - <font style="font-weight:bold;">',
-                king_hero.name,
-                '</font>'
-            ].join(''));
         }
         
-        $.each(player_heros, function(i, d) {
-            if(identity[0] != 0) {
-                if($('#identity font').last().text() == d.name)
-                    return true;
-                else if($('#choose_role_content').children().length == 3)
-                    return false;
-            }
-            var hero_img = $(['<div class="card_box"><div class="choose_role_card"><img src="img/generals/hero/',
-                                sgs.HEROIMAG_MAPPING[d.name], '" /></div></div>'
-                            ].join(''));
-            $('#choose_role_content').append(hero_img);
-            hero_img[0].name = d.name;
-            hero_img.click([choose_heros, player_heros], choose_role);
-        });
+        sgs.interface.Show_CardChooseBox(
+            '选择您的武将',
+            player_heros,
+            '你的身份是 - ' + sgs.interface.IDENTITY_INDEX_MAPPING.name[identity[0]]);
     });
     
     /* 选择英雄 */
-    var choose_role = function (e) {
-        $('#choose_back').css('display', 'none');
-        $('#choose_box').css('display', 'none');
+    $('.choose_role_card').live('click', function (e) {
+        $('#choose_box_bgcover').remove();
+        $('#choose_box').remove();
     
         var vthis = this,
-            choose_heros = e.data[0],
-            player_heros = e.data[1],
             pls = [];
         
         
@@ -159,7 +137,7 @@
                 setTimeout(sgs.animation.Deal_Comp, 200, d.card.length, d); /* 发牌 */
             }
         });
-    };
+    });
     
     var bing_event = function() {
         sgs.interface.bout.attach("get_card", function(player, cards) {
