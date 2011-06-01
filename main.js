@@ -3,10 +3,35 @@
     sgs.interface.Load_Data();
     
     var identity, /* 身份列表 */
-        player_count,
-        players = [],
-        player_heros,
-        choose_heros;
+        player_count, /* 玩家数量 */
+        players = [], /* 玩家列表(临时变量) */
+        player_heros, /* 玩家可选英雄 */
+        choose_heros; /* 所有可选英雄 */
+    
+    var overwrite = function(player) { /* 重写玩家方法 */
+        /* 到出牌阶段 */
+        player.choice_card = function() {
+            $('#player_cover').css('display', 'none');
+            $('#abandon').css('display', 'block');
+        };
+        /* 到弃牌阶段 *//*
+        player.discard = function() {
+            $.each($('.player_card .select_unable'), function(i, d) {
+                d.css('display', 'none');
+            });
+        };*/
+    };
+    
+    var bin_event = function() { /* 绑定事件 */
+        sgs.interface.bout.attach("get_card", function(player, cards) {
+            if(player.dom == $('#player')[0]) {
+                sgs.animation.Deal_Player(cards);
+            } else {
+                sgs.animation.Deal_Comp(cards.length, player);
+            }
+        });
+        sgs.interface.bout.attach("equip_on", sgs.animation.Equip_Equipment);
+    };
     
     /* 游戏开始 */
     $('#game_start').click(function (e) {
@@ -98,16 +123,15 @@
             tempPlayer.dom = tempDom;
             tempPlayer.selected = false;
             tempDom.player = tempPlayer;
-            if(i == 0) {
-                tempPlayer.choice_card = function() {
-                    $('#player_cover').css('display', 'none');
-                    $('#abandon').css('display', 'block');
-                };
-            }
+            if(i == 0)
+                overwrite(tempPlayer);
             pls.push(tempPlayer);
         }
+        /**************************************/
+        /*********** 游戏正式开始 *************/
+        /**************************************/
         sgs.interface.bout = new sgs.Bout(pls);
-        bing_event();
+        bin_event();
         
         /*** 测试用 ***/
         $.each(sgs.interface.bout.player, function(i, d) {
@@ -137,17 +161,6 @@
             }
         });
     });
-    
-    var bing_event = function() {
-        sgs.interface.bout.attach("get_card", function(player, cards) {
-            if(player.dom == $('#player')[0]) {
-                sgs.animation.Deal_Player(cards);
-            } else {
-                sgs.animation.Deal_Comp(cards.length, player);
-            }
-        });
-        sgs.interface.bout.attach("equip_on", sgs.animation.Equip_Equipment);
-    };
     
     /* 选牌 */
     $('.player_card').live('click', sgs.animation.Select_Card);

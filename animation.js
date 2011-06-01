@@ -157,9 +157,38 @@
         }, 500, function() { cardDom.onDrag = false; });
     };
     
-    /* 卡牌动画 */
+    /* 卡牌动画 sgs.animation.Card_Flash(sgs.interface.bout.player[1], new sgs.Card('杀', 3, 13)) */
     sgs.animation.Card_Flash = function(player, card) {
-        
+        var img,
+            targetLeft,
+            targetTop,
+            player_dom = player.dom;
+        if(card.name == '杀') {
+            img = $('<img src="img/system/killer.png" />');
+            //img = $('<img src="img/system/slash.png" />');
+        } else if(card.name == '闪') {
+            img = $('<img src="img/system/jink.png" />');
+        } else if(card.name == '桃') {
+            img = $('<img src="img/system/peach.png" />');
+        }
+        img.appendTo(document.body);
+        if(player.dom == $('#player')[0]) {
+            targetLeft = $(player_dom).offset().left + ($(player_dom).width() - img.width()) / 2;
+            targetTop = $(player_dom).offset().top - img.height() / 2;
+        } else {
+            targetLeft = $(player_dom).offset().left + ($(player_dom).width() - img.width()) / 2;
+            targetTop = $(player_dom).offset().top + ($(player_dom).height() - img.height()) / 2;
+        }
+        img.css({
+            position: 'absolute',
+            left: targetLeft,
+            top: targetTop,
+            opacity: 0,
+        });
+        img.animate({ opacity: 1 }, 50);
+        setTimeout(function() {
+            img.animate({ opacity: 0 }, 200, function() { img.remove(); });
+        }, 2000);
     };
     
     /* 从牌堆中删除部分牌 */
@@ -228,27 +257,40 @@
         });
     };
     
-    /* 出牌动画 */
+    /* 出牌动画 sgs.animation.Play_Card(sgs.interface.bout.player[1], sgs.interface.bout.player[1].card[0]) */
     sgs.animation.Play_Card = function(player, cards) {
         cards = cards instanceof Array ? cards : [cards];
-        if(player == $('#player')[0].player) {
-            drag_out(cards);
-            $.each(cards, function(i, d) {
-                $(d.dom).animate({
-                    left: $('#main').offset().left + $('#main').width() / 2 - 200,
-                    top: $('#main').offset().top + $('#main').height() / 2 - 60
-                }, 200);
-                setTimeout(function(dom) {
+        var flash = function(dom) {
+            $(dom).animate({
+                left: $('#main').offset().left + $('#main').width() / 2 - cardInfo.width / 2,
+                top: $('#main').offset().top + $('#main').height() / 2 - cardInfo.height / 2,
+            }, 200, function() {
+                setTimeout(function() {
                     $(dom).animate({
                         opacity: 0,
                     }, 500, function() {
                         $(dom).remove();
                     });
-                }, 3000, d.dom);
+                }, 3000);
+            });
+        };
+        if(player == $('#player')[0].player) {
+            drag_out(cards);
+            $.each(cards, function(i, d) {
+                flash(d.dom);
             });
             sgs.animation.Arrange_Card(player.card);
         } else {
-             
+            $.each(cards, function(i, d) {
+                var cardImg = $('<img src="' + sgs.CARDIMAG_MAPING[d.name] + '" style="width:93px; height:131px" />');
+                cardImg.appendTo($(document.body));
+                cardImg.css({
+                    position: 'absolute',
+                    left: ($(player.dom).offset().left + 20) + 'px',
+                    top: ($(player.dom).offset().top + 10) + 'px',
+                });
+                flash(cardImg[0]);
+            });
         }
     };
     

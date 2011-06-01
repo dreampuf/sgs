@@ -3,75 +3,20 @@ sgs.PLAYER_NUM = 4;
 sgs.DEFAULT_AI_LV = 0;
 sgs.DELAY = 1000;
 
-/*
-* 卡牌数据
-* 'color' : 方块: 0, 红桃: 1, 梅花: 2, 黑桃: 3;
-*/
-
-sgs.CARDIMAG_MAPING = {
-    "万箭齐发": "img/generals/card/archery_attack.png",
-    "丈八蛇矛": "img/generals/card/spear.png",
-    "乐不思蜀": "img/generals/card/indulgence.png",
-    "五谷丰登": "img/generals/card/amazing_grace.png",
-    "仁王盾": "img/generals/card/renwang_shield.png",
-    "借刀杀人": "img/generals/card/collateral.png",
-    "八卦阵": "img/generals/card/eight_diagram.png",
-    "决斗": "img/generals/card/duel.png",
-    "南蛮入侵": "img/generals/card/savage_assault.png",
-    "大宛": "img/generals/card/dayuan.png",
-    "寒冰剑": "img/generals/card/ice_sword.png",
-    "方天画戟": "img/generals/card/halberd.png",
-    "无中生有": "img/generals/card/ex_nihilo.png",
-    "无懈可击": "img/generals/card/nullification.png",
-    "杀": "img/generals/card/slash.png",
-    "桃": "img/generals/card/peach.png",
-    "桃园结义": "img/generals/card/god_salvation.png",
-    "爪黄飞电": "img/generals/card/zhuahuangfeidian.png",
-    "的卢": "img/generals/card/dilu.png",
-    "紫骍": "img/generals/card/zixing.png",
-    "绝影": "img/generals/card/jueying.png",
-    "诸葛连弩": "img/generals/card/crossbow.png",
-    "贯石斧": "img/generals/card/axe.png",
-    "赤兔": "img/generals/card/chitu.png",
-    "过河拆桥": "img/generals/card/dismantlement.png",
-    "闪": "img/generals/card/jink.png",
-    "闪电": "img/generals/card/lightning.png",
-    "雌雄双股剑": "img/generals/card/double_sword.png",
-    "青釭剑": "img/generals/card/qinggang_sword.png",
-    "青龙偃月刀": "img/generals/card/blade.png",
-    "顺手牵羊": "img/generals/card/snatch.png",
-    "麒麟弓": "img/generals/card/kylin_bow.png",
+sgs.CARD_MAGIC_RANGE_MAPPING = {
+    "五谷丰登": -1,
+    "桃园结义": -1,
+    "南蛮入侵": -1,
+    "万箭齐发": -1,
+    "决斗": 1,
+    "无中生有": 1,
+    "顺手牵羊": 1,
+    "过河拆桥": 1,
+    "借刀杀人": 2,
+    "无懈可击": 1,
+    "乐不思蜀": 1,
+    "闪电": 1,
 };
-
-sgs.HEROIMAG_MAPPING = {
-    "曹操": "caocao.png",
-    "张辽": "zhangliao.png",
-    "郭嘉": "guojia.png",
-    "夏侯淳": "xiahoudun.png",
-    "司马懿": "simayi.png",
-    "许褚": "xuchu.png",
-    "甄姬": "zhenji.png",
-    "刘备": "liubei.png",
-    "关羽": "guanyu.png",
-    "张飞": "zhangfei.png",
-    "赵云": "zhaoyun.png",
-    "马超": "machao.png",
-    "诸葛亮": "zhugeliang.png",
-    "黄月英": "huangyueying.png",
-    "孙权": "sunquan.png",
-    "周瑜": "zhouyu.png",
-    "吕蒙": "lvmeng.png",
-    "陆逊": "luxun.png",
-    "甘宁": "ganning.png",
-    "黄盖": "huanggai.png",
-    "大乔": "daqiao.png",
-    "孙尚香": "sunshangxiang.png",
-    "吕布": "lvbu.png",
-    "华佗": "huatuo.png",
-    "貂蝉": "diaochan.png"
-};
-
-
 
 sgs.CARD = [
     { 'name': '杀', 'color': 3, 'digit': '7', },
@@ -259,6 +204,75 @@ sgs.HERO = [
     ["华佗", 3, ["急救", "青囊"], "群", 1],
     ["貂蝉", 3, ["闭月", "离间"], "群", 0],
 ];
+
+
+/*
+* 卡牌数据
+* 'color' : 方块: 0, 红桃: 1, 梅花: 2, 黑桃: 3;
+*/
+
+sgs.CARDIMAG_MAPING = {
+    "万箭齐发": "img/generals/card/archery_attack.png",
+    "丈八蛇矛": "img/generals/card/spear.png",
+    "乐不思蜀": "img/generals/card/indulgence.png",
+    "五谷丰登": "img/generals/card/amazing_grace.png",
+    "仁王盾": "img/generals/card/renwang_shield.png",
+    "借刀杀人": "img/generals/card/collateral.png",
+    "八卦阵": "img/generals/card/eight_diagram.png",
+    "决斗": "img/generals/card/duel.png",
+    "南蛮入侵": "img/generals/card/savage_assault.png",
+    "大宛": "img/generals/card/dayuan.png",
+    "寒冰剑": "img/generals/card/ice_sword.png",
+    "方天画戟": "img/generals/card/halberd.png",
+    "无中生有": "img/generals/card/ex_nihilo.png",
+    "无懈可击": "img/generals/card/nullification.png",
+    "杀": "img/generals/card/slash.png",
+    "桃": "img/generals/card/peach.png",
+    "桃园结义": "img/generals/card/god_salvation.png",
+    "爪黄飞电": "img/generals/card/zhuahuangfeidian.png",
+    "的卢": "img/generals/card/dilu.png",
+    "紫骍": "img/generals/card/zixing.png",
+    "绝影": "img/generals/card/jueying.png",
+    "诸葛连弩": "img/generals/card/crossbow.png",
+    "贯石斧": "img/generals/card/axe.png",
+    "赤兔": "img/generals/card/chitu.png",
+    "过河拆桥": "img/generals/card/dismantlement.png",
+    "闪": "img/generals/card/jink.png",
+    "闪电": "img/generals/card/lightning.png",
+    "雌雄双股剑": "img/generals/card/double_sword.png",
+    "青釭剑": "img/generals/card/qinggang_sword.png",
+    "青龙偃月刀": "img/generals/card/blade.png",
+    "顺手牵羊": "img/generals/card/snatch.png",
+    "麒麟弓": "img/generals/card/kylin_bow.png",
+};
+
+sgs.HEROIMAG_MAPPING = {
+    "曹操": "caocao.png",
+    "张辽": "zhangliao.png",
+    "郭嘉": "guojia.png",
+    "夏侯淳": "xiahoudun.png",
+    "司马懿": "simayi.png",
+    "许褚": "xuchu.png",
+    "甄姬": "zhenji.png",
+    "刘备": "liubei.png",
+    "关羽": "guanyu.png",
+    "张飞": "zhangfei.png",
+    "赵云": "zhaoyun.png",
+    "马超": "machao.png",
+    "诸葛亮": "zhugeliang.png",
+    "黄月英": "huangyueying.png",
+    "孙权": "sunquan.png",
+    "周瑜": "zhouyu.png",
+    "吕蒙": "lvmeng.png",
+    "陆逊": "luxun.png",
+    "甘宁": "ganning.png",
+    "黄盖": "huanggai.png",
+    "大乔": "daqiao.png",
+    "孙尚香": "sunshangxiang.png",
+    "吕布": "lvbu.png",
+    "华佗": "huatuo.png",
+    "貂蝉": "diaochan.png"
+};
 
 sgs.IMG_LIST = [
     "img/generals/big/caocao.png",
