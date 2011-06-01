@@ -131,23 +131,18 @@
 {
     position: absolute;
     width: 570px;
-    height: 133px;
+    height: 131px;
     left: 163px;
-    top: 7px;
+    top: 8px;
 }
 .player_card, .player_card img
 {
     position: absolute;
-    margin: 1px;
+    top:0;
     width: 93px;
     height: 131px;
     cursor: pointer;
     display: block;
-}
-.player_card
-{
-    width: 95px;
-    height: 133px;
 }
 .pat_num
 {

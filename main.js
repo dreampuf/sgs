@@ -3,7 +3,6 @@
     sgs.interface.Load_Data();
     
     var identity, /* 身份列表 */
-        explanation_id, /* 技能解释 */
         player_count,
         players = [],
         player_heros,
@@ -153,6 +152,12 @@
     /* 选牌 */
     $('.player_card').live('click', sgs.animation.Select_Card);
     
+    /* 拖动 */
+    $('.player_card').live('dragstart', function() { return false; });
+    $('.player_card').live('mousedown', sgs.animation.Mouse_Down);
+    $('.player_card').live('mousemove', sgs.animation.Mouse_Move);
+    $('.player_card').live('mouseup mouseout', sgs.animation.Mouse_Up);/* mouseout 防止拖动过快 */
+    
     /* 选择目标 */
     $('.role').click(function(e) {
         if($(this).find('.role_cover').css('display') == 'block')
@@ -208,15 +213,14 @@
             if(this.card.selected == true)
                 selectedCard = this.card;
         });
-        var a = sgs.interface.bout.choice_card(new sgs.Operate(selectedCard.name, player, player.targets.selected[0], selectedCard));
-        var b = 0;
+        sgs.interface.bout.choice_card(new sgs.Operate(selectedCard.name, player, player.targets.selected[0], selectedCard));
+        sgs.animation.Play_Card($('#player')[0].player, selectedCard);
     });
     
     /* 选择角色界面 */
     $('.card_box').mousedown(function () {
         if($(this).find('.choose_role_card_cover').css('display') == 'block')
             return false;
-        
     }).mouseup(function () {
         
     }).mouseout(function () {
@@ -224,28 +228,46 @@
     });
     
     /* 显示技能解释 */
-    $('.card_box, .head_img, #player_head').live('mousemove', function(e) {
-        var vthis = this;
-        $('#explanation').css('display', 'none');
-        if(explanation_id != undefined)
-            clearTimeout(explanation_id);
-        explanation_id = setTimeout(function() {
+    $('.choose_role_card, .head_img, #player_head').live('mousemove', function(e) {
+        var vthis = this,
+            expDom = $('#explanation')[0];
+
+        $('#explanation').css({
+            display: 'none',
+            'z-index': '0',
+        });
+        if(expDom.explanation_id != undefined)
+            clearTimeout(expDom.explanation_id);
+        expDom.explanation_id = setTimeout(function() {
             sgs.animation.Skill_Explanation(
                 vthis.name,
                 true,
                 e.clientX,
                 e.clientY
             );
-            $('#explanation').css('display', 'block');
+            $('#explanation').css({
+                display: 'block',
+                'z-index': '999',
+            });
         }, 1000);
-    }).live('mouseout', function(e) {
-        if(explanation_id != undefined)
-            clearTimeout(explanation_id);
-    });
+    }).live('mouseout mousedown', function(e) {
+        var expDom = $('#explanation')[0];
+        if(expDom.explanation_id != undefined)
+            clearTimeout(expDom.explanation_id);
+        $('#explanation').css({
+            display: 'none',
+            'z-index': '0',
+        });
+    })
     $('#explanation').hover(function(e) {
-        clearTimeout(explanation_id);
+        this.hover = true;
+        clearTimeout(this.explanation_id);
     }, function(e) {
-        $('#explanation').css('display', 'none');
+        this.hover = false;
+        $('#explanation').css({
+            display: 'none',
+            'z-index': '0',
+        });
     });
     
     /* 身份按钮 */

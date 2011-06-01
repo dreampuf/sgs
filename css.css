@@ -276,8 +276,11 @@ body
 }
 #cards_last img
 {
-    width: 104px;
-    height: 142px;
+    position:absolute;
+    width: 93px;
+    height: 131px;
+    border-radius:2px;
+    box-shadow:1px 1px 5px 1px #000;
 }
 
 

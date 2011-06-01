@@ -33,10 +33,10 @@
     /* 将选牌从DOM中抽出（方便牌整理） */
     var drag_out = function(cards) {
         $(cards).each(function (i, d) {
-            var temp = $(this.dom),
+            var temp = $(d.dom),
                 left = temp.offset().left,
                 top = temp.offset().top;
-
+            
             temp.remove();
             temp.appendTo($(document.body));
             temp.css({ left: left, top: top });
@@ -48,10 +48,12 @@
     sgs.animation.Select_Card = function (e) {
         var cardDom = this,
             cardOut = cardInfo.out;
+        if(cardDom.onDrag)
+            return;
         $('#cards').find('.player_card').each(function(i, d) { /* 设置卡牌选中状态与玩家选中状态 */
             if(d == cardDom) {
                 if(cardDom.card.selected) { /* 卡牌已被选中时则取消选中 */
-                    $(cardDom).animate({ 'bottom': '0px' }, 100);
+                    $(cardDom).animate({ 'top': '0px' }, 100);
                     cardDom.card.selected = false;
                     $('#player')[0].player.targets = undefined;
                     /* 设置玩家为可选状态 */
@@ -60,19 +62,19 @@
                         if(d.player.selected) {
                             $(d).css({
                                 'box-shadow': '2px 2px 2px #000',
-                                left: parseInt($(d).css('left')) + 1,
-                                top: parseInt($(d).css('top')) + 1
+                                left: parseInt($(d).css('left')),
+                                top: parseInt($(d).css('top')),
                             });
                             d.player.selected = false;
                         }
                     });
                 } else { /* 卡牌没有被选中时 */
                     cardDom.card.selected = true;
-                    $(cardDom).animate({ 'bottom': cardOut + 'px' }, 100);
+                    $(cardDom).animate({ 'top': -cardOut + 'px' }, 100);
                 }
             } else {
                 d.card.selected = false;
-                $(d).animate({ 'bottom': '0px' }, 100);
+                $(d).animate({ 'top': '0px' }, 100);
             }
         });
         
@@ -97,8 +99,67 @@
         });
         
         /* 如果是对自己使用的卡牌则激活“确定”按钮 */
-        if(targets[0][0] == $('#player')[0].player)
+        if(player.targets[0][0] == $('#player')[0].player)
             $('#ok').css('display', 'block');
+    };
+    
+    /* 拖动 */
+    /*
+     * 用判断mousemove时鼠标是否按下来判断是否为拖动
+     * 1. mousedown
+     *   鼠判断是否处于拖动状态(包括返回动画):
+     *   - 是则不作任何操作;
+     *   - 不是处于拖动状态则设置dom的mousedown属性为true;
+     * 2. mousemove
+     *   判断鼠标是否按下:
+     *   - 不是则不作任何操作;
+     *   - 是按下的则执行拖动;
+     * 3. mouseup
+     *   判断是否处于拖动状态, 设置dom的mousedown属性为false:
+     *   - 不是则不作任何操作;
+     *   - 是则结束拖动;
+     */
+    sgs.animation.Mouse_Down = function(e) {
+        var cardDom = e.currentTarget,
+            vthis = this;
+        if(cardDom.onDrag)
+            return true;
+        
+        cardDom.mousedown = true;
+        cardDom.mouse_left = e.clientX; /* 鼠标按下时的位置 */
+        cardDom.mouse_top = e.clientY;
+        cardDom.first_left = $(this).offset().left - $('#cards').offset().left; /* 鼠标按下时卡牌的相对位置 */
+        cardDom.first_top = $(this).offset().top - $('#cards').offset().top;
+    };
+    sgs.animation.Mouse_Move = function(e) {
+        var cardDom = e.currentTarget;
+        if(!cardDom.mousedown)
+            return true;
+        
+        cardDom.onDrag = true;
+        $(cardDom).css({
+            'z-index': '1000',
+            cursor: 'pointer',
+            left: e.clientX - cardDom.mouse_left + cardDom.first_left,
+            top: e.clientY - cardDom.mouse_top + cardDom.first_top
+        });
+    };
+    sgs.animation.Mouse_Up = function(e) {
+        var cardDom = e.currentTarget;
+        cardDom.mousedown = false;
+        if(!cardDom.onDrag)
+            return true;
+        
+        $(cardDom).css('z-index', '0');
+        $(cardDom).animate({
+            left: cardDom.first_left,
+            top: cardDom.first_top
+        }, 500, function() { cardDom.onDrag = false; });
+    };
+    
+    /* 卡牌动画 */
+    sgs.animation.Card_Flash = function(player, card) {
+        
     };
     
     /* 从牌堆中删除部分牌 */
@@ -150,7 +211,6 @@
             var tempL,
                 targetL,
                 targetT = $('#cards').offset().top;
-            
             if(cc * cardInfo.width < $('#cards').width())
                 tempL = cardInfo.width * (i + cc - cards.length);
             else
@@ -163,64 +223,32 @@
             }, 500, function () {
                 $(d.dom).appendTo($('#cards'));
                 $(d.dom).css('left', tempL);
-                $(d.dom).css('top', 'auto');
-                $(d.dom).css('bottom', 0);
-                
-                /*var isDrag = false,
-                    mouse_left,
-                    mouse_top,
-                    first_left,
-                    first_top;
-                $(d.dom).mousedown(function(e) {
-                    isDrag = true;
-                    mouse_left = e.clientX;
-                    mouse_top = e.clientY;
-                    first_left = $(this).offset().left - $('#cards').offset().left - 1;
-                    first_top = $(this).offset().top - $('#cards').offset().top - 1;
-                    
-                }).mousemove(function(e) {
-                    if(isDrag) {
-                        $(this).css({
-                            cursor: 'pointer',
-                            left: e.clientX - mouse_left + first_left,
-                            top: e.clientY - mouse_top + first_top
-                        });
-                    }
-                }).mouseup(function(e) {
-                    isDrag = false;
-                    $(this).animate({
-                        left: first_left,
-                        top: first_top
-                    }, 500);
-                });*/
+                $(d.dom).css('top', '0');
             });
         });
     };
     
     /* 出牌动画 */
     sgs.animation.Play_Card = function(player, cards) {
+        cards = cards instanceof Array ? cards : [cards];
         if(player == $('#player')[0].player) {
             drag_out(cards);
             $.each(cards, function(i, d) {
                 $(d.dom).animate({
                     left: $('#main').offset().left + $('#main').width() / 2 - 200,
                     top: $('#main').offset().top + $('#main').height() / 2 - 60
-                    
-                    
                 }, 200);
-            
-            
-            
+                setTimeout(function(dom) {
+                    $(dom).animate({
+                        opacity: 0,
+                    }, 500, function() {
+                        $(dom).remove();
+                    });
+                }, 3000, d.dom);
             });
-            
-            //sgs.animation.Arrange_Card(player.card);
-            
-            
-            
-            
-            
+            sgs.animation.Arrange_Card(player.card);
         } else {
-            
+             
         }
     };
     
@@ -275,16 +303,17 @@
     
     /* 整理牌 */
     sgs.animation.Arrange_Card = function (cards) {
+        cards = cards == undefined ? $('#player')[0].player.card : cards;
         var cc = cards.length;
         $(cards).each(function (i, d) {
-            if (d.jqObj[0].parentNode == document.body)
+            if (d.dom.parentNode == document.body)
                 return true;
             var left;
             if (cc * cardInfo.width < $('#cards').width())
                 left = cardInfo.width * i;
             else
                 left = ($('#cards').width() - cardInfo.width) / (cc - 1) * i;
-            d.jqObj.animate({ left: left }, 'normal');
+            $(d.dom).animate({ left: left }, 'normal');
         });
     };
     
