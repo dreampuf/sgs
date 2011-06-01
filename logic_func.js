@@ -163,4 +163,25 @@ var sgs = sgs || {};
         });
         return result;
     } })(sgs.func.each);
+    sgs.func.all = (function(each){ return function(list, func) {
+        var result = false;
+        each(list, function(n, i) {
+            if(!func(i)) {
+                result = false;
+                return false;
+            }
+            result = true;
+        });
+        return result;
+    } })(sgs.func.each);
+    sgs.func.any = (function(each){ return function(list, func) {
+        var result = false;
+        each(list, function(n, i) {
+            if(func(i)) {
+                result = true;
+                return false;
+            }
+        });
+        return result;
+    } })(sgs.func.each);
 })(window.sgs);

@@ -46,6 +46,9 @@ var sgs = sgs || {};
         defend += equip[2] ? 1 : 0;
         return [attack, defend];
     };
+    sgs.Player.prototype.skill = function(skill_name) {
+        return this.hero.skills.indexOf(skill_name) != -1;
+    };
     sgs.Player.prototype.hascard = function(name) {
         var has = false;
         each(this.card, function(n, i){
@@ -89,6 +92,11 @@ var sgs = sgs || {};
         if(!this.isAI) throw new Error("sorry ! I'm computer.");
 
         this.AI.usecard(opt);
+    };
+    sgs.Player.prototype.discard = function(opt) {
+        if(!this.isAI) throw new Error("sorry ! I'm computer.");
+
+        this.AI.discard(opt);
     };
     
     /*
@@ -326,13 +334,13 @@ var sgs = sgs || {};
                         case 2:
                             return bout.usecard();
                         case 3:
-                            return bout.discard();
+                            return bout.player[bout.curplayer].discard();
                     }
                 }
             }
         } })(this), DELAY); } })(sgs.DELAY, sgs.interpreter.response_card);
     
-    sgs.Bout.prototype.decision = function(opt) {
+    sgs.Bout.prototype.decision = (function(decision){ return function(opt) {
         /* 判定 */
         var pl = this.player[this.curplayer];
 
@@ -345,12 +353,12 @@ var sgs = sgs || {};
         /** end-洛神 **/
 
         if(pl.be_decision.length > 0) {
-
+            return decision(this, pl, pl.be_decision.pop()); 
         }
 
         this.step = 1;
         this.continue();
-    };
+    } })(sgs.interpreter.decision);
     sgs.Bout.prototype.getcard = function(opt) {
         /* 摸牌 */
         var pl = this.player[this.curplayer],
@@ -362,12 +370,20 @@ var sgs = sgs || {};
         if(this.card.length < 5) { this.card = this.card.concat(shuffle(sgs.CARD)); }
         
         var cards = this.card.splice(0, num); 
+        //cards[0].name = "无懈可击";
+        //cards[1].name = "乐不思蜀";
+
         console.log(pl.nickname, "摸牌", map(cards, function(i) {return i.name; }));
         pl.card = pl.card.concat(cards);
         console.log(pl.nickname, "手牌:", map(pl.card, function(i) {return i.name; }));
         this.notify("get_card", pl, cards);
         
-        this.step = 2;
+        if(pl.status["lebusishu"]) {
+            console.log("中乐了.休息一下");
+            this.step = 3;
+        } else {
+            this.step = 2;
+        }
         this.continue();
     };
     sgs.Bout.prototype.select_card = (function(select){ return function(opt) {
@@ -418,19 +434,18 @@ var sgs = sgs || {};
 
     sgs.Bout.prototype.discard = function(opt) {
         /* 弃牌 */
-        var pl = opt.source,
+        var pl = this.player[this.curplayer],
             cards,
             isdis = false;
         
         console.log(pl.nickname, "弃牌了");
         if(pl.blood < pl.card.length){
-            cards = opt.data && opt.data["card"];
+            cards = opt && opt.data && opt.data["card"];
             if(!cards) {
                 return new sgs.Operate("弃牌", undefined, pl, {"num": pl.card.length - pl.blood});
             } else {
                 pl.card = sub(pl.card, cards); 
             }
-
             console.log(pl.nickname, "弃牌", map(cards, function(i) { return i.name; }));
         }
 
