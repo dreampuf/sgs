@@ -60,8 +60,8 @@ var sgs = sgs || {};
                     break;
                 case "乐不思蜀":
                     choiceable_pl = filter(bout.player, 
-                                           function(i){ return any(i.card, 
-                                                                   function(ii){ return ii.name == "乐不思蜀" ; }); });
+                                           function(i){ return !any(i.be_decision, 
+                                                                    function(ii){ return ii.id == "乐不思蜀" ; }); });
                     choiceable_num = 1;
                     break;
                 case "五谷丰登":
@@ -77,12 +77,40 @@ var sgs = sgs || {};
         return [choiceable_pl, choiceable_num];
     };
 
-    sgs.interpreter.ask_wuxie = function(bout, pltar_pos) {
+    sgs.interpreter.action_execute = function(bout, opt) {
+        var plsrc = opt.source,
+            pltar = opt.target,
+            card = opt.data,
+            commend_type = card.name;
+
+        switch(commend_type) {
+            case "乐不思蜀":
+                var judge_card = bout.card.shift(); 
+                bout.notify("judge_card", pltar, judge_card);
+                console.log("乐不思蜀判定--", judge_card.color);
+                if(judge_card.color != 1) { 
+                    bout.notify("apply_card", plsrc, pltar, card);
+                    pltar.status["lebusishu"] = true;
+                }
+                break;
+            case "无中生有": 
+                bout.notify("apply_card", plsrc, pltar, card);
+                var cards = bout.card.splice(0, 2);
+                bout.notify("get_card", pltar, cards);
+                pltar.card = pltar.card.concat(cards);
+                break;
+        }
+    };
+
+    sgs.interpreter.ask_wuxie = function(bout, pltar) {
         /*
          * 为锦囊询问无懈可击
+         * bout: sgs.Bout
+         * pltar_pos: 目标对象所在Bout.player位置
          * */
         var pls = bout.player,
             plslen = bout.playerlen,
+            pltar_pos = bout.playernum[pltar.nickname],
             pl_has_the_card,
             has_wuxie,
             may_wuxie = false;
@@ -98,7 +126,24 @@ var sgs = sgs || {};
         return may_wuxie;
     };
 
-    sgs.interpreter.response_card = function(bout, opt) {
+    sgs.interpreter.ask_peach = function(bout, plsrc, pltar) {
+        /*
+         * 向其他对象求桃
+         * bout: sgs.Bout
+         * plsrc: 临死对象
+         * pltar: 造成伤害对象
+         * */
+        var pltar_pos = bout.playernum[pltar.nickname], save_opt = [];
+        range(bout.playerlen, function(n) {  /* 临死求救 */
+            console.log(":向", bout.player[(pltar_pos+n)%bout.playerlen].nickname, "求救中.");
+            save_opt.push(new sgs.Operate("桃", 
+                                             plsrc,
+                                             bout.player[(pltar_pos+n)%bout.playerlen]));
+        });
+        bout.choice = save_opt;
+    };
+
+    sgs.interpreter.response_card = (function(action_execute, ask_peach){ return function(bout, opt) {
         /* 用户相应南蛮,万箭,临死求桃等动作时出的卡牌 */
         var plsrc = opt.source,
             pltar = opt.target,
@@ -153,14 +198,12 @@ var sgs = sgs || {};
                         case "无懈可击":
                             console.log(choice_bot.target.nickname, "表示没有无懈");
                             if(last_choice) {
-                                if(opt_top.data.name == "乐不思蜀") {
-                                    var judge_card = bout.card.shift(); 
-                                    bout.notify("judge_card", pltar, judge_card);
-                                    console.log("乐不思蜀判定--", judge_card.color);
-                                    if(judge_card.color != 1) { 
-                                        pltar.status["lebusishu"] = true;
-                                    }
-                                }
+                                action_execute(bout, opt_top);
+                                /*if(opt_top.data.name == "乐不思蜀") {
+                                    action_execute("乐不思蜀", bout, opt_top);    
+                                } else if(opt_top.data.name == "无中生有") {
+                                    action_execute("无中生有", bout, opt_top);
+                                }*/
                             }
                             break;
                         case "闪":
@@ -173,14 +216,7 @@ var sgs = sgs || {};
                                 pltar.blood--;
                                 
                                 if(pltar.blood < 1) {
-                                    var pltar_pos = bout.playernum[pltar.nickname], save_opt = [];
-                                    range(bout.playerlen, function(n) {  /* 临死求救 */
-                                        console.log(":向", bout.player[(pltar_pos+n)%bout.playerlen].nickname, "求救中.");
-                                        save_opt.push(new sgs.Operate("桃", 
-                                                                         plsrc,
-                                                                         bout.player[(pltar_pos+n)%bout.playerlen]));
-                                    });
-                                    bout.choice = save_opt;
+                                    ask_peach(bout, plsrc, pltar);
                                 };
                                 console.log(_("{0} 扣一滴血,还剩下{1}滴血", pltar.nickname, pltar.blood));
                             }
@@ -191,9 +227,10 @@ var sgs = sgs || {};
         }
         
         bout.continue();
-    };
+    } })(sgs.interpreter.action_execute,
+         sgs.interpreter.ask_peach);
 
-    sgs.interpreter.choice_card = (function(ask_wuxie){ return function(bout, opt) {
+    sgs.interpreter.choice_card = (function(action_execute, ask_wuxie){ return function(bout, opt) {
         var plsrc = opt.source,
             pltar = opt.target,
             card = opt.data;
@@ -222,19 +259,20 @@ var sgs = sgs || {};
                     pltar.be_decision.push(opt);
                     break;
                 case "无中生有":
-                    may_wuxie = ask_wuxie(bout, bout.playernum[pltar.nickname]);
+                    may_wuxie = ask_wuxie(bout, pltar);
                     if(!may_wuxie) {
-                        bout.notify("apply_card", plsrc, pltar, card);
-                        var cards = bout.cards.split(0, 2);
-                        //TODO
+                        action_execute(bout, opt);
+                    } else {
+                        bout.opt.push(opt);   
                     }
                     break;
             }
         }
         bout.continue();
-    } })(sgs.interpreter.ask_wuxie);
+    } })(sgs.interpreter.action_execute,
+         sgs.interpreter.ask_wuxie);
 
-    sgs.interpreter.decision = (function(ask_wuxie){ return function(bout, pltar, opt) {
+    sgs.interpreter.decision = (function(action_execute, ask_wuxie){ return function(bout, pltar, opt) {
         var plsrc = opt.source,
             card = opt.data,
             may_wuxie = false;
@@ -242,20 +280,16 @@ var sgs = sgs || {};
         switch(card.name) {
             case "乐不思蜀":
                 bout.opt.push(new sgs.Operate("乐不思蜀", plsrc, pltar, card));
-                may_wuxie = ask_wuxie(bout, bout.playernum[pltar.nickname]); 
+                may_wuxie = ask_wuxie(bout, pltar); 
                 
                 if(!may_wuxie){
-                    var judge_card = bout.card.shift(); 
-                    bout.notify("judge_card", pltar, judge_card);
-                    console.log("乐不思蜀判定--", judge_card.color);
-                    if(judge_card.color != 1) { 
-                        pltar.status["lebusishu"] = true;
-                    }
+                    action_execute(bout, opt); 
                 }
                 break;
         }
         return bout.continue();
-    } })(sgs.interpreter.ask_wuxie);
+    } })(sgs.interpreter.action_execute,
+         sgs.interpreter.ask_wuxie);
 
     sgs.interpreter.judge = function(bout) {
         var idens = bout.live_body_identity(),
@@ -282,18 +316,4 @@ var sgs = sgs || {};
         return;
     };
          
-    sgs.commend_mapping = {
-        "杀": function(bout, opt) {
-
-        },
-        "选择杀": function(bout, opt) {
-
-        },
-        "闪": function(bout, opt) {
-
-        },
-        "逃": function(bout, opt) {
-
-        },
-    };
 })(window.sgs);

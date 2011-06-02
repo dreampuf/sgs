@@ -440,9 +440,9 @@ var sgs = sgs || {};
         
         console.log(pl.nickname, "弃牌了");
         if(pl.blood < pl.card.length){
-            cards = opt && opt.data && opt.data["card"];
+            cards = opt && opt.data;
             if(!cards) {
-                return new sgs.Operate("弃牌", undefined, pl, {"num": pl.card.length - pl.blood});
+                return new sgs.Operate("弃牌", undefined, pl, pl.card.length - pl.blood);
             } else {
                 pl.card = sub(pl.card, cards); 
             }

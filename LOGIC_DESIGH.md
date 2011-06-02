@@ -41,7 +41,7 @@
 
 - 事件
 
-  **get\_card(Player, Card[])** 玩家拿牌.
+  **get\_card(Player, Card[])** 玩家获得牌.
 
 ### 出牌
 

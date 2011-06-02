@@ -130,7 +130,8 @@ var _ = sgs.func.format,
             plstatus = pl.status,
             bout = this.bout,
             use = false,
-            cards = pl.card;
+            cards = pl.card,
+            be_use_card;
 
         /* 有装备就装备 */
         var equips = filter(cards, function(i) { return EQUIP_TYPE_MAPPING[i.name] != undefined; });
@@ -144,13 +145,22 @@ var _ = sgs.func.format,
         /* 缺血有桃就桃 */
         var peachs = filter(cards, function(i) { return i.name == "桃"; });
         if(peachs.length && pl.blood < pl.hero.life) {
-            bout.choice_card(new sgs.Operate("桃", pl, pl, peachs[0]));    
-            return ;
+            return bout.choice_card(new sgs.Operate("桃", pl, pl, peachs[0]));    
+        }
+
+        /* 非伤害性锦囊 */
+        each(cards, function(n, i) {
+            if(["无中生有", "桃园结义", "五谷丰登"].indexOf(i.name) != -1) {
+                be_use_card = i;
+                return false;
+            }
+        });
+        if(be_use_card) {
+            return bout.choice_card(new sgs.Operate(be_use_card.name, pl, pl, be_use_card));
         }
 
         /* 使用锦囊 */
-        var be_use_card;
-            pls_rela = attack_deviation(bout, pl),
+        var pls_rela = attack_deviation(bout, pl),
             pls_max = max(pls_rela),
             pltar = bout.player[pls_rela.indexOf(pls_max)];
         
@@ -183,11 +193,11 @@ var _ = sgs.func.format,
         /* 简单AI 啥也不做 */
         opt = bout.discard(new sgs.Operate("弃牌", this.player));
         while(opt) { 
-            console.log("需要弃牌", opt.data["num"], "张");
+            console.log("需要弃牌", opt.data, "张");
             opt = bout.discard(new sgs.Operate("弃牌", 
                                          this.player,
                                          undefined, 
-                                         {"card": choice(this.player.card, opt.data["num"]) }));
+                                         choice(this.player.card, opt.data)));
         }
     }; 
 })(window.sgs);
