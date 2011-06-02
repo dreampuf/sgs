@@ -125,6 +125,7 @@
         if(cardDom.onDrag)
             return true;
         
+        document.body.onDragDom = cardDom;
         cardDom.mousedown = true;
         cardDom.mouse_left = e.clientX; /* 鼠标按下时的位置 */
         cardDom.mouse_top = e.clientY;
@@ -132,8 +133,8 @@
         cardDom.first_top = $(this).offset().top - $('#cards').offset().top;
     };
     sgs.animation.Mouse_Move = function(e) {
-        var cardDom = e.currentTarget;
-        if(!cardDom.mousedown)
+        var cardDom = document.body.onDragDom;
+        if(cardDom == undefined || !cardDom.mousedown)
             return true;
         
         cardDom.onDrag = true;
@@ -150,6 +151,7 @@
         if(!cardDom.onDrag)
             return true;
         
+        cardDom.onRevert = true; /* 避免重复执行下面的动画 */
         $(cardDom).css('z-index', '0');
         $(cardDom).animate({
             left: cardDom.first_left,
@@ -158,19 +160,15 @@
     };
     
     /* 卡牌动画 sgs.animation.Card_Flash(sgs.interface.bout.player[1], new sgs.Card('杀', 3, 13)) */
-    sgs.animation.Card_Flash = function(player, card) {
+    sgs.animation.Card_Flash = function(player, name) {
+        if(sgs.interface.EFFECT_IMG_MAPPING[name] == undefined)
+            return;
         var img,
             targetLeft,
             targetTop,
             player_dom = player.dom;
-        if(card.name == '杀') {
-            img = $('<img src="img/system/killer.png" />');
-            //img = $('<img src="img/system/slash.png" />');
-        } else if(card.name == '闪') {
-            img = $('<img src="img/system/jink.png" />');
-        } else if(card.name == '桃') {
-            img = $('<img src="img/system/peach.png" />');
-        }
+        
+        img = $('<img src="' + sgs.interface.EFFECT_IMG_MAPPING[name] + '" />');
         img.appendTo(document.body);
         if(player.dom == $('#player')[0]) {
             targetLeft = $(player_dom).offset().left + ($(player_dom).width() - img.width()) / 2;
@@ -187,7 +185,9 @@
         });
         img.animate({ opacity: 1 }, 50);
         setTimeout(function() {
-            img.animate({ opacity: 0 }, 200, function() { img.remove(); });
+            img.animate({ opacity: 0 }, 200, function() {
+                img.remove();
+            });
         }, 2000);
     };
     
@@ -260,7 +260,8 @@
     /* 出牌动画 sgs.animation.Play_Card(sgs.interface.bout.player[1], sgs.interface.bout.player[1].card[0]) */
     sgs.animation.Play_Card = function(player, cards) {
         cards = cards instanceof Array ? cards : [cards];
-        var flash = function(dom) {
+        var flash = function(dom, name, d) {
+            sgs.animation.Card_Flash(player, name);
             $(dom).animate({
                 left: $('#main').offset().left + $('#main').width() / 2 - cardInfo.width / 2,
                 top: $('#main').offset().top + $('#main').height() / 2 - cardInfo.height / 2,
@@ -269,6 +270,10 @@
                     $(dom).animate({
                         opacity: 0,
                     }, 500, function() {
+                        if(dom.card != undefined) {
+                            delete dom.card.dom;
+                            delete dom.card;
+                        }
                         $(dom).remove();
                     });
                 }, 3000);
@@ -277,7 +282,7 @@
         if(player == $('#player')[0].player) {
             drag_out(cards);
             $.each(cards, function(i, d) {
-                flash(d.dom);
+                flash(d.dom, d.name, d);
             });
             sgs.animation.Arrange_Card(player.card);
         } else {
@@ -289,7 +294,7 @@
                     left: ($(player.dom).offset().left + 20) + 'px',
                     top: ($(player.dom).offset().top + 10) + 'px',
                 });
-                flash(cardImg[0]);
+                flash(cardImg[0], d.name);
             });
         }
     };
@@ -425,7 +430,7 @@
                 if($(this).find('.role_name').text() == nickname) {
                     var leftNum = parseInt($(this).css('left'));
                     $(this).animate({ left: leftNum - 3 }, 50).animate({ left: leftNum }, 50);
-                    $(this).find('.blods_1 img').last().remove();
+                    delete $(this).find('.blods_1 img').last();
                 }
             });
         } else {

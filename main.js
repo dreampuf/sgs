@@ -14,12 +14,12 @@
             $('#player_cover').css('display', 'none');
             $('#abandon').css('display', 'block');
         };
-        /* 到弃牌阶段 *//*
+        /* 到弃牌阶段 */
         player.discard = function() {
             $.each($('.player_card .select_unable'), function(i, d) {
                 d.css('display', 'none');
             });
-        };*/
+        };
     };
     
     var bin_event = function() { /* 绑定事件 */
@@ -31,6 +31,12 @@
             }
         });
         sgs.interface.bout.attach("equip_on", sgs.animation.Equip_Equipment);
+        sgs.interface.bout.attach("choice_card", function(player, targets, cards) {
+            sgs.animation.Play_Card(player, cards);
+        });
+        sgs.interface.bout.attach("apply_card", function(player, targets, cards) {
+            sgs.animation.Play_Card(player, cards);
+        });
     };
     
     /* 游戏开始 */
@@ -44,10 +50,10 @@
         
         identity = sgs.Bout.get_identity(player_count); /* 第0个表示玩家身份 */
         
-        identity[0] = 0;
-        identity[1] = 2;
+        identity[0] = 1;
+        identity[1] = 0;
         identity[2] = 3;
-        identity[3] = 1;
+        identity[3] = 2;
         
         for(var i = 0; i < player_count; i++) {
             players.push({
@@ -168,8 +174,8 @@
     /* 拖动 */
     $('.player_card').live('dragstart', function() { return false; });
     $('.player_card').live('mousedown', sgs.animation.Mouse_Down);
-    $('.player_card').live('mousemove', sgs.animation.Mouse_Move);
-    $('.player_card').live('mouseup mouseout', sgs.animation.Mouse_Up);/* mouseout 防止拖动过快 */
+    $(document.body).bind('mousemove', sgs.animation.Mouse_Move);
+    $('.player_card').live('mouseup', sgs.animation.Mouse_Up);/* mouseout 防止拖动过快 */
     
     /* 选择目标 */
     $('.role').click(function(e) {

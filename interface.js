@@ -15,6 +15,15 @@
         "name": {  0: "主公", 1: "忠臣", 2: "内奸", 3: "反贼" }
     };
     
+    sgs.interface.EFFECT_IMG_MAPPING = {
+        "杀": "img/system/killer.png",
+        "闪": "img/system/jink.png",
+        "桃": "img/system/peach.png",
+        "决斗": "img/system/duel-b.png",
+        "无懈可击": "img/system/nullification.png",
+        "闪电": "img/system/lightning.png",
+    };
+    
     sgs.interface.COUNTRY_IMG_MAPPING = {
         "魏": "img/system/country/wei.png",
         "蜀": "img/system/country/shu.png",
