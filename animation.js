@@ -10,13 +10,13 @@
     var get_card = function(cards) {
         $(cards).each(function(i, d) {
             var pattern = d.color,
-                color = sgs.interface.CARD_COLOR_NUM_MAPPING.color[pattern],
+                color = sgs.CARD_COLOR_NUM_MAPPING.color[pattern],
                 num = d.digit,
-                numStr = sgs.interface.CARD_COLOR_NUM_MAPPING.number[num],
+                numStr = sgs.CARD_COLOR_NUM_MAPPING.number[num],
                 img = $(['<div class="player_card"><img src="',
                         sgs.CARDIMAG_MAPING[d.name], '" /><div class="pat_num" style="color:',
                         color, ';"><span class="pattern"><img src="',
-                        sgs.interface.PATTERN_IMG_MAPPING[pattern], '" /></span><span class="num">',
+                        sgs.PATTERN_IMG_MAPPING[pattern], '" /></span><span class="num">',
                         numStr, '</span></div><div class="select_unable"></div></div>'].join('')),
                 left = $('#cards_last').offset().left,
                 top = $('#cards_last').offset().top;
@@ -42,6 +42,12 @@
             temp.css({ left: left, top: top });
             temp.css('position', 'absolute');
         });
+    };
+    
+    /* 播放声音 */
+    var play_sound = function(src) {
+        $('#sound').attr('src', src);
+        $('#sound')[0].play();
     };
     
     /* 选牌 */
@@ -77,17 +83,14 @@
                 $(d).animate({ 'top': '0px' }, 100);
             }
         });
-        
-        /* 取消选中卡牌时不需要进行下一步 */
-        if(!cardDom.card.selected)
+        if(!cardDom.card.selected)/* 取消选中卡牌时不需要进行下一步 */
             return;
         
         var selectCard = cardDom.card,
             player = $('#player')[0].player;
         player.targets = sgs.interface.bout.select_card(new sgs.Operate(selectCard.name, player, undefined, selectCard));
-        player.targets.selected = []; /* 已选目标列表 */
-        /* 设置目标可选状态 */
-        $('.role .role_cover').each(function(i, d) {
+        player.targets.selected = [];/* 已选目标列表 */
+        $('.role .role_cover').each(function(i, d) {/* 设置目标可选状态 */
             $(d).css('display', 'block');
         });
         $.each(player.targets[0], function(i, d) {
@@ -97,24 +100,22 @@
                 }
             });
         });
-        
-        /* 如果是对自己使用的卡牌则激活“确定”按钮 */
-        if(player.targets[0][0] == $('#player')[0].player)
+        if(player.targets[0][0] == $('#player')[0].player)/* 如果是对自己使用的卡牌则激活“确定”按钮 */
             $('#ok').css('display', 'block');
     };
     
     /* 拖动 */
     /*
      * 用判断mousemove时鼠标是否按下来判断是否为拖动
-     * 1. mousedown
+     * 1. mousedown           card.dom
      *   鼠判断是否处于拖动状态(包括返回动画):
      *   - 是则不作任何操作;
      *   - 不是处于拖动状态则设置dom的mousedown属性为true;
-     * 2. mousemove
+     * 2. mousemove           document.body
      *   判断鼠标是否按下:
      *   - 不是则不作任何操作;
      *   - 是按下的则执行拖动;
-     * 3. mouseup
+     * 3. mouseup             card.dom
      *   判断是否处于拖动状态, 设置dom的mousedown属性为false:
      *   - 不是则不作任何操作;
      *   - 是则结束拖动;
@@ -159,31 +160,44 @@
         }, 500, function() { cardDom.onDrag = false; });
     };
     
-    /* 卡牌动画 sgs.animation.Card_Flash(sgs.interface.bout.player[1], new sgs.Card('杀', 3, 13)) */
+    /* 卡牌动画 sgs.animation.Card_Flash(sgs.interface.bout.player[1], '杀') */
     sgs.animation.Card_Flash = function(player, name) {
-        if(sgs.interface.EFFECT_IMG_MAPPING[name] == undefined)
+        if(sgs.EFFECT_IMG_MAPPING[name] == undefined)
             return;
         var img,
+            img2,
             targetLeft,
             targetTop,
             player_dom = player.dom;
         
-        img = $('<img src="' + sgs.interface.EFFECT_IMG_MAPPING[name] + '" />');
+        img = $('<img src="' + sgs.EFFECT_IMG_MAPPING[name] + '" />');
+        img2 = $('<img src="' + sgs.EFFECT_IMG_MAPPING[name] + '" />');
         img.appendTo(document.body);
-        if(player.dom == $('#player')[0]) {
-            targetLeft = $(player_dom).offset().left + ($(player_dom).width() - img.width()) / 2;
+        targetLeft = $(player_dom).offset().left + ($(player_dom).width() - img.width()) / 2;
+        if(player.dom == $('#player')[0]) 
             targetTop = $(player_dom).offset().top - img.height() / 2;
-        } else {
-            targetLeft = $(player_dom).offset().left + ($(player_dom).width() - img.width()) / 2;
+        else
             targetTop = $(player_dom).offset().top + ($(player_dom).height() - img.height()) / 2;
-        }
         img.css({
             position: 'absolute',
             left: targetLeft,
             top: targetTop,
             opacity: 0,
         });
-        img.animate({ opacity: 1 }, 50);
+        img.animate({ opacity: 1 }, 50, function() {
+            img2.appendTo(document.body).css({
+                position: 'absolute',
+                left: targetLeft,
+                top: targetTop,
+                opacity: 1,
+            }).animate({
+                opacity: 0,
+                width: img.width() * 2,
+                height: img.height() * 2,
+                left: targetLeft - img.width() / 2,
+                top: targetTop - img.height() / 2,
+            }, 200, function() { img2.remove() });
+        });
         setTimeout(function() {
             img.animate({ opacity: 0 }, 200, function() {
                 img.remove();
@@ -262,6 +276,7 @@
         cards = cards instanceof Array ? cards : [cards];
         var flash = function(dom, name, d) {
             sgs.animation.Card_Flash(player, name);
+            play_sound(sgs.SOUND_FILE_MAPPING.card[name][player.hero.gender]);
             $(dom).animate({
                 left: $('#main').offset().left + $('#main').width() / 2 - cardInfo.width / 2,
                 top: $('#main').offset().top + $('#main').height() / 2 - cardInfo.height / 2,
@@ -323,17 +338,18 @@
             });
             
             var equip_id = type == 0 ? '.attack' : (type == 1 ? '.defend' : (type == 2 ? '.attack_horse' : '.defend_horse')),
-                characher_mapping = sgs.interface.NUMBER_CHARACHER_MAPPING,
-                number_mapping = sgs.interface.CARD_COLOR_NUM_MAPPING.number,
-                pattern_img = sgs.interface.PATTERN_IMG_MAPPING;
+                characher_mapping = sgs.NUMBER_CHARACHER_MAPPING,
+                number_mapping = sgs.CARD_COLOR_NUM_MAPPING.number,
+                pattern_img = sgs.PATTERN_IMG_MAPPING;
             console.log(card);
             $(player.dom).find(equip_id).html(['<img src="',
-                    sgs.interface.WEAPON_ICON_MAPPING[type], '" style="width:13px; height:13px; position:absolute; left:0;" /><font style="position:absolute; left:18px;">',
+                    sgs.WEAPON_ICON_MAPPING[type], '" style="width:13px; height:13px; position:absolute; left:0;" /><font style="position:absolute; left:18px;">',
                     type == 2 ? '+1' : (type == 3 ? '-1' : characher_mapping[sgs.EQUIP_RANGE_MAPPING[card.name]]), '</font><font>',
                     card.name, '</font><font style="position:absolute; right:18px; line-height:15px;">',
                     number_mapping[card.digit], '</font><img src="',
                     pattern_img[type], '" style="width:11px; height:11px; position:absolute; top:1px; right:2px;"/>'
                 ].join(''));
+            play_sound(sgs.SOUND_FILE_MAPPING.equipment[type]);
             $(player.dom).find('.card_count span').text(($(player.dom).find('.card_count span').text() | 0) - 1);
         }
         /*
@@ -370,8 +386,8 @@
          * name      - 技能（或英雄）名称
          * isHero    - 是否为英雄
          */
-        var hero_prop = sgs.interface.HERO_PROPERTY_MAPPING;
-            skill_exp = sgs.interface.SKILL_EXPLANATION_MAPPING;
+        var hero_prop = sgs.HERO_PROPERTY_MAPPING;
+            skill_exp = sgs.SKILL_EXPLANATION_MAPPING;
             explanation = '',
             targetLeft = (clientX + $('#explanation').width()) > $(window).width() ?
                         clientX - $('#explanation').width() : clientX,

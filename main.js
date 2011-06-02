@@ -13,6 +13,8 @@
         player.choice_card = function() {
             $('#player_cover').css('display', 'none');
             $('#abandon').css('display', 'block');
+            sound.src = 'sound/system/your-turn.ogg';
+            sound.play();
         };
         /* 到弃牌阶段 */
         player.discard = function() {
@@ -94,7 +96,7 @@
         sgs.interface.Show_CardChooseBox(
             '选择您的武将',
             player_heros,
-            '你的身份是 - ' + sgs.interface.IDENTITY_INDEX_MAPPING.name[identity[0]]);
+            '你的身份是 - ' + sgs.IDENTITY_INDEX_MAPPING.name[identity[0]]);
     });
     
     /* 选择英雄 */
@@ -301,7 +303,7 @@
                 $(this).append($('<span style="display:none;"></span>'));
             $(this).find('img').attr('src', 'img/none.png');
         } else if($(this).find('span').length != 0) {
-            $(this).find('img').attr('src', sgs.interface.IDENTITY_IMG_MAPPING[0]);
+            $(this).find('img').attr('src', sgs.IDENTITY_IMG_MAPPING[0]);
         } else {
             $(this).find('img').attr('src', 'img/system/none.png');
             var target = $(this).next('.role_identity_select');
