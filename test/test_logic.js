@@ -55,6 +55,11 @@ test("Func", function(){
     deepEqual(sgs.func.and([1,2,3,4], [2,3,4,5,6]), [2,3,4], "sgs.func.and");
     deepEqual(sgs.func.or([1,2,3,4], [3,4,5,6,7]), [1,2,3,4,5,6,7], "sgs.func.or");
     deepEqual(sgs.func.sub([1,2,3,4,5], [1,3,4]), [2,5], "sgs.func.sub");
+
+    equal(sgs.func.all([2, 4, 6, 8, 10], function(i){ return i%2 == 0; }), true, "sgs.func.all");
+    equal(sgs.func.all([1, 3, 5, 6], function(i){ return i%2 != 0; }), false, "sgs.func.all");
+    equal(sgs.func.any([1,2,3,4,5,6], function(i){ return i == 3; }), true, "sgs.func.any");
+    equal(sgs.func.any([1,2,3,4,5,6], function(i){ return i == 7; }), false, "sgs.func.any");
 });
 
 test("Stage", function(){
@@ -124,7 +129,6 @@ test("AI_1v1", function(){
         about;
 
     heros[0] = filter(sgs.HERO, function(i) { return i.name == "甄姬"; })[0];
-    console.log(heros);
     range(2, function(n) {
         players.push(new sgs.Player(heros[n].name,
                                     idens[n],
@@ -132,7 +136,20 @@ test("AI_1v1", function(){
                                     true));
     });
     about = new sgs.Bout(players); 
-    //setInterval(function(){
-    //    console.log(about.card.length);
-    //}, 2000);
+});
+
+test("AI_1v1v1", function(){ 
+    var idens = sgs.Bout.get_identity(3),
+        heros = sgs.Bout.get_hero(3),
+        players = [],
+        about;
+
+    //heros[0] = filter(sgs.HERO, function(i) { return i.name == "甄姬"; })[0];
+    range(3, function(n) {
+        players.push(new sgs.Player(heros[n].name,
+                                    idens[n],
+                                    heros[n],
+                                    true));
+    });
+    about = new sgs.Bout(players); 
 });

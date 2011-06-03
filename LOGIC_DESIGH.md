@@ -30,18 +30,28 @@
 ## 游戏循环操作
 
 ### 判定
+
+- 事件
+
+  **skill(SkillType, ARGS..)** 技能,技能参数对应下表. 
+    {"洛神": (Player, Card, Success),
+    } 
+
 ### 摸牌
 
 - 事件
 
-  **get\_card(Player, Card[])** 玩家拿牌.
+  **get\_card(Player, Card[])** 玩家获得牌.
 
 ### 出牌
 
 - 事件
 
-  **equip\_on(Player, Card, EquipType)** 玩家装备装备.
-  **choice\_card(PlayerSource, PlayerTarget or PlayerTarget[], Card)** 源目标对目标使用卡牌. 
+  **equip\_on(Player, Card, EquipType)** 玩家装备装备.  
+  **choice\_card(PlayerSource, PlayerTarget or PlayerTarget[], Card)** 源目标对目标使用卡牌.  
+  **apply\_card(PlayerSource, PlayerTarget or PlayerTarget[], Card)** 源目标对目标使用卡牌成功.  
+  **judge\_card(Player, Card)** 对玩家进行卡牌判定.
+
 
 ### 弃牌 
 

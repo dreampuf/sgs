@@ -37,7 +37,7 @@
             sgs.animation.Play_Card(player, cards);
         });
         sgs.interface.bout.attach("apply_card", function(player, targets, cards) {
-            sgs.animation.Play_Card(player, cards);
+            //sgs.animation.Play_Card(player, cards);
         });
     };
     
