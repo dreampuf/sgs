@@ -77,31 +77,6 @@ var sgs = sgs || {};
         return [choiceable_pl, choiceable_num];
     };
 
-    sgs.interpreter.action_execute = function(bout, opt) {
-        var plsrc = opt.source,
-            pltar = opt.target,
-            card = opt.data,
-            commend_type = card.name;
-
-        switch(commend_type) {
-            case "乐不思蜀":
-                var judge_card = bout.card.shift(); 
-                bout.notify("judge_card", pltar, judge_card);
-                console.log("乐不思蜀判定--", judge_card.color);
-                if(judge_card.color != 1) { 
-                    bout.notify("apply_card", plsrc, pltar, card);
-                    pltar.status["lebusishu"] = true;
-                }
-                break;
-            case "无中生有": 
-                bout.notify("apply_card", plsrc, pltar, card);
-                var cards = bout.card.splice(0, 2);
-                bout.notify("get_card", pltar, cards);
-                pltar.card = pltar.card.concat(cards);
-                break;
-        }
-    };
-
     sgs.interpreter.ask_wuxie = function(bout, pltar) {
         /*
          * 为锦囊询问无懈可击
@@ -133,7 +108,9 @@ var sgs = sgs || {};
          * plsrc: 临死对象
          * pltar: 造成伤害对象
          * */
-        var pltar_pos = bout.playernum[pltar.nickname], save_opt = [];
+        var 
+            pltar_pos = bout.playernum[pltar.nickname], 
+            save_opt = [];
         range(bout.playerlen, function(n) {  /* 临死求救 */
             console.log(":向", bout.player[(pltar_pos+n)%bout.playerlen].nickname, "求救中.");
             save_opt.push(new sgs.Operate("桃", 
@@ -142,6 +119,45 @@ var sgs = sgs || {};
         });
         bout.choice = save_opt;
     };
+
+    sgs.interpreter.action_execute = (function(ask_peach){ return function(bout, opt) {
+        var plsrc = opt.source,
+            pltar = opt.target,
+            card = opt.data;
+
+        switch(card.name) {
+            case "乐不思蜀":
+                var judge_card = bout.card.shift(); 
+                bout.notify("judge_card", pltar, judge_card);
+                console.log("乐不思蜀判定--", judge_card.color);
+                if(judge_card.color != 1) { 
+                    bout.notify("apply_card", plsrc, pltar, card);
+                    pltar.status["lebusishu"] = true;
+                }
+                break;
+            case "无中生有": 
+                bout.notify("apply_card", plsrc, pltar, card);
+                var cards = bout.card.splice(0, 2);
+                bout.notify("get_card", pltar, cards);
+                pltar.card = pltar.card.concat(cards);
+                break;
+            case "闪电":
+                var judge_card = bout.card.shift();
+                bout.notify("judge_card", pltar, judge_card);
+                console.log("闪电判定--", judge_card.color);
+                if(judge_card.color == 3 && judge_card.digit >= 2 && judge_card.digit <= 9) { 
+                    bout.notify("apply_card", plsrc, pltar, card);
+                    
+                    pltar.blood -= 3;
+                    console.log(_("天要下雨,娘要嫁人.你这福分,有幸三生.坑爹阿,遭雷劈啦!"));
+                    
+                    if(pltar.blood < 1) {
+                        ask_peach(bout, pltar, plsrc);  
+                    }
+                }
+                break;
+        }
+    } })(sgs.interpreter.ask_peach);
 
     sgs.interpreter.response_card = (function(action_execute, ask_peach){ return function(bout, opt) {
         /* 用户相应南蛮,万箭,临死求桃等动作时出的卡牌 */
@@ -175,7 +191,8 @@ var sgs = sgs || {};
                             bout.choice = exclude(bout.choice, 
                                                   function(i) { return i.id == "桃" && i.target == pltar; });
                         }
-                        bout.choice.pop();
+                        //可能还需要桃
+                        //bout.choice.pop();
                         break;
                     case "闪":
                         bout.opt = [];
@@ -197,13 +214,8 @@ var sgs = sgs || {};
                             break;
                         case "无懈可击":
                             console.log(choice_bot.target.nickname, "表示没有无懈");
-                            if(last_choice) {
+                            if(last_choice) { /* 如果是最后一次请求无懈可击.则进行原来卡牌的判定 */
                                 action_execute(bout, opt_top);
-                                /*if(opt_top.data.name == "乐不思蜀") {
-                                    action_execute("乐不思蜀", bout, opt_top);    
-                                } else if(opt_top.data.name == "无中生有") {
-                                    action_execute("无中生有", bout, opt_top);
-                                }*/
                             }
                             break;
                         case "闪":
@@ -216,7 +228,7 @@ var sgs = sgs || {};
                                 pltar.blood--;
                                 
                                 if(pltar.blood < 1) {
-                                    ask_peach(bout, plsrc, pltar);
+                                    ask_peach(bout, pltar, plsrc);
                                 };
                                 console.log(_("{0} 扣一滴血,还剩下{1}滴血", pltar.nickname, pltar.blood));
                             }
@@ -252,10 +264,16 @@ var sgs = sgs || {};
                     break;
                 case "桃":
                     bout.notify("apply_card", plsrc, pltar, card);
-                    pltar.blood++;
-                    console.log(_("{0} 恢复一滴血,还剩下{1}滴血", pltar.nickname, pltar.blood));
+                    if(pltar.blood < pltar.hero.life) {
+                        pltar.blood++;
+                        console.log(_("{0} 恢复一滴血,还剩下{1}滴血", pltar.nickname, pltar.blood));
+                    }
                     break;
                 case "乐不思蜀":
+                    pltar.be_decision.push(opt);
+                    break;
+                case "闪电":
+                    opt.has_init = false;
                     pltar.be_decision.push(opt);
                     break;
                 case "无中生有":
@@ -285,6 +303,9 @@ var sgs = sgs || {};
                 if(!may_wuxie){
                     action_execute(bout, opt); 
                 }
+                break;
+            case "闪电":
+                //TODO
                 break;
         }
         return bout.continue();

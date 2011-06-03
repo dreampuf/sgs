@@ -150,7 +150,7 @@ var _ = sgs.func.format,
 
         /* 非伤害性锦囊 */
         each(cards, function(n, i) {
-            if(["无中生有", "桃园结义", "五谷丰登"].indexOf(i.name) != -1) {
+            if(["无中生有", "桃园结义", "五谷丰登", "闪电"].indexOf(i.name) != -1) {
                 be_use_card = i;
                 return false;
             }

@@ -136,7 +136,20 @@ test("AI_1v1", function(){
                                     true));
     });
     about = new sgs.Bout(players); 
-    //setInterval(function(){
-    //    console.log(about.card.length);
-    //}, 2000);
+});
+
+test("AI_1v1v1", function(){ 
+    var idens = sgs.Bout.get_identity(3),
+        heros = sgs.Bout.get_hero(3),
+        players = [],
+        about;
+
+    //heros[0] = filter(sgs.HERO, function(i) { return i.name == "甄姬"; })[0];
+    range(3, function(n) {
+        players.push(new sgs.Player(heros[n].name,
+                                    idens[n],
+                                    heros[n],
+                                    true));
+    });
+    about = new sgs.Bout(players); 
 });
