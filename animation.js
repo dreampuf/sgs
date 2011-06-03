@@ -153,7 +153,7 @@
             return true;
         
         cardDom.onRevert = true; /* 避免重复执行下面的动画 */
-        $(cardDom).css('z-index', '0');
+        $(cardDom).css('z-index', '10');
         $(cardDom).animate({
             left: cardDom.first_left,
             top: cardDom.first_top

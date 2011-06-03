@@ -230,6 +230,7 @@
     $('#ok').mouseup(function(e) {
         var player = $('#player')[0].player,
             selectedCard;
+        
         $('.player_card').each(function(i, d) {
             if(this.card.selected == true)
                 selectedCard = this.card;
