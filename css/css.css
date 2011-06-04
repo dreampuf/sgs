@@ -1,0 +1,133 @@
+﻿img
+{
+    border:none;
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+}
+
+#main
+{
+    position: relative;
+    float:top;
+    width: 1000px;
+    height: 620px;
+    margin: 0 auto;
+    padding: 1px;
+    border:1px solid #060100;
+    background: url("../img/system/page_bg.png");
+    display:none;
+    -moz-box-shadow:1px 1px 1px #000;
+    box-shadow:1px 1px 1px #000;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+/***** 游戏开始按钮 *****/
+#game_start
+{
+    display: block;
+    text-align:center;
+    width:100px;
+    line-height:20px;
+    margin-top:50px;
+    cursor: pointer;
+    border: 2px solid #000;
+    padding: 5px;
+
+}
+
+/* 游戏输出信息 */
+#gameinfo
+{
+    position: absolute;
+    left: 260px;
+    top: 220px;
+    height: 180px;
+    width: 500px;
+}
+
+/* 打出去的牌 */
+#played_card_box
+{
+    position:absolute;
+    left:50%;
+    top:50%;
+}
+
+/***** 发牌区 *****/
+#cards_last
+{
+    position: absolute;
+    top: 240px;
+    right: 80px;
+    width: 104px;
+    height: 142px;
+}
+#cards_last img
+{
+    position:absolute;
+    width: 93px;
+    height: 131px;
+    border-radius:2px;
+    box-shadow:1px 1px 5px 1px #000;
+}
+
+
+
+/***** 解释（技能等） *****/
+#explanation
+{
+    position:fixed;
+    width:301px;
+    left:650px;
+    top:100px;
+    background:#000;
+    display:none;
+    color:#e4d5a0;
+    padding:8px 12px;
+    font-size:13px;
+    opacity:0.8;
+    -moz-box-shadow:2px 2px 2px #000;
+    box-shadow:2px 2px 2px #000;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+/* 数据加载 */
+#data_load
+{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display:none;
+}
+#data_load img
+{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+#data_load_perc
+{
+    font-size: 80px;
+    font-weight: bold;
+    position: absolute;
+    width: 200px;
+    height: 60px;
+    margin: auto;
+    top: 280px;
+    left: 400px;
+    line-height: 60px;
+    text-align: center;
+    color: #f7b257;
+    text-shadow: 2px 2px 2px #fff;
+}
+#load_imgs
+{
+    display: none;
+}
