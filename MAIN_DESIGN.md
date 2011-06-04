@@ -82,7 +82,7 @@
 
 
 
-过程中会添加的属性
+添加的属性
 =====================================
 
 sgs.Card
@@ -95,8 +95,10 @@ sgs.Card
 sgs.Player
 -------------
 
-    - dom           dom对象
-    - selected      是否被选中
+    - dom               dom对象
+    - selected          是否被选中
+    - stage             阶段
+    - last_select_count 剩余可选牌数
 
 
 

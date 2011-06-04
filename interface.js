@@ -9,9 +9,7 @@
     sgs.interface.HERO_PROPERTY_MAPPING = {};
     $.each(sgs.HERO, (function(hero_mapping) {
         return function(i, d) {
-            hero_mapping[d.name] = {
-                "skill": d.skills
-            };
+            hero_mapping[d.name] = { "skill": d.skills };
         }
     })(sgs.interface.HERO_PROPERTY_MAPPING));
 

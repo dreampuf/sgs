@@ -3,9 +3,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>三国杀</title>
-    <link type="text/css" href="css.css" rel="stylesheet" media="screen" />
-    <link type="text/css" href="choose_card.css" rel="stylesheet" media="screen" />
-    <link type="text/css" href="player.css" rel="stylesheet" media="screen" />
+    <link type="text/css" href="css/css.css" rel="stylesheet" media="screen" />
+    <link type="text/css" href="css/choose_card.css" rel="stylesheet" media="screen" />
+    <link type="text/css" href="css/player_others.css" rel="stylesheet" media="screen" />
+    <link type="text/css" href="css/player.css" rel="stylesheet" media="screen" />
     <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
     <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="logic_func.js"></script>
@@ -171,6 +172,8 @@
             <img class="player_progress" src="img/system/progress/big/progress.png" />
             <img class="player_progress_bg" src="img/system/progress/big/progress_border.png" />
         </div>
+        <!-- 打出去的牌 -->
+        <div id="played_card_box"></div>
         <!-- 玩家部分 Begin -->
         <div id="player">
             <!-- 装备区 Begin -->

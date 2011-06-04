@@ -313,11 +313,29 @@ sgs.COUNTRY_IMG_MAPPING = {
     "群": "img/system/country/qun.png"
 };
 
-sgs.WEAPON_ICON_MAPPING = {
-    0: "img/generals/weapons/icon/attack.png",
-    1: "img/generals/weapons/icon/defend.png",
-    2: "img/generals/weapons/icon/horse.png",
-    3: "img/generals/weapons/icon/horse.png",
+sgs.EQUIP_ICON_MAPPING = {
+    0: "img/generals/equipment/icon/attack.png",
+    1: "img/generals/equipment/icon/defend.png",
+    2: "img/generals/equipment/icon/horse.png",
+    3: "img/generals/equipment/icon/horse.png",
+};
+
+sgs.EQUIP_IMG_MAPPING = {
+    "贯石斧": "img/generals/equipment/axe.png",
+    "青龙偃月刀": "img/generals/equipment/blade.png",
+    "赤兔": "img/generals/equipment/chitu.png",
+    "诸葛连弩": "img/generals/equipment/crossbow.png",
+    "大宛": "img/generals/equipment/dayuan.png",
+    "的卢": "img/generals/equipment/dilu.png",
+    "雌雄双股剑": "img/generals/equipment/double_sword.png",
+    "八卦阵": "img/generals/equipment/eight_diagram.png",
+    "方天画戟": "img/generals/equipment/halberd.png",
+    "绝影": "img/generals/equipment/jueying.png",
+    "麒麟弓": "img/generals/equipment/kylin_bow.png",
+    "青釭剑": "img/generals/equipment/qinggang_sword.png",
+    "丈八蛇矛": "img/generals/equipment/spear.png",
+    "爪黄飞电": "img/generals/equipment/zhuahuangfeidian.png",
+    "紫骍": "img/generals/equipment/zixing.png",
 };
 
 sgs.DEAD_IDENTITY_MAPPING = {
@@ -366,6 +384,9 @@ sgs.SOUND_FILE_MAPPING = {
     },
     "death": {
         
+    },
+    "damage": {
+        "common": "sound/system/injure2.ogg",
     },
 };
     
@@ -470,6 +491,27 @@ sgs.IMG_LIST = [
     "img/generals/card/spear.png",
     "img/generals/card/zhuahuangfeidian.png",
     "img/generals/card/zixing.png",
+    "img/generals/equipment/axe.png",
+    "img/generals/equipment/blade.png",
+    "img/generals/equipment/border.png",
+    "img/generals/equipment/chitu.png",
+    "img/generals/equipment/crossbow.png",
+    "img/generals/equipment/dayuan.png",
+    "img/generals/equipment/dilu.png",
+    "img/generals/equipment/double_sword.png",
+    "img/generals/equipment/eight_diagram.png",
+    "img/generals/equipment/halberd.png",
+    "img/generals/equipment/jueying.png",
+    "img/generals/equipment/kylin_bow.png",
+    "img/generals/equipment/qinggang_sword.png",
+    "img/generals/equipment/spear.png",
+    "img/generals/equipment/zhuahuangfeidian.png",
+    "img/generals/equipment/zixing.png",
+    "img/generals/equipment/icon/arrow.png",
+    "img/generals/equipment/icon/attack.png",
+    "img/generals/equipment/icon/defend.png",
+    "img/generals/equipment/icon/horse.png",
+    "img/generals/equipment/icon/spear.png",
     "img/generals/hero/caocao.png",
     "img/generals/hero/daqiao.png",
     "img/generals/hero/diaochan.png",
@@ -522,27 +564,6 @@ sgs.IMG_LIST = [
     "img/generals/small/zhenji.png",
     "img/generals/small/zhouyu.png",
     "img/generals/small/zhugeliang.png",
-    "img/generals/weapons/axe.png",
-    "img/generals/weapons/blade.png",
-    "img/generals/weapons/border.png",
-    "img/generals/weapons/chitu.png",
-    "img/generals/weapons/crossbow.png",
-    "img/generals/weapons/dayuan.png",
-    "img/generals/weapons/dilu.png",
-    "img/generals/weapons/double_sword.png.png",
-    "img/generals/weapons/eight_diagram.png",
-    "img/generals/weapons/halberd.png",
-    "img/generals/weapons/jueying.png",
-    "img/generals/weapons/kylin_bow.png",
-    "img/generals/weapons/qinggang_sword.png",
-    "img/generals/weapons/spear.png",
-    "img/generals/weapons/zhuahuangfeidian.png",
-    "img/generals/weapons/zixing.png",
-    "img/generals/weapons/icon/arrow.png",
-    "img/generals/weapons/icon/attack.png",
-    "img/generals/weapons/icon/defend.png",
-    "img/generals/weapons/icon/horse.png",
-    "img/generals/weapons/icon/spear.png",
     "img/system/blod_0.png",
     "img/system/blod_1.png",
     "img/system/card_back.png",
