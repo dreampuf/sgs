@@ -318,7 +318,7 @@
     };
     
     /* 出牌动画 sgs.animation.Play_Card(sgs.interface.bout.player[1], sgs.interface.bout.player[1].card[0]) */
-    sgs.animation.Play_Card = function(player, cards) {
+    sgs.animation.Play_Card = function(player, targets, cards) {
         cards = cards instanceof Array ? cards : [cards];
         var flash = function(dom, name, index) {
             sgs.animation.Card_Flash(player, name); /* 效果动画 */

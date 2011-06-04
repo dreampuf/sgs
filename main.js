@@ -10,11 +10,15 @@
     
     var overwrite = function(player) { /* 重写玩家方法 */
         player.choice_card = function() {
-            $('#player_cover').css('display', 'none');
-            $('#abandon').css('display', 'block');
+            
             if(player.stage != 2) {
+                $('#player_cover').css('display', 'none');
+                $('#abandon').css('display', 'block');
                 $('#sound')[0].src = 'sound/system/your-turn.ogg';
                 $('#sound')[0].play();
+                $('.player_card .select_unable').each(function(i, d) {
+                    $(d).css('display', 'none');
+                });
                 player.stage = 2;
             }
         };
@@ -44,9 +48,7 @@
             }
         });
         sgs.interface.bout.attach("equip_on", sgs.animation.Equip_Equipment);
-        sgs.interface.bout.attach("choice_card", function(player, targets, cards) {
-            sgs.animation.Play_Card(player, cards);
-        });
+        sgs.interface.bout.attach("choice_card", sgs.animation.Play_Card);
         sgs.interface.bout.attach("apply_card", function(player, targets, cards) {
             targets = targets instanceof Array ? targets : [targets];
             switch(cards.name) {
@@ -164,12 +166,12 @@
                 d.card[0].name = '杀';
                 d.card[1].name = '杀';
                 d.card[2].name = '闪';
-                d.card[3].name = '闪';
+                d.card[3].name = '桃';
             } else {
                 d.card[0].name = '杀';
                 d.card[1].name = '杀';
                 d.card[2].name = '闪';
-                d.card[3].name = '闪';
+                d.card[3].name = '桃';
             }
         });
         
@@ -266,21 +268,9 @@
                     selectedCard = d.card;
             });
             if(player.targets[0][0] == player) {
-                switch(selectedCard.name) {
-                    case "桃园结义":
-                        break;
-                    default:
-                        var type = sgs.EQUIP_TYPE_MAPPING[selectedCard.name];
-                        if(type != undefined) {
-                            sgs.interface.bout.choice_card(new sgs.Operate(selectedCard.name, player, player, selectedCard));
-                        } else {
-                            
-                        }
-                        break;
-                }
+                sgs.interface.bout.choice_card(new sgs.Operate(selectedCard.name, player, player, selectedCard));
             } else {
                 sgs.interface.bout.choice_card(new sgs.Operate(selectedCard.name, player, player.selected_targets[0], selectedCard));
-                sgs.animation.Play_Card($('#player')[0].player, selectedCard);
             }
         } else if(player.stage == 3) {
             $.each(player.card, function(i, d) {
