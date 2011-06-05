@@ -259,24 +259,24 @@
     /* 确定按钮 */
     $('#ok').mouseup(function(e) {
         $(this).find('.hover').css('display', 'block');
-        var player = $('#player')[0].player,
-            selectedCard;
+        var player = $('#player')[0].player;
         
+        $.each(player.card, function(i, d) {
+            if(d.selected)
+                player.selected_cards.push(d);
+        });
+        switch(player.stage) {
+            case -1:
+                sgs.interface.bout.response_card(new sgs.Operate(player.selected_cards[0].name, player, player.targets[0], player.selected_cards[0]));
+                break;
+        }
         if(player.stage == 2) {
-            $('.player_card').each(function(i, d) {
-                if(d.card.selected == true)
-                    selectedCard = d.card;
-            });
             if(player.targets[0][0] == player) {
-                sgs.interface.bout.choice_card(new sgs.Operate(selectedCard.name, player, player, selectedCard));
+                sgs.interface.bout.choice_card(new sgs.Operate(player.selected_cards[0].name, player, player, player.selected_cards[0]));
             } else {
-                sgs.interface.bout.choice_card(new sgs.Operate(selectedCard.name, player, player.selected_targets[0], selectedCard));
+                sgs.interface.bout.choice_card(new sgs.Operate(player.selected_cards[0].name, player, player.selected_targets[0], player.selected_cards[0]));
             }
         } else if(player.stage == 3) {
-            $.each(player.card, function(i, d) {
-                if(d.selected)
-                    player.selected_cards.push(d);
-            });
             sgs.interface.bout.discard(new sgs.Operate(undefined, undefined, undefined, player.selected_cards))
             player.stage = -1;
             $('#abandon').css('display', 'none');
