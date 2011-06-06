@@ -62,91 +62,6 @@
         $('#player_blod_1').html(blood_imgs);
     };
     
-    /* 选牌 */
-    sgs.animation.Select_Card = function (e) {
-        if(this.onDrag)
-            return;
-        
-        var cardDom = this,
-            cardOut = cardInfo.out,
-            player = $('#player')[0].player;
-        
-        switch(player.stage) {
-            case -1:
-                $('.player_card').each(function(i, d) {
-                    if(d == cardDom) {
-                        $(d).animate({ 'top': (d.card.selected ? 0 : -cardOut) }, 100);
-                        $('#ok').css('display', d.card.selected ? 'none' : 'block');
-                        d.card.selected = !d.card.selected;
-                    } else {
-                        $(d).animate({ 'top': 0 }, 100);
-                        d.card.selected = false;
-                    }
-                });
-                break;
-            
-            case 2:/* 出牌阶段 */
-                $('.player_card').each(function(i, d) { /* 设置卡牌选中状态与玩家选中状态 */
-                    if(d == cardDom) {
-                        if(cardDom.card.selected) { /* 卡牌已被选中时则取消选中 */
-                            $(cardDom).animate({ 'top': '0px' }, 100);
-                            cardDom.card.selected = false;
-                            player.targets = [];
-                            /* 设置玩家为可选状态 */
-                            $('.role').each(function(i, d) {
-                                $(d).find('.role_cover').css('display', 'none');
-                                if(d.player.selected) {
-                                    $(d).css({
-                                        'box-shadow': '2px 2px 2px #000',
-                                        left: parseInt($(d).css('left')),
-                                        top: parseInt($(d).css('top')),
-                                    });
-                                    d.player.selected = false;
-                                }
-                            });
-                            $('#ok').css('display', 'none');/* 隐藏确定按钮 */
-                        } else { /* 卡牌没有被选中时 */
-                            cardDom.card.selected = true;
-                            $(cardDom).animate({ 'top': -cardOut + 'px' }, 100);
-                        }
-                    } else {
-                        d.card.selected = false;
-                        $(d).animate({ 'top': 0 }, 100);
-                    }
-                });
-                var selectCard = cardDom.card;
-                player.targets = sgs.interface.bout.select_card(new sgs.Operate(selectCard.name, player, undefined, selectCard));
-                $('.role .role_cover').each(function(i, d) {/* 设置目标可选状态 */
-                    $(d).css('display', 'block');
-                });
-                $.each(player.targets[0], function(i, d) {
-                    $('.role').each(function(ii, dd) {
-                        if(d.nickname == dd.player.nickname) {
-                            $(dd).find('.role_cover').css('display', 'none');
-                        }
-                    });
-                });
-                if(player.targets[0][0] == $('#player')[0].player)/* 如果是对自己使用的卡牌则激活“确定”按钮 */
-                    $('#ok').css('display', 'block');
-                break;
-            
-            case 3:/* 弃牌阶段 */
-                if(cardDom.card.selected) {
-                    $(cardDom).animate({ 'top': 0 }, 100);
-                    cardDom.card.selected = false;
-                    player.last_select_count++;
-                } else {
-                    if(player.last_select_count == 0)
-                        return;
-                    $(cardDom).animate({ 'top': -cardOut + 'px' }, 100);
-                    cardDom.card.selected = true;
-                    player.last_select_count--;
-                }
-                if(player.last_select_count == 0)
-                    $('#ok').css('display', 'block');
-                break;
-        }
-    };
     
     /* 拖动 */
     /*
@@ -428,7 +343,6 @@
                 characher_mapping = sgs.NUMBER_CHARACHER_MAPPING,
                 number_mapping = sgs.CARD_COLOR_NUM_MAPPING.number,
                 pattern_img = sgs.PATTERN_IMG_MAPPING;
-            console.log(card);
             $(player.dom).find(equip_id).html(['<img src="',
                     sgs.EQUIP_ICON_MAPPING[type], '" style="width:13px; height:13px; position:absolute; left:0;" /><font style="position:absolute; left:18px;">',
                     type == 2 ? '+1' : (type == 3 ? '-1' : characher_mapping[sgs.EQUIP_RANGE_MAPPING[card.name]]), '</font><font>',
