@@ -83,7 +83,7 @@
             title_height = 24,
             card_padding = 3,
             box_width = card_count * 93 + (card_count - 1) * card_padding * 2 + 40, 
-            box_height = 210,
+            box_height = identity_info == undefined ? 180 : 210,
             card_choose_bg = $('<div id="choose_box_bgcover"></div>'),
             card_choose_box = $([
                 '<div id="choose_box">',
@@ -134,7 +134,16 @@
                 bottom: '30px',
             });
         } else {
-            
+            $.each(cards, function(i, d) {
+                var card = $(['<div class="choose_card"><img src="',
+                        sgs.CARDIMAG_MAPING[d.name], '" /><div class="pat_num" style="color:',
+                        d.color, ';"><span class="pattern"><img src="',
+                        sgs.PATTERN_IMG_MAPPING[d.color], '" /></span><span class="num">',
+                        sgs.CARD_COLOR_NUM_MAPPING.number[d.digit], '</span></div><div class="select_unable"></div></div>'].join(''));
+                card[0].name = d.name;
+                card.css('left', i * (93 + card_padding * 2) + 'px');
+                card_choose_box.find('#choose_cards').append(card);
+            });
         }
         card_choose_bg.appendTo($('#main'));
         card_choose_box.appendTo($('#main'));

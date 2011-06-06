@@ -148,7 +148,8 @@
     left: 163px;
     top: 8px;
 }
-.player_card, .player_card img
+.player_card, .player_card img, 
+.choose_card, .choose_card img
 {
     position: absolute;
     top:0;

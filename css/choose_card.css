@@ -75,7 +75,7 @@
 
 /***** 选择武将 *****/
 
-.choose_role_card
+.choose_role_card, .choose_card
 {
     position:absolute;
     float:left;

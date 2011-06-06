@@ -318,7 +318,7 @@
             this.player.selected = true;
             player.selected_targets.push(this.player);
             player.target_selectable_count--;
-            console.log('选择目标:', this.player);
+            console.log('选择目标:', this.player, this.player.nickname);
             if(player.target_selectable_count == 0) {/* 选择目标达到【目标数量】时，将其他可选目标设为不可选状态 */
                 $.each(sgs.func.sub(player.targets[0], player.selected_targets), function(i, d) {
                     $(d.dom).find('.role_cover').css('display', 'block');
@@ -397,6 +397,11 @@
         player.card_selectable_count = player.card.length - player.blood;
         player.stage = 3;
     });
+
+    /* 五谷丰登等选牌 */
+    $('.choose_card').live('click', function(e) {
+        //...
+    });
     
     /* 显示技能解释 */
     $('.choose_role_card, .head_img, #player_head').live('mousemove', function(e) {
@@ -464,6 +469,7 @@
     $('.role_identity_select img').click(function(e) {
         $(this).parent().prev().find('img').attr('src', $(this).attr('src'));
         $(this).parent().css('display', 'none');
+        return false;
     });
 
     /* 按钮样式变化 */
