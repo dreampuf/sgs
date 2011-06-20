@@ -122,7 +122,7 @@ test("Stage", function(){
                                                    i.name == "孙权" ;}).length, 3, "主公随机武将含有三巨头.");
 });
 
-test("AI_1v1", function(){
+test("2AI", function(){
     var idens = sgs.Bout.get_identity(2),
         heros = sgs.Bout.get_hero(2),
         players = [],
@@ -138,18 +138,19 @@ test("AI_1v1", function(){
     about = new sgs.Bout(players); 
 });
 
-test("AI_1v1v1", function(){ 
-    var idens = sgs.Bout.get_identity(3),
-        heros = sgs.Bout.get_hero(3),
+test("3AI", function(){ 
+    var PLAYER_NUM = 3,
+        idens = sgs.Bout.get_identity(PLAYER_NUM),
+        heros = sgs.Bout.get_hero(PLAYER_NUM),
         players = [],
         about;
 
     //heros[0] = filter(sgs.HERO, function(i) { return i.name == "甄姬"; })[0];
-    range(3, function(n) {
+    range(PLAYER_NUM, function(n) {
         players.push(new sgs.Player(heros[n].name,
                                     idens[n],
                                     heros[n],
                                     true));
     });
-    about = new sgs.Bout(players); 
+    //about = new sgs.Bout(players); 
 });

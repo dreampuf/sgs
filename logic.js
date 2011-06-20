@@ -211,7 +211,8 @@ var sgs = sgs || {};
         this.opt = []; /* 操作堆栈 */
         this.choice = []; /* 要牌队列 */
         this.step = 0; /* 当前执行状态 0: 判定阶段, 1: 摸牌阶段, 2: 出牌阶段, 3: 弃牌阶段 */
-        this.attached = []; /* 绑定的事件 */
+        this.attached = {}; /* 绑定的事件 */
+        this.last_judge_card; /* 上一张判定牌 */
         
         this.timer = 0;
 
@@ -258,14 +259,18 @@ var sgs = sgs || {};
         return result;
     };
     sgs.Bout.prototype.attach = function(even_type, func) {
-        this.attached.push({"name":even_type, "func":func});
+        if(!this.attached[even_type]) {
+            this.attached[even_type] = [];
+        }
+        this.attached[even_type].push(func);
     };
     sgs.Bout.prototype.notify = function(event_type) {
         var args = slice.call(arguments, 1);
-        each(this.attached, function(n, i) {
-            if(i["name"] == event_type)
-                i["func"].apply({}, args);
-        });
+        if(this.attached[event_type]) {
+            each(this.attached[event_type], function(n, i) {
+                i.apply({}, args);
+            });
+        }
     };
     sgs.Bout.prototype.ishero = function(hero) {
         var pls = this.player, i = pls.length;
@@ -447,6 +452,7 @@ var sgs = sgs || {};
                 pl.card = sub(pl.card, cards); 
             }
             console.log(pl.nickname, "弃牌", map(cards, function(i) { return i.name; }));
+            this.notify("discard", pl, cards);
         }
 
         pl.status = {};

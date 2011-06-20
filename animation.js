@@ -10,13 +10,13 @@
     var get_card = function(cards) {
         $(cards).each(function(i, d) {
             var pattern = d.color,
-                color = sgs.interface.CARD_COLOR_NUM_MAPPING.color[pattern],
+                color = sgs.CARD_COLOR_NUM_MAPPING.color[pattern],
                 num = d.digit,
-                numStr = sgs.interface.CARD_COLOR_NUM_MAPPING.number[num],
-                img = $(['<div class="player_card"><img src="img/generals/card/',
+                numStr = sgs.CARD_COLOR_NUM_MAPPING.number[num],
+                img = $(['<div class="player_card"><img src="',
                         sgs.CARDIMAG_MAPING[d.name], '" /><div class="pat_num" style="color:',
-                        color, ';"><span class="pattern"><img src="img/pattern_',
-                        pattern, '.png" /></span><span class="num">',
+                        color, ';"><span class="pattern"><img src="',
+                        sgs.PATTERN_IMG_MAPPING[pattern], '" /></span><span class="num">',
                         numStr, '</span></div><div class="select_unable"></div></div>'].join('')),
                 left = $('#cards_last').offset().left,
                 top = $('#cards_last').offset().top;
@@ -26,70 +26,144 @@
             img.css('position', 'absolute');
             img[0].card = d;
             d.dom = img[0];
+            d.selected = false;
         });
     };
     
     /* 将选牌从DOM中抽出（方便牌整理） */
     var drag_out = function(cards) {
+        cards = cards instanceof Array ? cards : [cards];
         $(cards).each(function (i, d) {
-            var temp = $(this.dom),
-                left = temp.offset().left,
-                top = temp.offset().top;
-
-            temp.remove();
+            var temp = $(d.dom),
+                leftcss = temp.offset().left,
+                topcss = temp.offset().top;
+            
             temp.appendTo($(document.body));
-            temp.css({ left: left, top: top });
-            temp.css('position', 'absolute');
+            temp.css({
+                position: 'absolute',
+                left: leftcss,
+                top: topcss,
+            });
         });
     };
     
-    /* 选牌 */
-    sgs.animation.Select_Card = function (cardDom) {
-        var cardOut = cardInfo.out,
-            selected = $(cardDom).css('bottom') == cardOut + 'px' ? true : false;
-        $('#cards').find('.player_card').each(function() {
-            if(this == cardDom) {
-                if(selected) {
-                    $(cardDom).animate({ 'bottom': '0px' }, 100);
-                    cardDom.card.selected = false;
-                    /* 设置玩家为可选状态 */
-                    $('.role .role_cover').each(function(i, d) {
-                        $(this).css('display', 'none');
-                    });
-                } else {
-                    cardDom.card.selected = true;
-                    $(cardDom).animate({ 'bottom': cardOut + 'px' }, 100);
-                }
-            } else {
-                this.card.selected = false;
-                $(this).animate({ 'bottom': '0px' }, 100);
-            }
-        });
+    /* 播放声音 */
+    var play_sound = function(src) {
+        $('#sound')[0].src = src;
+        $('#sound')[0].play();
+    };
+    
+    /* 刷新自己血量 */
+    var refresh_blood = function() {
+        var player = $('#player')[0].player;
+            blood_imgs = '';
+        for(var i = 0; i < player.blood; i++)
+            blood_imgs += '<img src="img/system/blod_1.png" />';
+        $('#player_blod_1').html(blood_imgs);
+    };
+    
+    
+    /* 拖动 */
+    /*
+     * 用判断mousemove时鼠标是否按下来判断是否为拖动
+     * 1. mousedown           card.dom
+     *   鼠判断是否处于拖动状态(包括返回动画):
+     *   - 是则不作任何操作;
+     *   - 不是处于拖动状态则设置dom的mousedown属性为true;
+     * 2. mousemove           document.body
+     *   判断鼠标是否按下:
+     *   - 不是则不作任何操作;
+     *   - 是按下的则执行拖动;
+     * 3. mouseup             card.dom
+     *   判断是否处于拖动状态, 设置dom的mousedown属性为false:
+     *   - 不是则不作任何操作;
+     *   - 是则结束拖动;
+     */
+    sgs.animation.Mouse_Down = function(e) {
+        var cardDom = e.currentTarget,
+            vthis = this;
+        if(cardDom.onDrag)
+            return true;
         
-        if(selected)
+        document.body.onDragDom = cardDom;
+        cardDom.mousedown = true;
+        cardDom.mouse_left = e.clientX; /* 鼠标按下时的位置 */
+        cardDom.mouse_top = e.clientY;
+        cardDom.first_left = $(this).offset().left - $('#cards').offset().left; /* 鼠标按下时卡牌的相对位置 */
+        cardDom.first_top = $(this).offset().top - $('#cards').offset().top;
+    };
+    sgs.animation.Mouse_Move = function(e) {
+        var cardDom = document.body.onDragDom;
+        if(cardDom == undefined || !cardDom.mousedown)
+            return true;
+        
+        cardDom.onDrag = true;
+        $(cardDom).css({
+            'z-index': '1000',
+            cursor: 'pointer',
+            left: e.clientX - cardDom.mouse_left + cardDom.first_left,
+            top: e.clientY - cardDom.mouse_top + cardDom.first_top
+        });
+    };
+    sgs.animation.Mouse_Up = function(e) {
+        var cardDom = e.currentTarget;
+        cardDom.mousedown = false;
+        if(!cardDom.onDrag)
+            return true;
+        
+        cardDom.onRevert = true; /* 避免重复执行下面的动画 */
+        $(cardDom).animate({
+            left: cardDom.first_left,
+            top: cardDom.first_top
+        }, 500, function() {
+            cardDom.onDrag = false;
+            $(cardDom).css('z-index', '10');
+        });
+    };
+    
+    /* 卡牌效果动画 sgs.animation.Card_Flash(sgs.interface.bout.player[1], '杀') */
+    sgs.animation.Card_Flash = function(player, name) {
+        if(sgs.EFFECT_IMG_MAPPING[name] == undefined)
             return;
+        var img,
+            img2,
+            targetLeft,
+            targetTop,
+            player_dom = player.dom;
         
-        var selectCard,
-            player = $('#player')[0].player;
-        $.each(player.card, function(i, d) {
-            if(d == cardDom.card) {
-                selectCard = d;
-                return false;
-            }
+        img = $('<img src="' + sgs.EFFECT_IMG_MAPPING[name] + '" />');
+        img2 = $('<img src="' + sgs.EFFECT_IMG_MAPPING[name] + '" />');
+        img.appendTo(document.body);
+        targetLeft = $(player_dom).offset().left + ($(player_dom).width() - img.width()) / 2;
+        if(player.dom == $('#player')[0]) 
+            targetTop = $(player_dom).offset().top - img.height() / 2;
+        else
+            targetTop = $(player_dom).offset().top + ($(player_dom).height() - img.height()) / 2;
+        img.css({
+            position: 'absolute',
+            left: targetLeft,
+            top: targetTop,
+            opacity: 0,
         });
-        
-        player.targets = sgs.interface.bout.select_card(new sgs.Operate(selectCard.name, player, undefined, selectCard));
-        player.targets.selected = [];
-        $('.role .role_cover').each(function(i, d) {
-            $(d).css('display', 'block');
+        img.animate({ opacity: 1 }, 50, function() {
+            img2.appendTo(document.body).css({
+                position: 'absolute',
+                left: targetLeft,
+                top: targetTop,
+                opacity: 1,
+            }).animate({
+                opacity: 0,
+                width: img.width() * 2,
+                height: img.height() * 2,
+                left: targetLeft - img.width() / 2,
+                top: targetTop - img.height() / 2,
+            }, 200, function() { img2.remove() });
         });
-        $.each(player.targets[0], function(i, d) {
-            $('.role').each(function(ii, dd) {
-                if(d.nickname == dd.player.nickname) {
-                    $(dd).find('.role_cover').css('display', 'none');
-                }
+        setTimeout(function() {
+            img.animate({ opacity: 0 }, 200, function() {
+                img.remove();
             });
-        });
+        }, 2000);
     };
     
     /* 从牌堆中删除部分牌 */
@@ -107,7 +181,7 @@
     /* 给电脑发牌 */
     sgs.animation.Deal_Comp = function(card_count, player) {
         for(var i = 0; i < card_count; i++) {
-            var img = $('<img src="img/card_back.png" style="width:93px; height:131px" />');
+            var img = $('<img src="img/system/card_back.png" style="width:93px; height:131px" />');
             img.appendTo(document.body);
             img.css({
                 position: 'absolute',
@@ -130,84 +204,170 @@
     };
     
     /* 给玩家发牌 */
-    sgs.animation.Deal_Player = function() {
-        get_card($('#player')[0].player.card);
+    sgs.animation.Deal_Player = function(cards) {
+        get_card(cards);
         
         var cc = $('#player')[0].player.card.length;
-        $.each($('#player')[0].player.card, function (i, d) {
+        $.each(cards, function (i, d) {
             if (d.dom.parentNode != document.body)
                 return true;
 
-            var tempL = cc * cardInfo.width < $('#cards').width() ? cardInfo.width * i : ($('#cards').width() - cardInfo.width) / (cc - 1) * i,
-                targetL = $('#cards').offset().left + tempL,
+            var tempL,
+                targetL,
                 targetT = $('#cards').offset().top;
-
+            if(cc * cardInfo.width < $('#cards').width())
+                tempL = cardInfo.width * (i + cc - cards.length);
+            else
+                tempL = ($('#cards').width() - cardInfo.width) / (cc - 1) * (i + cc - cards.length);
+            targetL = $('#cards').offset().left + tempL;
+            
             $(d.dom).animate({
                 left: targetL,
                 top: targetT
             }, 500, function () {
                 $(d.dom).appendTo($('#cards'));
                 $(d.dom).css('left', tempL);
-                $(d.dom).css('top', 'auto');
-                $(d.dom).css('bottom', 0);
-                
-                /*var isDrag = false,
-                    mouse_left,
-                    mouse_top,
-                    first_left,
-                    first_top;
-                $(d.dom).mousedown(function(e) {
-                    isDrag = true;
-                    mouse_left = e.clientX;
-                    mouse_top = e.clientY;
-                    first_left = $(this).offset().left - $('#cards').offset().left - 1;
-                    first_top = $(this).offset().top - $('#cards').offset().top - 1;
-                    
-                }).mousemove(function(e) {
-                    if(isDrag) {
-                        $(this).css({
-                            cursor: 'pointer',
-                            left: e.clientX - mouse_left + first_left,
-                            top: e.clientY - mouse_top + first_top
-                        });
-                    }
-                }).mouseup(function(e) {
-                    isDrag = false;
-                    $(this).animate({
-                        left: first_left,
-                        top: first_top
-                    }, 500);
-                });*/
+                $(d.dom).css('top', '0');
             });
         });
     };
     
+    /* 出牌动画 sgs.animation.Play_Card(sgs.interface.bout.player[1], sgs.interface.bout.player[1].card[0]) */
+    sgs.animation.Play_Card = function(player, targets, cards) {
+        cards = cards instanceof Array ? cards : [cards];
+        var flash = function(dom, name, index) {
+            sgs.animation.Card_Flash(player, name); /* 效果动画 */
+            play_sound(sgs.SOUND_FILE_MAPPING.card[name][player.hero.gender]); /* 声音 */
+            /*
+             * 1. 把现有卡牌往后移(动画)
+             * 2. 加上要添加的卡牌
+             * 3. 把要添加的卡牌移过去(动画)
+             */
+            var current_count = $('#played_card_box').children().length, /* 现有卡牌数量 */
+                card_count = cards.length, /* 打出的卡牌数量 */
+                finally_width = (current_count + card_count) * (cardInfo.width + 2) - 2, /* 最终宽度(2 为卡牌之间的间隔) */
+                domLeft = $(dom).offset().left,
+                domTop = $(dom).offset().top;
+            
+            $('#played_card_box').children().each(function(i, d) {
+                $(d).animate({
+                    left: -finally_width / 2 + (i + card_count) * (cardInfo.width + 2),
+                    top: -cardInfo.width / 2,
+                }, 300);
+            });
+            $(dom).prependTo($('#played_card_box'));
+            $(dom).css({
+                left: domLeft - $('#played_card_box').offset().left,
+                top: domTop - $('#played_card_box').offset().top,
+            });
+            $(dom).animate({
+                left: -finally_width / 2 + index * (cardInfo.width + 2),
+                top: -cardInfo.width / 2,
+            }, 300, function() {
+                setTimeout(function() {
+                    $(dom).animate({
+                        opacity: 0,
+                    }, 500, function() {
+                        if(dom.card != undefined) {
+                            delete dom.card.dom;
+                            delete dom.card;
+                        }
+                        $(dom).remove();
+                    });
+                }, 3000);
+            });
+        };
+        if(player == $('#player')[0].player) {
+            drag_out(cards);
+            $.each(cards, function(i, d) {
+                flash(d.dom, d.name, i);
+            });
+            sgs.animation.Arrange_Card(player.card);
+        } else {
+            $.each(cards, function(i, d) {
+                var cardImg = $('<img src="' + sgs.CARDIMAG_MAPING[d.name] + '" style="width:93px; height:131px;" />');
+                cardImg.appendTo($(document.body));
+                cardImg.css({
+                    position: 'absolute',
+                    left: ($(player.dom).offset().left + 20) + 'px',
+                    top: ($(player.dom).offset().top + 10) + 'px',
+                });
+                flash(cardImg[0], d.name, i);
+            });
+        }
+        $(player.dom).find('.card_count span').text(player.card.length);
+    };
+    
     /* 装备装备动画 */
-    sgs.animation.Equip_Equipment = function(card) {
-        var left = $('#cards').offset().left - 128,
-            top = $('#cards').offset().top - 20;
-        card.jqObj.animate({
-            left: targetL,
-            top: targetT,
-            bottom: 0,
-            opacity: 0.5
-        }, 'normal', function () {
-            card.jqObj[0].remove();
-        });
+    sgs.animation.Equip_Equipment = function(player, card) {
+        var type = sgs.EQUIP_TYPE_MAPPING[card.name];
+        if(player == $('#player')[0].player) {
+            drag_out(card);
+            $(card.dom).animate({
+                left: $('#attack').offset().left + ($('#attack').width() - $(card.dom).width()) / 2,
+                top: $('#player').offset().top + ($('#player').height() - $(card.dom).height()) / 2,
+            }, 500).animate({
+                opacity: 0
+            }, 200, function() { $(card.dom).remove(); });
+            
+            var equip_id = type == 0 ? '#attack' : (type == 1 ? '#defend' : (type == 2 ? '#attack_horse' : '#defend_horse')),
+                equip_img = $(['<div class="equip_box">',
+                                    '<img class="equip_border" src="img/generals/equipment/border.png" />',
+                                    '<img class="equip_img" src="', sgs.EQUIP_IMG_MAPPING[card.name], '" />',
+                                    '<img class="equip_pattern" src="', sgs.PATTERN_IMG_MAPPING[card.color], '" />',
+                                    '<span class="equip_num" style="color:', sgs.CARD_COLOR_NUM_MAPPING.color[card.color], ';">',
+                                        sgs.CARD_COLOR_NUM_MAPPING.number[card.digit],'</span>',
+                                '</div>',
+                                '<div class="equip_back"></div>'
+                            ].join(''));
+            $(equip_id).html(equip_img);
+            sgs.animation.Arrange_Card();
+        } else {
+            var cardJqObj = $('<img src="' + sgs.CARDIMAG_MAPING[card.name] + '" />');
+            cardJqObj.appendTo($(document.body));
+            cardJqObj.css({
+                position: 'absolute',
+                width: sgs.interface.cardInfo.width + 'px',
+                height: sgs.interface.cardInfo.height + 'px',
+                left: ($(player.dom).offset().left - 60) + 'px',
+                top: ($(player.dom).offset().top - 30) + 'px'
+            });
+            cardJqObj.animate({
+                left: ($(player.dom).offset().left + 20) + 'px',
+                top: ($(player.dom).offset().top + 10) + 'px'
+            }, 500).animate({
+                opacity: 0
+            }, 200, function() { cardJqObj.remove(); });
+            
+            var equip_id = type == 0 ? '.attack' : (type == 1 ? '.defend' : (type == 2 ? '.attack_horse' : '.defend_horse')),
+                characher_mapping = sgs.NUMBER_CHARACHER_MAPPING,
+                number_mapping = sgs.CARD_COLOR_NUM_MAPPING.number,
+                pattern_img = sgs.PATTERN_IMG_MAPPING;
+            $(player.dom).find(equip_id).html(['<img src="',
+                    sgs.EQUIP_ICON_MAPPING[type], '" style="width:13px; height:13px; position:absolute; left:0;" /><font style="position:absolute; left:18px;">',
+                    type == 2 ? '+1' : (type == 3 ? '-1' : characher_mapping[sgs.EQUIP_RANGE_MAPPING[card.name]]), '</font><font>',
+                    card.name, '</font><font style="position:absolute; right:18px; line-height:15px;">',
+                    number_mapping[card.digit], '</font><img src="',
+                    pattern_img[type], '" style="width:11px; height:11px; position:absolute; top:1px; right:2px;"/>'
+                ].join(''));
+            $(player.dom).find('.card_count span').text(($(player.dom).find('.card_count span').text() | 0) - 1);
+        }
+        play_sound(sgs.SOUND_FILE_MAPPING.equipment[type]);
     };
     
     /* 整理牌 */
     sgs.animation.Arrange_Card = function (cards) {
+        cards = cards == undefined ? $('#player')[0].player.card : cards;
         var cc = cards.length;
         $(cards).each(function (i, d) {
-            if (d.jqObj[0].parentNode == document.body)
+            if (d.dom.parentNode == document.body)
                 return true;
             var left;
             if (cc * cardInfo.width < $('#cards').width())
                 left = cardInfo.width * i;
             else
                 left = ($('#cards').width() - cardInfo.width) / (cc - 1) * i;
-            d.jqObj.animate({ left: left }, 'normal');
+            $(d.dom).animate({ left: left }, 'normal');
         });
     };
     
@@ -218,7 +378,7 @@
          * isHero    - 是否为英雄
          */
         var hero_prop = sgs.interface.HERO_PROPERTY_MAPPING;
-            skill_exp = sgs.interface.SKILL_EXPLANATION_MAPPING;
+            skill_exp = sgs.SKILL_EXPLANATION_MAPPING;
             explanation = '',
             targetLeft = (clientX + $('#explanation').width()) > $(window).width() ?
                         clientX - $('#explanation').width() : clientX,
@@ -229,12 +389,12 @@
             var skills = hero_prop[name].skill;
             $(skills).each(function(i, d) {
                 explanation += [
-                    '<font style="font-weight:bold;">', d, '</font>: ', skill_exp[d],
+                    '<font style="font-weight:bold; color:#65ffcc;">', d, '</font>: ', skill_exp[d],
                     i + 1 == skills.length ? '' : '<br /><br />'
                 ].join('');
             });
         } else {
-            explanation = ['<font style="font-weight:bold;">', name, '</font>: ', skill_exp[name]].join('');
+            explanation = ['<font style="font-weight:bold; color:#65ffcc;">', name, '</font>: ', skill_exp[name]].join('');
         }
         explanation = explanation.replace('★', '<br />★');
         $('#explanation').html(explanation);
@@ -270,19 +430,53 @@
         }
     };
     
-    /* 掉血动画 javascript:sgs.animation.Get_Damage(true, '_aaa_') */
-    sgs.animation.Get_Damage = function(isComp, nickname) {
-        if(isComp) {
-            $('.role').each(function(i, d) {
-                if($(this).find('.role_name').text() == nickname) {
-                    var leftNum = parseInt($(this).css('left'));
-                    $(this).animate({ left: leftNum - 3 }, 50).animate({ left: leftNum }, 50);
-                    $(this).find('.blods_1 img').last().remove();
-                }
-            });
+    /* 掉血动画 sgs.animation.Get_Damage(true, sgs.interface.bout.player[1]) */
+    sgs.animation.Get_Damage = function(player) {
+        var left_num,
+            top_num,
+            targetLeft,
+            targetTop,
+            damage_img = $('<img src="img/system/damage.png" />');
+        damage_img.appendTo($(document.body));
+        var damage_img_width = damage_img.width(),
+            damage_img_height = damage_img.height();
+        if(player.dom != $('#player')[0]) {
+            left_num = parseInt($(player.dom).css('left'));
+            top_num = parseInt($(player.dom).css('top'));
+            targetLeft = $(player.dom).offset().left + ($(player.dom).width() - damage_img_width) / 2;
+            targetTop = $(player.dom).offset().top + ($(player.dom).height() - damage_img_height) / 2;
+            $(player.dom).animate({/* 震动 */
+                left: left_num - 10,
+                top: top_num + 10,
+            }, 50).animate({
+                left: left_num,
+                top: top_num,
+            }, 50);
         } else {
-            
+            left_num = parseInt($('#player_head').css('right'));
+            top_num = parseInt($('#player_head').css('top'));
+            targetLeft = $('#player_head').offset().left + ($('#player_head').width() - damage_img_width) / 2;
+            targetTop = $('#player_head').offset().top + ($('#player_head').height() - damage_img_height) / 2;
+            $('#player_head').animate({/* 震动 */
+                right: left_num + 10,
+                top: top_num + 10,
+            }, 100).animate({
+                right: left_num,
+                top: top_num,
+            }, 100);
         }
+        damage_img.css({
+            position: 'absolute',
+            left: targetLeft,
+            top: targetTop,
+            width: damage_img_width,
+        });
+        setTimeout(function() {
+            damage_img.animate({ opacity: 0 }, 100, function() { damage_img.remove(); });
+        }, 1000);
+        $(player.dom).find('.blods_1 img').last().remove();
+        play_sound(sgs.SOUND_FILE_MAPPING.damage.common);
+        refresh_blood();
     }
     
 })(sgs);

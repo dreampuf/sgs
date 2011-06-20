@@ -42,18 +42,22 @@ var _ = sgs.func.format,
         "闪电": 1,
     };
     sgs.Ai.identity_rela = { /* 身份之间敌对关系 (1 ~ 3) */
+        /*主公*/
         0 : { 0 : 0,
               1 : 1,
               2 : 2,
               3 : 3 },
+        /*忠臣*/
         1 : { 0 : 1,
               1 : 0,
               2 : 3,
               3 : 3 },
+        /*内奸*/
         2 : { 0 : 2,
               1 : 3,
               2 : 0,
               3 : 3 },
+        /*反贼*/
         3 : { 0 : 3,
               1 : 3,
               2 : 3,
@@ -89,16 +93,23 @@ var _ = sgs.func.format,
     sgs.Ai.prototype.ask_card = (function(){ return function(opt) {
         var pl = this.player,
             bout = this.bout,
-            cardname = opt.data;
+            cardname = opt.data,
+            opt_top = this.bout.opt[0];
         
         if(opt.id == "技能") {
             switch(cardname) {
                 case "洛神":
+                    return bout.response_card(new sgs.Operate("技能", pl, pl, "洛神"));
+                case "鬼才":
                     return bout.response_card(new sgs.Operate("技能", pl, pl, true));
             }
         } else {
             switch(cardname) {
                 case "无懈可击":
+                    if(opt.source == pl && opt_top.target != pl) { /* 不无懈自己出的牌 */
+                        return bout.response_card(new sgs.Operate(cardname, pl, pl, pl.findcard(cardname)));
+                    }
+                    break;
                 case "桃":
                     if(opt.source == pl) { /* 自己 */
                         return bout.response_card(new sgs.Operate(cardname, pl, pl, pl.findcard(cardname)));
@@ -131,7 +142,8 @@ var _ = sgs.func.format,
             bout = this.bout,
             use = false,
             cards = pl.card,
-            be_use_card;
+            be_use_card,
+            card_select_info;
 
         /* 有装备就装备 */
         var equips = filter(cards, function(i) { return EQUIP_TYPE_MAPPING[i.name] != undefined; });
@@ -170,15 +182,26 @@ var _ = sgs.func.format,
         }
         
         /* 使用杀 */
-        var be_use_card = filter(cards, function(i) { return i.name == "杀"; });
-
-        use = be_use_card.length > 0 && !pltar.equip[2] && !plstatus["hassha"] ? true : false;
+        be_use_card = filter(cards, function(i) { return i.name == "杀"; });
+        use = be_use_card.length > 0 && !plstatus["hassha"];
         if(use) {
-            plstatus["hassha"] = pl.equip[0] && pl.equip[0].name == "诸葛连弩" || pl.skill("咆哮")
-                                 ? false 
-                                 : true; /* 诸葛连弩连杀 */
-            be_use_card = be_use_card[0];
-            return bout.choice_card(new sgs.Operate(be_use_card.name, pl, pltar, be_use_card));
+            card_select_info = bout.select_card(new sgs.Operate("杀", pl, pltar, be_use_card[0]));
+            if(card_select_info[0].indexOf(pltar) == -1) { /* 如果最佳对象不在可选区域,则改变次级对象 */
+                pltar = undefined;
+                each(card_select_info[0], function(n, i) {
+                    if(pls_rela[bout.playernum[i.nickname]] >= 2) {
+                        pltar = i;
+                        return false;
+                    }            
+                });
+            }
+            if(pltar) {
+                plstatus["hassha"] = pl.equip[0] && pl.equip[0].name == "诸葛连弩" || pl.skill("咆哮")
+                                     ? false 
+                                     : true; /* 诸葛连弩连杀 */
+                be_use_card = be_use_card[0];
+                return bout.choice_card(new sgs.Operate(be_use_card.name, pl, pltar, be_use_card));
+            }
         }
 
         this.discard();

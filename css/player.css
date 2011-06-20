@@ -34,7 +34,7 @@
     left: 0;
     bottom: 5px;
     text-align: center;
-    background: url("img/system/player_info.png") no-repeat;
+    background: url("../img/system/player_info.png") no-repeat;
     border: 1px solid #000;
     -moz-box-shadow:0 8px 2px #000;
     box-shadow:0 8px 2px #000;
@@ -65,11 +65,13 @@
     width:142px;
     height:25px;
     cursor:pointer;
+    left:0;
 }
 .equip_back
 {
     background-color:#000;
-    opacity:0.5;
+    opacity:0.3;
+    cursor:default;
     display:none;
 }
 #attack, #defend, #attack_horse, #defend_horse
@@ -88,23 +90,34 @@
     float: left;
     font-weight: bold;
 }
+   .equip_border
+    {
+        left:0;
+        width:142px;
+        height:25px;
+    }
+    .equip_img
+    {
+        position:absolute;
+        left:0;
+        width:137px;
+        height:21px;
+        margin:2px;
+    }
     .equip_pattern
     {
-        font-size: 26px;
-        margin: 0 5px 0 10px;
-        width: 15px;
-        line-height: 22px;
+        position:absolute;
+        right:23px;
+        height:15px;
+        top:5px;
     }
     .equip_num
     {
-        font-size: 20px;
-        width: 20px;
-        line-height: 26px;
-    }
-    .equip_name
-    {
-        font-size: 16px;
-        line-height: 28px;
+        position:absolute;
+        right:3px;
+        width:20px;
+        font-weight:bold;
+        top:3px;
     }
 
 #defend
@@ -131,23 +144,19 @@
 {
     position: absolute;
     width: 570px;
-    height: 133px;
+    height: 131px;
     left: 163px;
-    top: 7px;
+    top: 8px;
 }
-.player_card, .player_card img
+.player_card, .player_card img, 
+.choose_card, .choose_card img
 {
     position: absolute;
-    margin: 1px;
+    top:0;
     width: 93px;
     height: 131px;
     cursor: pointer;
     display: block;
-}
-.player_card
-{
-    width: 95px;
-    height: 133px;
 }
 .pat_num
 {
@@ -167,12 +176,12 @@
 }
 .pattern
 {
-    width:12px;
+    width:14px;
     height:15px;
 }
 .pattern img
 {
-    width:12px;
+    width:14px;
     height:15px;
 }
 .num

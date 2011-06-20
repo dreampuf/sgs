@@ -2,3 +2,4 @@
 *.patch
 *.sh
 *.db
+/sound
