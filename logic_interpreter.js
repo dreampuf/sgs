@@ -403,8 +403,5 @@ var sgs = sgs || {};
         return;
     };
 
-    sgs.interpreter.commend_map = {
-        "杀": function(target){},
-    };
          
 })(window.sgs);
