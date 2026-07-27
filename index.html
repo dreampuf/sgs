@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>三国杀</title>
@@ -10,12 +10,11 @@
     <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
     <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="logic_func.js"></script>
-    <script type="text/javascript" src="logic_interpreter.js"></script>
-    <script type="text/javascript" src="logic_ai.js"></script>
-    <script type="text/javascript" src="logic.js"></script>
+    <script type="text/javascript" src="ui_shell.js"></script>
     <script type="text/javascript" src="interface.js"></script>
     <script type="text/javascript" src="animation.js"></script>
     <script type="text/javascript" src="main.js"></script>
+    <script type="module" src="/src/browser/bootstrap.ts"></script>
 </head>
 <body>
     <audio id="sound" src="" autoplay="false"></audio>
@@ -24,10 +23,10 @@
         <!-- 游戏开始 -->
         <div id="start_options">
             <div>选择早期扩展包</div>
-            <label title="2009-03-23 发行的神话再临·风武将扩充。"><input type="checkbox" class="expansion_pack" value="wind" checked="checked" /> 风</label>
+            <label title="2009 年 3 月发行；武将与素材已接入 Core，11 个技能规则仍在迁移。同期报道的具体日期存在冲突，故只保留月份精度。"><input type="checkbox" class="expansion_pack" value="wind" checked="checked" /> 风（技能迁移中）</label>
             <label title="2009-09-21 发行的神话再临·军争篇游戏牌扩充。"><input type="checkbox" class="expansion_pack" value="military" checked="checked" /> 军争</label>
-            <label title="2009-11-16 发行的神话再临·火武将扩充。"><input type="checkbox" class="expansion_pack" value="fire" /> 火</label>
-            <label title="2010-07-29 发行的神话再临·林武将扩充。"><input type="checkbox" class="expansion_pack" value="forest" /> 林</label>
+            <label title="2009-11-16 发行；武将与素材已接入 Core，13 个新增技能规则仍在迁移。"><input type="checkbox" class="expansion_pack" value="fire" /> 火（技能迁移中）</label>
+            <label title="2010-07-29 发行；武将与素材已接入 Core，18 个技能规则仍在迁移。"><input type="checkbox" class="expansion_pack" value="forest" /> 林（技能迁移中）</label>
             <span class="ai_option">AI：<select id="ai_level"><option value="0">简单</option><option value="1" selected="selected">普通</option><option value="2">困难</option></select></span>
         </div>
         <div id="game_start">开始</div>

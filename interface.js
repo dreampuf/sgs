@@ -49,28 +49,29 @@ var sgs = sgs || {};
     /* 设置信息 */
     sgs.interface.Set_RoleInfo = function(player, dom) {
         if(dom != undefined)
-            player.dom = dom;
+            sgs.view.bindPlayer(player, dom);
+        var playerDom = sgs.view.playerElement(player);
         if(!player.isAI) {
             $('#player_country').attr('src', sgs.COUNTRY_IMG_MAPPING[player.hero.country]);
             $('#player_name').text(player.nickname);
             $('#player_head_img').attr('src', sgs.interface.heroImage(player.hero.name, 'big'));
-            for (var i = 0; i < player.hero.life; i++) {
+            for (var i = 0; i < player.maxBlood; i++) {
                 $('<img src="img/system/blod_0.png" />').appendTo($('#player_blod_0'));
                 $('<img src="img/system/blod_1.png" />').appendTo($('#player_blod_1'));
             }
             $("#player_identity img").attr('src', sgs.IDENTITY_IMG_MAPPING[player.identity]);
             $('#player_head')[0].name = player.hero.name;
         } else {
-            $(player.dom).find('.role_country img').attr('src', sgs.COUNTRY_IMG_MAPPING[player.hero.country]);
-            $(player.dom).find('.role_name').text('_' + player.hero.name + '_');
+            $(playerDom).find('.role_country img').attr('src', sgs.COUNTRY_IMG_MAPPING[player.hero.country]);
+            $(playerDom).find('.role_name').text('_' + player.hero.name + '_');
             if(player.identity == 0)
-                $(player.dom).find('.role_identity img').attr('src', sgs.IDENTITY_IMG_MAPPING[0]);
-            $(player.dom).find('.head_img img').attr('src', sgs.interface.heroImage(player.hero.name, 'small'));
-            for(var k = 0; k < player.hero.life; k++) {
-                $(player.dom).find('.blods_0').append('<img src="img/system/blod_0.png" />');
-                $(player.dom).find('.blods_1').append('<img src="img/system/blod_1.png" />');
+                $(playerDom).find('.role_identity img').attr('src', sgs.IDENTITY_IMG_MAPPING[0]);
+            $(playerDom).find('.head_img img').attr('src', sgs.interface.heroImage(player.hero.name, 'small'));
+            for(var k = 0; k < player.maxBlood; k++) {
+                $(playerDom).find('.blods_0').append('<img src="img/system/blod_0.png" />');
+                $(playerDom).find('.blods_1').append('<img src="img/system/blod_1.png" />');
             }
-            $(player.dom).find('.head_img')[0].name = player.hero.name;
+            $(playerDom).find('.head_img')[0].name = player.hero.name;
         }
     };
 
@@ -138,6 +139,13 @@ var sgs = sgs || {};
                 var card = $('<div class="choose_role_card"><img src="' +
                         sgs.interface.heroImage(d.name, 'hero') + '" /></div>');
                 card[0].name = d.name;
+                if(sgs.HERO_IMPLEMENTATION_MAPPING &&
+                   sgs.HERO_IMPLEMENTATION_MAPPING[d.name] == 'partial') {
+                    card.attr({
+                        title: d.name + '：武将数据与素材已接入，技能规则迁移中',
+                        'data-implementation': 'partial'
+                    }).append('<span class="implementation_badge">技能迁移中</span>');
+                }
                 card.css('left', i * (93 + card_padding * 2) + 'px');
                 card_choose_box.find('#choose_cards').append(card);
             });
@@ -161,12 +169,64 @@ var sgs = sgs || {};
                         sgs.PATTERN_IMG_MAPPING[d.color], '" /></span><span class="num">',
                         sgs.CARD_COLOR_NUM_MAPPING.number[d.digit], '</span></div><div class="select_unable"></div></div>'].join(''));
                 card[0].name = d.name;
+                sgs.view.bindCard(d, card[0]);
                 card.css('left', i * (93 + card_padding * 2) + 'px');
                 card_choose_box.find('#choose_cards').append(card);
             });
         }
         card_choose_bg.appendTo($('#main'));
         card_choose_box.appendTo($('#main'));
+    };
+
+    /* 显示通用选项框。选项只携带序列化字符串，由当前 Bout 提交命令。 */
+    sgs.interface.Show_OptionChooseBox = function(title, options) {
+        var box_width = Math.max(280, options.length * 120 + 40),
+            card_choose_bg = $('<div id="choose_box_bgcover"></div>'),
+            option_box = $([
+                '<div id="choose_box">',
+                    '<div><div id="choose_box_content">',
+                        '<div id="choose_box_title"><font></font></div>',
+                        '<div id="choose_options"></div>',
+                    '</div></div>',
+                '</div>'
+            ].join(''));
+        option_box.find('#choose_box_content').css({
+            width: box_width + 'px',
+            height: '130px'
+        });
+        option_box.find('#choose_box_title').css({
+            width: (box_width - 30) + 'px',
+            left: '15px'
+        }).find('font').text(title);
+        $.each(options, function(i, option) {
+            var button = $('<button class="choose_option"></button>');
+            button.text(option);
+            button[0].option = option;
+            button.css({
+                position: 'relative',
+                margin: '58px 8px 0 8px',
+                minWidth: '92px',
+                height: '32px'
+            });
+            option_box.find('#choose_options').append(button);
+        });
+        card_choose_bg.appendTo($('#main'));
+        option_box.appendTo($('#main'));
+    };
+
+    /* 显示通用玩家组合选择框。value 由 Core 生成，界面只负责展示。 */
+    sgs.interface.Show_PlayerChooseBox = function(title, options) {
+        var labels = $.map(options, function(option) {
+                return option.label;
+            }),
+            values = $.map(options, function(option) {
+                return option.value;
+            });
+        sgs.interface.Show_OptionChooseBox(title, labels);
+        $('#choose_options .choose_option').each(function(index) {
+            $(this).removeClass('choose_option').addClass('choose_players');
+            this.player_ids = values[index];
+        });
     };
 
 })(window.sgs);

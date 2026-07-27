@@ -74,6 +74,19 @@
 
 
 /***** 选择武将 *****/
+.choose_role_card .implementation_badge {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    padding: 2px 3px;
+    color: #fff4c2;
+    background: rgba(85, 28, 13, 0.9);
+    border: 1px solid #d1a55b;
+    border-radius: 2px;
+    font-size: 10px;
+    line-height: 12px;
+    white-space: nowrap;
+}
 
 .choose_role_card, .choose_card
 {

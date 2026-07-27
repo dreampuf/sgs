@@ -4,13 +4,20 @@
   "private": true,
   "description": "单页三国杀棋牌游戏",
   "scripts": {
-    "test": "npm run test:logic && npm run test:ui",
-    "test:logic": "node test/smoke.test.js && node test/content-matrix.test.js && node test/card-rules.test.js && node test/delayed-rules.test.js && node test/dying-rules.test.js && node test/turn-matrix.test.js && node test/hero-matrix.test.js",
+    "assets:early": "node scripts/fetch-early-expansion-assets.mjs",
+    "test": "npm run test:core && npm run test:logic && npm run test:ui",
+    "test:core": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "test:logic": "node test/random.test.js && node test/smoke.test.js && node test/content-matrix.test.js && node test/card-rules.test.js && node test/delayed-rules.test.js && node test/dying-rules.test.js && node test/turn-matrix.test.js && node test/hero-matrix.test.js",
     "test:ui": "playwright test",
-    "serve": "python3 -m http.server 8080",
-    "serve:test": "python3 -m http.server 4173 --bind 127.0.0.1"
+    "build": "vite build",
+    "serve": "vite --host 0.0.0.0 --port 8080",
+    "serve:test": "vite --host 127.0.0.1 --port 4173"
   },
   "devDependencies": {
-    "@playwright/test": "1.62.0"
+    "@playwright/test": "1.62.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.1.5",
+    "vitest": "^4.1.10"
   }
 }

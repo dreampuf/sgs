@@ -1,14 +1,46 @@
 var sgs = sgs || {};
 
 (function(sgs){
-    var srd = Math.random,
+    var randomSource = Math.random,
+        randomSeed = null,
         slice = Array.prototype.slice,
         copy = function(ary){ return slice.apply(ary); };
 
     sgs.func = sgs.func || {};
+    sgs.func.create_seeded_random = function(seed) {
+        var state = (Number(seed) >>> 0) || 0x6d2b79f5;
+        var random = function() {
+            state += 0x6d2b79f5;
+            var value = state;
+            value = Math.imul(value ^ value >>> 15, value | 1);
+            value ^= value + Math.imul(value ^ value >>> 7, value | 61);
+            return ((value ^ value >>> 14) >>> 0) / 4294967296;
+        };
+        random.get_state = function() { return state >>> 0; };
+        return random;
+    };
+    sgs.func.set_random_source = function(source, seed) {
+        if(typeof source != "function") {
+            throw new Error("random source must be a function");
+        }
+        randomSource = source;
+        randomSeed = seed == undefined ? null : Number(seed) >>> 0;
+    };
+    sgs.func.set_random_seed = function(seed) {
+        randomSeed = Number(seed) >>> 0;
+        randomSource = sgs.func.create_seeded_random(randomSeed);
+        return randomSeed;
+    };
+    sgs.func.reset_random_source = function() {
+        randomSource = Math.random;
+        randomSeed = null;
+    };
+    sgs.func.get_random_seed = function() {
+        return randomSeed;
+    };
     sgs.func.rint = function(max) {
         max = max || 100;
-        return srd() * max | 0;
+        return randomSource() * max | 0;
     };
     sgs.func.shuffle = (function(rint) { return function(list) {
         var llen = list.length, 

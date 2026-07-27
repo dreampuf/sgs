@@ -182,7 +182,7 @@ var sgs = sgs || {};
                 case "无懈可击":
                     break;
                 case "桃":
-                    if(pl.blood >= pl.hero.life) {
+                    if(pl.blood >= pl.maxBlood) {
                         break;
                     }
                     choiceable_pl = [pl];
@@ -444,7 +444,7 @@ var sgs = sgs || {};
                 break;
             case "桃园结义":
                 apply_to_targets(bout.player, function(target) {
-                    if(target.blood > 0 && target.blood < target.hero.life) { target.blood++; }
+                    if(target.blood > 0 && target.blood < target.maxBlood) { target.blood++; }
                 });
                 bout.notify("apply_card", plsrc, bout.player, card);
                 break;
@@ -678,7 +678,7 @@ var sgs = sgs || {};
             console.log(_("{0} 装备了 {1}", pltar.nickname, card.name));
             var replaced = pltar.equip[equip_pos];
             if(replaced) {
-                if(replaced.name == "白银狮子" && pltar.blood > 0 && pltar.blood < pltar.hero.life) {
+                if(replaced.name == "白银狮子" && pltar.blood > 0 && pltar.blood < pltar.maxBlood) {
                     pltar.blood++;
                 }
                 discard_card(bout, replaced);
@@ -700,7 +700,7 @@ var sgs = sgs || {};
                     bout.choice.push(new sgs.Operate("闪", plsrc, pltar, "闪"));
                     break;
                 case "桃":
-                    if(pltar.blood < pltar.hero.life) {
+                    if(pltar.blood < pltar.maxBlood) {
                         pltar.blood++;
                         bout.notify("apply_card", plsrc, pltar, card);
                         console.log(_("{0} 恢复一滴血,还剩下{1}滴血", pltar.nickname, pltar.blood));

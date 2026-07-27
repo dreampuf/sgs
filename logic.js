@@ -1,7 +1,9 @@
 var sgs = sgs || {};
 
 (function(sgs){
-    var slice = Array.prototype.slice,
+    var nextPlayerId = 1,
+        nextCardId = 1,
+        slice = Array.prototype.slice,
         splice = Array.prototype.splice,
         copy = function(ary){ return slice.apply(ary); },
         _ = sgs.func.format,
@@ -19,7 +21,7 @@ var sgs = sgs || {};
     /*
      * 玩家对象
      * */
-    sgs.Player = function(nickname, identity, hero, isAI) {
+    sgs.Player = function(nickname, identity, hero, isAI, id) {
         /* 玩家 */ 
         /*
          * nickname : 昵称
@@ -27,6 +29,7 @@ var sgs = sgs || {};
          * hero : 英雄
          * isAI : 是否为AI控制
          */
+        this.id = id || "legacy-player-" + nextPlayerId++;
         this.nickname = nickname;
         this.identity = identity;
         this.hero = hero;
@@ -34,7 +37,8 @@ var sgs = sgs || {};
         this.AI = undefined; 
         this.card = [];
 
-        this.blood = hero.life; /* 玩家当前生命值 */
+        this.maxBlood = hero.life; /* 体力上限属于玩家状态，不能修改共享武将定义 */
+        this.blood = this.maxBlood; /* 玩家当前生命值 */
         this.be_decision = []; /* 被施展的延迟技能 */
         this.equip = []; /* 装备, 0:武器, 1:防具, 2:+1马, 3:-1马 */
         this.status = {}; /* 临时状态 */
@@ -112,6 +116,7 @@ var sgs = sgs || {};
          * gender : 性别.
          */
         this.name = name;
+        this.definitionId = "legacy:hero:" + name;
         this.life = life;
         this.skills = skills;
         this.country = country;        
@@ -130,6 +135,8 @@ var sgs = sgs || {};
          * enable : 是否可用
          */
         this.name = name;
+        this.definitionId = "legacy:card:" + name;
+        this.instanceId = "legacy-card-" + nextCardId++;
         this.color = color;
         this.digit = digit;
         this.enable = true;
@@ -172,10 +179,14 @@ var sgs = sgs || {};
      * 回合操作对象
      * 主要负责和界面交互,以及提供AI计算环境
      * */
-    sgs.Bout = function(player, ailv) {
+    sgs.Bout = function(player, ailv, seed) {
         /* 回合 */
         if(player.length > sgs.PLAYER_NUM) {
             throw new Error("can't more than " + sgs.PLAYER_NUM + " players.");
+        }
+
+        if(seed != undefined) {
+            sgs.func.set_random_seed(seed);
         }
 
         var _bufflog = [], 
@@ -187,8 +198,8 @@ var sgs = sgs || {};
         each(player, function(n, i) { if(i == king) { king_num = n; return false; } });
         player = slice.call(player, king_num).concat(slice.call(player, 0, king_num));
         if(player.length >= 4) { /* 超过四位玩家,主公血量+1 */
+            player[0].maxBlood++;
             player[0].blood++;
-            player[0].hero.life++;
         }
         
         each(player, function(n, i) { 
@@ -202,6 +213,7 @@ var sgs = sgs || {};
         this._bufflog = _bufflog; /* 当前操作日志 */
         this._log = []; /* 操作日志 */
         this.start_time = new Date(); /* 局开始时间 */
+        this.seed = sgs.func.get_random_seed();
         this.ailv = ailv != undefined ? ailv : sgs.DEFAULT_AI_LV;
         this.player = player;/* 玩家 */
         this.playerlen = player.length;

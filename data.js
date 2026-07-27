@@ -225,8 +225,14 @@ sgs.CARD = [
 sgs.EXPANSION_PACKS = {
     "wind": {
         name: "神话再临·风",
-        releaseDate: "2009-03-23",
-        source: "QSanguosha GPL-3.0 image assets, based on early Yoka expansion release history.",
+        implementation: "partial",
+        releaseDate: "2009-03",
+        releaseDatePrecision: "month",
+        source: "Yoka release history and contemporary March 2009 reporting; QSanguosha pinned source and image assets.",
+        heroImplementations: {
+            "黄忠": "complete",
+            "魏延": "complete"
+        },
         heroes: [
             ["夏侯渊", 4, ["神速"], "魏", 1],
             ["曹仁", 4, ["据守"], "魏", 1],
@@ -252,8 +258,10 @@ sgs.EXPANSION_PACKS = {
     },
     "military": {
         name: "神话再临·军争篇",
+        implementation: "complete",
         releaseDate: "2009-09-21",
-        source: "QSanguosha GPL-3.0 image assets, based on early Yoka expansion release history.",
+        releaseDatePrecision: "day",
+        source: "Yoka release history and Sina game archive; QSanguosha pinned source and image assets.",
         heroes: [],
         cards: [
             { 'name': '古锭刀', 'color': 3, 'digit': '1' },
@@ -326,8 +334,10 @@ sgs.EXPANSION_PACKS = {
     },
     "fire": {
         name: "神话再临·火",
+        implementation: "partial",
         releaseDate: "2009-11-16",
-        source: "QSanguosha GPL-3.0 image assets, based on early Yoka expansion release history.",
+        releaseDatePrecision: "day",
+        source: "Yoka release history and contemporary Sina reporting; QSanguosha pinned source and image assets.",
         heroes: [
             ["典韦", 4, ["强袭"], "魏", 1],
             ["荀彧", 3, ["驱虎", "节命"], "魏", 1],
@@ -353,8 +363,10 @@ sgs.EXPANSION_PACKS = {
     },
     "forest": {
         name: "神话再临·林",
+        implementation: "partial",
         releaseDate: "2010-07-29",
-        source: "QSanguosha GPL-3.0 image assets, based on early Yoka expansion release history.",
+        releaseDatePrecision: "day",
+        source: "Yoka release history and contemporary ChinaJoy reporting; QSanguosha pinned source and image assets.",
         heroes: [
             ["徐晃", 4, ["断粮"], "魏", 1],
             ["曹丕", 3, ["行殇", "放逐", "颂威"], "魏", 1],
@@ -390,11 +402,17 @@ sgs.applyExpansionPack = function(packId) {
     sgs.HERO = sgs.HERO.concat(heroes);
     sgs.CARD = sgs.CARD.concat(cards);
     sgs.HEROIMAG_MAPPING = sgs.HEROIMAG_MAPPING || {};
+    sgs.HERO_IMPLEMENTATION_MAPPING =
+        sgs.HERO_IMPLEMENTATION_MAPPING || {};
     sgs.CARDIMAG_MAPPING = sgs.CARDIMAG_MAPPING || {};
     sgs.CARDIMAG_MAPING = sgs.CARDIMAG_MAPING || {};
     for(var heroName in pack.heroImages) {
         if(pack.heroImages.hasOwnProperty(heroName)) {
             sgs.HEROIMAG_MAPPING[heroName] = pack.heroImages[heroName];
+            sgs.HERO_IMPLEMENTATION_MAPPING[heroName] =
+                (pack.heroImplementations &&
+                 pack.heroImplementations[heroName]) ||
+                pack.implementation || "partial";
         }
     }
     for(var cardName in pack.cardImages) {

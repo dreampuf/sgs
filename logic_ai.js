@@ -107,7 +107,7 @@ var _ = sgs.func.format,
             if(i == plsrc || i.blood <= 0) {
                 pls_rel[n] = -1;
             } else {
-                pls_rel[n] += Math.max(0, i.hero.life - i.blood) * config.targetBloodWeight;
+                pls_rel[n] += Math.max(0, i.maxBlood - i.blood) * config.targetBloodWeight;
                 pls_rel[n] += Math.max(0, i.card.length - 2) * config.handWeight;
                 if(strategy.focusLord && i.identity == 0) { pls_rel[n] += 2; }
                 if(strategy.focusRebel && i.identity == 3) { pls_rel[n] += 1.25; }
@@ -211,7 +211,7 @@ var _ = sgs.func.format,
         }
         /* 缺血有桃就桃 */
         var peachs = filter(cards, function(i) { return i.name == "桃"; });
-        if(peachs.length && pl.blood < pl.hero.life) {
+        if(peachs.length && pl.blood < pl.maxBlood) {
             return bout.choice_card(new sgs.Operate("桃", pl, pl, peachs[0]));    
         }
 
