@@ -198,6 +198,31 @@
     background-color: #000;
     opacity: 0.5;
     display: none;
+    z-index: 20;
+    cursor: not-allowed;
+    border-radius: 3px;
+}
+.player_card.card_unusable
+{
+    filter: grayscale(0.9) brightness(0.65);
+    cursor: not-allowed;
+}
+.player_card.card_unusable:after
+{
+    content: "当前不可用";
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    bottom: 8px;
+    z-index: 21;
+    padding: 2px 0;
+    color: #eee4c9;
+    background: rgba(20, 13, 8, 0.82);
+    border: 1px solid rgba(238, 228, 201, 0.45);
+    border-radius: 2px;
+    font-size: 11px;
+    text-align: center;
+    pointer-events: none;
 }
 .card_drag
 {
@@ -291,6 +316,8 @@
     float: left;
     width: 113px;
     height: 106px;
+    object-fit: cover;
+    object-position: center 30%;
 }
 /* 名称 */
 #player_name_back

@@ -5,6 +5,61 @@
     sgs.animation = sgs.animation || {};
     
     var cardInfo = sgs.interface.cardInfo;
+
+    var card_image = function(card) {
+        return sgs.interface.cardImage(card && card.name ? card.name : card);
+    };
+
+    var player_anchor = function(player) {
+        var dom = player && player.dom ? $(player.dom) : $();
+        if(!dom.length) {
+            return { left: $(window).width() / 2, top: $(window).height() / 2 };
+        }
+        return {
+            left: dom.offset().left + dom.outerWidth() / 2,
+            top: dom.offset().top + dom.outerHeight() / 2
+        };
+    };
+
+    var remove_card_dom = function(dom) {
+        if(!dom) {
+            return;
+        }
+        if(dom.card != undefined) {
+            delete dom.card.dom;
+            delete dom.card;
+        }
+        $(dom).remove();
+    };
+
+    var show_discard = function(card, sourceDom) {
+        var discardBox = $('#discard_pile_box'),
+            discard = $('<img class="discard_card" src="' + card_image(card) + '" />'),
+            sourceOffset = sourceDom && $(sourceDom).length ? $(sourceDom).offset() : $('#played_card_box').offset(),
+            oldCards = discardBox.children();
+        discard.appendTo($(document.body)).css({
+            left: sourceOffset.left,
+            top: sourceOffset.top,
+            opacity: 0.95
+        });
+        discard.animate({
+            left: discardBox.offset().left,
+            top: discardBox.offset().top,
+            opacity: 0.82
+        }, 280, function() {
+            discard.appendTo(discardBox).css({ left: 0, top: 0 });
+            oldCards.not(discard).fadeOut(160, function() { $(this).remove(); });
+        });
+    };
+
+    var status_container = function(player, className) {
+        var parent = $(player.dom),
+            container = parent.children('.' + className);
+        if(!container.length) {
+            container = $('<div class="' + className + '"></div>').appendTo(parent);
+        }
+        return container;
+    };
     
     /* 将牌放置到牌堆位置 */
     var get_card = function(cards) {
@@ -32,7 +87,7 @@
     
     /* 将选牌从DOM中抽出（方便牌整理） */
     var drag_out = function(cards) {
-        cards = cards instanceof Array ? cards : [cards];
+        cards = Array.isArray(cards) ? cards : [cards];
         $(cards).each(function (i, d) {
             var temp = $(d.dom),
                 leftcss = temp.offset().left,
@@ -49,9 +104,19 @@
     
     /* 播放声音 */
     var play_sound = function(src) {
-        $('#sound')[0].src = src;
-        $('#sound')[0].play();
+        var audio = $('#sound')[0],
+            playResult;
+        if(!audio || !src || sgs.SOUND_ENABLED === false) {
+            return;
+        }
+        audio.src = src;
+        playResult = audio.play();
+        if(playResult && playResult.catch) {
+            playResult.catch(function() {});
+        }
     };
+
+    sgs.animation.Play_Sound = play_sound;
     
     /* 刷新自己血量 */
     var refresh_blood = function() {
@@ -131,8 +196,8 @@
             targetTop,
             player_dom = player.dom;
         
-        img = $('<img src="' + sgs.EFFECT_IMG_MAPPING[name] + '" />');
-        img2 = $('<img src="' + sgs.EFFECT_IMG_MAPPING[name] + '" />');
+        img = $('<img class="card_flash_effect" src="' + sgs.EFFECT_IMG_MAPPING[name] + '" />');
+        img2 = $('<img class="card_flash_effect" src="' + sgs.EFFECT_IMG_MAPPING[name] + '" />');
         img.appendTo(document.body);
         targetLeft = $(player_dom).offset().left + ($(player_dom).width() - img.width()) / 2;
         if(player.dom == $('#player')[0]) 
@@ -234,10 +299,13 @@
     
     /* 出牌动画 sgs.animation.Play_Card(sgs.interface.bout.player[1], sgs.interface.bout.player[1].card[0]) */
     sgs.animation.Play_Card = function(player, targets, cards) {
-        cards = cards instanceof Array ? cards : [cards];
+        cards = Array.isArray(cards) ? cards : [cards];
         var flash = function(dom, name, index) {
             sgs.animation.Card_Flash(player, name); /* 效果动画 */
-            play_sound(sgs.SOUND_FILE_MAPPING.card[name][player.hero.gender]); /* 声音 */
+            var card_sounds = sgs.SOUND_FILE_MAPPING.card[name];
+            if(card_sounds && card_sounds[player.hero.gender]) {
+                play_sound(card_sounds[player.hero.gender]); /* 声音 */
+            }
             /*
              * 1. 把现有卡牌往后移(动画)
              * 2. 加上要添加的卡牌
@@ -255,7 +323,10 @@
                     top: -cardInfo.width / 2,
                 }, 300);
             });
-            $(dom).prependTo($('#played_card_box'));
+            $(dom)
+                .removeClass('player_card card_unusable')
+                .addClass('table_card')
+                .prependTo($('#played_card_box'));
             $(dom).css({
                 left: domLeft - $('#played_card_box').offset().left,
                 top: domTop - $('#played_card_box').offset().top,
@@ -265,16 +336,14 @@
                 top: -cardInfo.width / 2,
             }, 300, function() {
                 setTimeout(function() {
-                    $(dom).animate({
-                        opacity: 0,
-                    }, 500, function() {
-                        if(dom.card != undefined) {
-                            delete dom.card.dom;
-                            delete dom.card;
-                        }
-                        $(dom).remove();
+                    var isDelayed = name == "乐不思蜀" || name == "兵粮寸断" || name == "闪电";
+                    if(!isDelayed) {
+                        show_discard({ name: name }, dom);
+                    }
+                    $(dom).animate({ opacity: 0 }, 220, function() {
+                        remove_card_dom(dom);
                     });
-                }, 3000);
+                }, 900);
             });
         };
         if(player == $('#player')[0].player) {
@@ -296,6 +365,121 @@
             });
         }
         $(player.dom).find('.card_count span').text(player.card.length);
+    };
+
+    sgs.animation.Discard_Card = function(player, cards) {
+        cards = Array.isArray(cards) ? cards : [cards];
+        if(player == $('#player')[0].player) {
+            drag_out(cards);
+        }
+        $.each(cards, function(i, card) {
+            var dom = card.dom;
+            if(!dom) {
+                dom = $('<img class="table_card" src="' + card_image(card) + '" />')
+                    .appendTo(document.body)
+                    .css({
+                        left: player_anchor(player).left - cardInfo.width / 2,
+                        top: player_anchor(player).top - cardInfo.height / 2
+                    })[0];
+            }
+            $(dom).removeClass('player_card card_unusable').addClass('table_card');
+            show_discard(card, dom);
+            $(dom).animate({ opacity: 0 }, 260, function() {
+                remove_card_dom(dom);
+            });
+        });
+        if(player == $('#player')[0].player) {
+            sgs.animation.Arrange_Card(player.card);
+        }
+        $(player.dom).find('.card_count span').text(player.card.length);
+    };
+
+    sgs.animation.Delayed_On = function(player, card, previousPlayer) {
+        if(previousPlayer) {
+            sgs.animation.Delayed_Off(previousPlayer, card, "move");
+        }
+        var zone = status_container(player, 'delayed_zone'),
+            selector = '.delayed_status[data-card-name="' + card.name + '"]';
+        if(zone.find(selector).length) {
+            return;
+        }
+        var status = $('<div class="delayed_status" data-card-name="' + card.name +
+            '" title="' + card.name + '（判定区）"><img src="' + card_image(card) +
+            '" /><span>' + card.name + '</span></div>');
+        status.appendTo(zone).css({ opacity: 0, transform: 'scale(1.35)' }).animate({
+            opacity: 1
+        }, 220, function() {
+            status.css('transform', 'scale(1)');
+        });
+    };
+
+    sgs.animation.Delayed_Off = function(player, card, reason) {
+        if(!player || !card) {
+            return;
+        }
+        var zone = status_container(player, 'delayed_zone'),
+            status = zone.find('.delayed_status[data-card-name="' + card.name + '"]');
+        status.attr('data-exit-reason', reason || 'resolve').addClass('delayed_resolving')
+            .animate({ opacity: 0 }, 240, function() { status.remove(); });
+    };
+
+    sgs.animation.Nullified = function(player, targets, cancelledCard) {
+        var names = [],
+            targetList = Array.isArray(targets) ? targets : [targets];
+        $.each(targetList, function(i, target) {
+            if(target && target.nickname) {
+                names.push(target.nickname.replace(/_/g, ''));
+                $(target.dom).addClass('nullified_target');
+                setTimeout(function() { $(target.dom).removeClass('nullified_target'); }, 700);
+            }
+        });
+        var effect = $('<div class="nullified_effect"><strong>无懈可击</strong><span>抵消 ' +
+            (cancelledCard ? cancelledCard.name : '锦囊') + '</span><small>' +
+            (names.length ? names.join('、') : '本次效果') + '</small></div>');
+        effect.appendTo($('#main')).animate({ opacity: 1, top: '39%' }, 160)
+            .delay(520).animate({ opacity: 0, top: '35%' }, 220, function() { effect.remove(); });
+    };
+
+    sgs.animation.Status_Change = function(player, name, enabled) {
+        var labels = {
+                "chained": "横置",
+                "jiu_damage": "酒",
+                "lebusishu": "跳过出牌",
+                "bingliang": "跳过摸牌"
+            },
+            container = status_container(player, 'status_strip'),
+            token = container.find('.status_token[data-status="' + name + '"]');
+        $(player.dom).toggleClass('status_' + name, !!enabled);
+        if(enabled && !token.length) {
+            $('<span class="status_token" data-status="' + name + '">' +
+                (labels[name] || name) + '</span>').appendTo(container).hide().fadeIn(160);
+        } else if(!enabled) {
+            token.fadeOut(160, function() { token.remove(); });
+        }
+    };
+
+    sgs.animation.Judge_Card = function(player, card) {
+        var anchor = player_anchor(player),
+            judge = $('<div class="judge_effect"><span>判定</span><img src="' +
+                card_image(card) + '" /></div>');
+        judge.appendTo(document.body).css({
+            left: anchor.left - 47,
+            top: anchor.top - 66,
+            opacity: 0
+        }).animate({ opacity: 1, top: anchor.top - 86 }, 180)
+          .delay(650).animate({ opacity: 0 }, 220, function() { judge.remove(); });
+    };
+
+    sgs.animation.Show_Card = function(player, card) {
+        var anchor = player_anchor(player),
+            shown = $('<div class="show_card_effect"><span>展示</span><img src="' +
+                card_image(card) + '" /></div>');
+        shown.appendTo(document.body).css({
+            left: anchor.left - 47,
+            top: anchor.top - 66,
+            opacity: 0
+        }).animate({ opacity: 1 }, 160)
+          .delay(650).animate({ opacity: 0 }, 220, function() { shown.remove(); });
     };
     
     /* 装备装备动画 */
@@ -354,6 +538,17 @@
         }
         play_sound(sgs.SOUND_FILE_MAPPING.equipment[type]);
     };
+
+    sgs.animation.Remove_Equipment = function(player, card, type) {
+        if(player == $('#player')[0].player) {
+            var equipId = type == 0 ? '#attack' : (type == 1 ? '#defend' : (type == 2 ? '#attack_horse' : '#defend_horse'));
+            $(equipId).children().fadeOut(160, function() { $(this).remove(); });
+        } else {
+            var equipClass = type == 0 ? '.attack' : (type == 1 ? '.defend' : (type == 2 ? '.attack_horse' : '.defend_horse'));
+            $(player.dom).find(equipClass).empty();
+        }
+        show_discard(card, player.dom);
+    };
     
     /* 整理牌 */
     sgs.animation.Arrange_Card = function (cards) {
@@ -377,8 +572,13 @@
          * name      - 技能（或英雄）名称
          * isHero    - 是否为英雄
          */
-        var hero_prop = sgs.interface.HERO_PROPERTY_MAPPING;
-            skill_exp = sgs.SKILL_EXPLANATION_MAPPING;
+        var hero_prop = sgs.interface.HERO_PROPERTY_MAPPING,
+            skill_exp = sgs.SKILL_EXPLANATION_MAPPING,
+            skill_status = sgs.SKILL_IMPLEMENTATION_STATUS || {},
+            status_label = {
+                "missing": '<font style="color:#ff8a80;">[规则未实现]</font> ',
+                "partial": '<font style="color:#ffd180;">[部分实现]</font> '
+            },
             explanation = '',
             targetLeft = (clientX + $('#explanation').width()) > $(window).width() ?
                         clientX - $('#explanation').width() : clientX,
@@ -389,12 +589,16 @@
             var skills = hero_prop[name].skill;
             $(skills).each(function(i, d) {
                 explanation += [
-                    '<font style="font-weight:bold; color:#65ffcc;">', d, '</font>: ', skill_exp[d],
+                    '<font style="font-weight:bold; color:#65ffcc;">', d, '</font>: ',
+                    status_label[skill_status[d]] || '', skill_exp[d],
                     i + 1 == skills.length ? '' : '<br /><br />'
                 ].join('');
             });
         } else {
-            explanation = ['<font style="font-weight:bold; color:#65ffcc;">', name, '</font>: ', skill_exp[name]].join('');
+            explanation = [
+                '<font style="font-weight:bold; color:#65ffcc;">', name, '</font>: ',
+                status_label[skill_status[name]] || '', skill_exp[name]
+            ].join('');
         }
         explanation = explanation.replace('★', '<br />★');
         $('#explanation').html(explanation);
@@ -431,6 +635,22 @@
     };
     
     /* 掉血动画 sgs.animation.Get_Damage(true, sgs.interface.bout.player[1]) */
+    sgs.animation.Refresh_Blood = function(player) {
+        var bloodImgs = '',
+            i;
+        if(!player || !player.dom) {
+            return;
+        }
+        for(i = 0; i < Math.max(0, player.blood); i++) {
+            bloodImgs += '<img src="img/system/blod_1.png" />';
+        }
+        if(player.dom == $('#player')[0]) {
+            $('#player_blod_1').html(bloodImgs);
+        } else {
+            $(player.dom).find('.blods_1').html(bloodImgs);
+        }
+    };
+
     sgs.animation.Get_Damage = function(player) {
         var left_num,
             top_num,
@@ -474,9 +694,25 @@
         setTimeout(function() {
             damage_img.animate({ opacity: 0 }, 100, function() { damage_img.remove(); });
         }, 1000);
-        $(player.dom).find('.blods_1 img').last().remove();
+        sgs.animation.Refresh_Blood(player);
         play_sound(sgs.SOUND_FILE_MAPPING.damage.common);
-        refresh_blood();
-    }
+    };
+
+    sgs.animation.Player_Death = function(player) {
+        var dead_image = sgs.DEAD_IDENTITY_MAPPING[player.identity],
+            player_dom = $(player.dom);
+        if(!dead_image) {
+            return;
+        }
+        if(player.dom == $('#player')[0]) {
+            $('#player_identity img').attr('src', dead_image);
+            $('#player_head_img').css('filter', 'grayscale(1)');
+            $('#player_cover').css('display', 'block');
+        } else {
+            player_dom.find('.role_identity img').attr('src', dead_image);
+            player_dom.find('.head_img img').css('filter', 'grayscale(1)');
+            player_dom.find('.role_cover').css('display', 'block');
+        }
+    };
     
 })(sgs);

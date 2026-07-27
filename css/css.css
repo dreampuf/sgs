@@ -57,6 +57,226 @@ body
     left:50%;
     top:50%;
 }
+.table_card
+{
+    position:absolute;
+    width:93px;
+    height:131px;
+    z-index:70;
+    border-radius:3px;
+    box-shadow:1px 1px 5px 1px #000;
+    pointer-events:none;
+}
+.card_flash_effect
+{
+    max-width:240px;
+    max-height:240px;
+    object-fit:contain;
+    pointer-events:none;
+}
+#discard_pile_box
+{
+    position:absolute;
+    width:66px;
+    height:93px;
+    right:190px;
+    top:248px;
+    z-index:15;
+    border:1px dashed rgba(91, 56, 34, 0.55);
+    border-radius:3px;
+    background:rgba(45, 28, 16, 0.12);
+}
+#discard_pile_box:before
+{
+    content:"弃牌堆";
+    position:absolute;
+    left:0;
+    right:0;
+    top:-18px;
+    color:#4d3521;
+    font-size:11px;
+    text-align:center;
+}
+.discard_card
+{
+    position:absolute;
+    width:66px;
+    height:93px;
+    z-index:16;
+    border-radius:3px;
+    box-shadow:1px 1px 4px #000;
+    pointer-events:none;
+}
+.delayed_zone
+{
+    position:absolute;
+    z-index:35;
+    display:flex;
+    gap:3px;
+    pointer-events:none;
+}
+.role > .delayed_zone
+{
+    left:4px;
+    top:91px;
+    width:122px;
+}
+#player > .delayed_zone
+{
+    right:158px;
+    top:-36px;
+    min-width:120px;
+    justify-content:flex-end;
+}
+.delayed_status
+{
+    position:relative;
+    width:34px;
+    height:42px;
+    overflow:hidden;
+    color:#fff4cf;
+    background:#25170e;
+    border:2px solid #d2a33e;
+    border-radius:3px;
+    box-shadow:0 0 7px #f0c65a;
+    transition:transform 0.2s ease;
+}
+.delayed_status img
+{
+    width:34px;
+    height:48px;
+    object-fit:cover;
+}
+.delayed_status span
+{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    background:rgba(0, 0, 0, 0.78);
+    font-size:9px;
+    text-align:center;
+}
+.delayed_status.delayed_resolving
+{
+    filter:brightness(1.5);
+    transform:scale(1.2);
+}
+.status_strip
+{
+    position:absolute;
+    z-index:36;
+    display:flex;
+    gap:3px;
+    pointer-events:none;
+}
+.role > .status_strip
+{
+    right:4px;
+    top:91px;
+    max-width:86px;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+}
+#player > .status_strip
+{
+    right:158px;
+    top:-62px;
+    min-width:180px;
+    justify-content:flex-end;
+}
+.status_token
+{
+    padding:2px 5px;
+    color:#fff4cf;
+    background:rgba(75, 34, 17, 0.92);
+    border:1px solid #e4b45c;
+    border-radius:8px;
+    font-size:10px;
+    box-shadow:0 0 4px rgba(255, 206, 104, 0.8);
+}
+.status_chained
+{
+    outline:2px dashed #87c9df;
+    outline-offset:-3px;
+}
+.nullified_effect
+{
+    position:absolute;
+    z-index:120;
+    left:50%;
+    top:43%;
+    width:190px;
+    margin-left:-95px;
+    padding:9px 12px;
+    color:#f8e8b8;
+    background:rgba(18, 17, 22, 0.94);
+    border:2px solid #89c5e8;
+    border-radius:6px;
+    box-shadow:0 0 18px #bde4ff;
+    opacity:0;
+    text-align:center;
+    pointer-events:none;
+}
+.nullified_effect strong,
+.nullified_effect span,
+.nullified_effect small
+{
+    display:block;
+}
+.nullified_effect strong
+{
+    color:#c8ecff;
+    font-size:18px;
+}
+.nullified_effect span
+{
+    margin-top:3px;
+    text-decoration:line-through;
+}
+.nullified_effect small
+{
+    margin-top:2px;
+    opacity:0.8;
+}
+.nullified_target
+{
+    animation:nullified_target_flash 0.18s linear 4 alternate;
+}
+@keyframes nullified_target_flash
+{
+    from { filter:none; }
+    to { filter:grayscale(1) brightness(1.8); }
+}
+.judge_effect,
+.show_card_effect
+{
+    position:absolute;
+    z-index:110;
+    width:93px;
+    height:150px;
+    color:#fff2bd;
+    text-align:center;
+    pointer-events:none;
+}
+.judge_effect span,
+.show_card_effect span
+{
+    display:block;
+    margin-bottom:3px;
+    padding:2px;
+    background:rgba(0,0,0,0.82);
+    border-radius:8px;
+    font-size:12px;
+}
+.judge_effect img,
+.show_card_effect img
+{
+    width:93px;
+    height:131px;
+    border-radius:3px;
+    box-shadow:0 0 12px #f3d778;
+}
 
 /***** 发牌区 *****/
 #cards_last
@@ -130,4 +350,31 @@ body
 #load_imgs
 {
     display: none;
+}
+
+#start_options {
+    position: absolute;
+    left: 390px;
+    top: 318px;
+    z-index: 20;
+    padding: 8px 12px;
+    color: #f8e6b0;
+    background: rgba(28, 12, 6, 0.82);
+    border: 1px solid #8b5a2b;
+    border-radius: 4px;
+    font-size: 14px;
+}
+#start_options label {
+    margin-right: 8px;
+    white-space: nowrap;
+}
+
+#start_options .ai_option {
+    display: inline-block;
+    margin-left: 6px;
+}
+#start_options select {
+    background: #2b160c;
+    color: #f8e6b0;
+    border: 1px solid #8b5a2b;
 }

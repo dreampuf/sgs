@@ -1,0 +1,16 @@
+{
+  "name": "sgs-single-page",
+  "version": "0.2.0",
+  "private": true,
+  "description": "单页三国杀棋牌游戏",
+  "scripts": {
+    "test": "npm run test:logic && npm run test:ui",
+    "test:logic": "node test/smoke.test.js && node test/content-matrix.test.js && node test/card-rules.test.js && node test/delayed-rules.test.js && node test/dying-rules.test.js && node test/turn-matrix.test.js && node test/hero-matrix.test.js",
+    "test:ui": "playwright test",
+    "serve": "python3 -m http.server 8080",
+    "serve:test": "python3 -m http.server 4173 --bind 127.0.0.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.0"
+  }
+}

@@ -1,6 +1,11 @@
-﻿var sgs = sgs || {};
+var sgs = sgs || {};
 sgs.PLAYER_NUM = 4;
-sgs.DEFAULT_AI_LV = 0;
+sgs.DEFAULT_AI_LV = 1;
+sgs.AI_LEVELS = {
+    0: { name: "简单", description: "偏随机，保留基础防御。" },
+    1: { name: "普通", description: "按身份关系选择目标并保留关键牌。" },
+    2: { name: "困难", description: "结合身份、血量、手牌和武将定位进行策略决策。" }
+};
 sgs.DELAY = 1000;
 
 sgs.CARD_MAGIC_RANGE_MAPPING = {
@@ -31,10 +36,12 @@ sgs.EQUIP_RANGE_MAPPING = {
     "诸葛连弩": 1,
     "寒冰剑" : 2,
     "雌雄双股剑" : 2,
-    "清鉷剑" : 2,
+    "青釭剑" : 2,
+    "古锭刀" : 2,
     "青龙偃月刀" : 3,
     "丈八蛇矛" : 3,
     "贯石斧" : 4,
+    "朱雀羽扇" : 4,
     "方天画戟" : 5,
     "麒麟弓" : 5,
 };
@@ -50,11 +57,16 @@ sgs.EQUIP_TYPE_MAPPING = {
     "方天画戟" : 0,
     "麒麟弓" : 0,
     "寒冰剑" : 0,
+    "古锭刀" : 0,
+    "朱雀羽扇" : 0,
     "八卦阵" : 1,
     "仁王盾" : 1,
+    "藤甲" : 1,
+    "白银狮子" : 1,
     "绝影" : 2,
     "的卢" : 2,
     "爪黄飞电" : 2,
+    "骅骝" : 2,
     "赤兔" : 3,
     "大宛" : 3,
     "紫骍" : 3,
@@ -70,7 +82,7 @@ sgs.HERO = [
     ["曹操", 4, ["护驾", "奸雄"], "魏", 1],
     ["张辽", 4, ["突袭"], "魏", 1],
     ["郭嘉", 3, ["天妒", "遗计"], "魏", 1],
-    ["夏侯淳", 4, ["刚烈"], "魏", 1],
+    ["夏侯惇", 4, ["刚烈"], "魏", 1],
     ["司马懿", 3, ["反馈", "鬼才"], "魏", 1],
     ["许褚", 4, ["裸衣"], "魏", 1],
     ["甄姬", 3, ["洛神", "倾国"], "魏", 0],
@@ -210,13 +222,207 @@ sgs.CARD = [
 ];
 
 
+sgs.EXPANSION_PACKS = {
+    "wind": {
+        name: "神话再临·风",
+        releaseDate: "2009-03-23",
+        source: "QSanguosha GPL-3.0 image assets, based on early Yoka expansion release history.",
+        heroes: [
+            ["夏侯渊", 4, ["神速"], "魏", 1],
+            ["曹仁", 4, ["据守"], "魏", 1],
+            ["黄忠", 4, ["烈弓"], "蜀", 1],
+            ["魏延", 4, ["狂骨"], "蜀", 1],
+            ["小乔", 3, ["天香", "红颜"], "吴", 0],
+            ["周泰", 4, ["不屈"], "吴", 1],
+            ["张角", 3, ["雷击", "鬼道", "黄天"], "群", 1],
+            ["于吉", 3, ["蛊惑"], "群", 1]
+        ],
+        cards: [],
+        heroImages: {
+            "夏侯渊": "expansion/shenhua/hero/xiahouyuan.jpg",
+            "曹仁": "expansion/shenhua/hero/caoren.jpg",
+            "黄忠": "expansion/shenhua/hero/huangzhong.jpg",
+            "魏延": "expansion/shenhua/hero/weiyan.jpg",
+            "小乔": "expansion/shenhua/hero/xiaoqiao.jpg",
+            "周泰": "expansion/shenhua/hero/zhoutai.jpg",
+            "张角": "expansion/shenhua/hero/zhangjiao.jpg",
+            "于吉": "expansion/shenhua/hero/yuji.jpg"
+        },
+        cardImages: {}
+    },
+    "military": {
+        name: "神话再临·军争篇",
+        releaseDate: "2009-09-21",
+        source: "QSanguosha GPL-3.0 image assets, based on early Yoka expansion release history.",
+        heroes: [],
+        cards: [
+            { 'name': '古锭刀', 'color': 3, 'digit': '1' },
+            { 'name': '藤甲', 'color': 3, 'digit': '2' },
+            { 'name': '酒', 'color': 3, 'digit': '3' },
+            { 'name': '雷杀', 'color': 3, 'digit': '4' },
+            { 'name': '雷杀', 'color': 3, 'digit': '5' },
+            { 'name': '雷杀', 'color': 3, 'digit': '6' },
+            { 'name': '雷杀', 'color': 3, 'digit': '7' },
+            { 'name': '雷杀', 'color': 3, 'digit': '8' },
+            { 'name': '酒', 'color': 3, 'digit': '9' },
+            { 'name': '兵粮寸断', 'color': 3, 'digit': '10' },
+            { 'name': '铁索连环', 'color': 3, 'digit': '11' },
+            { 'name': '铁索连环', 'color': 3, 'digit': '12' },
+            { 'name': '无懈可击', 'color': 3, 'digit': '13' },
+            { 'name': '白银狮子', 'color': 2, 'digit': '1' },
+            { 'name': '藤甲', 'color': 2, 'digit': '2' },
+            { 'name': '酒', 'color': 2, 'digit': '3' },
+            { 'name': '兵粮寸断', 'color': 2, 'digit': '4' },
+            { 'name': '雷杀', 'color': 2, 'digit': '5' },
+            { 'name': '雷杀', 'color': 2, 'digit': '6' },
+            { 'name': '雷杀', 'color': 2, 'digit': '7' },
+            { 'name': '雷杀', 'color': 2, 'digit': '8' },
+            { 'name': '酒', 'color': 2, 'digit': '9' },
+            { 'name': '铁索连环', 'color': 2, 'digit': '10' },
+            { 'name': '铁索连环', 'color': 2, 'digit': '11' },
+            { 'name': '铁索连环', 'color': 2, 'digit': '12' },
+            { 'name': '铁索连环', 'color': 2, 'digit': '13' },
+            { 'name': '无懈可击', 'color': 1, 'digit': '1' },
+            { 'name': '火攻', 'color': 1, 'digit': '2' },
+            { 'name': '火攻', 'color': 1, 'digit': '3' },
+            { 'name': '火杀', 'color': 1, 'digit': '4' },
+            { 'name': '桃', 'color': 1, 'digit': '5' },
+            { 'name': '桃', 'color': 1, 'digit': '6' },
+            { 'name': '火杀', 'color': 1, 'digit': '7' },
+            { 'name': '闪', 'color': 1, 'digit': '8' },
+            { 'name': '闪', 'color': 1, 'digit': '9' },
+            { 'name': '火杀', 'color': 1, 'digit': '10' },
+            { 'name': '闪', 'color': 1, 'digit': '11' },
+            { 'name': '闪', 'color': 1, 'digit': '12' },
+            { 'name': '无懈可击', 'color': 1, 'digit': '13' },
+            { 'name': '朱雀羽扇', 'color': 0, 'digit': '1' },
+            { 'name': '桃', 'color': 0, 'digit': '2' },
+            { 'name': '桃', 'color': 0, 'digit': '3' },
+            { 'name': '火杀', 'color': 0, 'digit': '4' },
+            { 'name': '火杀', 'color': 0, 'digit': '5' },
+            { 'name': '闪', 'color': 0, 'digit': '6' },
+            { 'name': '闪', 'color': 0, 'digit': '7' },
+            { 'name': '闪', 'color': 0, 'digit': '8' },
+            { 'name': '酒', 'color': 0, 'digit': '9' },
+            { 'name': '闪', 'color': 0, 'digit': '10' },
+            { 'name': '闪', 'color': 0, 'digit': '11' },
+            { 'name': '火攻', 'color': 0, 'digit': '12' },
+            { 'name': '骅骝', 'color': 0, 'digit': '13' }
+        ],
+        heroImages: {},
+        cardImages: {
+            "火杀": "expansion/shenhua/card/fire_slash.png",
+            "雷杀": "expansion/shenhua/card/thunder_slash.png",
+            "酒": "expansion/shenhua/card/analeptic.png",
+            "兵粮寸断": "expansion/shenhua/card/supply_shortage.png",
+            "铁索连环": "expansion/shenhua/card/iron_chain.png",
+            "火攻": "expansion/shenhua/card/fire_attack.png",
+            "古锭刀": "expansion/shenhua/card/guding_blade.jpg",
+            "藤甲": "expansion/shenhua/card/vine.jpg",
+            "白银狮子": "expansion/shenhua/card/silver_lion.jpg",
+            "朱雀羽扇": "expansion/shenhua/card/fan.jpg",
+            "骅骝": "expansion/shenhua/card/hualiu.jpg"
+        }
+    },
+    "fire": {
+        name: "神话再临·火",
+        releaseDate: "2009-11-16",
+        source: "QSanguosha GPL-3.0 image assets, based on early Yoka expansion release history.",
+        heroes: [
+            ["典韦", 4, ["强袭"], "魏", 1],
+            ["荀彧", 3, ["驱虎", "节命"], "魏", 1],
+            ["庞统", 3, ["连环", "涅槃"], "蜀", 1],
+            ["卧龙诸葛亮", 3, ["八阵", "火计", "看破"], "蜀", 1],
+            ["太史慈", 4, ["天义"], "吴", 1],
+            ["袁绍", 4, ["乱击", "血裔"], "群", 1],
+            ["颜良文丑", 4, ["双雄"], "群", 1],
+            ["庞德", 4, ["马术", "猛进"], "群", 1]
+        ],
+        cards: [],
+        heroImages: {
+            "典韦": "expansion/shenhua/hero/dianwei.jpg",
+            "荀彧": "expansion/shenhua/hero/xunyu.jpg",
+            "庞统": "expansion/shenhua/hero/pangtong.jpg",
+            "卧龙诸葛亮": "expansion/shenhua/hero/wolong.jpg",
+            "太史慈": "expansion/shenhua/hero/taishici.jpg",
+            "袁绍": "expansion/shenhua/hero/yuanshao.jpg",
+            "颜良文丑": "expansion/shenhua/hero/yanliangwenchou.jpg",
+            "庞德": "expansion/shenhua/hero/pangde.jpg"
+        },
+        cardImages: {}
+    },
+    "forest": {
+        name: "神话再临·林",
+        releaseDate: "2010-07-29",
+        source: "QSanguosha GPL-3.0 image assets, based on early Yoka expansion release history.",
+        heroes: [
+            ["徐晃", 4, ["断粮"], "魏", 1],
+            ["曹丕", 3, ["行殇", "放逐", "颂威"], "魏", 1],
+            ["孟获", 4, ["祸首", "再起"], "蜀", 1],
+            ["祝融", 4, ["巨象", "烈刃"], "蜀", 0],
+            ["孙坚", 4, ["英魂"], "吴", 1],
+            ["鲁肃", 3, ["好施", "缔盟"], "吴", 1],
+            ["董卓", 8, ["酒池", "肉林", "崩坏", "暴虐"], "群", 1],
+            ["贾诩", 3, ["完杀", "乱武", "帷幕"], "群", 1]
+        ],
+        cards: [],
+        heroImages: {
+            "徐晃": "expansion/shenhua/hero/xuhuang.jpg",
+            "曹丕": "expansion/shenhua/hero/caopi.jpg",
+            "孟获": "expansion/shenhua/hero/menghuo.jpg",
+            "祝融": "expansion/shenhua/hero/zhurong.jpg",
+            "孙坚": "expansion/shenhua/hero/sunjian.jpg",
+            "鲁肃": "expansion/shenhua/hero/lusu.jpg",
+            "董卓": "expansion/shenhua/hero/dongzhuo.jpg",
+            "贾诩": "expansion/shenhua/hero/jiaxu.jpg"
+        },
+        cardImages: {}
+    }
+};
+
+sgs.applyExpansionPack = function(packId) {
+    var pack = sgs.EXPANSION_PACKS && sgs.EXPANSION_PACKS[packId];
+    if(!pack || pack.enabled) {
+        return false;
+    }
+    var heroes = sgs.Hero ? sgs.func.map(pack.heroes || [], function(i){ return new sgs.Hero(i[0], i[1], i[2], i[3], i[4]); }) : (pack.heroes || []);
+    var cards = sgs.Card ? sgs.func.map(pack.cards || [], function(i){ return new sgs.Card(i["name"], i["color"], i["digit"]); }) : (pack.cards || []);
+    sgs.HERO = sgs.HERO.concat(heroes);
+    sgs.CARD = sgs.CARD.concat(cards);
+    sgs.HEROIMAG_MAPPING = sgs.HEROIMAG_MAPPING || {};
+    sgs.CARDIMAG_MAPPING = sgs.CARDIMAG_MAPPING || {};
+    sgs.CARDIMAG_MAPING = sgs.CARDIMAG_MAPING || {};
+    for(var heroName in pack.heroImages) {
+        if(pack.heroImages.hasOwnProperty(heroName)) {
+            sgs.HEROIMAG_MAPPING[heroName] = pack.heroImages[heroName];
+        }
+    }
+    for(var cardName in pack.cardImages) {
+        if(pack.cardImages.hasOwnProperty(cardName)) {
+            sgs.CARDIMAG_MAPPING[cardName] = pack.cardImages[cardName];
+            sgs.CARDIMAG_MAPING[cardName] = "img/" + pack.cardImages[cardName];
+        }
+    }
+    sgs.CARD_MAGIC_RANGE_MAPPING["兵粮寸断"] = 1;
+    sgs.CARD_MAGIC_RANGE_MAPPING["铁索连环"] = -1;
+    sgs.CARD_MAGIC_RANGE_MAPPING["火攻"] = 1;
+    sgs.CARD_CONTERACT_MAPPING["火杀"] = "闪";
+    sgs.CARD_CONTERACT_MAPPING["雷杀"] = "闪";
+    if(sgs.interface && sgs.interface.HERO_PROPERTY_MAPPING) {
+        sgs.func.each(heroes, function(n, hero) {
+            sgs.interface.HERO_PROPERTY_MAPPING[hero.name] = { "skill": hero.skills };
+        });
+    }
+    pack.enabled = true;
+    return true;
+};
 
 
 sgs.HEROIMAG_MAPPING = {
     "曹操": "caocao.png",
     "张辽": "zhangliao.png",
     "郭嘉": "guojia.png",
-    "夏侯淳": "xiahoudun.png",
+    "夏侯惇": "xiahoudun.png",
     "司马懿": "simayi.png",
     "许褚": "xuchu.png",
     "甄姬": "zhenji.png",
@@ -336,12 +542,20 @@ sgs.EQUIP_IMG_MAPPING = {
     "丈八蛇矛": "img/generals/equipment/spear.png",
     "爪黄飞电": "img/generals/equipment/zhuahuangfeidian.png",
     "紫骍": "img/generals/equipment/zixing.png",
+    "寒冰剑": "img/generals/equipment/ice_sword.png",
+    "仁王盾": "img/generals/equipment/renwang_shield.png",
+    "古锭刀": "img/expansion/shenhua/card/guding_blade.jpg",
+    "藤甲": "img/expansion/shenhua/equipment/vine.png",
+    "白银狮子": "img/expansion/shenhua/equipment/silver_lion.png",
+    "朱雀羽扇": "img/expansion/shenhua/equipment/fan.png",
+    "骅骝": "img/expansion/shenhua/card/hualiu.jpg",
 };
 
 sgs.DEAD_IDENTITY_MAPPING = {
-    1: "img/system/dead/liegeman_dead.png",
-    2: "img/system/dead/traitor_dead.png",
-    3: "img/system/dead/enemy_dead.png",
+    0: "img/system/dead/lord.png",
+    1: "img/system/dead/loyalist.png",
+    2: "img/system/dead/renegade.png",
+    3: "img/system/dead/rebel.png",
 };
 
 sgs.IDENTITY_IMG_MAPPING = {
@@ -389,6 +603,9 @@ sgs.SOUND_FILE_MAPPING = {
         "common": "sound/system/injure2.ogg",
     },
 };
+/* 当前仓库未包含 sound/ 素材。关闭请求可避免每次动画产生 404；
+ * 补齐音频文件后将此值改为 true 即可恢复。 */
+sgs.SOUND_ENABLED = false;
     
 sgs.SKILL_EXPLANATION_MAPPING = {
     "护驾": "主公技，当你需要使用（或打出）一张【闪】时，你可以发动护驾。所有魏势力角色按行动顺序依次选择是否打出一张【闪】“提供”给你（视为由你使用或打出），直到有一名角色或没有任何角色决定如此做时为止",
@@ -431,7 +648,62 @@ sgs.SKILL_EXPLANATION_MAPPING = {
     "青囊": "出牌阶段，你可以主动弃掉一张手牌，令任一目标角色回复1点体力。每回合限用一次",
     "闭月": "回合结束阶段，可摸一张牌",
     "离间": "出牌阶段，你可以弃一张牌并选择两名男性角色。若如此作，视为其中一名男性角色对另一名男性角色使用一张【决斗】。（此【决斗】不能被【无懈可击】响应）。每回合限用一次",
+    "神速": "你可以跳过判定阶段和摸牌阶段，或跳过出牌阶段并弃置一张装备牌；每选择一项，视为对一名角色使用一张无距离限制的【杀】",
+    "据守": "结束阶段，你可以摸三张牌，然后将武将牌翻面",
+    "烈弓": "你使用【杀】指定目标后，若其手牌数不小于你的体力值，或不大于你的攻击范围，你可以令其不能使用【闪】响应",
+    "狂骨": "锁定技，当你对距离1以内的角色造成1点伤害后，你回复1点体力",
+    "天香": "当你受到伤害时，你可以弃置一张红桃手牌并将伤害转移给另一名角色；伤害结算后，该角色摸等同于其已损失体力值的牌",
+    "红颜": "锁定技，你的黑桃牌视为红桃牌",
+    "不屈": "当你的体力扣减至0或更低时，每扣减1点体力亮出一张牌置于武将牌上；若这些牌点数均不同，你不会死亡",
+    "雷击": "每当你使用或打出【闪】时，可以令一名角色判定；若结果为黑桃，你对其造成2点雷电伤害",
+    "鬼道": "一名角色的判定牌生效前，你可以用一张黑色牌替换之",
+    "黄天": "主公技，其他群势力角色的出牌阶段限一次，其可以交给你一张【闪】或【闪电】",
+    "蛊惑": "你可以扣置一张手牌并声明一种基本牌或普通锦囊牌；其他角色质疑后验明此牌，并按结果结算声明或质疑惩罚",
+    "强袭": "出牌阶段限一次，你可以失去1点体力或弃置一张武器牌，对攻击范围内的一名角色造成1点伤害",
+    "驱虎": "出牌阶段限一次，你与一名体力值大于你的角色拼点；若你赢，其对你指定的攻击范围内另一名角色造成1点伤害，否则其对你造成1点伤害",
+    "节命": "你每受到1点伤害，可以令一名角色将手牌摸至其体力上限，至多摸至五张",
+    "连环": "你可以将一张梅花手牌当【铁索连环】使用或重铸",
+    "涅槃": "限定技，当你处于濒死状态时，可以弃置区域内所有牌、重置并翻至正面，然后摸三张牌并将体力回复至3点",
+    "八阵": "锁定技，若你的装备区没有防具，视为装备【八卦阵】",
+    "火计": "你可以将一张红色手牌当【火攻】使用",
+    "看破": "你可以将一张黑色手牌当【无懈可击】使用",
+    "天义": "出牌阶段限一次，你可以与一名角色拼点；赢则本回合攻击范围无限、可多使用一张【杀】且【杀】可多选一个目标，未赢则不能使用【杀】",
+    "乱击": "你可以将两张花色相同的手牌当【万箭齐发】使用",
+    "血裔": "主公技，锁定技，场上每有一名其他群势力角色，你的手牌上限便增加2",
+    "双雄": "摸牌阶段，你可以放弃摸牌并进行判定，获得判定牌；本回合可以将与判定牌颜色不同的一张手牌当【决斗】使用",
+    "猛进": "当你使用的【杀】被【闪】抵消时，你可以弃置目标角色的一张牌",
+    "断粮": "你可以将一张黑色基本牌或装备牌当【兵粮寸断】使用，并可以对距离2以内的角色使用【兵粮寸断】",
+    "行殇": "其他角色死亡时，你可以获得其所有牌",
+    "放逐": "你每受到1点伤害，可以令一名其他角色摸X张牌并翻面，X为你已损失的体力值",
+    "颂威": "主公技，其他魏势力角色的黑色判定牌生效后，其可以令你摸一张牌",
+    "祸首": "锁定技，【南蛮入侵】对你无效；其他角色使用的【南蛮入侵】造成的伤害来源改为你",
+    "再起": "摸牌阶段，若你已受伤，可以改为亮出牌堆顶X张牌；每有一张红桃你回复1点体力，其余牌收入手牌，X为你已损失的体力值",
+    "巨象": "锁定技，【南蛮入侵】对你无效；其他角色使用的【南蛮入侵】结算后进入弃牌堆时，你获得之",
+    "烈刃": "你使用【杀】造成伤害后，可以与受伤角色拼点；若你赢，获得其一张牌",
+    "英魂": "准备阶段，若你已受伤，可以令一名其他角色选择：摸一张弃X张，或摸X张弃一张；X为你已损失的体力值",
+    "好施": "摸牌阶段，你可以多摸两张牌；若摸牌后手牌数大于五，须将一半手牌交给手牌最少的一名其他角色",
+    "缔盟": "出牌阶段限一次，你可以弃置等同于两名其他角色手牌数之差的牌，然后交换这两名角色的手牌",
+    "酒池": "你可以将一张黑桃手牌当【酒】使用",
+    "肉林": "锁定技，你对女性角色或女性角色对你使用【杀】时，目标须连续使用两张【闪】才能抵消",
+    "崩坏": "结束阶段，若你的体力值不是全场最少，你须选择失去1点体力或减1点体力上限",
+    "暴虐": "主公技，其他群势力角色造成伤害后，可以进行判定；若结果为黑桃，你回复1点体力",
+    "完杀": "锁定技，你的回合内，除濒死角色本人外，其他角色不能使用【桃】",
+    "乱武": "限定技，出牌阶段，你可以令所有其他角色依次对距离最近的角色使用一张【杀】，不能如此做者失去1点体力",
+    "帷幕": "锁定技，你不能成为黑色锦囊牌的目标",
 };
+
+/* 技能说明存在并不表示规则已经实现。测试和界面共同使用此表，
+ * 防止数据中的武将能力被误当成可运行功能。 */
+sgs.SKILL_IMPLEMENTATION_STATUS = {};
+for(var skill_name in sgs.SKILL_EXPLANATION_MAPPING) {
+    if(sgs.SKILL_EXPLANATION_MAPPING.hasOwnProperty(skill_name)) {
+        sgs.SKILL_IMPLEMENTATION_STATUS[skill_name] = "missing";
+    }
+}
+sgs.SKILL_IMPLEMENTATION_STATUS["洛神"] = "partial";
+sgs.SKILL_IMPLEMENTATION_STATUS["鬼才"] = "partial";
+sgs.SKILL_IMPLEMENTATION_STATUS["咆哮"] = "partial";
+sgs.SKILL_IMPLEMENTATION_STATUS["奇才"] = "partial";
 
 sgs.IMG_LIST = [
     "img/generals/big/caocao.png",

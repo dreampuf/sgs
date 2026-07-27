@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
@@ -22,6 +22,14 @@
     <div id="main">
         <div id="" style="width:100%; position:absolute;"><img src="img/system/main_top.png" style="width:1000px;" /></div>
         <!-- 游戏开始 -->
+        <div id="start_options">
+            <div>选择早期扩展包</div>
+            <label title="2009-03-23 发行的神话再临·风武将扩充。"><input type="checkbox" class="expansion_pack" value="wind" checked="checked" /> 风</label>
+            <label title="2009-09-21 发行的神话再临·军争篇游戏牌扩充。"><input type="checkbox" class="expansion_pack" value="military" checked="checked" /> 军争</label>
+            <label title="2009-11-16 发行的神话再临·火武将扩充。"><input type="checkbox" class="expansion_pack" value="fire" /> 火</label>
+            <label title="2010-07-29 发行的神话再临·林武将扩充。"><input type="checkbox" class="expansion_pack" value="forest" /> 林</label>
+            <span class="ai_option">AI：<select id="ai_level"><option value="0">简单</option><option value="1" selected="selected">普通</option><option value="2">困难</option></select></span>
+        </div>
         <div id="game_start">开始</div>
         
         <div class="role" id="role2">
@@ -174,6 +182,8 @@
         </div>
         <!-- 打出去的牌 -->
         <div id="played_card_box"></div>
+        <!-- 可见弃牌堆（仅展示最上方一张） -->
+        <div id="discard_pile_box" title="弃牌堆"></div>
         <!-- 玩家部分 Begin -->
         <div id="player">
             <!-- 装备区 Begin -->

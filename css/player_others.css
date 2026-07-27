@@ -23,6 +23,46 @@
     cursor: pointer;
     opacity: 0.2;
     display: none;
+    z-index: 12;
+}
+.role.target_available
+{
+    box-shadow: 0 0 10px 4px #5bd76d, 2px 2px 2px #000;
+    animation: target_available_pulse 0.9s ease-in-out infinite alternate;
+}
+.role.target_available:after,
+.role.target_selected:after
+{
+    position: absolute;
+    z-index: 30;
+    left: 28px;
+    right: 28px;
+    bottom: -10px;
+    padding: 2px 0;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 11px;
+    text-align: center;
+    pointer-events: none;
+}
+.role.target_available:after
+{
+    content: "可选目标";
+    background: rgba(25, 112, 45, 0.92);
+}
+.role.target_selected
+{
+    box-shadow: 0 0 15px 5px #dd0200, 2px 2px 2px #000;
+}
+.role.target_selected:after
+{
+    content: "已选择";
+    background: rgba(180, 16, 12, 0.94);
+}
+@keyframes target_available_pulse
+{
+    from { box-shadow: 0 0 7px 2px #5bd76d, 2px 2px 2px #000; }
+    to { box-shadow: 0 0 13px 5px #8cf39b, 2px 2px 2px #000; }
 }
 .role > div
 {
@@ -108,6 +148,8 @@
     left: 4px;
     top: 28px;
     margin-left: 3px;
+    object-fit: cover;
+    object-position: center 35%;
 }
 /* 玩家牌数 */
 .card_count

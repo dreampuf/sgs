@@ -202,12 +202,13 @@ var sgs = sgs || {};
         this._bufflog = _bufflog; /* 当前操作日志 */
         this._log = []; /* 操作日志 */
         this.start_time = new Date(); /* 局开始时间 */
-        this.ailv = ailv || sgs.DEFAULT_AI_LV;
+        this.ailv = ailv != undefined ? ailv : sgs.DEFAULT_AI_LV;
         this.player = player;/* 玩家 */
         this.playerlen = player.length;
         this.playernum = playernum; /* 玩家对应 */
         this.curplayer = 0;/* 当前执行玩家 */
         this.card = ccard; /* 已经洗过的卡 */
+        this.discardPile = []; /* 弃牌堆 */
         this.opt = []; /* 操作堆栈 */
         this.choice = []; /* 要牌队列 */
         this.step = 0; /* 当前执行状态 0: 判定阶段, 1: 摸牌阶段, 2: 出牌阶段, 3: 弃牌阶段 */
@@ -371,8 +372,16 @@ var sgs = sgs || {};
 
         /** 张辽-奇袭 **/
         /** end-奇袭 **/
+        if(pl.status["bingliang"]) {
+            console.log(pl.nickname, "受兵粮寸断影响，跳过摸牌阶段");
+            this.step = 2;
+            return this.continue();
+        }
         
-        if(this.card.length < 5) { this.card = this.card.concat(shuffle(sgs.CARD)); }
+        if(this.card.length < num && this.discardPile.length) {
+            this.card = this.card.concat(shuffle(this.discardPile));
+            this.discardPile = [];
+        }
         
         var cards = this.card.splice(0, num); 
         //cards[0].name = "无懈可击";
@@ -408,6 +417,15 @@ var sgs = sgs || {};
                 throw new Error("有没有搞错!明明都用过这牌了!你以为电脑是好欺负的?");
                 return ;
             }
+            if(EQUIP_TYPE_MAPPING[card.name] == undefined &&
+               card.name != "乐不思蜀" &&
+               card.name != "兵粮寸断" &&
+               card.name != "闪电") {
+                this.discardPile = this.discardPile || [];
+                if(this.discardPile.indexOf(card) == -1) {
+                    this.discardPile.push(card);
+                }
+            }
         }
         choice_card(this, opt);
 
@@ -424,6 +442,11 @@ var sgs = sgs || {};
                 throw new Error("有没有搞错!明明都用过这牌了!你以为电脑是好欺负的?");
                 return ;
             }
+            this.discardPile = this.discardPile || [];
+            if(this.discardPile.indexOf(card) == -1) {
+                this.discardPile.push(card);
+            }
+            this.notify("response_card", pl, opt.target, card);
         }
 
         response_card(this, opt);
@@ -450,25 +473,43 @@ var sgs = sgs || {};
                 return new sgs.Operate("弃牌", undefined, pl, pl.card.length - pl.blood);
             } else {
                 pl.card = sub(pl.card, cards); 
+                this.discardPile = this.discardPile || [];
+                this.discardPile = this.discardPile.concat(cards);
             }
             console.log(pl.nickname, "弃牌", map(cards, function(i) { return i.name; }));
             this.notify("discard", pl, cards);
         }
 
-        pl.status = {};
+        var persistent_status = {},
+            status_name;
+        for(status_name in pl.status) {
+            if(pl.status.hasOwnProperty(status_name) && pl.status[status_name] &&
+               status_name != "chained" && status_name != "dead") {
+                this.notify("status_change", pl, status_name, false);
+            }
+        }
+        if(pl.status["chained"]) {
+            persistent_status["chained"] = true;
+        }
+        if(pl.status["dead"]) {
+            persistent_status["dead"] = true;
+        }
+        pl.status = persistent_status;
         
         setTimeout((function(bout){ return function(){
-            bout.curplayer++;
-
-            if(bout.curplayer >= bout.playerlen) { 
-                bout.timer++; 
-                if (bout.timer > 30) {
-                    console.log("GAME OVER"); 
-                    return ;
+            var inspected = 0;
+            do {
+                bout.curplayer++;
+                if(bout.curplayer >= bout.playerlen) {
+                    bout.timer++;
+                    if (bout.timer > 30) {
+                        console.log("GAME OVER");
+                        return;
+                    }
                 }
-            }
-
-            bout.curplayer %= bout.playerlen;
+                bout.curplayer %= bout.playerlen;
+                inspected++;
+            } while(inspected < bout.playerlen && bout.player[bout.curplayer].blood <= 0);
             bout.step = 0;
             bout.continue();
         } })(this), 50);

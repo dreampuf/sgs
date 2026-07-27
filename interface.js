@@ -1,4 +1,4 @@
-﻿var sgs = sgs || {};
+var sgs = sgs || {};
 
 (function (sgs) {
     
@@ -12,6 +12,26 @@
             hero_mapping[d.name] = { "skill": d.skills };
         }
     })(sgs.interface.HERO_PROPERTY_MAPPING));
+
+    sgs.interface.heroImage = function(name, size) {
+        var image = sgs.HEROIMAG_MAPPING[name] || 'none.png';
+        if(image.indexOf('/') == -1) {
+            return 'img/generals/' + size + '/' + image;
+        }
+        if((size == 'big' || size == 'small') &&
+           image.indexOf('expansion/shenhua/hero/') == 0) {
+            image = image.replace('expansion/shenhua/hero/',
+                'expansion/shenhua/portrait/' + size + '/');
+        }
+        return 'img/' + image;
+    };
+    sgs.interface.cardImage = function(name) {
+        var image = sgs.CARDIMAG_MAPING[name] || (sgs.CARDIMAG_MAPPING && sgs.CARDIMAG_MAPPING[name]) || 'img/system/none.png';
+        if(image.indexOf('img/') === 0) {
+            return image;
+        }
+        return image.indexOf('/') == -1 ? image : 'img/' + image;
+    };
 
     sgs.interface.cardInfo = {
         /*
@@ -33,7 +53,7 @@
         if(!player.isAI) {
             $('#player_country').attr('src', sgs.COUNTRY_IMG_MAPPING[player.hero.country]);
             $('#player_name').text(player.nickname);
-            $('#player_head_img').attr('src', 'img/generals/big/' + sgs.HEROIMAG_MAPPING[player.hero.name]);
+            $('#player_head_img').attr('src', sgs.interface.heroImage(player.hero.name, 'big'));
             for (var i = 0; i < player.hero.life; i++) {
                 $('<img src="img/system/blod_0.png" />').appendTo($('#player_blod_0'));
                 $('<img src="img/system/blod_1.png" />').appendTo($('#player_blod_1'));
@@ -45,7 +65,7 @@
             $(player.dom).find('.role_name').text('_' + player.hero.name + '_');
             if(player.identity == 0)
                 $(player.dom).find('.role_identity img').attr('src', sgs.IDENTITY_IMG_MAPPING[0]);
-            $(player.dom).find('.head_img img').attr('src', 'img/generals/small/' + sgs.HEROIMAG_MAPPING[player.hero.name]);
+            $(player.dom).find('.head_img img').attr('src', sgs.interface.heroImage(player.hero.name, 'small'));
             for(var k = 0; k < player.hero.life; k++) {
                 $(player.dom).find('.blods_0').append('<img src="img/system/blod_0.png" />');
                 $(player.dom).find('.blods_1').append('<img src="img/system/blod_1.png" />');
@@ -115,8 +135,8 @@
         card_choose_box.find('#choose_box_title font').text(title);
         if(identity_info != undefined) {
             $.each(cards, function(i, d) {
-                var card = $('<div class="choose_role_card"><img src="img/generals/hero/' +
-                        sgs.HEROIMAG_MAPPING[d.name] + '" /></div>');
+                var card = $('<div class="choose_role_card"><img src="' +
+                        sgs.interface.heroImage(d.name, 'hero') + '" /></div>');
                 card[0].name = d.name;
                 card.css('left', i * (93 + card_padding * 2) + 'px');
                 card_choose_box.find('#choose_cards').append(card);
@@ -136,7 +156,7 @@
         } else {
             $.each(cards, function(i, d) {
                 var card = $(['<div class="choose_card"><img src="',
-                        sgs.CARDIMAG_MAPING[d.name], '" /><div class="pat_num" style="color:',
+                        sgs.interface.cardImage(d.name), '" /><div class="pat_num" style="color:',
                         d.color, ';"><span class="pattern"><img src="',
                         sgs.PATTERN_IMG_MAPPING[d.color], '" /></span><span class="num">',
                         sgs.CARD_COLOR_NUM_MAPPING.number[d.digit], '</span></div><div class="select_unable"></div></div>'].join(''));
