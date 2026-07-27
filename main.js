@@ -489,8 +489,7 @@ $(document).ready(function () {
             var selected_target = player.selected_targets.length > 1 ?
                     player.selected_targets :
                     (player.selected_targets[0] ||
-                     (player.targets.length > 1 ? player.targets : player.targets[0]) ||
-                     player);
+                     (player.targets.length > 1 ? player.targets : player.targets[0]));
             console.log('出牌:', player, '目标:', selected_target);
             lockCommittedCards(player, selected_cards);
             player.stage = -1;

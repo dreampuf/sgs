@@ -335,6 +335,65 @@ test('桃无需手选目标，并由 Core 恢复体力及移动手牌', async ({
     .toHaveCount(1, { timeout: 2500 });
 });
 
+test('五谷丰登作为零目标牌进入公共牌池选择界面', async ({ page }) => {
+  const errors = capturePageErrors(page);
+  await startCoreGame(page);
+  await configureState(page, { humanHand: ['五谷丰登'] });
+  await clickHandCard(page, '五谷丰登');
+  await expect(page.locator('#ok')).toBeVisible();
+  await page.locator('#ok').click();
+  await expect.poll(() => page.evaluate(() =>
+    window.sgs.interface.bout.state().pendingDecision?.request.type
+  )).toBe('respond-card');
+  await page.evaluate(() => {
+    const bout = window.sgs.interface.bout;
+    const human = window.sgs.view.playerFor(
+      document.querySelector('#player')
+    );
+    for (let guard = 0; guard < 64; guard += 1) {
+      const request = bout.state().pendingDecision?.request;
+      if (
+        !request ||
+        (request.playerId === human.id && request.type === 'select-cards')
+      ) {
+        break;
+      }
+      const legal = bout.legalActions();
+      const command = request.type === 'respond-card'
+        ? legal.find((action) => action.type === 'pass')
+        : legal.find((action) => action.type === 'choose-cards');
+      if (!command) throw new Error(`cannot advance ${request.type}`);
+      bout.dispatchCommand(command);
+    }
+  });
+  await showPendingHumanDecision(page);
+
+  const pending = await page.evaluate(() =>
+    window.sgs.interface.bout.state().pendingDecision?.request
+  );
+  expect(pending).toMatchObject({
+    type: 'select-cards',
+    reason: 'amazing-grace',
+    minimum: 1,
+    maximum: 1
+  });
+  await expect(page.locator('#choose_box')).toBeVisible();
+  await expect(page.locator('#choose_box .choose_card'))
+    .toHaveCount(pending.selectableCardIds.length);
+
+  const selectedName = await page.locator('#choose_box .choose_card')
+    .first()
+    .evaluate((element) => window.sgs.view.cardFor(element).name);
+  await page.locator('#choose_box .choose_card').first().click();
+  await expect.poll(() => page.evaluate((cardName) => {
+    const human = window.sgs.view.playerFor(
+      document.querySelector('#player')
+    );
+    return human.card.some((card) => card.name === cardName);
+  }, selectedName)).toBe(true);
+  expect(errors).toEqual([]);
+});
+
 test('铁索连环支持一至两名目标并投影横置状态', async ({ page }) => {
   await startCoreGame(page);
   await configureState(page, { humanHand: ['铁索连环'] });
