@@ -90,6 +90,12 @@ export class RuleResolver {
                 targetIds[0] === targetId
             );
         },
+        hasEquipmentSlot: (playerId, slot) =>
+          (state.zones[equipmentZone(playerId)] ?? []).some((cardId) => {
+            const definitionId = state.cards[cardId]?.definitionId;
+            return definitionId !== undefined &&
+              this.#catalog.card(definitionId).equipment?.slot === slot;
+          }),
         attackRange: (snapshot, playerId) =>
           this.#catalog.attackRange(snapshot, playerId),
         distanceBetween: (snapshot, sourceId, targetId) =>

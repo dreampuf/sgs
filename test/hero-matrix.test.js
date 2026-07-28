@@ -36,10 +36,8 @@ for (const hero of sgs.HERO) {
   }
 }
 
-const partial = Object.entries(sgs.SKILL_IMPLEMENTATION_STATUS)
-  .filter(([, status]) => status === 'partial')
-  .map(([skill]) => skill)
-  .sort();
-assert.deepStrictEqual(partial, ['咆哮', '奇才', '洛神', '鬼才'].sort());
+const incomplete = Object.entries(sgs.SKILL_IMPLEMENTATION_STATUS)
+  .filter(([, status]) => status !== 'implemented');
+assert.deepStrictEqual(incomplete, []);
 
 console.log(`hero matrix passed: ${heroIdentityCases} hero/identity cases, ${aiLevelCases} AI-level cases, ${skillCases} skill declarations`);

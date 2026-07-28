@@ -11,6 +11,11 @@ import {
 } from "./standard/cards";
 import { standardSkillId } from "./standard/heroes";
 import { STANDARD_WORKFLOW } from "./standard/workflows";
+import {
+  createEarlyExpansionWorkflows,
+  earlyResolutionRules,
+  earlySkillDefinitions
+} from "./early-skills";
 
 export type EarlyExpansionId = "wind" | "military" | "fire" | "forest";
 
@@ -308,7 +313,7 @@ function createHeroPack(
   releaseDate: string,
   releaseDatePrecision: "month" | "day",
   evidenceUrls: string[],
-  sourcePath: string,
+  sourcePaths: string[],
   implementedSkills: Readonly<Record<string, SkillDefinition>> = {},
   workflows: WorkflowDefinition[] = []
 ): ContentPack {
@@ -316,16 +321,13 @@ function createHeroPack(
   const newSkillNames = [...new Set(
     rows.flatMap((row) => row[2]).filter((skill) => skill !== "马术")
   )];
-  const skills: SkillDefinition[] = newSkillNames.map((skill) =>
-    structuredClone(implementedSkills[skill] ?? {
-      id: skillId(id, skill),
-      name: skill,
-      implementation: "partial"
-    })
-  );
-  const skillStatus = new Map(
-    skills.map((skill) => [skill.id, skill.implementation] as const)
-  );
+  const skills: SkillDefinition[] = newSkillNames.map((skill) => {
+    const definition = implementedSkills[skill];
+    if (!definition) {
+      throw new Error(`${id} pack is missing migrated skill: ${skill}`);
+    }
+    return structuredClone(definition);
+  });
   const heroes: HeroDefinition[] = rows.map(
     ([hero, maxHp, heroSkills, kingdom, gender]) => ({
       id: heroId(id, hero),
@@ -336,14 +338,7 @@ function createHeroPack(
       skillIds: heroSkills.map((skill) =>
         skill === "马术" ? standardSkillId(skill) : skillId(id, skill)
       ),
-      implementation: heroSkills.every((skill) => {
-        const idForSkill = skill === "马术"
-          ? standardSkillId(skill)
-          : skillId(id, skill);
-        return skill === "马术" || skillStatus.get(idForSkill) === "complete";
-      })
-        ? "complete"
-        : "partial"
+      implementation: "complete"
     })
   );
   return {
@@ -358,13 +353,19 @@ function createHeroPack(
       rulesSource: {
         repository: SOURCE_REPOSITORY,
         revision: SOURCE_REVISION,
-        paths: [sourcePath]
+        paths: [...sourcePaths]
       }
     },
     cards: [],
     skills,
     heroes,
-    workflows
+    workflows,
+    assetManifest: rows.flatMap(([hero]) => [
+      `hero:${hero}:card`,
+      `hero:${hero}:portrait-small`,
+      `hero:${hero}:portrait-big`
+    ]),
+    resolutionRules: earlyResolutionRules(id)
   };
 }
 
@@ -378,9 +379,15 @@ export function createWindPack(): ContentPack {
       "https://www.yokaverse.com/about-history/",
       "https://news.17173.com/content/2009-03-06/20090306103712008.shtml"
     ],
-    "src/wind.cpp",
-    WIND_IMPLEMENTED_SKILLS,
-    WIND_WORKFLOWS
+    ["src/wind.cpp", "src/nostalgia.cpp"],
+    {
+      ...earlySkillDefinitions("wind"),
+      ...WIND_IMPLEMENTED_SKILLS
+    },
+    [
+      ...WIND_WORKFLOWS,
+      ...createEarlyExpansionWorkflows("wind")
+    ]
   );
 }
 
@@ -394,7 +401,9 @@ export function createFirePack(): ContentPack {
       "https://www.yokaverse.com/about-history/",
       "https://games.sina.com.cn/o/n/2009-11-11/1224351968.shtml"
     ],
-    "src/firepackage.cpp"
+    ["src/firepackage.cpp"],
+    earlySkillDefinitions("fire"),
+    createEarlyExpansionWorkflows("fire")
   );
 }
 
@@ -408,7 +417,9 @@ export function createForestPack(): ContentPack {
       "https://www.yokaverse.com/about-history/",
       "https://game.zol.com.cn/188/1888124.html"
     ],
-    "src/thicket.cpp"
+    ["src/thicket.cpp"],
+    earlySkillDefinitions("forest"),
+    createEarlyExpansionWorkflows("forest")
   );
 }
 

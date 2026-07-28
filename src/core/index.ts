@@ -3,6 +3,7 @@ export * from "./ability-program";
 export * from "./card-resolution";
 export * from "./event-rule-resolver";
 export * from "./legal-action-resolver";
+export * from "./match-setup";
 export * from "./registry";
 export * from "./rng";
 export * from "./rule-bus";

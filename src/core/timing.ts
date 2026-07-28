@@ -3,7 +3,8 @@ import type {
   EffectDraft,
   GameState,
   JudgmentPattern,
-  PlayerId
+  PlayerId,
+  WorkflowValue
 } from "./types";
 import {
   evaluateRulePredicate,
@@ -33,6 +34,7 @@ export interface EffectTimingMatch {
     mark: string;
     equals: number | boolean;
   };
+  ownerEquipmentSlotAbsent?: "armor" | "weapon" | "defensive-horse" | "offensive-horse";
   propagated?: boolean;
   nature?: "normal" | "fire" | "thunder";
   amountGreaterThan?: number;
@@ -71,6 +73,13 @@ export type AtomicEffectTimingOperation =
   | {
       type: "add-tags";
       tags: string[];
+    }
+  | {
+      type: "replace-source-with-owner";
+    }
+  | {
+      type: "replace-with-workflow";
+      workflowId: string;
     };
 
 export type EffectTimingOperation =
@@ -130,6 +139,10 @@ export interface TimingQueries extends RuleExpressionQueries {
     sourceId: PlayerId,
     cardId: string,
     targetId: PlayerId
+  ): boolean;
+  hasEquipmentSlot(
+    playerId: PlayerId,
+    slot: "armor" | "weapon" | "defensive-horse" | "offensive-horse"
   ): boolean;
 }
 
@@ -268,8 +281,14 @@ function matches(
   }
   if (
     match.ownerMark !== undefined &&
-    state.players[ownerId]?.marks[match.ownerMark.mark] !==
+    (state.players[ownerId]?.marks[match.ownerMark.mark] ?? false) !==
       match.ownerMark.equals
+  ) {
+    return false;
+  }
+  if (
+    match.ownerEquipmentSlotAbsent !== undefined &&
+    queries.hasEquipmentSlot(ownerId, match.ownerEquipmentSlotAbsent)
   ) {
     return false;
   }
@@ -470,6 +489,34 @@ function apply(
         effect,
         [`timing:handled:${candidate.id}`]
       ) as typeof effect
+    }];
+  }
+  if (operation.type === "replace-source-with-owner") {
+    return "sourceId" in effect
+      ? [{ ...effect, sourceId: ownerId }]
+      : [effect];
+  }
+  if (operation.type === "replace-with-workflow") {
+    const cardId = "cardId" in effect
+      ? effect.cardId
+      : `system:timing:${candidate.id}`;
+    const targetIds = "targetId" in effect &&
+      typeof effect.targetId === "string"
+      ? [effect.targetId]
+      : "playerId" in effect && typeof effect.playerId === "string"
+        ? [effect.playerId]
+        : [];
+    return [{
+      type: "run-workflow",
+      workflowId: operation.workflowId,
+      context: {
+        sourceId: ownerId,
+        cardId,
+        targetIds
+      },
+      data: {
+        effect: structuredClone(effect) as unknown as WorkflowValue
+      }
     }];
   }
   const tagged = addEffectTags(effect, operation.tags);

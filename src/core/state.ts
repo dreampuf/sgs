@@ -44,6 +44,7 @@ export type CardSpec = CardDefinitionId | CardPrint;
 export interface CreateGameStateOptions {
   gameId?: string;
   rulesetId?: string;
+  contentPacks?: GameState["contentPacks"];
   seed: number;
   players: InitialPlayer[];
   drawPile?: CardSpec[];
@@ -93,6 +94,7 @@ export function createGameState(options: CreateGameStateOptions): GameState {
       maxHp: input.maxHp,
       alive: hp > 0,
       dying: false,
+      faceUp: true,
       skillIds: [...(input.skillIds ?? [])],
       marks: {}
     };
@@ -116,9 +118,10 @@ export function createGameState(options: CreateGameStateOptions): GameState {
   }
 
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     gameId: options.gameId ?? `game-${seed}`,
     rulesetId: options.rulesetId ?? "standard@0.1",
+    contentPacks: structuredClone(options.contentPacks ?? []),
     seed,
     rngState,
     revision: 0,
@@ -157,12 +160,12 @@ export function deserializeGameState(serialized: string): GameState {
 function migrateGameState(value: unknown): unknown {
   if (!value || typeof value !== "object") return value;
   const legacy = value as Record<string, unknown>;
-  if (legacy.schemaVersion === 2) {
+  if (legacy.schemaVersion === 3) {
     const migrated = structuredClone(legacy);
     migrated.effectPlans ??= {};
     return migrated;
   }
-  if (legacy.schemaVersion !== 1) return value;
+  if (legacy.schemaVersion !== 1 && legacy.schemaVersion !== 2) return value;
   const migrated = structuredClone(legacy);
   const players = migrated.players as Record<
     string,
@@ -170,11 +173,13 @@ function migrateGameState(value: unknown): unknown {
   >;
   for (const player of Object.values(players ?? {})) {
     player.dying ??= false;
+    player.faceUp ??= true;
     player.skillIds ??= [];
     player.marks ??= {};
   }
   const turnOrder = migrated.turnOrder as string[] | undefined;
-  migrated.schemaVersion = 2;
+  migrated.schemaVersion = 3;
+  migrated.contentPacks ??= [];
   migrated.turnNumber ??= 1;
   migrated.triggerQueue ??= [];
   migrated.effectPlans ??= {};
@@ -187,7 +192,7 @@ function migrateGameState(value: unknown): unknown {
 export function assertGameState(value: unknown): asserts value is GameState {
   if (!value || typeof value !== "object") throw new Error("invalid game state");
   const state = value as Partial<GameState>;
-  if (state.schemaVersion !== 2) {
+  if (state.schemaVersion !== 3) {
     throw new Error(`unsupported game state schema: ${String(state.schemaVersion)}`);
   }
   if (

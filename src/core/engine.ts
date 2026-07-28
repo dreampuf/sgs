@@ -153,7 +153,10 @@ export function getLegalActions(
 
   if (state.phase === "discard") {
     const hand = state.zones[handZone(playerId)] ?? [];
-    const excess = Math.max(0, hand.length - Math.max(0, player.hp));
+    const excess = Math.max(0, hand.length - registry.handLimit(
+      state,
+      playerId
+    ));
     if (excess === 0) {
       return modified(playerId, [{ type: "end-turn", playerId }]);
     }
@@ -579,20 +582,45 @@ export function dispatch(
     if (endGameIfDecided()) return;
     const currentIndex = state.turnOrder.indexOf(endedPlayerId);
     let nextPlayerId: PlayerId | undefined;
+    let firstSkippedPlayerId: PlayerId | undefined;
+    let nextTurnNumber = state.turnNumber + 1;
     for (let offset = 1; offset <= state.turnOrder.length; offset += 1) {
       const candidate =
         state.turnOrder[(currentIndex + offset) % state.turnOrder.length]!;
-      if (state.players[candidate]?.alive) {
-        nextPlayerId = candidate;
-        break;
+      const candidateState = state.players[candidate];
+      if (!candidateState?.alive) continue;
+      if (!candidateState.faceUp) {
+        firstSkippedPlayerId ??= candidate;
+        candidateState.faceUp = true;
+        emit({
+          type: "PlayerStateChanged",
+          playerId: candidate,
+          cardId: "system:turn-over",
+          hp: candidateState.hp,
+          maxHp: candidateState.maxHp,
+          faceUp: true,
+          chained: candidateState.marks.chained === true,
+          dying: candidateState.dying
+        });
+        emit({
+          type: "TurnSkipped",
+          playerId: candidate,
+          turnNumber: nextTurnNumber,
+          reason: "face-down"
+        });
+        nextTurnNumber += 1;
+        continue;
       }
+      nextPlayerId = candidate;
+      break;
     }
+    nextPlayerId ??= firstSkippedPlayerId;
     if (!nextPlayerId) {
       state.phase = "finished";
       return;
     }
     state.currentPlayerId = nextPlayerId;
-    state.turnNumber += 1;
+    state.turnNumber = nextTurnNumber;
     state.turnUsage[nextPlayerId] = {};
     state.phase = "judgment";
     emit({
@@ -1565,7 +1593,11 @@ export function dispatch(
               registry.targetSets(state, sourceId, definitionId).some(
                 (targetIds) =>
                   targetIds.length === 1 && targetIds[0] === targetId
-              )
+              ),
+            distanceBetween: (sourceId, targetId) =>
+              registry.distanceBetween(state, sourceId, targetId),
+            attackRange: (playerId) =>
+              registry.attackRange(state, playerId)
           });
           if (result.effects && result.decision) {
             throw new Error(
@@ -1632,6 +1664,57 @@ export function dispatch(
             playerId: effect.playerId,
             mark: effect.mark,
             value: effect.value,
+            cardId: effect.cardId
+          });
+          break;
+        }
+        case "set-player-state": {
+          const player = state.players[effect.playerId];
+          if (!player) break;
+          if (effect.maxHp !== undefined) {
+            player.maxHp = Math.max(1, effect.maxHp);
+          }
+          if (effect.hp !== undefined) {
+            player.hp = Math.min(player.maxHp, effect.hp);
+          } else if (player.hp > player.maxHp) {
+            player.hp = player.maxHp;
+          }
+          if (effect.faceUp !== undefined) player.faceUp = effect.faceUp;
+          if (effect.chained !== undefined) {
+            player.marks.chained = effect.chained;
+          }
+          if (effect.dying !== undefined) player.dying = effect.dying;
+          if (player.hp > 0) {
+            player.alive = true;
+            if (effect.dying === undefined) player.dying = false;
+          }
+          emit({
+            type: "PlayerStateChanged",
+            playerId: effect.playerId,
+            cardId: effect.cardId,
+            hp: player.hp,
+            maxHp: player.maxHp,
+            faceUp: player.faceUp,
+            chained: player.marks.chained === true,
+            dying: player.dying
+          });
+          break;
+        }
+        case "swap-hands": {
+          const firstZone = handZone(effect.firstPlayerId);
+          const secondZone = handZone(effect.secondPlayerId);
+          const firstCards = [...(state.zones[firstZone] ?? [])];
+          const secondCards = [...(state.zones[secondZone] ?? [])];
+          for (const cardId of firstCards) {
+            moveCard(cardId, secondZone, "skill");
+          }
+          for (const cardId of secondCards) {
+            moveCard(cardId, firstZone, "skill");
+          }
+          emit({
+            type: "HandsSwapped",
+            firstPlayerId: effect.firstPlayerId,
+            secondPlayerId: effect.secondPlayerId,
             cardId: effect.cardId
           });
           break;
@@ -1742,6 +1825,66 @@ export function dispatch(
           for (const cardId of ownedCards) moveCard(cardId, DISCARD_PILE, "death");
           if (!endGameIfDecided() && effect.playerId === state.currentPlayerId) {
             finishTurn();
+          }
+          break;
+        }
+        case "cancel-card-resolution": {
+          const containsCard = (value: unknown): boolean =>
+            JSON.stringify(value).includes(effect.cardId);
+          state.stack = state.stack.filter((frame) =>
+            !containsCard(frame.effect)
+          );
+          for (const [planId, plan] of Object.entries(state.effectPlans)) {
+            if (containsCard(plan)) delete state.effectPlans[planId];
+          }
+          const card = state.cards[effect.cardId];
+          if (card?.virtual) {
+            for (const materialCardId of card.materialCardIds ?? []) {
+              if (
+                (state.zones[PROCESSING_ZONE] ?? []).includes(materialCardId)
+              ) {
+                moveCard(materialCardId, DISCARD_PILE, "skill");
+              }
+            }
+            const processing = state.zones[PROCESSING_ZONE] ?? [];
+            const index = processing.indexOf(effect.cardId);
+            if (index >= 0) processing.splice(index, 1);
+            delete state.cards[effect.cardId];
+          } else if (
+            (state.zones[PROCESSING_ZONE] ?? []).includes(effect.cardId)
+          ) {
+            moveCard(effect.cardId, DISCARD_PILE, "skill");
+          }
+          emit({
+            type: "CardCancelled",
+            cardId: effect.cardId,
+            reason: "skill",
+            ...(effect.sourceId ? { sourceId: effect.sourceId } : {})
+          });
+          break;
+        }
+        case "resolve-accepted-response": {
+          const invalid =
+            effect.invalidMark !== undefined &&
+            state.players[effect.playerId]?.marks[effect.invalidMark] === true;
+          if (effect.invalidMark !== undefined) {
+            const player = state.players[effect.playerId];
+            if (player) player.marks[effect.invalidMark] = false;
+          }
+          if (invalid) {
+            emit({
+              type: "CardCancelled",
+              cardId: effect.responseCardId,
+              reason: "skill",
+              sourceId: effect.playerId
+            });
+            resolvePassedResponse(effect.pending, effect.playerId);
+          } else {
+            resolveAcceptedResponse(
+              effect.pending,
+              effect.responseCardId,
+              effect.playerId
+            );
           }
           break;
         }
@@ -1877,6 +2020,34 @@ export function dispatch(
     }
   };
 
+  const resolvePassedResponse = (
+    pending: NonNullable<GameState["pendingDecision"]>,
+    playerId: PlayerId
+  ): void => {
+    if (pending.continuation.type === "workflow") {
+      resumeWorkflow(pending.continuation.resume, {
+        type: "passed",
+        playerId
+      });
+    } else if (pending.continuation.type === "rescue") {
+      requestNextRescuer(
+        pending.remainingResponderIds,
+        pending.continuation
+      );
+    } else {
+      if (pending.request.type !== "respond-card") {
+        throw new Error("passed response requires a response request");
+      }
+      requestNextResponder(
+        pending.request.cardId,
+        pending.remainingResponderIds,
+        pending.request.acceptedDefinitionIds,
+        pending.request.responseKind,
+        pending.continuation
+      );
+    }
+  };
+
   if (command.type === "use-card" || command.type === "use-virtual-card") {
     let cardId: CardInstanceId;
     let definitionId: string;
@@ -1995,7 +2166,12 @@ export function dispatch(
       result: "responded"
     });
     state.pendingDecision = null;
-    resolveAcceptedResponse(pending, command.cardId, command.playerId);
+    pushEffects([{
+      type: "resolve-accepted-response",
+      pending: structuredClone(pending),
+      responseCardId: command.cardId,
+      playerId: command.playerId
+    }]);
     resolveUntilDecision();
   } else if (command.type === "respond-virtual-card") {
     const pending = state.pendingDecision!;
@@ -2038,8 +2214,18 @@ export function dispatch(
       result: "responded"
     });
     state.pendingDecision = null;
-    pushEffects([{ type: "finish-card", cardId }]);
-    resolveAcceptedResponse(pending, cardId, command.playerId);
+    pushEffects([
+      {
+        type: "resolve-accepted-response",
+        pending: structuredClone(pending),
+        responseCardId: cardId,
+        playerId: command.playerId,
+        ...(command.skillId === "wind:skill:蛊惑"
+          ? { invalidMark: `guhuo-invalid:${cardId}` }
+          : {})
+      },
+      { type: "finish-card", cardId }
+    ]);
     resolveUntilDecision();
   } else if (command.type === "pass") {
     const pending = state.pendingDecision!;
@@ -2053,25 +2239,7 @@ export function dispatch(
       result: "passed"
     });
     state.pendingDecision = null;
-    if (pending.continuation.type === "workflow") {
-      resumeWorkflow(pending.continuation.resume, {
-        type: "passed",
-        playerId: command.playerId
-      });
-    } else if (pending.continuation.type === "rescue") {
-      requestNextRescuer(
-        pending.remainingResponderIds,
-        pending.continuation
-      );
-    } else {
-      requestNextResponder(
-        pending.request.cardId,
-        pending.remainingResponderIds,
-        pending.request.acceptedDefinitionIds,
-        pending.request.responseKind,
-        pending.continuation
-      );
-    }
+    resolvePassedResponse(pending, command.playerId);
     resolveUntilDecision();
   } else if (command.type === "choose-cards") {
     const pending = state.pendingDecision!;

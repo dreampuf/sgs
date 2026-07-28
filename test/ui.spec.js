@@ -6,10 +6,13 @@ const CARD_ID = {
   '桃': 'standard:peach',
   '酒': 'standard:wine',
   '无懈可击': 'standard:nullification',
+  '无中生有': 'standard:ex-nihilo',
   '南蛮入侵': 'standard:savage-assault',
   '铁索连环': 'standard:iron-chain',
   '决斗': 'standard:duel',
   '五谷丰登': 'standard:amazing-grace',
+  '火攻': 'standard:fire-attack',
+  '朱雀羽扇': 'standard:fan',
   '过河拆桥': 'standard:dismantlement',
   '乐不思蜀': 'standard:indulgence',
   '八卦阵': 'standard:eight-diagram'
@@ -34,7 +37,10 @@ async function openStartScreen(page) {
 
 async function startCoreGame(page) {
   await openStartScreen(page);
-  await page.evaluate(() => window.sgs.func.set_random_seed(20260727));
+  await page.evaluate(() => {
+    window.sgs.func.set_random_seed(20260727);
+    window.sgs.motion.setInstant(true);
+  });
   await page.locator('#game_start').click();
   await expect(page.locator('#choose_box')).toBeVisible();
   await page.locator('.choose_role_card').first().click();
@@ -44,7 +50,7 @@ async function startCoreGame(page) {
       document.querySelectorAll('.player_card').length >= 4;
   }, null, { timeout: 15_000 });
   await page.evaluate(() => {
-    window.jQuery.fx.off = true;
+    window.sgs.motion.setInstant(true);
     window.sgs.interface.bout.pause();
   });
   await configureState(page);
@@ -93,12 +99,12 @@ async function configureState(page, fixture = {}) {
         state.zones[zoneId] = [];
       });
     }
-    if (fixture.humanHp !== undefined) {
-      state.players[human.id].hp = fixture.humanHp;
-    }
-    if (fixture.humanSkills) {
-      state.players[human.id].skillIds = [...fixture.humanSkills];
-    }
+    state.players[human.id].maxHp = 4;
+    state.players[human.id].hp = fixture.humanHp ?? 4;
+    state.players[human.id].skillIds = [...(fixture.humanSkills || [])];
+    opponents.forEach((player) => {
+      state.players[player.id].skillIds = [];
+    });
     if (fixture.humanEquipment) {
       const handZoneId = `zone:hand:${human.id}`;
       const equipmentZoneId = `zone:equipment:${human.id}`;
@@ -212,6 +218,18 @@ test('生产入口只加载 Core 对局，不再暴露旧解释器或旧 AI', as
     hasSession: !!window.sgs.interface.bout.session,
     interpreter: typeof window.sgs.interpreter,
     ai: typeof window.sgs.Ai,
+    operate: typeof window.sgs.Operate,
+    legacyBout: typeof window.sgs.Bout,
+    nonLordHasLordSkill: window.sgs.interface.bout.player
+      .filter((player) => player.identity !== 0)
+      .some((player) => {
+        const skillIds =
+          window.sgs.interface.bout.state().players[player.id].skillIds;
+        return skillIds.some((skillId) =>
+          ['护驾', '激将', '救援', '黄天', '血裔', '颂威', '暴虐']
+            .some((name) => skillId.endsWith(`:${name}`))
+        );
+      }),
     hasPlayerExpando: Object.prototype.hasOwnProperty.call(
       document.querySelector('#player'),
       'player'
@@ -226,6 +244,9 @@ test('生产入口只加载 Core 对局，不再暴露旧解释器或旧 AI', as
     hasSession: true,
     interpreter: 'undefined',
     ai: 'undefined',
+    operate: 'undefined',
+    legacyBout: 'undefined',
+    nonLordHasLordSkill: false,
     hasPlayerExpando: false,
     hasCardExpando: false,
     modelHasDom: false
@@ -233,8 +254,129 @@ test('生产入口只加载 Core 对局，不再暴露旧解释器或旧 AI', as
   expect(errors).toEqual([]);
 });
 
+test('首次原生发牌动画完成前 Core 不开始推进', async ({ page }) => {
+  await openStartScreen(page);
+  await page.evaluate(() => {
+    window.sgs.func.set_random_seed(20260728);
+    window.sgs.motion.setInstant(false);
+  });
+  await page.locator('#game_start').click();
+  await page.locator('.choose_role_card').first().click();
+  const started = await page.evaluate(() => ({
+    eventCount: window.sgs.interface.bout.state().eventLog.length,
+    nativeAnimations: document.getAnimations().length,
+    motionAnimating: window.sgs.motion.isAnimating()
+  }));
+  expect(started.eventCount).toBe(0);
+  expect(started.nativeAnimations).toBeGreaterThan(0);
+  expect(started.motionAnimating).toBe(true);
+
+  await page.waitForTimeout(150);
+  expect(await page.evaluate(() =>
+    window.sgs.interface.bout.state().eventLog.length
+  )).toBe(0);
+  await expect(page.locator('#cards > .player_card'))
+    .toHaveCount(4, { timeout: 2000 });
+  await page.evaluate(() => {
+    window.sgs.interface.bout.pause();
+    window.sgs.motion.setInstant(true);
+  });
+});
+
+test('浏览器构造全部 43 张卡牌、49 名武将和 4 种身份组合', async ({ page }) => {
+  await openStartScreen(page);
+  await page.evaluate(() => window.sgs.motion.setInstant(true));
+  for (const pack of ['wind', 'fire', 'forest', 'military']) {
+    await page.locator(`input[value="${pack}"]`).check();
+  }
+  await page.locator('#game_start').click();
+  await page.locator('.choose_role_card').first().click();
+  await page.waitForFunction(() => {
+    const bout = window.sgs.interface.bout;
+    return bout.engine === 'core' &&
+      document.querySelectorAll('.player_card').length >= 4;
+  }, null, { timeout: 15_000 });
+  await page.evaluate(() => {
+    window.sgs.motion.setInstant(true);
+    window.sgs.interface.bout.pause();
+  });
+  const result = await page.evaluate(async () => {
+    const manifest = window.sgs.interface.bout.contentManifest();
+    const heroes = window.sgs.HERO;
+    const cards = [...new Map(
+      window.sgs.CARD.map((card) => [card.name, card])
+    ).values()];
+    const coreHeroes = new Map(
+      manifest.heroes.map((hero) => [hero.name, hero])
+    );
+    const coreCards = new Map(
+      manifest.cards.map((card) => [card.name, card])
+    );
+    const failures = [];
+    let cases = 0;
+
+    for (const hero of heroes) {
+      for (const identity of [0, 1, 2, 3]) {
+        for (const sourceCard of cards) {
+          const player = new window.sgs.Player(
+            `_${hero.name}_`,
+            identity,
+            hero,
+            identity !== 0
+          );
+          const card = new window.sgs.Card(
+            sourceCard.name,
+            sourceCard.color,
+            sourceCard.digit
+          );
+          if (
+            player.hero !== hero ||
+            player.identity !== identity ||
+            !window.sgs.IDENTITY_INDEX_MAPPING.name[identity] ||
+            card.name !== sourceCard.name ||
+            !coreHeroes.has(hero.name) ||
+            !coreCards.has(card.name)
+          ) {
+            failures.push(`${hero.name}/${identity}/${sourceCard.name}`);
+          }
+          cases += 1;
+        }
+      }
+    }
+
+    const assetUrls = [
+      ...heroes.map((hero) =>
+        window.sgs.interface.heroImage(hero.name, 'hero')
+      ),
+      ...cards.map((card) => window.sgs.interface.cardImage(card.name))
+    ];
+    const assetChecks = await Promise.all(assetUrls.map(async (url) => ({
+      url,
+      ok: url.indexOf('none.png') === -1 && (await fetch(url)).ok
+    })));
+    return {
+      cardCount: cards.length,
+      heroCount: heroes.length,
+      identityCount: 4,
+      cases,
+      failures,
+      missingAssets: assetChecks.filter((asset) => !asset.ok)
+    };
+  });
+
+  expect(result).toEqual({
+    cardCount: 43,
+    heroCount: 49,
+    identityCount: 4,
+    cases: 8428,
+    failures: [],
+    missingAssets: []
+  });
+});
+
 test('扩展包选择只更新选中的真实数据包与素材映射', async ({ page }) => {
   await openStartScreen(page);
+  await page.evaluate(() => window.sgs.motion.setInstant(true));
   await page.locator('input[value="wind"]').uncheck();
   await page.locator('input[value="military"]').check();
   await page.locator('input[value="fire"]').check();
@@ -264,7 +406,7 @@ test('扩展包选择只更新选中的真实数据包与素材映射', async ({
   expect(content.heroes.find((hero) => hero.name === '卧龙诸葛亮'))
     .toMatchObject({
       id: 'fire:hero:卧龙诸葛亮',
-      implementation: 'partial',
+      implementation: 'complete',
       skillIds: [
         'fire:skill:八阵',
         'fire:skill:火计',
@@ -435,6 +577,85 @@ test('过河拆桥的目标高亮来自 Core 目标集合', async ({ page }) => 
   await expect(page.locator('.role.target_available')).toHaveCount(expected);
 });
 
+test('过河拆桥只选择目标区域，目标手牌保持隐藏且不追加己方支付', async ({ page }) => {
+  await startCoreGame(page);
+  await configureState(page, {
+    humanHand: ['过河拆桥', '杀', '闪', '桃'],
+    aiHand: ['杀', '闪', '杀', '桃']
+  });
+
+  const fixture = await page.evaluate(() => {
+    const bout = window.sgs.interface.bout;
+    const state = bout.state();
+    const human = window.sgs.view.playerFor(document.querySelector('#player'));
+    const cardId = state.zones[`zone:hand:${human.id}`].find(
+      (id) => state.cards[id].definitionId === 'standard:dismantlement'
+    );
+    const use = bout.legalActions().find((action) =>
+      action.type === 'use-card' &&
+      action.cardId === cardId &&
+      action.targetIds.length === 1
+    );
+    if (!use) throw new Error('过河拆桥没有合法的单一目标');
+    const targetId = use.targetIds[0];
+    const humanBefore = state.zones[`zone:hand:${human.id}`].length;
+    const targetBefore = state.zones[`zone:hand:${targetId}`].length;
+    bout.dispatchCommand(use);
+    for (let guard = 0; guard < 16; guard += 1) {
+      const request = bout.state().pendingDecision?.request;
+      if (!request || request.type !== 'respond-card') break;
+      const pass = bout.legalActions().find((action) => action.type === 'pass');
+      if (!pass) throw new Error('无懈可击窗口无法跳过');
+      bout.dispatchCommand(pass);
+    }
+    bout.resume();
+    return { humanId: human.id, targetId, humanBefore, targetBefore };
+  });
+
+  await expect(page.locator('#choose_box')).toBeVisible();
+  await page.evaluate(() => window.sgs.interface.bout.pause());
+  const decision = await page.evaluate(() => {
+    const state = window.sgs.interface.bout.state();
+    const request = state.pendingDecision?.request;
+    const zones = request.selectableCardIds.map((cardId) =>
+      Object.entries(state.zones).find(([, ids]) => ids.includes(cardId))?.[0]
+    );
+    return {
+      type: request.type,
+      playerId: request.playerId,
+      reason: request.reason,
+      zones
+    };
+  });
+  expect(decision).toMatchObject({
+    type: 'select-cards',
+    playerId: fixture.humanId,
+    reason: 'dismantle'
+  });
+  expect(decision.zones.every((zone) =>
+    zone === `zone:hand:${fixture.targetId}`
+  )).toBe(true);
+  await expect(page.locator('#choose_box_title')).toContainText('的区域');
+  await expect(page.locator('#choose_box .hidden_choice_card'))
+    .toHaveCount(fixture.targetBefore);
+  await expect(page.locator('#choose_box .hidden_choice_card').first())
+    .toHaveAttribute('aria-label', '目标手牌（未知）');
+  await expect(page.locator('#choose_box .hidden_choice_card img').first())
+    .toHaveAttribute('src', 'img/system/card_back.png');
+
+  await page.locator('#choose_box .choose_card').first().click();
+  await expect.poll(() => page.evaluate(({ humanId, targetId }) => {
+    const state = window.sgs.interface.bout.state();
+    return {
+      human: state.zones[`zone:hand:${humanId}`].length,
+      target: state.zones[`zone:hand:${targetId}`].length
+    };
+  }, fixture)).toEqual({
+    human: fixture.humanBefore - 1,
+    target: fixture.targetBefore - 1
+  });
+});
+
 test('AI 出杀时玩家可用闪响应，牌与领域事件同步', async ({ page }) => {
   await startCoreGame(page);
   await configureState(page, {
@@ -513,6 +734,7 @@ test('无懈可击走真实响应链并显示抵消反馈', async ({ page }) => 
     aiHand: ['过河拆桥'],
     humanHand: ['无懈可击']
   });
+  await page.evaluate(() => window.sgs.motion.setInstant(false));
   const targetId = await page.evaluate(() => {
     const bout = window.sgs.interface.bout;
     const sourceId = bout.state().currentPlayerId;
@@ -533,6 +755,7 @@ test('无懈可击走真实响应链并显示抵消反馈', async ({ page }) => 
     )
   )).toBe(true);
   await expect(page.locator('.nullified_effect')).toContainText('抵消');
+  await page.evaluate(() => window.sgs.motion.setInstant(true));
 });
 
 test('乐不思蜀进入判定区并由共享判定链移除', async ({ page }) => {
@@ -599,6 +822,48 @@ test('八卦阵选项框触发红色判定并抵消杀', async ({ page }) => {
   )).toBe(4);
 });
 
+test('装备牌只走原生装备动画并在完成后恢复 Core 推进', async ({ page }) => {
+  await startCoreGame(page);
+  await configureState(page, {
+    humanHand: ['八卦阵', '杀', '闪', '桃']
+  });
+  await page.evaluate(() => window.sgs.motion.setInstant(false));
+  const before = await page.locator('#cards > .player_card').count();
+  await clickHandCard(page, '八卦阵');
+  await page.locator('#ok').click();
+
+  await page.evaluate(() => window.sgs.motion.whenIdle());
+  const result = await page.evaluate(() => {
+    const bout = window.sgs.interface.bout;
+    const human = window.sgs.view.playerFor(document.querySelector('#player'));
+    const state = bout.state();
+    return {
+      equipment: state.zones[`zone:equipment:${human.id}`].map(
+        (cardId) => state.cards[cardId].definitionId
+      ),
+      handState: state.zones[`zone:hand:${human.id}`].length,
+      handModel: human.card.length,
+      handDom: document.querySelectorAll('#cards > .player_card').length,
+      equipDom: document.querySelectorAll('#defend .equip_box').length,
+      nativeAnimations: document.getAnimations().length,
+      motionAnimating: window.sgs.motion.isAnimating()
+    };
+  });
+  expect(result).toEqual({
+    equipment: ['standard:eight-diagram'],
+    handState: before - 1,
+    handModel: before - 1,
+    handDom: before - 1,
+    equipDom: 1,
+    nativeAnimations: 0,
+    motionAnimating: false
+  });
+  await page.evaluate(() => {
+    window.sgs.interface.bout.pause();
+    window.sgs.motion.setInstant(true);
+  });
+});
+
 test('通用玩家选择框提交序列化 playerIds', async ({ page }) => {
   await startCoreGame(page);
   await configureState(page, {
@@ -622,4 +887,200 @@ test('通用玩家选择框提交序列化 playerIds', async ({ page }) => {
         event.selectedPlayerIds.length === 1
     )
   )).toBe(true);
+});
+
+test('没有可用响应牌时自动放弃，不用玩家反复点击取消', async ({ page }) => {
+  await startCoreGame(page);
+  await configureState(page, {
+    humanHand: ['无中生有'],
+    clearOpponentCards: true
+  });
+  await clickHandCard(page, '无中生有');
+  await page.locator('#ok').click();
+  await page.evaluate(() => window.sgs.interface.bout.resume());
+
+  await expect.poll(() => page.evaluate(() => {
+    const state = window.sgs.interface.bout.state();
+    return {
+      pending: state.pendingDecision?.request || null,
+      resolved: state.eventLog.some(
+        (event) => event.type === 'CardsDrawn' && event.count === 2
+      )
+    };
+  })).toEqual({ pending: null, resolved: true });
+  await expect(page.locator('#cancel')).toBeHidden();
+});
+
+test('选择框使用临时卡牌绑定，火攻弃牌后不会留下幽灵手牌', async ({ page }) => {
+  await startCoreGame(page);
+  await configureState(page, {
+    humanHand: ['火攻', '朱雀羽扇'],
+    aiHand: ['闪']
+  });
+  await page.evaluate(() => {
+    const bout = window.sgs.interface.bout;
+    const human = window.sgs.view.playerFor(document.querySelector('#player'));
+    const state = bout.state();
+    for (const cardId of state.zones[`zone:hand:${human.id}`]) {
+      state.cards[cardId].suit = 'diamond';
+    }
+    for (const player of bout.player.filter((candidate) => candidate !== human)) {
+      for (const cardId of state.zones[`zone:hand:${player.id}`]) {
+        state.cards[cardId].suit = 'diamond';
+      }
+    }
+    bout.restoreSnapshot(JSON.stringify(state));
+    human.stage = 2;
+    human.choice_card();
+  });
+
+  await clickHandCard(page, '火攻');
+  await page.locator('.role.target_available').first().click();
+  await page.locator('#ok').click();
+  await showPendingHumanDecision(page);
+  await expect(page.locator('#choose_box_title')).toContainText(
+    '火攻：弃置一张同花色手牌'
+  );
+
+  const binding = await page.locator('#choose_box .choose_card').first()
+    .evaluate((choice) => {
+      const card = window.sgs.view.cardFor(choice);
+      const primary = window.sgs.view.cardElement(card);
+      return {
+        choiceName: card.name,
+        primaryClass: primary?.className || '',
+        primaryParentId: primary?.parentElement?.id || ''
+      };
+    });
+  expect(binding.primaryClass).toContain('player_card');
+  expect(binding.primaryParentId).toBe('cards');
+
+  const before = await page.locator('#cards > .player_card').count();
+  await page.locator('#choose_box .choose_card').first().click();
+  await expect(page.locator('#cards > .player_card')).toHaveCount(before - 1);
+  await expect.poll(() => page.evaluate(() => {
+    const human = window.sgs.view.playerFor(document.querySelector('#player'));
+    return {
+      model: human.card.length,
+      dom: document.querySelectorAll('#cards > .player_card').length
+    };
+  })).toEqual({ model: before - 1, dom: before - 1 });
+});
+
+test('给予等非摸牌移动后，手牌模型与玩家可见卡牌保持一致', async ({ page }) => {
+  await startCoreGame(page);
+  await configureState(page, {
+    current: 'ai',
+    aiHand: ['杀'],
+    humanHand: ['闪']
+  });
+
+  const before = await page.evaluate(() =>
+    window.sgs.view.playerFor(document.querySelector('#player')).card.length
+  );
+  await page.evaluate(() => {
+    const bout = window.sgs.interface.bout;
+    const human = window.sgs.view.playerFor(document.querySelector('#player'));
+    const donor = bout.player.find((player) => player !== human);
+    const state = bout.state();
+    state.players[donor.id].skillIds = ['standard:skill:仁德'];
+    bout.restoreSnapshot(JSON.stringify(state));
+    const give = bout.legalActions().find((action) =>
+      action.type === 'activate-skill' &&
+      action.skillId === 'standard:skill:仁德' &&
+      action.targetIds.length === 1 &&
+      action.targetIds[0] === human.id &&
+      action.materialCardIds.length === 1
+    );
+    if (!give) throw new Error('仁德没有生成单牌给予动作');
+    bout.dispatchCommand(give);
+  });
+
+  await expect(page.locator('#cards > .player_card')).toHaveCount(before + 1);
+  await expect.poll(() => page.evaluate(() => {
+    const bout = window.sgs.interface.bout;
+    const human = window.sgs.view.playerFor(document.querySelector('#player'));
+    return {
+      state: bout.state().zones[`zone:hand:${human.id}`].length,
+      model: human.card.length,
+      dom: document.querySelectorAll('#cards > .player_card').length
+    };
+  })).toEqual({ state: before + 1, model: before + 1, dom: before + 1 });
+});
+
+test('刘备仁德牌先完成入手动画，Core 才继续推进后续行动', async ({ page }) => {
+  await startCoreGame(page);
+  await configureState(page, {
+    current: 'ai',
+    aiHand: ['杀', '杀', '杀', '杀'],
+    humanHand: ['闪', '桃', '杀', '闪']
+  });
+
+  const fixture = await page.evaluate(() => {
+    const bout = window.sgs.interface.bout;
+    const human = window.sgs.view.playerFor(document.querySelector('#player'));
+    const donor = bout.player.find((player) => player !== human);
+    const state = bout.state();
+    state.players[donor.id].skillIds = ['standard:skill:仁德'];
+    bout.restoreSnapshot(JSON.stringify(state));
+    window.sgs.motion.setInstant(false);
+    const give = bout.legalActions().find((action) =>
+      action.type === 'activate-skill' &&
+      action.skillId === 'standard:skill:仁德' &&
+      action.targetIds.length === 1 &&
+      action.targetIds[0] === human.id &&
+      action.materialCardIds.length === 1
+    );
+    if (!give) throw new Error('仁德没有生成单牌给予动作');
+    bout.dispatchCommand(give);
+    const eventCount = bout.state().eventLog.length;
+    bout.resume();
+    return {
+      donorId: donor.id,
+      humanId: human.id,
+      givenCardId: give.materialCardIds[0],
+      eventCount
+    };
+  });
+
+  await page.waitForTimeout(530);
+  const atAnimationEnd = await page.evaluate((fixture) => {
+    const bout = window.sgs.interface.bout;
+    const state = bout.state();
+    const human = window.sgs.view.playerFor(document.querySelector('#player'));
+    const card = human.card.find(
+      (candidate) => candidate.coreCardId === fixture.givenCardId
+    );
+    return {
+      currentPlayerId: state.currentPlayerId,
+      phase: state.phase,
+      eventCount: state.eventLog.length,
+      cardParent: window.sgs.view.cardElement(card)?.parentElement?.id || null
+    };
+  }, fixture);
+  expect(atAnimationEnd).toEqual({
+    currentPlayerId: fixture.donorId,
+    phase: 'action',
+    eventCount: fixture.eventCount,
+    cardParent: 'cards'
+  });
+  await page.evaluate(() => {
+    window.sgs.interface.bout.pause();
+    window.sgs.motion.setInstant(true);
+  });
+});
+
+test('无需弃牌时直接结束回合，不留下选择零张牌的旧提示', async ({ page }) => {
+  await startCoreGame(page);
+  await configureState(page, { humanHand: ['闪'] });
+  const humanId = await page.evaluate(() =>
+    window.sgs.view.playerFor(document.querySelector('#player')).id
+  );
+
+  await page.locator('#abandon').click();
+  await expect(page.locator('#action_prompt')).toBeHidden();
+  await expect.poll(() => page.evaluate((previousPlayerId) => {
+    const state = window.sgs.interface.bout.state();
+    return state.currentPlayerId !== previousPlayerId;
+  }, humanId)).toBe(true);
 });

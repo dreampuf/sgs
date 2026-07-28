@@ -15,7 +15,9 @@ export type CardMoveReason =
   | "judge"
   | "delayed"
   | "reveal"
-  | "give";
+  | "give"
+  | "pindian"
+  | "skill";
 
 export type CardMoveCause =
   | {
@@ -34,8 +36,16 @@ export interface PlayerState {
   maxHp: number;
   alive: boolean;
   dying: boolean;
+  faceUp: boolean;
   skillIds: string[];
   marks: Record<string, number | boolean>;
+}
+
+export interface InstalledContentPack {
+  id: string;
+  version: string;
+  sourceRevision?: string;
+  assetManifest: string[];
 }
 
 export interface CardInstance {
@@ -92,9 +102,23 @@ export interface IncrementTurnUsageEffect {
 export interface CancelEffect {
   type: "cancel";
   cardId: CardInstanceId;
-  reason: "jink" | "nullification";
+  reason: "jink" | "nullification" | "skill";
   sourceId?: PlayerId;
   targetId?: PlayerId;
+}
+
+export interface CancelCardResolutionEffect {
+  type: "cancel-card-resolution";
+  cardId: CardInstanceId;
+  sourceId?: PlayerId;
+}
+
+export interface ResolveAcceptedResponseEffect {
+  type: "resolve-accepted-response";
+  pending: PendingDecision;
+  responseCardId: CardInstanceId;
+  playerId: PlayerId;
+  invalidMark?: string;
 }
 
 export interface FinishCardEffect {
@@ -107,6 +131,24 @@ export interface SetMarkEffect {
   playerId: PlayerId;
   mark: string;
   value: number | boolean;
+  cardId: CardInstanceId;
+}
+
+export interface SetPlayerStateEffect {
+  type: "set-player-state";
+  playerId: PlayerId;
+  cardId: CardInstanceId;
+  hp?: number;
+  maxHp?: number;
+  faceUp?: boolean;
+  chained?: boolean;
+  dying?: boolean;
+}
+
+export interface SwapHandsEffect {
+  type: "swap-hands";
+  firstPlayerId: PlayerId;
+  secondPlayerId: PlayerId;
   cardId: CardInstanceId;
 }
 
@@ -446,8 +488,12 @@ export type Effect =
   | LoseHpEffect
   | IncrementTurnUsageEffect
   | CancelEffect
+  | CancelCardResolutionEffect
+  | ResolveAcceptedResponseEffect
   | FinishCardEffect
   | SetMarkEffect
+  | SetPlayerStateEffect
+  | SwapHandsEffect
   | ToggleChainEffect
   | EquipEffect
   | RequestCardSelectionEffect
@@ -732,9 +778,10 @@ export interface PendingDecision {
 }
 
 export interface GameState {
-  schemaVersion: 2;
+  schemaVersion: 3;
   gameId: string;
   rulesetId: string;
+  contentPacks: InstalledContentPack[];
   seed: number;
   rngState: number;
   revision: number;
@@ -906,6 +953,28 @@ export type DomainEvent =
       cardId: CardInstanceId;
     })
   | (EventBase & {
+      type: "PlayerStateChanged";
+      playerId: PlayerId;
+      cardId: CardInstanceId;
+      hp: number;
+      maxHp: number;
+      faceUp: boolean;
+      chained: boolean;
+      dying: boolean;
+    })
+  | (EventBase & {
+      type: "HandsSwapped";
+      firstPlayerId: PlayerId;
+      secondPlayerId: PlayerId;
+      cardId: CardInstanceId;
+    })
+  | (EventBase & {
+      type: "TurnSkipped";
+      playerId: PlayerId;
+      turnNumber: number;
+      reason: "face-down";
+    })
+  | (EventBase & {
       type: "CardsDrawn";
       playerId: PlayerId;
       count: number;
@@ -914,7 +983,7 @@ export type DomainEvent =
   | (EventBase & {
       type: "CardCancelled";
       cardId: CardInstanceId;
-      reason: "jink" | "nullification";
+      reason: "jink" | "nullification" | "skill";
       sourceId?: PlayerId;
       targetId?: PlayerId;
     })

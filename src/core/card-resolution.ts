@@ -36,6 +36,18 @@ export type CardResolutionRule =
       id: string;
       priority?: number;
       match: CardResolutionMatch;
+      scope: "each-target";
+      operation: {
+        type: "exclude-target-with-skills";
+        skillIds: string[];
+        cardColor?: "red" | "black";
+        excludedDefinitionIds?: string[];
+      };
+    }
+  | {
+      id: string;
+      priority?: number;
+      match: CardResolutionMatch;
       scope: "target-or-card";
       operation: {
         type: "allow-nullification";
@@ -93,6 +105,27 @@ export function composeTargetResolution(
   let current = target.effects.map((effect) => structuredClone(effect));
   for (const rule of rules) {
     if (rule.scope === "each-target") {
+      if (rule.operation.type === "exclude-target-with-skills") {
+        const card = state.cards[context.cardId];
+        const color = card?.suit === "heart" || card?.suit === "diamond"
+          ? "red"
+          : card?.suit === "club" || card?.suit === "spade"
+            ? "black"
+            : undefined;
+        if (
+          (
+            rule.operation.cardColor === undefined ||
+            rule.operation.cardColor === color
+          ) &&
+          !rule.operation.excludedDefinitionIds?.includes(definition.id) &&
+          rule.operation.skillIds.some((skillId) =>
+            state.players[target.targetId]?.skillIds.includes(skillId)
+          )
+        ) {
+          current = [];
+        }
+        continue;
+      }
       current = [{
         type: "request-response",
         sourceId: context.sourceId,

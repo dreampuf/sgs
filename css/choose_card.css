@@ -103,6 +103,27 @@
     width: 93px;
     height: 131px;
 }
+.choice_zone_label
+{
+    position:absolute;
+    left:4px;
+    right:4px;
+    bottom:4px;
+    z-index:4;
+    padding:2px 1px;
+    border:1px solid rgba(235, 205, 132, 0.72);
+    border-radius:2px;
+    color:#fff1bd;
+    background:rgba(31, 20, 11, 0.86);
+    font-size:11px;
+    line-height:15px;
+    text-align:center;
+    pointer-events:none;
+}
+.hidden_choice_card > img
+{
+    object-fit:cover;
+}
 /* 身份 */
 #identity
 {

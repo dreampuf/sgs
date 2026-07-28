@@ -57,6 +57,11 @@ export class EventRuleResolver {
       const playerId = this.#eventField(event, condition.field);
       return typeof playerId === "string" && playerId !== ownerId;
     }
+    if (condition.type === "event-card-source-is-not-owner") {
+      const cardId = this.#eventField(event, "cardId");
+      return typeof cardId === "string" &&
+        state.cards[cardId]?.sourcePlayerId !== ownerId;
+    }
     if (condition.type === "event-field-equals") {
       return this.#eventField(event, condition.field) === condition.value;
     }

@@ -118,7 +118,11 @@ describe("deterministic state", () => {
       delete player.marks;
     }
     const migrated = deserializeGameState(JSON.stringify(legacy));
-    expect(migrated.schemaVersion).toBe(2);
+    expect(migrated.schemaVersion).toBe(3);
+    expect(migrated.contentPacks).toEqual([]);
+    expect(
+      Object.values(migrated.players).every((player) => player.faceUp)
+    ).toBe(true);
     expect(migrated.cards).toEqual(current.cards);
     expect(migrated.turnOrder).toEqual(current.turnOrder);
     expect(migrated.triggerQueue).toEqual([]);

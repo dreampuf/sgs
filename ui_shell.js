@@ -32,6 +32,11 @@ var sgs = sgs || {};
             cardElementByModel.set(card, dom);
             cardByElement.set(dom, card);
         },
+        bindCardPreview: function(card, dom) {
+            dom = element(dom);
+            if(!card || !dom) return;
+            cardByElement.set(dom, card);
+        },
         cardElement: function(card) {
             return card ? cardElementByModel.get(card) : undefined;
         },
@@ -40,7 +45,8 @@ var sgs = sgs || {};
         },
         unbindCard: function(card, dom) {
             dom = element(dom) || cardElementByModel.get(card);
-            if(card) cardElementByModel.delete(card);
+            if(card && cardElementByModel.get(card) === dom)
+                cardElementByModel.delete(card);
             if(dom) cardByElement.delete(dom);
         }
     };
@@ -77,13 +83,6 @@ var sgs = sgs || {};
         this.enable = true;
     };
 
-    sgs.Operate = function(id, source, target, data) {
-        this.id = id;
-        this.source = source;
-        this.target = target;
-        this.data = data;
-    };
-
     sgs.HERO = sgs.func.map(sgs.HERO, function(i) {
         return new sgs.Hero(i[0], i[1], i[2], i[3], i[4]);
     });
@@ -91,28 +90,4 @@ var sgs = sgs || {};
         return new sgs.Card(i.name, i.color, i.digit);
     });
 
-    sgs.Bout = {};
-    sgs.Bout.get_identity = function(playerNum) {
-        return sgs.func.shuffle(sgs.IDENTITY_MAPPING[playerNum]);
-    };
-    sgs.Bout.get_hero = function(playerNum, heroes) {
-        return sgs.func.choice(heroes || sgs.HERO, playerNum);
-    };
-    sgs.Bout.get_king_hero = function(otherNum, heroes) {
-        var pool = heroes || sgs.HERO,
-            always = sgs.func.filter(pool, function(hero) {
-                return hero.name == '曹操' ||
-                    hero.name == '刘备' ||
-                    hero.name == '孙权';
-            }),
-            others = sgs.func.exclude(
-                sgs.func.choice(pool, (otherNum || 2) + 3),
-                function(hero) {
-                    return hero.name == '曹操' ||
-                        hero.name == '刘备' ||
-                        hero.name == '孙权';
-                }
-            );
-        return always.concat(others.slice(0, 2));
-    };
 })(sgs);

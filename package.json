@@ -8,7 +8,7 @@
     "test": "npm run test:core && npm run test:logic && npm run test:ui",
     "test:core": "vitest run",
     "typecheck": "tsc --noEmit",
-    "test:logic": "node test/random.test.js && node test/smoke.test.js && node test/content-matrix.test.js && node test/card-rules.test.js && node test/delayed-rules.test.js && node test/dying-rules.test.js && node test/turn-matrix.test.js && node test/hero-matrix.test.js",
+    "test:logic": "node test/random.test.js && node test/smoke.test.js && node test/native-motion.test.js && node test/content-matrix.test.js && node test/card-rules.test.js && node test/delayed-rules.test.js && node test/dying-rules.test.js && node test/turn-matrix.test.js && node test/hero-matrix.test.js",
     "test:ui": "playwright test",
     "build": "vite build",
     "serve": "vite --host 0.0.0.0 --port 8080",

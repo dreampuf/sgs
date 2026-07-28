@@ -78,6 +78,16 @@ export class LegalActionResolver {
           rule.materials.suit === suit
         ) &&
         (
+          rule.materials.colorByMark === undefined ||
+          rule.materials.colorByMark.values[
+            String(
+              state.players[ownerId]?.marks[
+                rule.materials.colorByMark.mark
+              ]
+            )
+          ] === color
+        ) &&
+        (
           rule.materials.definitionId === undefined ||
           rule.materials.definitionId === card.definitionId
         ) &&
@@ -86,80 +96,159 @@ export class LegalActionResolver {
           this.#catalog.card(card.definitionId).tags?.includes(
             rule.materials.definitionTag
           ) === true
+        ) &&
+        (
+          rule.materials.cardCategories === undefined ||
+          rule.materials.cardCategories.includes(
+            this.#catalog.card(card.definitionId).category
+          )
+        ) &&
+        (
+          rule.materials.equipmentSlots === undefined ||
+          (
+            this.#catalog.card(card.definitionId).equipment !== undefined &&
+            rule.materials.equipmentSlots.includes(
+              this.#catalog.card(card.definitionId).equipment!.slot
+            )
+          )
         )
       );
     });
     const materials = this.#combinations(
       materialIds,
       rule.materials.count
+    ).filter((selected) =>
+      !rule.materials.sameSuit ||
+      new Set(selected.map((cardId) =>
+        this.#catalog.effectiveCardSuit(state, cardId, ownerId)
+      )).size <= 1
     );
     const actions: LegalAction[] = [];
     const request = state.pendingDecision?.request;
-    if (
-      rule.response &&
-      request?.type === "respond-card" &&
-      request.playerId === ownerId &&
-      request.acceptedDefinitionIds.includes(rule.definitionId)
-    ) {
-      actions.push(...materials.map((materialCardIds) => ({
-        type: "respond-virtual-card" as const,
-        playerId: ownerId,
-        decisionId: request.id,
-        skillId: rule.id,
-        definitionId: rule.definitionId,
-        materialCardIds
-      })));
-    }
-    if (
-      rule.action &&
-      !state.pendingDecision &&
-      state.phase === "action" &&
-      state.currentPlayerId === ownerId &&
-      this.#catalog.canUseDefinition(state, ownerId, rule.definitionId)
-    ) {
-      const targetSets = this.#catalog.targetSets(
-        state,
-        ownerId,
-        rule.definitionId
-      );
-      actions.push(...materials.flatMap((materialCardIds) =>
-        targetSets.map((targetIds) => ({
-          type: "use-virtual-card" as const,
+    const definitionIds = rule.definitionIds ??
+      (rule.definitionId ? [rule.definitionId] : []);
+    for (const definitionId of definitionIds) {
+      if (!this.#catalog.hasCard(definitionId)) continue;
+      if (
+        rule.response &&
+        request?.type === "respond-card" &&
+        request.playerId === ownerId &&
+        request.acceptedDefinitionIds.includes(definitionId)
+      ) {
+        actions.push(...materials.map((materialCardIds) => ({
+          type: "respond-virtual-card" as const,
           playerId: ownerId,
+          decisionId: request.id,
           skillId: rule.id,
-          definitionId: rule.definitionId,
-          materialCardIds,
-          targetIds
-        }))
-      ));
+          definitionId,
+          materialCardIds
+        })));
+      }
+      if (
+        rule.action &&
+        !state.pendingDecision &&
+        state.phase === "action" &&
+        state.currentPlayerId === ownerId &&
+        this.#catalog.card(definitionId).active &&
+        this.#catalog.canUseDefinition(state, ownerId, definitionId)
+      ) {
+        const targetSets = this.#catalog.targetSets(
+          state,
+          ownerId,
+          definitionId
+        );
+        actions.push(...materials.flatMap((materialCardIds) =>
+          targetSets.map((targetIds) => ({
+            type: "use-virtual-card" as const,
+            playerId: ownerId,
+            skillId: rule.id,
+            definitionId,
+            materialCardIds,
+            targetIds
+          }))
+        ));
+      }
     }
     return actions;
   }
 
   #activeActions(
     state: GameState,
+    actorId: PlayerId,
     ownerId: PlayerId,
     rule: ActiveAbilityRule
   ): LegalAction[] {
+    const actorHeroId = state.players[actorId]?.heroDefinitionId;
+    let actorKingdom: ReturnType<ContentRegistry["hero"]>["kingdom"] | undefined;
+    if (rule.grantedToKingdom !== undefined && actorHeroId) {
+      try {
+        actorKingdom = this.#catalog.hero(actorHeroId).kingdom;
+      } catch {
+        actorKingdom = undefined;
+      }
+    }
     if (
       state.pendingDecision ||
       state.phase !== "action" ||
-      state.currentPlayerId !== ownerId ||
+      state.currentPlayerId !== actorId ||
+      (
+        actorId !== ownerId &&
+        (
+          rule.grantedToKingdom === undefined ||
+          rule.grantedToKingdom !== actorKingdom
+        )
+      ) ||
+      (
+        actorId === ownerId &&
+        rule.grantedToKingdom !== undefined
+      ) ||
       (
         rule.ownerHpAbove !== undefined &&
-        state.players[ownerId]!.hp <= rule.ownerHpAbove
+        state.players[actorId]!.hp <= rule.ownerHpAbove
+      ) ||
+      (
+        rule.ownerMark !== undefined &&
+        (state.players[ownerId]?.marks[rule.ownerMark.mark] ?? false) !==
+          rule.ownerMark.equals
       ) ||
       (
         rule.maximumUsesPerTurn !== undefined &&
-        (state.turnUsage[ownerId]?.[rule.id] ?? 0) >=
+        (state.turnUsage[actorId]?.[rule.id] ?? 0) >=
           rule.maximumUsesPerTurn
       )
     ) {
       return [];
     }
     const materialIds = rule.materials.zones.flatMap((zone) =>
-      state.zones[`zone:${zone}:${ownerId}`] ?? []
-    );
+      state.zones[`zone:${zone}:${actorId}`] ?? []
+    ).filter((cardId) => {
+      const card = state.cards[cardId];
+      if (!card) return false;
+      const definition = this.#catalog.card(card.definitionId);
+      const suit = this.#catalog.effectiveCardSuit(state, cardId, actorId);
+      const color = suit === "heart" || suit === "diamond"
+        ? "red"
+        : "black";
+      return (
+        (rule.materials.color === undefined ||
+          rule.materials.color === color) &&
+        (rule.materials.suits === undefined ||
+          (suit !== undefined && rule.materials.suits.includes(suit))) &&
+        (rule.materials.cardCategories === undefined ||
+          rule.materials.cardCategories.includes(definition.category)) &&
+        (rule.materials.definitionTags === undefined ||
+          rule.materials.definitionTags.some((tag) =>
+            definition.tags?.includes(tag)
+          )) &&
+        (rule.materials.definitionIds === undefined ||
+          rule.materials.definitionIds.includes(definition.id)) &&
+        (rule.materials.equipmentSlots === undefined ||
+          (
+            definition.equipment !== undefined &&
+            rule.materials.equipmentSlots.includes(definition.equipment.slot)
+          ))
+      );
+    });
     const maximum = rule.materials.maximum === "all"
       ? materialIds.length
       : Math.min(rule.materials.maximum, materialIds.length);
@@ -173,7 +262,7 @@ export class LegalActionResolver {
     }
     const targetSets = this.#catalog.targetSetsFromSpec(
       state,
-      ownerId,
+      actorId,
       rule.target,
       {
         distanceBonus: 0,
@@ -182,9 +271,40 @@ export class LegalActionResolver {
       }
     );
     return materialSets.flatMap((materialCardIds) =>
-      targetSets.map((targetIds) => ({
+      targetSets.filter((targetIds) => {
+        if (
+          rule.constraints?.includes(
+            "material-count-equals-target-hand-difference"
+          )
+        ) {
+          if (targetIds.length !== 2) return false;
+          const difference = Math.abs(
+            (state.zones[`zone:hand:${targetIds[0]}`]?.length ?? 0) -
+            (state.zones[`zone:hand:${targetIds[1]}`]?.length ?? 0)
+          );
+          if (materialCardIds.length !== difference) return false;
+        }
+        if (
+          rule.constraints?.includes("equipped-weapon-means-distance-one") &&
+          materialCardIds.length === 1 &&
+          (state.zones[equipmentZone(actorId)] ?? []).includes(
+            materialCardIds[0]!
+          ) &&
+          (
+            targetIds.length !== 1 ||
+            this.#catalog.distanceBetween(
+              state,
+              actorId,
+              targetIds[0]!
+            ) > 1
+          )
+        ) {
+          return false;
+        }
+        return true;
+      }).map((targetIds) => ({
         type: "activate-skill" as const,
-        playerId: ownerId,
+        playerId: actorId,
         skillId: rule.id,
         materialCardIds,
         targetIds
@@ -199,6 +319,19 @@ export class LegalActionResolver {
     actions: LegalAction[],
     rule: LegalActionAbilityRule
   ): LegalAction[] {
+    if (rule.type === "restrict-rescue-during-owner-turn") {
+      const pending = state.pendingDecision;
+      if (
+        state.currentPlayerId !== ownerId ||
+        pending?.request.type !== "respond-card" ||
+        pending.request.responseKind !== "peach" ||
+        pending.continuation.type !== "rescue" ||
+        actorId === pending.continuation.playerId
+      ) {
+        return actions;
+      }
+      return actions.filter((action) => action.type === "pass");
+    }
     if (rule.type === "allow-end-turn") {
       if (
         ownerId !== actorId ||
@@ -213,6 +346,13 @@ export class LegalActionResolver {
     }
     if (rule.type === "forbid-card-use") {
       if (ownerId !== actorId) return actions;
+      if (
+        rule.ownerMark !== undefined &&
+        (state.players[ownerId]?.marks[rule.ownerMark.mark] ?? false) !==
+          rule.ownerMark.equals
+      ) {
+        return actions;
+      }
       return actions.filter((action) => {
         if (
           action.type !== "use-card" &&
@@ -250,7 +390,32 @@ export class LegalActionResolver {
         : action.definitionId;
       if (!definitionId) return true;
       const tags = this.#catalog.card(definitionId).tags ?? [];
-      return !rule.cardTags.some((tag) => tags.includes(tag));
+      const suit = action.type === "use-card"
+        ? this.#catalog.effectiveCardSuit(
+            state,
+            action.cardId,
+            action.playerId
+          )
+        : action.materialCardIds.length === 1
+          ? this.#catalog.effectiveCardSuit(
+              state,
+              action.materialCardIds[0]!,
+              action.playerId
+            )
+          : undefined;
+      const color = suit === "heart" || suit === "diamond"
+        ? "red"
+        : suit === "club" || suit === "spade"
+          ? "black"
+          : undefined;
+      return (
+        !rule.cardTags.some((tag) => tags.includes(tag)) ||
+        (
+          rule.cardColor !== undefined &&
+          rule.cardColor !== color
+        ) ||
+        rule.excludedCardTags?.some((tag) => tags.includes(tag)) === true
+      );
     });
   }
 
@@ -268,7 +433,9 @@ export class LegalActionResolver {
           if (rule.type === "view-as") {
             actions.push(...this.#viewAsActions(state, actorId, rule));
           } else if (rule.type === "active") {
-            actions.push(...this.#activeActions(state, actorId, rule));
+              actions.push(
+                ...this.#activeActions(state, actorId, actorId, rule)
+              );
           }
         }
       }
@@ -290,9 +457,18 @@ export class LegalActionResolver {
         const skill = this.#catalog.skill(skillId);
         for (const rule of skill.abilities ?? []) {
           if (
+            rule.type === "active" &&
+            rule.grantedToKingdom !== undefined
+          ) {
+            actions.push(
+              ...this.#activeActions(state, actorId, ownerId, rule)
+            );
+          }
+          if (
             rule.type === "forbid-targeting-owner" ||
             rule.type === "allow-end-turn" ||
-            rule.type === "forbid-card-use"
+            rule.type === "forbid-card-use" ||
+            rule.type === "restrict-rescue-during-owner-turn"
           ) {
             actions = this.#applyRestriction(
               state,

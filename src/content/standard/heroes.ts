@@ -52,6 +52,7 @@ const COMPLETE_SKILLS: Record<string, SkillDefinition> = {
     id: standardSkillId("护驾"),
     name: "护驾",
     implementation: "complete",
+    lordOnly: true,
     abilities: [{
       type: "timing",
       timing: "before-effect",
@@ -72,6 +73,7 @@ const COMPLETE_SKILLS: Record<string, SkillDefinition> = {
     id: standardSkillId("激将"),
     name: "激将",
     implementation: "complete",
+    lordOnly: true,
     abilities: [
       {
         type: "active",
@@ -472,6 +474,7 @@ const COMPLETE_SKILLS: Record<string, SkillDefinition> = {
     id: standardSkillId("救援"),
     name: "救援",
     implementation: "complete",
+    lordOnly: true,
     abilities: [{
       type: "trigger",
       eventType: "HpRecovered",

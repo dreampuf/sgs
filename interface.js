@@ -88,9 +88,7 @@ var sgs = sgs || {};
                 $('#main').css('display', 'block');
             $('#data_load_perc').text(parseInt(count / sgs.IMG_LIST.length * 100) + '%');
             if(count == sgs.IMG_LIST.length) {
-                $('#data_load').animate({
-                    opacity: 0
-                }, 1000, function() {
+                sgs.motion.to($('#data_load'), { opacity: 0 }, 1000).then(function() {
                     $('#data_load').css('display', 'none');
                 });
             }
@@ -98,7 +96,8 @@ var sgs = sgs || {};
     }
 
     /* 显示选牌框(选将/五谷/观星/..) */
-    sgs.interface.Show_CardChooseBox = function(title, cards, identity_info) {
+    sgs.interface.Show_CardChooseBox = function(title, cards, identity_info, presentation) {
+        $('#action_prompt').text('').css('display', 'none');
         var card_count = cards.length,
             title_width = title.length * 18 + 20,
             title_height = 24,
@@ -139,13 +138,7 @@ var sgs = sgs || {};
                 var card = $('<div class="choose_role_card"><img src="' +
                         sgs.interface.heroImage(d.name, 'hero') + '" /></div>');
                 card[0].name = d.name;
-                if(sgs.HERO_IMPLEMENTATION_MAPPING &&
-                   sgs.HERO_IMPLEMENTATION_MAPPING[d.name] == 'partial') {
-                    card.attr({
-                        title: d.name + '：武将数据与素材已接入，技能规则迁移中',
-                        'data-implementation': 'partial'
-                    }).append('<span class="implementation_badge">技能迁移中</span>');
-                }
+                card.attr({ role: 'button', 'aria-label': d.name, title: d.name });
                 card.css('left', i * (93 + card_padding * 2) + 'px');
                 card_choose_box.find('#choose_cards').append(card);
             });
@@ -163,13 +156,27 @@ var sgs = sgs || {};
             });
         } else {
             $.each(cards, function(i, d) {
-                var card = $(['<div class="choose_card"><img src="',
-                        sgs.interface.cardImage(d.name), '" /><div class="pat_num" style="color:',
-                        d.color, ';"><span class="pattern"><img src="',
-                        sgs.PATTERN_IMG_MAPPING[d.color], '" /></span><span class="num">',
-                        sgs.CARD_COLOR_NUM_MAPPING.number[d.digit], '</span></div><div class="select_unable"></div></div>'].join(''));
+                var hidden = presentation && presentation.hiddenCards &&
+                        presentation.hiddenCards.indexOf(d) != -1,
+                    zoneLabel = presentation && presentation.zoneLabels ?
+                        presentation.zoneLabels[i] : '',
+                    card = hidden
+                        ? $('<div class="choose_card hidden_choice_card"><img src="img/system/card_back.png" /><div class="select_unable"></div></div>')
+                        : $(['<div class="choose_card"><img src="',
+                            sgs.interface.cardImage(d.name), '" /><div class="pat_num" style="color:',
+                            sgs.CARD_COLOR_NUM_MAPPING.color[d.color], ';"><span class="pattern"><img src="',
+                            sgs.PATTERN_IMG_MAPPING[d.color], '" /></span><span class="num">',
+                            sgs.CARD_COLOR_NUM_MAPPING.number[d.digit], '</span></div><div class="select_unable"></div></div>'].join(''));
                 card[0].name = d.name;
-                sgs.view.bindCard(d, card[0]);
+                card.attr({
+                    role: 'button',
+                    'aria-label': hidden ? '目标手牌（未知）' : d.name,
+                    title: hidden ? '目标手牌（未知）' : d.name
+                });
+                if(zoneLabel) {
+                    card.append($('<span class="choice_zone_label"></span>').text(zoneLabel));
+                }
+                sgs.view.bindCardPreview(d, card[0]);
                 card.css('left', i * (93 + card_padding * 2) + 'px');
                 card_choose_box.find('#choose_cards').append(card);
             });
@@ -180,6 +187,7 @@ var sgs = sgs || {};
 
     /* 显示通用选项框。选项只携带序列化字符串，由当前 Bout 提交命令。 */
     sgs.interface.Show_OptionChooseBox = function(title, options) {
+        $('#action_prompt').text('').css('display', 'none');
         var box_width = Math.max(280, options.length * 120 + 40),
             card_choose_bg = $('<div id="choose_box_bgcover"></div>'),
             option_box = $([

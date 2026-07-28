@@ -40,13 +40,13 @@
             top: sourceOffset.top,
             opacity: 0.95
         });
-        discard.animate({
+        return sgs.motion.to(discard, {
             left: discardBox.offset().left,
             top: discardBox.offset().top,
             opacity: 0.82
-        }, 280, function() {
+        }, 280).then(function() {
             discard.appendTo(discardBox).css({ left: 0, top: 0 });
-            oldCards.not(discard).fadeOut(160, function() { $(this).remove(); });
+            return sgs.motion.fadeOut(oldCards.not(discard), 160, true);
         });
     };
 
@@ -74,7 +74,11 @@
                 left = $('#cards_last').offset().left,
                 top = $('#cards_last').offset().top;
             
-            img.appendTo($(document.body));
+            img.attr({
+                role: 'button',
+                'aria-label': d.name,
+                title: d.name
+            }).appendTo($(document.body));
             img.css({ left: left, top: top });
             img.css('position', 'absolute');
             sgs.view.bindCard(d, img[0]);
@@ -174,10 +178,10 @@
             return true;
         
         cardDom.onRevert = true; /* 避免重复执行下面的动画 */
-        $(cardDom).animate({
+        return sgs.motion.to(cardDom, {
             left: cardDom.first_left,
             top: cardDom.first_top
-        }, 500, function() {
+        }, 500).then(function() {
             cardDom.onDrag = false;
             $(cardDom).css('z-index', '10');
         });
@@ -186,7 +190,7 @@
     /* 卡牌效果动画 sgs.animation.Card_Flash(sgs.interface.bout.player[1], '杀') */
     sgs.animation.Card_Flash = function(player, name) {
         if(sgs.EFFECT_IMG_MAPPING[name] == undefined)
-            return;
+            return Promise.resolve();
         var img,
             img2,
             targetLeft,
@@ -207,25 +211,39 @@
             top: targetTop,
             opacity: 0,
         });
-        img.animate({ opacity: 1 }, 50, function() {
-            img2.appendTo(document.body).css({
-                position: 'absolute',
-                left: targetLeft,
-                top: targetTop,
-                opacity: 1,
-            }).animate({
-                opacity: 0,
-                width: img.width() * 2,
-                height: img.height() * 2,
-                left: targetLeft - img.width() / 2,
-                top: targetTop - img.height() / 2,
-            }, 200, function() { img2.remove() });
-        });
-        setTimeout(function() {
-            img.animate({ opacity: 0 }, 200, function() {
+        return sgs.motion.sequence([
+            function() {
+                return sgs.motion.to(img, { opacity: 1 }, 50);
+            },
+            function() {
+                img2.appendTo(document.body).css({
+                    position: 'absolute',
+                    left: targetLeft,
+                    top: targetTop,
+                    opacity: 1
+                });
+                return sgs.motion.parallel([
+                    sgs.motion.to(img2, {
+                        opacity: 0,
+                        width: img.width() * 2,
+                        height: img.height() * 2,
+                        left: targetLeft - img.width() / 2,
+                        top: targetTop - img.height() / 2
+                    }, 200).then(function() { img2.remove(); }),
+                    sgs.motion.sequence([
+                        function() { return sgs.motion.delay(500); },
+                        function() { return sgs.motion.to(img, { opacity: 0 }, 200); }
+                    ]).then(function() {
+                        img.remove();
+                    })
+                ]);
+            }
+        ]).finally(function() {
+            if(document.documentElement.contains(img[0]))
                 img.remove();
-            });
-        }, 2000);
+            if(document.documentElement.contains(img2[0]))
+                img2.remove();
+        });
     };
     
     /* 从牌堆中删除部分牌 */
@@ -242,7 +260,8 @@
     
     /* 给电脑发牌 */
     sgs.animation.Deal_Comp = function(card_count, player) {
-        var playerDom = sgs.view.playerElement(player);
+        var playerDom = sgs.view.playerElement(player),
+            tasks = [];
         for(var i = 0; i < card_count; i++) {
             var img = $('<img src="img/system/card_back.png" style="width:93px; height:131px" />');
             img.appendTo(document.body);
@@ -251,26 +270,31 @@
                 left: $('#cards_last').offset().left + 8,
                 top: $('#cards_last').offset().top
             });
-            img.animate({
-                left: $(playerDom).offset().left + (i + 1) * 10,
-                top: $(playerDom).offset().top + 10,
-                opacity: 0.8
-            }, 500, (function(img){
-                return function() {
-                    $(playerDom).find('.card_count span').text(parseInt($(playerDom).find('.card_count span').text()) + 1);
-                    img.animate({ opacity: 0 }, 'slow', function() {
-                        img.remove();
-                    });
-                }
-            })(img));
+            tasks.push((function(cardBack, index) {
+                return sgs.motion.sequence([
+                    function() {
+                        return sgs.motion.to(cardBack, {
+                            left: $(playerDom).offset().left + (index + 1) * 10,
+                            top: $(playerDom).offset().top + 10,
+                            opacity: 0.8
+                        }, 500);
+                    },
+                    function() {
+                    $(playerDom).find('.card_count span').text(player.card.length);
+                        return sgs.motion.fadeOut(cardBack, 160, true);
+                    }
+                ]);
+            })(img, i));
         };
+        return sgs.motion.parallel(tasks);
     };
     
     /* 给玩家发牌 */
     sgs.animation.Deal_Player = function(cards) {
         get_card(cards);
         
-        var cc = sgs.view.playerFor($('#player')[0]).card.length;
+        var cc = sgs.view.playerFor($('#player')[0]).card.length,
+            tasks = [];
         $.each(cards, function (i, d) {
             var cardDom = sgs.view.cardElement(d);
             if (cardDom.parentNode != document.body)
@@ -285,14 +309,58 @@
                 tempL = ($('#cards').width() - cardInfo.width) / (cc - 1) * (i + cc - cards.length);
             targetL = $('#cards').offset().left + tempL;
             
-            $(cardDom).animate({
+            tasks.push(sgs.motion.to(cardDom, {
                 left: targetL,
                 top: targetT
-            }, 500, function () {
+            }, 500).then(function () {
                 $(cardDom).appendTo($('#cards'));
                 $(cardDom).css('left', tempL);
                 $(cardDom).css('top', '0');
-            });
+            }));
+        });
+        return sgs.motion.parallel(tasks);
+    };
+
+    sgs.animation.Sync_Player_Hand = function(player) {
+        var playerDom = sgs.view.playerElement(player);
+        if(playerDom != $('#player')[0]) {
+            $(playerDom).find('.card_count span').text(player.card.length);
+            return Promise.resolve();
+        }
+
+        $('#cards > .player_card').each(function(i, dom) {
+            var card = sgs.view.cardFor(dom);
+            if(!card || player.card.indexOf(card) == -1) {
+                remove_card_dom(dom);
+            }
+        });
+
+        var missing = [];
+        $.each(player.card, function(i, card) {
+            var dom = sgs.view.cardElement(card);
+            if(dom && document.documentElement.contains(dom)) {
+                $(dom).attr({
+                    'aria-label': card.name,
+                    title: card.name
+                }).find('> img').first().attr('src', card_image(card));
+                $(dom).find('.pattern img').attr(
+                    'src',
+                    sgs.PATTERN_IMG_MAPPING[card.color]
+                );
+                $(dom).find('.num').text(
+                    sgs.CARD_COLOR_NUM_MAPPING.number[card.digit]
+                );
+            }
+            if(!dom || !document.documentElement.contains(dom) ||
+               !$(dom).hasClass('player_card')) {
+                missing.push(card);
+            }
+        });
+        return (missing.length ?
+            sgs.animation.Deal_Player(missing) :
+            Promise.resolve()
+        ).then(function() {
+            return sgs.animation.Arrange_Card(player.card);
         });
     };
     
@@ -300,7 +368,7 @@
     sgs.animation.Play_Card = function(player, targets, cards) {
         cards = Array.isArray(cards) ? cards : [cards];
         var flash = function(dom, name, index) {
-            sgs.animation.Card_Flash(player, name); /* 效果动画 */
+            void sgs.animation.Card_Flash(player, name); /* 效果动画 */
             var card_sounds = sgs.SOUND_FILE_MAPPING.card[name];
             if(card_sounds && card_sounds[player.hero.gender]) {
                 play_sound(card_sounds[player.hero.gender]); /* 声音 */
@@ -316,11 +384,12 @@
                 domLeft = $(dom).offset().left,
                 domTop = $(dom).offset().top;
             
+            var existingMoves = [];
             $('#played_card_box').children().each(function(i, d) {
-                $(d).animate({
+                existingMoves.push(sgs.motion.to(d, {
                     left: -finally_width / 2 + (i + card_count) * (cardInfo.width + 2),
-                    top: -cardInfo.width / 2,
-                }, 300);
+                    top: -cardInfo.width / 2
+                }, 240));
             });
             $(dom)
                 .removeClass('player_card card_unusable')
@@ -330,28 +399,35 @@
                 left: domLeft - $('#played_card_box').offset().left,
                 top: domTop - $('#played_card_box').offset().top,
             });
-            $(dom).animate({
-                left: -finally_width / 2 + index * (cardInfo.width + 2),
-                top: -cardInfo.width / 2,
-            }, 300, function() {
-                setTimeout(function() {
+            return sgs.motion.sequence([
+                function() {
+                    return sgs.motion.parallel(existingMoves.concat([
+                        sgs.motion.to(dom, {
+                            left: -finally_width / 2 + index * (cardInfo.width + 2),
+                            top: -cardInfo.width / 2
+                        }, 240)
+                    ]));
+                },
+                function() { return sgs.motion.delay(140); },
+                function() {
                     var isDelayed = name == "乐不思蜀" || name == "兵粮寸断" || name == "闪电";
-                    if(!isDelayed) {
-                        show_discard({ name: name }, dom);
-                    }
-                    $(dom).animate({ opacity: 0 }, 220, function() {
+                    return sgs.motion.parallel([
+                        isDelayed ? Promise.resolve() : show_discard({ name: name }, dom),
+                        sgs.motion.to(dom, { opacity: 0 }, 120)
+                    ]).then(function() {
                         remove_card_dom(dom);
                     });
-                }, 900);
-            });
+                }
+            ]);
         };
-        var playerDom = sgs.view.playerElement(player);
+        var playerDom = sgs.view.playerElement(player),
+            tasks = [];
         if(player == sgs.view.playerFor($('#player')[0])) {
             drag_out(cards);
             $.each(cards, function(i, d) {
-                flash(sgs.view.cardElement(d), d.name, i);
+                tasks.push(flash(sgs.view.cardElement(d), d.name, i));
             });
-            sgs.animation.Arrange_Card(player.card);
+            tasks.push(sgs.animation.Arrange_Card(player.card));
         } else {
             $.each(cards, function(i, d) {
                 var cardImg = $('<img src="' + sgs.CARDIMAG_MAPING[d.name] + '" style="width:93px; height:131px;" />');
@@ -361,10 +437,11 @@
                     left: ($(playerDom).offset().left + 20) + 'px',
                     top: ($(playerDom).offset().top + 10) + 'px',
                 });
-                flash(cardImg[0], d.name, i);
+                tasks.push(flash(cardImg[0], d.name, i));
             });
         }
         $(playerDom).find('.card_count span').text(player.card.length);
+        return sgs.motion.parallel(tasks);
     };
 
     sgs.animation.Discard_Card = function(player, cards) {
@@ -372,6 +449,7 @@
         if(player == sgs.view.playerFor($('#player')[0])) {
             drag_out(cards);
         }
+        var tasks = [];
         $.each(cards, function(i, card) {
             var dom = sgs.view.cardElement(card);
             if(!dom) {
@@ -383,68 +461,79 @@
                     })[0];
             }
             $(dom).removeClass('player_card card_unusable').addClass('table_card');
-            show_discard(card, dom);
-            $(dom).animate({ opacity: 0 }, 260, function() {
+            tasks.push(sgs.motion.parallel([
+                show_discard(card, dom),
+                sgs.motion.to(dom, { opacity: 0 }, 260)
+            ]).then(function() {
                 remove_card_dom(dom);
-            });
+            }));
         });
         if(player == sgs.view.playerFor($('#player')[0])) {
-            sgs.animation.Arrange_Card(player.card);
+            tasks.push(sgs.animation.Arrange_Card(player.card));
         }
         $(sgs.view.playerElement(player)).find('.card_count span').text(player.card.length);
+        return sgs.motion.parallel(tasks);
     };
 
     sgs.animation.Delayed_On = function(player, card, previousPlayer) {
+        var previousTask = Promise.resolve();
         if(previousPlayer) {
-            sgs.animation.Delayed_Off(previousPlayer, card, "move");
+            previousTask = sgs.animation.Delayed_Off(previousPlayer, card, "move");
         }
         var zone = status_container(player, 'delayed_zone'),
             selector = '.delayed_status[data-card-name="' + card.name + '"]';
         if(zone.find(selector).length) {
-            return;
+            return previousTask;
         }
         var status = $('<div class="delayed_status" data-card-name="' + card.name +
             '" title="' + card.name + '（判定区）"><img src="' + card_image(card) +
             '" /><span>' + card.name + '</span></div>');
-        status.appendTo(zone).css({ opacity: 0, transform: 'scale(1.35)' }).animate({
-            opacity: 1
-        }, 220, function() {
+        status.appendTo(zone).css({ opacity: 0, transform: 'scale(1.35)' });
+        return sgs.motion.parallel([
+            previousTask,
+            sgs.motion.to(status, { opacity: 1 }, 220).then(function() {
             status.css('transform', 'scale(1)');
-        });
+            })
+        ]);
     };
 
     sgs.animation.Delayed_Off = function(player, card, reason) {
         if(!player || !card) {
-            return;
+            return Promise.resolve();
         }
         var zone = status_container(player, 'delayed_zone'),
             status = zone.find('.delayed_status[data-card-name="' + card.name + '"]');
-        status.attr('data-exit-reason', reason || 'resolve').addClass('delayed_resolving')
-            .animate({ opacity: 0 }, 240, function() { status.remove(); });
+        status.attr('data-exit-reason', reason || 'resolve').addClass('delayed_resolving');
+        return sgs.motion.fadeOut(status, 240, true);
     };
 
     sgs.animation.Nullified = function(player, targets, cancelledCard) {
         var names = [],
             targetList = Array.isArray(targets) ? targets : [targets];
+        var targetTasks = [];
         $.each(targetList, function(i, target) {
             if(target && target.nickname) {
                 names.push(target.nickname.replace(/_/g, ''));
                 var targetDom = sgs.view.playerElement(target);
                 $(targetDom).addClass('nullified_target');
-                setTimeout(function() { $(targetDom).removeClass('nullified_target'); }, 700);
+                targetTasks.push((function(dom) {
+                    return sgs.motion.delay(700).then(function() {
+                        $(dom).removeClass('nullified_target');
+                    });
+                })(targetDom));
             }
         });
         var effect = $('<div class="nullified_effect"><strong>无懈可击</strong><span>抵消 ' +
             (cancelledCard ? cancelledCard.name : '锦囊') + '</span><small>' +
             (names.length ? names.join('、') : '本次效果') + '</small></div>');
         effect.appendTo($('#main'));
-        if($.fx.off) {
-            effect.css({ opacity: 1, top: '39%' });
-            setTimeout(function() { effect.remove(); }, 800);
-        } else {
-            effect.animate({ opacity: 1, top: '39%' }, 160)
-                .delay(520).animate({ opacity: 0, top: '35%' }, 220, function() { effect.remove(); });
-        }
+        return sgs.motion.parallel(targetTasks.concat([
+            sgs.motion.sequence([
+                function() { return sgs.motion.to(effect, { opacity: 1, top: '39%' }, 160); },
+                function() { return sgs.motion.delay(520); },
+                function() { return sgs.motion.to(effect, { opacity: 0, top: '35%' }, 220); }
+            ]).then(function() { effect.remove(); })
+        ]));
     };
 
     sgs.animation.Status_Change = function(player, name, enabled) {
@@ -458,11 +547,13 @@
             token = container.find('.status_token[data-status="' + name + '"]');
         $(sgs.view.playerElement(player)).toggleClass('status_' + name, !!enabled);
         if(enabled && !token.length) {
-            $('<span class="status_token" data-status="' + name + '">' +
-                (labels[name] || name) + '</span>').appendTo(container).hide().fadeIn(160);
+            token = $('<span class="status_token" data-status="' + name + '">' +
+                (labels[name] || name) + '</span>').appendTo(container).hide();
+            return sgs.motion.fadeIn(token, 160);
         } else if(!enabled) {
-            token.fadeOut(160, function() { token.remove(); });
+            return sgs.motion.fadeOut(token, 160, true);
         }
+        return Promise.resolve();
     };
 
     sgs.animation.Judge_Card = function(player, card) {
@@ -473,8 +564,12 @@
             left: anchor.left - 47,
             top: anchor.top - 66,
             opacity: 0
-        }).animate({ opacity: 1, top: anchor.top - 86 }, 180)
-          .delay(650).animate({ opacity: 0 }, 220, function() { judge.remove(); });
+        });
+        return sgs.motion.sequence([
+            function() { return sgs.motion.to(judge, { opacity: 1, top: anchor.top - 86 }, 180); },
+            function() { return sgs.motion.delay(650); },
+            function() { return sgs.motion.to(judge, { opacity: 0 }, 220); }
+        ]).then(function() { judge.remove(); });
     };
 
     sgs.animation.Show_Card = function(player, card) {
@@ -485,23 +580,31 @@
             left: anchor.left - 47,
             top: anchor.top - 66,
             opacity: 0
-        }).animate({ opacity: 1 }, 160)
-          .delay(650).animate({ opacity: 0 }, 220, function() { shown.remove(); });
+        });
+        return sgs.motion.sequence([
+            function() { return sgs.motion.to(shown, { opacity: 1 }, 160); },
+            function() { return sgs.motion.delay(650); },
+            function() { return sgs.motion.to(shown, { opacity: 0 }, 220); }
+        ]).then(function() { shown.remove(); });
     };
     
     /* 装备装备动画 */
     sgs.animation.Equip_Equipment = function(player, card) {
         var type = sgs.EQUIP_TYPE_MAPPING[card.name],
             playerDom = sgs.view.playerElement(player),
-            cardDom = sgs.view.cardElement(card);
+            cardDom = sgs.view.cardElement(card),
+            animationTask;
         if(player == sgs.view.playerFor($('#player')[0])) {
             drag_out(card);
-            $(cardDom).animate({
-                left: $('#attack').offset().left + ($('#attack').width() - $(cardDom).width()) / 2,
-                top: $('#player').offset().top + ($('#player').height() - $(cardDom).height()) / 2,
-            }, 500).animate({
-                opacity: 0
-            }, 200, function() {
+            animationTask = sgs.motion.sequence([
+                function() {
+                    return sgs.motion.to(cardDom, {
+                        left: $('#attack').offset().left + ($('#attack').width() - $(cardDom).width()) / 2,
+                        top: $('#player').offset().top + ($('#player').height() - $(cardDom).height()) / 2
+                    }, 500);
+                },
+                function() { return sgs.motion.to(cardDom, { opacity: 0 }, 200); }
+            ]).then(function() {
                 remove_card_dom(cardDom);
             });
             
@@ -516,7 +619,10 @@
                                 '<div class="equip_back"></div>'
                             ].join(''));
             $(equip_id).html(equip_img);
-            sgs.animation.Arrange_Card();
+            animationTask = sgs.motion.parallel([
+                animationTask,
+                sgs.animation.Arrange_Card()
+            ]);
         } else {
             var cardJqObj = $('<img src="' + sgs.CARDIMAG_MAPING[card.name] + '" />');
             cardJqObj.appendTo($(document.body));
@@ -527,12 +633,15 @@
                 left: ($(playerDom).offset().left - 60) + 'px',
                 top: ($(playerDom).offset().top - 30) + 'px'
             });
-            cardJqObj.animate({
-                left: ($(playerDom).offset().left + 20) + 'px',
-                top: ($(playerDom).offset().top + 10) + 'px'
-            }, 500).animate({
-                opacity: 0
-            }, 200, function() { cardJqObj.remove(); });
+            animationTask = sgs.motion.sequence([
+                function() {
+                    return sgs.motion.to(cardJqObj, {
+                        left: $(playerDom).offset().left + 20,
+                        top: $(playerDom).offset().top + 10
+                    }, 500);
+                },
+                function() { return sgs.motion.to(cardJqObj, { opacity: 0 }, 200); }
+            ]).then(function() { cardJqObj.remove(); });
             
             var equip_id = type == 0 ? '.attack' : (type == 1 ? '.defend' : (type == 2 ? '.attack_horse' : '.defend_horse')),
                 characher_mapping = sgs.NUMBER_CHARACHER_MAPPING,
@@ -545,27 +654,30 @@
                     number_mapping[card.digit], '</font><img src="',
                     pattern_img[type], '" style="width:11px; height:11px; position:absolute; top:1px; right:2px;"/>'
                 ].join(''));
-            $(playerDom).find('.card_count span').text(($(playerDom).find('.card_count span').text() | 0) - 1);
+            $(playerDom).find('.card_count span').text(player.card.length);
         }
         play_sound(sgs.SOUND_FILE_MAPPING.equipment[type]);
+        return animationTask || Promise.resolve();
     };
 
     sgs.animation.Remove_Equipment = function(player, card, type) {
-        var playerDom = sgs.view.playerElement(player);
+        var playerDom = sgs.view.playerElement(player),
+            removeTask = Promise.resolve();
         if(player == sgs.view.playerFor($('#player')[0])) {
             var equipId = type == 0 ? '#attack' : (type == 1 ? '#defend' : (type == 2 ? '#attack_horse' : '#defend_horse'));
-            $(equipId).children().fadeOut(160, function() { $(this).remove(); });
+            removeTask = sgs.motion.fadeOut($(equipId).children(), 160, true);
         } else {
             var equipClass = type == 0 ? '.attack' : (type == 1 ? '.defend' : (type == 2 ? '.attack_horse' : '.defend_horse'));
             $(playerDom).find(equipClass).empty();
         }
-        show_discard(card, playerDom);
+        return sgs.motion.parallel([removeTask, show_discard(card, playerDom)]);
     };
     
     /* 整理牌 */
     sgs.animation.Arrange_Card = function (cards) {
         cards = cards == undefined ? sgs.view.playerFor($('#player')[0]).card : cards;
         var cc = cards.length;
+        var tasks = [];
         $(cards).each(function (i, d) {
             var cardDom = sgs.view.cardElement(d);
             if(!cardDom)
@@ -577,8 +689,10 @@
                 left = cardInfo.width * i;
             else
                 left = ($('#cards').width() - cardInfo.width) / (cc - 1) * i;
-            $(cardDom).animate({ left: left }, 'normal');
+            sgs.motion.cancel(cardDom);
+            tasks.push(sgs.motion.to(cardDom, { left: left }, 180));
         });
+        return sgs.motion.parallel(tasks);
     };
     
     /* 显示技能解释 */
@@ -628,24 +742,18 @@
         if(!isComp) {
             $('#player_progress').width('296px');
             $('#player_progress_bar').css({ display: 'block', opacity: 1 });
-            $('#player_progress').animate({
-                width: 0
-            }, (seconds || 15) * 1000, function() {
-                $('#player_progress_bar').animate({
-                    opacity: 0
-                }, 200);
-            });
+            return sgs.motion.sequence([
+                function() { return sgs.motion.to($('#player_progress'), { width: 0 }, (seconds || 15) * 1000); },
+                function() { return sgs.motion.to($('#player_progress_bar'), { opacity: 0 }, 200); }
+            ]);
         } else {
             var comp_id = "#role" + comp_num;
             $(comp_id).find('.role_progress').width('123px');
             $(comp_id).find('.role_progress_bar').css({ display: 'block', opacity: 1 });
-            $(comp_id).find('.role_progress').animate({
-                width: 0
-            }, (seconds || 15) * 1000, function() {
-                $(comp_id).find('.role_progress_bar').animate({
-                    opacity: 0
-                }, 200);
-            });
+            return sgs.motion.sequence([
+                function() { return sgs.motion.to($(comp_id).find('.role_progress'), { width: 0 }, (seconds || 15) * 1000); },
+                function() { return sgs.motion.to($(comp_id).find('.role_progress_bar'), { opacity: 0 }, 200); }
+            ]);
         }
     };
     
@@ -682,25 +790,31 @@
             top_num = parseInt($(playerDom).css('top'));
             targetLeft = $(playerDom).offset().left + ($(playerDom).width() - damage_img_width) / 2;
             targetTop = $(playerDom).offset().top + ($(playerDom).height() - damage_img_height) / 2;
-            $(playerDom).animate({/* 震动 */
-                left: left_num - 10,
-                top: top_num + 10,
-            }, 50).animate({
-                left: left_num,
-                top: top_num,
-            }, 50);
+            var shakeTask = sgs.motion.sequence([
+                function() { return sgs.motion.to(playerDom, {
+                    left: left_num - 10,
+                    top: top_num + 10
+                }, 50); },
+                function() { return sgs.motion.to(playerDom, {
+                    left: left_num,
+                    top: top_num
+                }, 50); }
+            ]);
         } else {
             left_num = parseInt($('#player_head').css('right'));
             top_num = parseInt($('#player_head').css('top'));
             targetLeft = $('#player_head').offset().left + ($('#player_head').width() - damage_img_width) / 2;
             targetTop = $('#player_head').offset().top + ($('#player_head').height() - damage_img_height) / 2;
-            $('#player_head').animate({/* 震动 */
-                right: left_num + 10,
-                top: top_num + 10,
-            }, 100).animate({
-                right: left_num,
-                top: top_num,
-            }, 100);
+            var shakeTask = sgs.motion.sequence([
+                function() { return sgs.motion.to($('#player_head'), {
+                    right: left_num + 10,
+                    top: top_num + 10
+                }, 100); },
+                function() { return sgs.motion.to($('#player_head'), {
+                    right: left_num,
+                    top: top_num
+                }, 100); }
+            ]);
         }
         damage_img.css({
             position: 'absolute',
@@ -708,11 +822,13 @@
             top: targetTop,
             width: damage_img_width,
         });
-        setTimeout(function() {
-            damage_img.animate({ opacity: 0 }, 100, function() { damage_img.remove(); });
-        }, 1000);
+        var damageTask = sgs.motion.sequence([
+            function() { return sgs.motion.delay(1000); },
+            function() { return sgs.motion.to(damage_img, { opacity: 0 }, 100); }
+        ]).then(function() { damage_img.remove(); });
         sgs.animation.Refresh_Blood(player);
         play_sound(sgs.SOUND_FILE_MAPPING.damage.common);
+        return sgs.motion.parallel([shakeTask, damageTask]);
     };
 
     sgs.animation.Player_Death = function(player) {

@@ -91,6 +91,21 @@ export type TargetFilter =
       gender: HeroDefinition["gender"];
     }
   | {
+      type: "hero-kingdom";
+      kingdom: HeroDefinition["kingdom"];
+    }
+  | {
+      type: "has-skill";
+      skillId: string;
+    }
+  | {
+      type: "hp-greater-than-source";
+    }
+  | {
+      type: "hand-count-at-most";
+      count: number;
+    }
+  | {
       type: "distance-at-most";
       value: number | "attack-range";
       from?: "source" | "previous";
@@ -129,6 +144,7 @@ export interface ContentPack {
       paths: string[];
     };
   };
+  assetManifest?: string[];
   prints?: CardPrint[];
   cards: CardDefinition[];
   skills: SkillDefinition[];
@@ -190,6 +206,8 @@ export interface WorkflowRunContext {
     definitionId: CardDefinitionId,
     targetId: PlayerId
   ): boolean;
+  distanceBetween(sourceId: PlayerId, targetId: PlayerId): number;
+  attackRange(playerId: PlayerId): number;
 }
 
 export interface WorkflowResult {
@@ -234,6 +252,10 @@ export interface TargetingAbilityRule {
   ignoreDistance?: boolean;
   maximumTargetsBonus?: number;
   ownerHandCountEquals?: number;
+  ownerMark?: {
+    mark: string;
+    equals: number | boolean;
+  };
 }
 
 export type TriggerCondition =
@@ -294,6 +316,9 @@ export type TriggerCondition =
       type: "event-card";
       category?: CardDefinition["category"];
       tag?: string;
+    }
+  | {
+      type: "event-card-source-is-not-owner";
     };
 
 export type TriggerPlayerBinding =
@@ -321,12 +346,17 @@ export interface UsageAbilityRule {
   definitionId?: CardDefinitionId;
   cardTag?: string;
   unlimited: true;
+  ownerMark?: {
+    mark: string;
+    equals: number | boolean;
+  };
 }
 
 export interface ViewAsAbilityRule {
   type: "view-as";
   id: string;
-  definitionId: CardDefinitionId;
+  definitionId?: CardDefinitionId;
+  definitionIds?: CardDefinitionId[];
   materials: {
     zones: TargetZone[];
     count: number;
@@ -334,6 +364,15 @@ export interface ViewAsAbilityRule {
     suit?: CardSuit;
     definitionId?: CardDefinitionId;
     definitionTag?: string;
+    cardCategories?: CardDefinition["category"][];
+    equipmentSlots?: Array<
+      NonNullable<CardDefinition["equipment"]>["slot"]
+    >;
+    sameSuit?: boolean;
+    colorByMark?: {
+      mark: string;
+      values: Record<string, "red" | "black">;
+    };
   };
   action?: boolean;
   response?: boolean;
@@ -347,10 +386,27 @@ export interface ActiveAbilityRule {
     zones: TargetZone[];
     minimum: number;
     maximum: number | "all";
+    color?: "red" | "black";
+    suits?: CardSuit[];
+    cardCategories?: CardDefinition["category"][];
+    definitionTags?: string[];
+    definitionIds?: CardDefinitionId[];
+    equipmentSlots?: Array<
+      NonNullable<CardDefinition["equipment"]>["slot"]
+    >;
   };
   target: TargetSpec;
   maximumUsesPerTurn?: number;
   ownerHpAbove?: number;
+  ownerMark?: {
+    mark: string;
+    equals: number | boolean;
+  };
+  grantedToKingdom?: HeroDefinition["kingdom"];
+  constraints?: Array<
+    | "material-count-equals-target-hand-difference"
+    | "equipped-weapon-means-distance-one"
+  >;
   program: AbilityProgram;
 }
 
@@ -360,6 +416,8 @@ export interface ResponseCountAbilityRule {
   sourceCardTag?: string;
   sourceIsOwner?: boolean;
   opponentIsOwner?: boolean;
+  sourceGender?: HeroDefinition["gender"];
+  opponentGender?: HeroDefinition["gender"];
   count: number;
 }
 
@@ -375,6 +433,8 @@ export type LegalActionAbilityRule =
       type: "forbid-targeting-owner";
       cardTags: string[];
       ownerHandEmpty?: boolean;
+      cardColor?: "red" | "black";
+      excludedCardTags?: string[];
     }
   | {
       type: "allow-end-turn";
@@ -386,7 +446,19 @@ export type LegalActionAbilityRule =
       type: "forbid-card-use";
       definitionIds?: CardDefinitionId[];
       cardTags?: string[];
+      ownerMark?: {
+        mark: string;
+        equals: number | boolean;
+      };
+    }
+  | {
+      type: "restrict-rescue-during-owner-turn";
     };
+
+export interface HandLimitAbilityRule {
+  type: "modify-hand-limit";
+  bonusPerOtherKingdom?: HeroDefinition["kingdom"];
+}
 
 export type AbilityRule =
   | TargetingAbilityRule
@@ -397,12 +469,14 @@ export type AbilityRule =
   | ActiveAbilityRule
   | ResponseCountAbilityRule
   | CardPropertyAbilityRule
+  | HandLimitAbilityRule
   | LegalActionAbilityRule;
 
 export interface SkillDefinition {
   id: string;
   name: string;
   implementation?: "complete" | "partial";
+  lordOnly?: boolean;
   abilities?: AbilityRule[];
 }
 
@@ -476,6 +550,11 @@ export class ContentRegistry {
         rule.cardTag === undefined ||
         definition.tags?.includes(rule.cardTag)
       ) &&
+      (
+        rule.ownerMark === undefined ||
+        (state.players[sourceId]?.marks[rule.ownerMark.mark] ?? false) ===
+          rule.ownerMark.equals
+      ) &&
       rule.unlimited
     );
     if (unlimited || definition.maxUsesPerTurn === undefined) return true;
@@ -516,6 +595,17 @@ export class ContentRegistry {
           (rule.sourceIsOwner && sourceId !== ownerId) ||
           (rule.opponentIsOwner && opponentId !== ownerId) ||
           (
+            rule.sourceGender !== undefined &&
+            this.#heroGender(state, sourceId) !== rule.sourceGender
+          ) ||
+          (
+            rule.opponentGender !== undefined &&
+            (
+              opponentId === undefined ||
+              this.#heroGender(state, opponentId) !== rule.opponentGender
+            )
+          ) ||
+          (
             rule.sourceCardTag !== undefined &&
             !cardDefinition?.tags?.includes(rule.sourceCardTag)
           )
@@ -526,6 +616,45 @@ export class ContentRegistry {
       }
     }
     return count;
+  }
+
+  #heroGender(
+    state: Readonly<GameState>,
+    playerId: PlayerId
+  ): HeroDefinition["gender"] | undefined {
+    const heroId = state.players[playerId]?.heroDefinitionId;
+    if (!heroId) return undefined;
+    try {
+      return this.hero(heroId).gender;
+    } catch {
+      return undefined;
+    }
+  }
+
+  handLimit(state: Readonly<GameState>, playerId: PlayerId): number {
+    const player = state.players[playerId];
+    if (!player) return 0;
+    let limit = Math.max(0, player.hp);
+    for (const skillId of player.skillIds) {
+      for (const rule of this.skill(skillId).abilities ?? []) {
+        if (rule.type !== "modify-hand-limit") continue;
+        if (rule.bonusPerOtherKingdom) {
+          limit += state.turnOrder.filter((otherId) => {
+            if (otherId === playerId || !state.players[otherId]?.alive) {
+              return false;
+            }
+            const heroId = state.players[otherId]?.heroDefinitionId;
+            if (!heroId) return false;
+            try {
+              return this.hero(heroId).kingdom === rule.bonusPerOtherKingdom;
+            } catch {
+              return false;
+            }
+          }).length * 2;
+        }
+      }
+    }
+    return limit;
   }
 
   #equipmentDefinition(
@@ -722,6 +851,28 @@ export class ContentRegistry {
             return false;
           }
         }
+        if (filter.type === "hero-kingdom") {
+          const heroId = player?.heroDefinitionId;
+          if (!heroId) return false;
+          try {
+            return this.hero(heroId).kingdom === filter.kingdom;
+          } catch {
+            return false;
+          }
+        }
+        if (filter.type === "has-skill") {
+          return player?.skillIds.includes(filter.skillId) === true;
+        }
+        if (filter.type === "hp-greater-than-source") {
+          const source = state.players[sourceId];
+          return player !== undefined &&
+            source !== undefined &&
+            player.hp > source.hp;
+        }
+        if (filter.type === "hand-count-at-most") {
+          return (state.zones[`zone:hand:${playerId}`]?.length ?? 0) <=
+            filter.count;
+        }
         const fromId = filter.from === "previous"
           ? selected[selected.length - 1]
           : sourceId;
@@ -800,6 +951,11 @@ export class ContentRegistry {
             rule.ownerHandCountEquals !== undefined &&
             (state.zones[`zone:hand:${sourceId}`]?.length ?? 0) !==
               rule.ownerHandCountEquals
+          ) ||
+          (
+            rule.ownerMark !== undefined &&
+            (source?.marks[rule.ownerMark.mark] ?? false) !==
+              rule.ownerMark.equals
           )
         ) {
           continue;
@@ -1180,6 +1336,17 @@ export class ContentRegistry {
       version,
       name,
       requires: [...requires]
+    }));
+  }
+
+  installedContentPacks(): GameState["contentPacks"] {
+    return [...this.#packs.values()].map((pack) => ({
+      id: pack.id,
+      version: pack.version,
+      ...(pack.provenance?.rulesSource?.revision
+        ? { sourceRevision: pack.provenance.rulesSource.revision }
+        : {}),
+      assetManifest: [...(pack.assetManifest ?? [])]
     }));
   }
 

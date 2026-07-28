@@ -291,6 +291,9 @@ function globalResponseDefinition(
     id,
     name,
     category: "trick",
+    tags: id === STANDARD_CARD.savageAssault
+      ? ["targeting:trick", "targeting:savage-assault"]
+      : ["targeting:trick", "targeting:archery-attack"],
     active: true,
     implementation: "complete",
     target: { type: "none" },
@@ -1076,25 +1079,49 @@ function createStandardResolutionRules(): NonNullable<
 }
 
 export function createStandardPack(): ContentPack {
+  const cards = createCardDefinitions().filter(
+    (definition) => !MANEUVERING_CARD_IDS.has(definition.id)
+  );
+  const heroes = createStandardHeroDefinitions();
   return {
     id: "standard",
     version: "0.3.0",
     name: "三国杀标准版",
     requires: [],
+    provenance: {
+      releaseDate: "2008-01-01",
+      releaseDatePrecision: "day",
+      evidenceUrls: ["https://www.yokaverse.com/about-history/"],
+      rulesSource: {
+        repository: "https://github.com/Mogara/QSanguosha",
+        revision: "b3b5ad83e7ed758ea2524b325528d2d507eb7f98",
+        paths: [
+          "src/standard.cpp",
+          "src/standard-cards.cpp",
+          "src/standard-generals.cpp",
+          "src/standard-skillcards.cpp"
+        ]
+      }
+    },
     prints: createStandardPrints(STANDARD_CARD_IDS_BY_NAME),
     resolutionRules: createStandardResolutionRules(),
     workflows: createStandardWorkflows().filter(
       (workflow) => workflow.id !== STANDARD_WORKFLOW.fireAttack
     ),
     skills: createStandardSkillDefinitions(),
-    heroes: createStandardHeroDefinitions(),
-    cards: createCardDefinitions().filter(
-      (definition) => !MANEUVERING_CARD_IDS.has(definition.id)
-    )
+    heroes,
+    cards,
+    assetManifest: [
+      ...cards.map((definition) => `card:${definition.id}`),
+      ...heroes.map((definition) => `hero:${definition.id}`)
+    ]
   };
 }
 
 export function createManeuveringPack(): ContentPack {
+  const cards = createCardDefinitions().filter(
+    (definition) => MANEUVERING_CARD_IDS.has(definition.id)
+  );
   return {
     id: "maneuvering",
     version: "1.0.0",
@@ -1119,8 +1146,7 @@ export function createManeuveringPack(): ContentPack {
     ),
     skills: [],
     heroes: [],
-    cards: createCardDefinitions().filter(
-      (definition) => MANEUVERING_CARD_IDS.has(definition.id)
-    )
+    cards,
+    assetManifest: cards.map((definition) => `card:${definition.id}`)
   };
 }

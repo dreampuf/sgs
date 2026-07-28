@@ -11,6 +11,7 @@
     <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="logic_func.js"></script>
     <script type="text/javascript" src="ui_shell.js"></script>
+    <script type="text/javascript" src="motion.js"></script>
     <script type="text/javascript" src="interface.js"></script>
     <script type="text/javascript" src="animation.js"></script>
     <script type="text/javascript" src="main.js"></script>
@@ -23,13 +24,13 @@
         <!-- 游戏开始 -->
         <div id="start_options">
             <div>选择早期扩展包</div>
-            <label title="2009 年 3 月发行；武将与素材已接入 Core，11 个技能规则仍在迁移。同期报道的具体日期存在冲突，故只保留月份精度。"><input type="checkbox" class="expansion_pack" value="wind" checked="checked" /> 风（技能迁移中）</label>
+            <label title="2009 年 3 月发行；11 个技能规则与素材均已接入 Core。同期报道的具体日期存在冲突，故只保留月份精度。"><input type="checkbox" class="expansion_pack" value="wind" checked="checked" /> 风</label>
             <label title="2009-09-21 发行的神话再临·军争篇游戏牌扩充。"><input type="checkbox" class="expansion_pack" value="military" checked="checked" /> 军争</label>
-            <label title="2009-11-16 发行；武将与素材已接入 Core，13 个新增技能规则仍在迁移。"><input type="checkbox" class="expansion_pack" value="fire" /> 火（技能迁移中）</label>
-            <label title="2010-07-29 发行；武将与素材已接入 Core，18 个技能规则仍在迁移。"><input type="checkbox" class="expansion_pack" value="forest" /> 林（技能迁移中）</label>
+            <label title="2009-11-16 发行；13 个新增技能规则与素材均已接入 Core。"><input type="checkbox" class="expansion_pack" value="fire" /> 火</label>
+            <label title="2010-07-29 发行；18 个技能规则与素材均已接入 Core。"><input type="checkbox" class="expansion_pack" value="forest" /> 林</label>
             <span class="ai_option">AI：<select id="ai_level"><option value="0">简单</option><option value="1" selected="selected">普通</option><option value="2">困难</option></select></span>
         </div>
-        <div id="game_start">开始</div>
+        <div id="game_start" role="button" aria-label="开始游戏">开始</div>
         
         <div class="role" id="role2">
             <!-- 国家 -->
@@ -167,6 +168,7 @@
         <!-- 游戏输出信息 -->
         <div id="gameinfo">
         </div>
+        <div id="action_prompt" role="status" aria-live="polite"></div>
         <!-- 牌堆 -->
         <div id="cards_last">
             <img src="img/system/card_back.png" style="left:10px; top:10px;" />
@@ -203,17 +205,17 @@
 
             <!-- 按钮 Begin -->
             <div id="ok_cancel_abandon">
-                <div id="ok">
+                <div id="ok" role="button" aria-label="确定">
                     <img class="press" src="img/system/buttons/ok_press.png" />
                     <img class="hover" src="img/system/buttons/ok_hover.png" />
                     <img class="normal" src="img/system/buttons/ok.png" />
                 </div>
-                <div id="cancel">
+                <div id="cancel" role="button" aria-label="取消">
                     <img class="press" src="img/system/buttons/cancel_press.png" />
                     <img class="hover" src="img/system/buttons/cancel_hover.png" />
                     <img class="normal" src="img/system/buttons/cancel.png" />
                 </div>
-                <div id="abandon">
+                <div id="abandon" role="button" aria-label="结束出牌并进入弃牌阶段">
                     <img class="press" src="img/system/buttons/abandon_press.png" />
                     <img class="hover" src="img/system/buttons/abandon_hover.png" />
                     <img class="normal" src="img/system/buttons/abandon.png" />

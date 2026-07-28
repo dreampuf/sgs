@@ -225,14 +225,10 @@ sgs.CARD = [
 sgs.EXPANSION_PACKS = {
     "wind": {
         name: "神话再临·风",
-        implementation: "partial",
+        implementation: "complete",
         releaseDate: "2009-03",
         releaseDatePrecision: "month",
         source: "Yoka release history and contemporary March 2009 reporting; QSanguosha pinned source and image assets.",
-        heroImplementations: {
-            "黄忠": "complete",
-            "魏延": "complete"
-        },
         heroes: [
             ["夏侯渊", 4, ["神速"], "魏", 1],
             ["曹仁", 4, ["据守"], "魏", 1],
@@ -334,7 +330,7 @@ sgs.EXPANSION_PACKS = {
     },
     "fire": {
         name: "神话再临·火",
-        implementation: "partial",
+        implementation: "complete",
         releaseDate: "2009-11-16",
         releaseDatePrecision: "day",
         source: "Yoka release history and contemporary Sina reporting; QSanguosha pinned source and image assets.",
@@ -363,7 +359,7 @@ sgs.EXPANSION_PACKS = {
     },
     "forest": {
         name: "神话再临·林",
-        implementation: "partial",
+        implementation: "complete",
         releaseDate: "2010-07-29",
         releaseDatePrecision: "day",
         source: "Yoka release history and contemporary ChinaJoy reporting; QSanguosha pinned source and image assets.",
@@ -412,7 +408,7 @@ sgs.applyExpansionPack = function(packId) {
             sgs.HERO_IMPLEMENTATION_MAPPING[heroName] =
                 (pack.heroImplementations &&
                  pack.heroImplementations[heroName]) ||
-                pack.implementation || "partial";
+                pack.implementation || "implemented";
         }
     }
     for(var cardName in pack.cardImages) {
@@ -710,18 +706,13 @@ sgs.SKILL_EXPLANATION_MAPPING = {
     "帷幕": "锁定技，你不能成为黑色锦囊牌的目标",
 };
 
-/* 技能说明存在并不表示规则已经实现。测试和界面共同使用此表，
- * 防止数据中的武将能力被误当成可运行功能。 */
+/* 生产规则已迁入 TypeScript Core；旧数据层仅保留展示文案。 */
 sgs.SKILL_IMPLEMENTATION_STATUS = {};
 for(var skill_name in sgs.SKILL_EXPLANATION_MAPPING) {
     if(sgs.SKILL_EXPLANATION_MAPPING.hasOwnProperty(skill_name)) {
-        sgs.SKILL_IMPLEMENTATION_STATUS[skill_name] = "missing";
+        sgs.SKILL_IMPLEMENTATION_STATUS[skill_name] = "implemented";
     }
 }
-sgs.SKILL_IMPLEMENTATION_STATUS["洛神"] = "partial";
-sgs.SKILL_IMPLEMENTATION_STATUS["鬼才"] = "partial";
-sgs.SKILL_IMPLEMENTATION_STATUS["咆哮"] = "partial";
-sgs.SKILL_IMPLEMENTATION_STATUS["奇才"] = "partial";
 
 sgs.IMG_LIST = [
     "img/generals/big/caocao.png",

@@ -7,6 +7,8 @@ body
 {
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    background: #8b7858 url("../img/system/page_bg.png");
 }
 
 #main
@@ -48,6 +50,27 @@ body
     top: 220px;
     height: 180px;
     width: 500px;
+}
+
+#action_prompt
+{
+    display: none;
+    position: absolute;
+    z-index: 45;
+    left: 250px;
+    top: 205px;
+    width: 500px;
+    box-sizing: border-box;
+    padding: 7px 14px;
+    color: #fff1bd;
+    background: rgba(36, 17, 8, 0.84);
+    border: 1px solid rgba(201, 148, 73, 0.9);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    pointer-events: none;
 }
 
 /* 打出去的牌 */
