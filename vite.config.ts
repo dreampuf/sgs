@@ -6,6 +6,7 @@ const LEGACY_SCRIPTS = [
   "data.js",
   "logic_func.js",
   "ui_shell.js",
+  "motion.js",
   "interface.js",
   "animation.js",
   "main.js"

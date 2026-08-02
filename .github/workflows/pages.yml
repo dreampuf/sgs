@@ -30,6 +30,15 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Verify browser runtime
+        run: |
+          for file in data.js logic_func.js ui_shell.js motion.js interface.js animation.js main.js; do
+            test -f "dist/$file"
+          done
+          if grep -Eq '(href|src)="/assets/' dist/index.html; then
+            echo "Pages build contains root-relative Vite assets" >&2
+            exit 1
+          fi
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact
