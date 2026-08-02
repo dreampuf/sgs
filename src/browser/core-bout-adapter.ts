@@ -390,6 +390,7 @@ function unique<T>(values: T[]): T[] {
 
 export interface CoreBoutAdapterOptions {
   cardNames?: string[];
+  publicIdentities?: boolean;
   shouldPromptForNullification?: () => boolean;
   shouldPromptForPeach?: () => boolean;
 }
@@ -407,6 +408,7 @@ export class CoreBoutAdapter {
   readonly #cardIdByUiCardViewModel = new WeakMap<UiCardViewModel, CardInstanceId>();
   readonly #playerById = new Map<PlayerId, UiPlayerViewModel>();
   readonly #aiAgent = new PolicySearchAgent();
+  readonly #publicIdentities: boolean;
   readonly #shouldPromptForNullification: () => boolean;
   readonly #shouldPromptForPeach: () => boolean;
   #advanceTimer: number | null = null;
@@ -480,6 +482,7 @@ export class CoreBoutAdapter {
     ];
     this.playerlen = this.player.length;
     this.ailv = aiLevel;
+    this.#publicIdentities = options.publicIdentities === true;
     this.#shouldPromptForNullification =
       options.shouldPromptForNullification ?? (() => true);
     this.#shouldPromptForPeach =
@@ -2813,7 +2816,8 @@ export class CoreBoutAdapter {
       const command = this.#aiAgent.chooseAction(observeForPlayer(
         state,
         pending.playerId,
-        this.#registry
+        this.#registry,
+        { revealAllIdentities: this.#publicIdentities }
       ));
       this.#submit(command);
       return;
@@ -2857,7 +2861,8 @@ export class CoreBoutAdapter {
       this.#submit(this.#aiAgent.chooseAction(observeForPlayer(
         state,
         current.id,
-        this.#registry
+        this.#registry,
+        { revealAllIdentities: this.#publicIdentities }
       )));
       return;
     }
@@ -2884,7 +2889,8 @@ export class CoreBoutAdapter {
     this.#submit(this.#aiAgent.chooseAction(observeForPlayer(
       state,
       current.id,
-      this.#registry
+      this.#registry,
+      { revealAllIdentities: this.#publicIdentities }
     )));
   }
 }

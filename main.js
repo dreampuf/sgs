@@ -1256,6 +1256,7 @@ var initializeGame = function() {
             {
                 cardNames: active_match.storyScenario ?
                     active_match.storyScenario.cardNames : undefined,
+                publicIdentities: Boolean(active_match.storyScenario),
                 shouldPromptForNullification: promptForNullification,
                 shouldPromptForPeach: promptForPeach
             }
@@ -1377,6 +1378,7 @@ var initializeGame = function() {
             {
                 cardNames: restoredStoryScenario ?
                     restoredStoryScenario.cardNames : undefined,
+                publicIdentities: Boolean(restoredStoryScenario),
                 shouldPromptForNullification: promptForNullification,
                 shouldPromptForPeach: promptForPeach
             }

@@ -82,6 +82,69 @@ describe("information-safe AI", () => {
     expect(observation.legalActions).toContainEqual(action);
   });
 
+  test("story AI sees fixed factions and does not attack a scripted ally", () => {
+    const registry = createStandardRegistry();
+    const state = createGameState({
+      seed: 20260802,
+      currentPlayerId: "guan-yu",
+      phase: "action",
+      players: [
+        {
+          id: "lord",
+          identity: "lord",
+          heroDefinitionId: "standard:hero:刘备",
+          maxHp: 5
+        },
+        {
+          id: "guan-yu",
+          identity: "loyalist",
+          heroDefinitionId: "standard:hero:关羽",
+          maxHp: 4,
+          hand: [STANDARD_CARD.slash]
+        },
+        {
+          id: "zhang-fei",
+          identity: "loyalist",
+          heroDefinitionId: "standard:hero:张飞",
+          maxHp: 4
+        },
+        {
+          id: "dong-zhuo",
+          identity: "rebel",
+          heroDefinitionId: "forest:hero:董卓",
+          maxHp: 8
+        }
+      ]
+    });
+    const observation = observeForPlayer(
+      state,
+      "guan-yu",
+      registry,
+      { revealAllIdentities: true }
+    );
+
+    expect(observeForPlayer(
+      state,
+      "guan-yu",
+      registry
+    ).players.map((player) => player.identity)).toEqual([
+      "lord",
+      "loyalist",
+      null,
+      null
+    ]);
+    expect(observation.players.map((player) => player.identity)).toEqual([
+      "lord",
+      "loyalist",
+      "loyalist",
+      "rebel"
+    ]);
+    expect(new PolicySearchAgent().chooseAction(observation)).toMatchObject({
+      type: "end-action-phase",
+      playerId: "guan-yu"
+    });
+  });
+
   test("Guhuo questioning considers faction, health, and public credibility", () => {
     const registry = createStandardRegistry();
     const observationFor = (

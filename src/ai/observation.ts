@@ -74,10 +74,16 @@ export interface PlayerObservation {
   behaviorHistory: PlayerBehaviorEvent[];
 }
 
+export interface ObserveForPlayerOptions {
+  /** Story scenarios publish their fixed factions before the match begins. */
+  revealAllIdentities?: boolean;
+}
+
 export function observeForPlayer(
   state: GameState,
   playerId: PlayerId,
-  registry: ContentRegistry
+  registry: ContentRegistry,
+  options: ObserveForPlayerOptions = {}
 ): PlayerObservation {
   if (!state.players[playerId]) throw new Error(`unknown observer: ${playerId}`);
   const visibleCards = (cardIds: string[]): CardInstance[] =>
@@ -176,7 +182,8 @@ export function observeForPlayer(
       equipment: visibleCards(state.zones[equipmentZone(id)] ?? []),
       judgment: visibleCards(state.zones[`zone:judgment:${id}`] ?? []),
       identity:
-        id === playerId ||
+        options.revealAllIdentities === true ||
+          id === playerId ||
           state.players[id]!.identity === "lord" ||
           !state.players[id]!.alive
           ? state.players[id]!.identity ?? null
