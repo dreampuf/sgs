@@ -133,6 +133,11 @@ const DEFAULT_SETTINGS: AudioSettings = {
   sfxVolume: 0.62
 };
 
+function runtimeAssetUrl(path: string): string {
+  if (/^[a-z][a-z\d+.-]*:/i.test(path)) return path;
+  return new URL(path.replace(/^\/+/, ""), document.baseURI).href;
+}
+
 function normalizedVolume(value: number): number {
   return Math.max(0, Math.min(1, Number.isFinite(value) ? value : 0));
 }
@@ -190,8 +195,8 @@ class BrowserAudioEngine implements SgsAudioEngine {
 
   constructor() {
     this.#catalogPromise = Promise.all([
-      fetch("/audio/catalog.json"),
-      fetch("/audio/heroes/catalog.json")
+      fetch(runtimeAssetUrl("audio/catalog.json")),
+      fetch(runtimeAssetUrl("audio/heroes/catalog.json"))
     ])
       .then(async ([audioResponse, heroResponse]) => {
         if (!audioResponse.ok) {
@@ -486,7 +491,7 @@ class BrowserAudioEngine implements SgsAudioEngine {
       !this.#settings.sfxEnabled ||
       !this.#context
     ) return;
-    const buffer = await this.#loadBuffer(url);
+    const buffer = await this.#loadBuffer(runtimeAssetUrl(url));
     if (
       !this.#pageActive ||
       !this.#settings.sfxEnabled ||
@@ -561,7 +566,7 @@ class BrowserAudioEngine implements SgsAudioEngine {
     const outgoing = this.#music;
     const outgoingId = this.#currentMusicId;
     const outgoingEntry = outgoingId ? catalog.music[outgoingId] : undefined;
-    const music = new Audio(entry.url);
+    const music = new Audio(runtimeAssetUrl(entry.url));
     music.loop = entry.loop === true;
     music.preload = "auto";
     music.volume = 0;

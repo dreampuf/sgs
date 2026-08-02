@@ -632,14 +632,14 @@ var initializeGame = function() {
         return selected ? selected.value : 'identity';
     };
     var HOME_BACKGROUNDS = {
-        identity: '/img/system/home/background-identity.jpg',
-        wei: '/img/system/home/background-story-wei.jpg',
-        shu: '/img/system/home/background-story-shu.jpg',
-        wu: '/img/system/home/background-story-wu.jpg',
-        qun: '/img/system/home/background-story-qun.jpg'
+        identity: 'img/system/home/background-identity.jpg',
+        wei: 'img/system/home/background-story-wei.jpg',
+        shu: 'img/system/home/background-story-shu.jpg',
+        wu: 'img/system/home/background-story-wu.jpg',
+        qun: 'img/system/home/background-story-qun.jpg'
         },
         HOME_SCENARIO_BACKGROUNDS = {
-            /* 'wu:wu-208-chibi': '/img/system/home/background-story-wu-chibi.jpg' */
+            /* 'wu:wu-208-chibi': 'img/system/home/background-story-wu-chibi.jpg' */
         };
     Object.keys(HOME_BACKGROUNDS).forEach(function(key) {
         var image = new Image();
