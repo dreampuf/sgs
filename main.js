@@ -67,6 +67,21 @@ var initializeGame = function() {
         };
     };
 
+    var sparseOpponentSeatAngle = function(index, count, start, end) {
+        if(count == 1) return 270;
+        var startLeft = opponentSeatRect(start, 1).centerLeft,
+            endLeft = opponentSeatRect(end, 1).centerLeft,
+            centerLeft = startLeft +
+                (endLeft - startLeft) * index / (count - 1),
+            normalized = Math.max(-1, Math.min(1, (centerLeft - 500) / 440));
+        /*
+         * Equal angle steps crowd the ends of an ellipse. Sparse tables use
+         * equal horizontal spacing and project each centre back onto the arc,
+         * so full-size seats stay distinct while still following the curve.
+         */
+        return 360 - Math.acos(normalized) * 180 / Math.PI;
+    };
+
     var layoutOpponentSeats = function() {
         var seats = ui.all('.role', opponent_seats),
             count = seats.length,
@@ -94,16 +109,9 @@ var initializeGame = function() {
         ) {
             end -= 0.5;
         }
-        /*
-         * Sparse tables can keep a balanced single arc after the right edge
-         * is shortened. Dense tables retain the longer left side because
-         * they need the additional circumference.
-         */
-        if(count <= 5) {
-            start = Math.max(start, 540 - end);
-        }
         seats.forEach(function(seat, index) {
-            var angle = count == 1 ? 270 :
+            var angle = count <= 5 ?
+                    sparseOpponentSeatAngle(index, count, start, end) :
                     start + (end - start) * index / (count - 1),
                 rect = opponentSeatRect(angle, scale);
             seat.style.left = Math.round(rect.centerLeft - 65.5) + 'px';

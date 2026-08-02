@@ -1106,8 +1106,63 @@ test('四人身份场座位为摸牌堆和弃牌堆预留空间', async ({ page 
     )
   )).toBe(true);
   const angles = geometry.seats.map((seat) => seat.angle);
-  expect(angles[1]).toBe(270);
-  expect(angles[0] + angles[2]).toBeCloseTo(540, 5);
+  expect(angles[0]).toBe(200);
+  expect(angles.at(-1)).toBeGreaterThan(295);
+  expect(angles.at(-1) - angles[0]).toBeGreaterThan(95);
+  expect(errors).toEqual([]);
+});
+
+test('六人身份场的五个对手沿可用弧线分散排列', async ({ page }) => {
+  const errors = capturePageErrors(page);
+  await openStartScreen(page);
+  await page.evaluate(() => {
+    window.sgs.func.set_random_seed(20260802);
+    window.sgs.motion.setInstant(true);
+  });
+  await page.locator('#identity_player_count').fill('6');
+  await page.locator('#game_start').click();
+  await expect(page.locator('#choose_box')).toBeVisible();
+  await page.locator('.choose_role_card').first().click();
+  await page.waitForFunction(() =>
+    window.sgs.interface.bout?.engine === 'core' &&
+    window.sgs.interface.bout.player.length === 6
+  );
+  const geometry = await page.evaluate(() => {
+    window.sgs.interface.bout.pause();
+    const rect = (element) => {
+      const value = element.getBoundingClientRect();
+      return {
+        left: value.left,
+        right: value.right,
+        top: value.top,
+        bottom: value.bottom
+      };
+    };
+    return {
+      seats: [...document.querySelectorAll('#opponent_seats > .role')]
+        .map((seat) => ({
+          angle: Number(seat.getAttribute('data-seat-angle')),
+          rect: rect(seat)
+        })),
+      fixtures: [
+        rect(document.querySelector('#cards_last')),
+        rect(document.querySelector('#discard_pile_box'))
+      ]
+    };
+  });
+  expect(geometry.seats).toHaveLength(5);
+  expect(geometry.seats[0].angle).toBe(200);
+  expect(
+    geometry.seats.at(-1).angle - geometry.seats[0].angle
+  ).toBeGreaterThan(95);
+  expect(geometry.seats.every((seat, index) =>
+    geometry.fixtures.every((fixture) =>
+      !rectanglesOverlap(seat.rect, fixture)
+    ) && (
+      index === 0 ||
+      seat.rect.left - geometry.seats[index - 1].rect.right >= 20
+    )
+  )).toBe(true);
   expect(errors).toEqual([]);
 });
 
