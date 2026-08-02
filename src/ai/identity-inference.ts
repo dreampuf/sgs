@@ -21,6 +21,9 @@ export interface IdentityInference {
   hostility: Record<PlayerId, Record<PlayerId, number>>;
 }
 
+const LORD_UNCERTAIN_TARGET_CAP = 20;
+const CLEAR_REBEL_PROBABILITY = 0.85;
+
 function hiddenPrior(observation: PlayerObservation): IdentityProbability {
   const counts = { ...identityCounts(observation.players.length) };
   for (const player of observation.players) {
@@ -195,25 +198,57 @@ export function inferIdentities(
   };
 }
 
+/**
+ * Lords only treat a hidden player as a confirmed rebel after public behavior
+ * has pushed the rebel probability well beyond the seat-count prior. Merely
+ * being one of several unknown players is not evidence.
+ */
+export function isClearRebelTarget(
+  observation: PlayerObservation,
+  targetId: PlayerId
+): boolean {
+  const target = observation.players.find((player) => player.id === targetId);
+  if (target?.identity === "rebel") return true;
+  const belief = inferIdentities(observation).beliefs.find(
+    (candidate) => candidate.playerId === targetId
+  );
+  return belief !== undefined &&
+    belief.evidence.length > 0 &&
+    belief.probabilities.rebel >= CLEAR_REBEL_PROBABILITY;
+}
+
 export function strategicIdentityTargetScore(
   observation: PlayerObservation,
   targetId: PlayerId
 ): number {
   if (targetId === observation.selfId) return 0;
   const inference = inferIdentities(observation);
-  const belief = inference.beliefs.find(
+  const identityBelief = inference.beliefs.find(
     (candidate) => candidate.playerId === targetId
-  )?.probabilities;
+  );
+  const belief = identityBelief?.probabilities;
   const target = observation.players.find((player) => player.id === targetId);
   if (!belief || !target) return 0;
   const retaliation = Math.min(
     100,
     inference.hostility[targetId]?.[observation.selfId] ?? 0
   );
-  if (
-    observation.selfIdentity === "lord" ||
-    observation.selfIdentity === "loyalist"
-  ) {
+  if (observation.selfIdentity === "lord") {
+    const expectedHostility = belief.rebel * 220 + belief.renegade * 35 -
+      belief.loyalist * 180 - belief.lord * 1_000 + retaliation;
+    const clearRebel = target.identity === "rebel" ||
+      (
+        (identityBelief?.evidence.length ?? 0) > 0 &&
+        belief.rebel >= CLEAR_REBEL_PROBABILITY
+      );
+    // A lord's opening job is to preserve both camps while identities emerge.
+    // Unknown-seat priors can justify light disruption, but never the same
+    // aggression or low-health finish pressure as explicit rebel evidence.
+    return clearRebel
+      ? expectedHostility
+      : Math.min(LORD_UNCERTAIN_TARGET_CAP, expectedHostility);
+  }
+  if (observation.selfIdentity === "loyalist") {
     return belief.rebel * 220 + belief.renegade * 35 -
       belief.loyalist * 180 - belief.lord * 1_000 + retaliation;
   }

@@ -6,7 +6,10 @@ import type {
   CardDefinitionId,
   LegalAction
 } from "../core/types";
-import { strategicIdentityTargetScore } from "./identity-inference";
+import {
+  isClearRebelTarget,
+  strategicIdentityTargetScore
+} from "./identity-inference";
 
 export interface ActionEvaluator {
   evaluate(
@@ -152,6 +155,41 @@ function isHarmful(definitionId: CardDefinitionId | undefined): boolean {
       "standard:archery-attack"
     ].includes(definitionId)
   );
+}
+
+function canDealImmediateDamage(
+  definitionId: CardDefinitionId | undefined
+): boolean {
+  return definitionId !== undefined && (
+    isSlashDefinition(definitionId) ||
+    [
+      "standard:duel",
+      "standard:fire-attack",
+      "standard:savage-assault",
+      "standard:archery-attack"
+    ].includes(definitionId)
+  );
+}
+
+function lordUncertainAggressionPenalty(
+  observation: PlayerObservation,
+  targetIds: readonly string[]
+): number {
+  if (observation.selfIdentity !== "lord") return 0;
+  return targetIds.reduce((penalty, targetId) => {
+    const target = observedPlayer(observation, targetId);
+    if (
+      !target?.alive ||
+      isClearRebelTarget(observation, targetId)
+    ) {
+      return penalty;
+    }
+    // Direct damage against an unknown seat should lose to waiting or to
+    // non-damaging disruption, even when using a card relieves hand overflow.
+    // At critical health, the additional restraint dominates all ordinary
+    // tempo incentives so the lord will not gamble on killing a loyalist.
+    return penalty - 45 - (target.hp <= 1 ? 600 : 0);
+  }, 0);
 }
 
 function strategicHostility(
@@ -889,6 +927,12 @@ export const STANDARD_HEURISTIC: ActionEvaluator = {
           intent,
           intent === "beneficial"
         );
+        if (intent === "harmful") {
+          score += lordUncertainAggressionPenalty(
+            observation,
+            action.targetIds
+          );
+        }
       }
       score -= materialCost(observation, action.materialCardIds) * 0.55;
       score += overflowValue(observation, action);
@@ -912,6 +956,9 @@ export const STANDARD_HEURISTIC: ActionEvaluator = {
 
     const definitionId = cardDefinitionForAction(observation, action);
     let score = cardActionValue(observation, action, definitionId);
+    if (canDealImmediateDamage(definitionId)) {
+      score += lordUncertainAggressionPenalty(observation, action.targetIds);
+    }
     if (action.type === "use-virtual-card") {
       score += guhuoRiskAdjustment(observation, action);
     }

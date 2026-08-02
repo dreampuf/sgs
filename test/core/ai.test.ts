@@ -11,6 +11,7 @@ import {
   equipmentZone,
   handZone,
   inferIdentities,
+  isClearRebelTarget,
   observeForPlayer,
   strategicIdentityTargetScore
 } from "../../src/core";
@@ -1426,6 +1427,183 @@ describe("information-safe AI", () => {
     expect(new PolicySearchAgent().chooseAction(observation)).toMatchObject({
       type: "use-card",
       targetIds: [expectedTargetId]
+    });
+  });
+
+  test("a lord balances unknown seats instead of executing a weak player", () => {
+    const registry = createStandardRegistry();
+    const state = createGameState({
+      seed: 520,
+      currentPlayerId: "lord",
+      phase: "action",
+      players: [
+        {
+          id: "lord",
+          identity: "lord",
+          heroDefinitionId: "hero:lord",
+          maxHp: 4,
+          hand: [
+            STANDARD_CARD.peach,
+            STANDARD_CARD.fireAttack,
+            STANDARD_CARD.wine,
+            STANDARD_CARD.slash
+          ]
+        },
+        {
+          id: "weak-unknown",
+          identity: "renegade",
+          heroDefinitionId: "hero:weak-unknown",
+          maxHp: 4,
+          hp: 1,
+          hand: [STANDARD_CARD.peach]
+        },
+        {
+          id: "hidden-rebel-a",
+          identity: "rebel",
+          heroDefinitionId: "hero:hidden-rebel-a",
+          maxHp: 4
+        },
+        {
+          id: "hidden-loyalist",
+          identity: "loyalist",
+          heroDefinitionId: "hero:hidden-loyalist",
+          maxHp: 4
+        },
+        {
+          id: "hidden-rebel-b",
+          identity: "rebel",
+          heroDefinitionId: "hero:hidden-rebel-b",
+          maxHp: 4
+        }
+      ]
+    });
+    const observation = observeForPlayer(state, "lord", registry);
+
+    expect(isClearRebelTarget(observation, "weak-unknown")).toBe(false);
+    expect(strategicIdentityTargetScore(observation, "weak-unknown"))
+      .toBe(20);
+    expect(new PolicySearchAgent().chooseAction(observation)).toEqual({
+      type: "end-action-phase",
+      playerId: "lord"
+    });
+  });
+
+  test("the replay-shaped lord opening avoids blind damage", () => {
+    const registry = createStandardRegistry();
+    const state = createGameState({
+      seed: 522,
+      currentPlayerId: "lord",
+      phase: "action",
+      players: [
+        {
+          id: "lord",
+          identity: "lord",
+          heroDefinitionId: "hero:lord",
+          maxHp: 4,
+          hand: [
+            STANDARD_CARD.peach,
+            STANDARD_CARD.wine,
+            STANDARD_CARD.jink,
+            STANDARD_CARD.duel,
+            STANDARD_CARD.nullification,
+            STANDARD_CARD.slash
+          ]
+        },
+        {
+          id: "unknown-a",
+          identity: "renegade",
+          heroDefinitionId: "hero:unknown-a",
+          maxHp: 4,
+          hand: Array.from({ length: 4 }, () => STANDARD_CARD.slash)
+        },
+        {
+          id: "unknown-b",
+          identity: "rebel",
+          heroDefinitionId: "hero:unknown-b",
+          maxHp: 4
+        },
+        {
+          id: "unknown-c",
+          identity: "loyalist",
+          heroDefinitionId: "hero:unknown-c",
+          maxHp: 4
+        },
+        {
+          id: "unknown-d",
+          identity: "rebel",
+          heroDefinitionId: "hero:unknown-d",
+          maxHp: 4
+        }
+      ]
+    });
+    const observation = observeForPlayer(state, "lord", registry);
+
+    expect(new PolicySearchAgent().chooseAction(observation)).toEqual({
+      type: "end-action-phase",
+      playerId: "lord"
+    });
+  });
+
+  test("a lord attacks at full strength after clear rebel evidence", () => {
+    const registry = createStandardRegistry();
+    const state = createGameState({
+      seed: 521,
+      currentPlayerId: "lord",
+      phase: "action",
+      players: [
+        {
+          id: "lord",
+          identity: "lord",
+          heroDefinitionId: "hero:lord",
+          maxHp: 4,
+          hp: 3,
+          hand: [STANDARD_CARD.slash]
+        },
+        {
+          id: "attacker",
+          identity: "rebel",
+          heroDefinitionId: "hero:attacker",
+          maxHp: 4,
+          hp: 1
+        },
+        {
+          id: "quiet-rebel",
+          identity: "rebel",
+          heroDefinitionId: "hero:quiet-rebel",
+          maxHp: 4
+        },
+        {
+          id: "quiet-loyalist",
+          identity: "loyalist",
+          heroDefinitionId: "hero:quiet-loyalist",
+          maxHp: 4
+        },
+        {
+          id: "quiet-renegade",
+          identity: "renegade",
+          heroDefinitionId: "hero:quiet-renegade",
+          maxHp: 4
+        }
+      ]
+    });
+    state.eventLog.push({
+      type: "DamageApplied",
+      sequence: 1,
+      revision: 0,
+      sourceId: "attacker",
+      targetId: "lord",
+      amount: 1,
+      cardId: "system:public-history",
+      nature: "normal"
+    });
+    const observation = observeForPlayer(state, "lord", registry);
+
+    expect(isClearRebelTarget(observation, "attacker")).toBe(true);
+    expect(strategicIdentityTargetScore(observation, "attacker"))
+      .toBeGreaterThan(200);
+    expect(new PolicySearchAgent().chooseAction(observation)).toMatchObject({
+      type: "use-card",
+      targetIds: ["attacker"]
     });
   });
 
