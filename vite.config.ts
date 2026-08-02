@@ -18,7 +18,6 @@ export default defineConfig({
     closeBundle() {
       const output = resolve("dist");
       cpSync(resolve("img"), resolve(output, "img"), { recursive: true });
-      cpSync(resolve("js"), resolve(output, "js"), { recursive: true });
       for (const file of LEGACY_SCRIPTS) {
         copyFileSync(resolve(file), resolve(output, file));
       }
