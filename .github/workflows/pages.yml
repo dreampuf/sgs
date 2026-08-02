@@ -39,6 +39,16 @@ jobs:
             echo "Pages build contains root-relative Vite assets" >&2
             exit 1
           fi
+          if grep -q 'data:text/css' dist/index.html; then
+            echo "Pages build contains inline CSS with ambiguous relative asset URLs" >&2
+            exit 1
+          fi
+          for file in \
+            img/system/home/background-identity.jpg \
+            img/system/home/background-story-shu.jpg \
+            img/system/role_bg.png; do
+            test -f "dist/$file"
+          done
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact

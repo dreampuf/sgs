@@ -640,10 +640,13 @@ var initializeGame = function() {
         },
         HOME_SCENARIO_BACKGROUNDS = {
             /* 'wu:wu-208-chibi': 'img/system/home/background-story-wu-chibi.jpg' */
+        },
+        pageAssetUrl = function(path) {
+            return new URL(path.replace(/^\/+/, ''), document.baseURI).href;
         };
     Object.keys(HOME_BACKGROUNDS).forEach(function(key) {
         var image = new Image();
-        image.src = HOME_BACKGROUNDS[key];
+        image.src = pageAssetUrl(HOME_BACKGROUNDS[key]);
     });
     var setHomeBackground = function(modeId, campaignId, scenarioId) {
         var faction = modeId == 'story' && HOME_BACKGROUNDS[campaignId]
@@ -661,7 +664,7 @@ var initializeGame = function() {
         scene.dataset.scenario = scenarioId || '';
         scene.style.setProperty(
             '--home-background',
-            'url("' + background + '")'
+            'url("' + pageAssetUrl(background) + '")'
         );
         ui.one('#main').setAttribute('data-home-faction', faction);
         ui.text(

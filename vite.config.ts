@@ -14,6 +14,9 @@ const LEGACY_SCRIPTS = [
 
 export default defineConfig({
   base: "./",
+  build: {
+    assetsInlineLimit: 0
+  },
   plugins: [{
     name: "copy-legacy-browser-runtime",
     closeBundle() {
