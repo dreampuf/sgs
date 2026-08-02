@@ -795,7 +795,9 @@ var initializeGame = function() {
             button.classList.toggle('selected', item.id == selected.id);
             button.innerHTML = '<span>' + item.year + ' · ' + item.title +
                 '</span><small>' + (completed ? '已完成' :
-                    (button.disabled ? '尚未解锁' : item.location)) + '</small>';
+                    (button.disabled ? '尚未解锁' :
+                        item.seats.length + ' 人 · ' + item.difficulty)) +
+                '</small>';
             button.addEventListener('click', function() {
                 selected_story_scenario_id = item.id;
                 renderStoryScenario();
@@ -813,16 +815,30 @@ var initializeGame = function() {
             storyCopy.append(item);
         });
         ui.text(ui.one('#story_intro .story_objective'), selected.objective);
+        var localSide = function(identity) {
+                if(selected.localIdentity == 'lord' ||
+                   selected.localIdentity == 'loyalist') {
+                    return identity == 'lord' || identity == 'loyalist';
+                }
+                return identity == selected.localIdentity;
+            },
+            allies = selected.seats.filter(function(seat) {
+                return localSide(seat.identity);
+            }).map(function(seat, index) {
+                return heroNameFromId(seat.heroDefinitionId) +
+                    (index == 0 ? '（玩家）' : '');
+            }),
+            enemies = selected.seats.filter(function(seat) {
+                return !localSide(seat.identity);
+            }).map(function(seat) {
+                return heroNameFromId(seat.heroDefinitionId);
+            });
         ui.text(
             ui.one('#story_intro .story_roster'),
-            '本场可选：' + selected.localHeroDefinitionIds
-                .filter(function(heroId) {
-                    return story_progress.unlockedHeroDefinitionIds
-                        .indexOf(heroId) != -1;
-                })
-                .map(heroNameFromId)
-                .join('、') +
-            ' · 胜利解锁：' +
+            selected.seats.length + ' 人 · ' + selected.difficulty +
+            '｜我方：' + allies.join('、') +
+            '｜敌方：' + enemies.join('、') +
+            '｜胜利解锁：' +
             selected.unlockHeroDefinitionIds.map(heroNameFromId).join('、')
         );
     };
@@ -1176,6 +1192,9 @@ var initializeGame = function() {
             '选择您的武将',
             player_heros,
             '你的身份是 - ' + sgs.IDENTITY_INDEX_MAPPING.name[identity[0]]);
+        if(mode.id == 'story' && player_heros.length == 1) {
+            ui.one('.choose_role_card').click();
+        }
     };
 
     /* 游戏开始 */

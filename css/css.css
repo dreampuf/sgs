@@ -359,8 +359,16 @@ body
 }
 .card_flash_effect
 {
+    width:128px;
+    height:128px;
     max-width:240px;
     max-height:240px;
+    object-fit:contain;
+}
+.damage_effect
+{
+    width:172px;
+    height:170px;
     object-fit:contain;
 }
 #discard_pile_box
@@ -844,32 +852,76 @@ body
     position: absolute;
     top: 0;
     display:none;
+    z-index:10000;
+    overflow:hidden;
+    background:#17120c;
 }
-#data_load img
+#data_load > img
 {
     width: 100%;
     height: 100%;
     position: absolute;
     object-fit:cover;
 }
+#data_load .data_load_status
+{
+    position: absolute;
+    box-sizing:border-box;
+    width:420px;
+    left:50%;
+    bottom:72px;
+    transform:translateX(-50%);
+    padding:18px 24px 16px;
+    text-align:center;
+    color:#f3dfad;
+    background:rgba(24, 12, 5, 0.88);
+    border:1px solid rgba(222, 153, 66, 0.65);
+    border-radius:7px;
+    box-shadow:0 7px 24px rgba(0, 0, 0, 0.75);
+}
+#data_load_phase
+{
+    font-size:18px;
+    letter-spacing:2px;
+}
 #data_load_perc
 {
-    font-size: 80px;
-    font-weight: bold;
-    position: absolute;
-    width: 200px;
-    height: 60px;
-    margin: auto;
-    top: 280px;
-    left: 400px;
-    line-height: 60px;
-    text-align: center;
+    margin-top:2px;
+    font-size:50px;
+    line-height:58px;
+    font-weight:bold;
     color: #f7b257;
-    text-shadow: 2px 2px 2px #fff;
+    text-shadow:2px 2px 2px #241204;
 }
-#load_imgs
+#data_load_bar
 {
-    display: none;
+    height:9px;
+    overflow:hidden;
+    background:rgba(0, 0, 0, 0.65);
+    border:1px solid rgba(255, 218, 145, 0.45);
+    border-radius:999px;
+}
+#data_load_bar i
+{
+    display:block;
+    width:0;
+    height:100%;
+    border-radius:inherit;
+    background:linear-gradient(90deg, #853019, #f0a83b 65%, #ffe9a0);
+    transition:width 120ms linear;
+}
+#data_load_detail
+{
+    margin-top:7px;
+    color:#e8d2a2;
+    font-size:13px;
+}
+#data_load small
+{
+    display:block;
+    margin-top:4px;
+    color:#ad9b75;
+    font-size:11px;
 }
 
 #start_options {

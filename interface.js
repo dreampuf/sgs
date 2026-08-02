@@ -244,31 +244,12 @@ var sgs = sgs || {};
     };
 
     sgs.interface.Load_Data = function() {
-        var loading = dom.one('#data_load'),
-            imageContainer = dom.one('#load_imgs'),
-            percentage = dom.one('#data_load_perc'),
-            count = 0;
-        dom.show(loading);
-        sgs.IMG_LIST.forEach(function(source) {
-            var image = document.createElement('img');
-            image.addEventListener('load', function() {
-                count++;
-                if(/data_load_bg.jpg/.test(image.getAttribute('src'))) {
-                    dom.show(dom.one('#main'));
-                }
-                dom.text(
-                    percentage,
-                    parseInt(count / sgs.IMG_LIST.length * 100, 10) + '%'
-                );
-                if(count == sgs.IMG_LIST.length) {
-                    sgs.motion.to(loading, { opacity: 0 }, 1000).then(
-                        function() { dom.hide(loading); }
-                    );
-                }
-            });
-            image.src = source;
-            imageContainer.append(image);
-        });
+        if(window.sgsAssets) {
+            return window.sgsAssets.start();
+        }
+        dom.show(dom.one('#main'));
+        dom.hide(dom.one('#data_load'));
+        return Promise.resolve();
     };
 
     sgs.interface.Show_CardChooseBox = function(

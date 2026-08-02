@@ -111,6 +111,7 @@ export interface PlayedMusicTransition {
 }
 
 export interface SgsAudioEngine {
+  whenCatalogReady(): Promise<void>;
   unlock(): Promise<void>;
   playCue(cue: AudioCue): void;
   playHeroCue(cue: HeroAudioCue): void;
@@ -242,6 +243,10 @@ class BrowserAudioEngine implements SgsAudioEngine {
     });
   }
 
+  async whenCatalogReady(): Promise<void> {
+    await this.#catalogPromise;
+  }
+
   async unlock(): Promise<void> {
     this.#unlocked = true;
     if (!this.#context) {
@@ -277,12 +282,18 @@ class BrowserAudioEngine implements SgsAudioEngine {
       eventType: cue.eventType,
       dedupeKey: cue.dedupeKey
     });
-    void this.#playSfxBuffer(cue.id);
+    this.#runInBackground(
+      this.#playSfxBuffer(cue.id),
+      `play generated sound ${cue.id}`
+    );
   }
 
   playSfx(id: string): void {
     this.#recordCue({ id });
-    void this.#playSfxBuffer(id);
+    this.#runInBackground(
+      this.#playSfxBuffer(id),
+      `play generated sound ${id}`
+    );
   }
 
   playHeroCue(cue: HeroAudioCue): void {
@@ -335,7 +346,10 @@ class BrowserAudioEngine implements SgsAudioEngine {
       for (const asset of definition.assets) {
         const timer = window.setTimeout(() => {
           this.#pendingSfxTimers.delete(timer);
-          void this.#playAudioUrl(asset.url, asset.gain);
+          this.#runInBackground(
+            this.#playAudioUrl(asset.url, asset.gain),
+            `play generated hero sound ${asset.url}`
+          );
         }, asset.delayMs);
         this.#pendingSfxTimers.add(timer);
       }
@@ -471,6 +485,12 @@ class BrowserAudioEngine implements SgsAudioEngine {
     }
   }
 
+  #runInBackground(task: Promise<void>, operation: string): void {
+    void task.catch((error: unknown) => {
+      console.warn(`Unable to ${operation}`, error);
+    });
+  }
+
   async #playSfxBuffer(id: string): Promise<void> {
     if (
       !this.#pageActive ||
@@ -518,16 +538,21 @@ class BrowserAudioEngine implements SgsAudioEngine {
     if (existing) return existing;
     const promise = (async () => {
       if (!this.#context) throw new Error("audio context is not initialized");
-      const response = await fetch(url);
+      let response: Response;
+      try {
+        response = await fetch(url);
+      } catch (error) {
+        const detail = error instanceof Error ? error.message : String(error);
+        throw new Error(`audio request failed: ${url}: ${detail}`);
+      }
       if (!response.ok) {
         throw new Error(`audio request failed: ${response.status} ${url}`);
       }
       return await this.#context.decodeAudioData(await response.arrayBuffer());
     })();
     this.#bufferPromises.set(url, promise);
-    void promise.catch((error: unknown) => {
+    void promise.catch(() => {
       this.#bufferPromises.delete(url);
-      console.warn(`Unable to play generated sound ${url}`, error);
     });
     return promise;
   }

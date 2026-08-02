@@ -324,9 +324,15 @@
         <!-- 玩家部分 End -->
 
         <!-- 数据加载 -->
-        <div id="data_load">
+        <div id="data_load" role="status" aria-live="polite" aria-busy="true">
             <img src="img/system/data_load_bg.jpg" />
-            <div id="data_load_perc"></div>
+            <div class="data_load_status">
+                <div id="data_load_phase">准备资源清单</div>
+                <div id="data_load_perc">0%</div>
+                <div id="data_load_bar" aria-hidden="true"><i></i></div>
+                <div id="data_load_detail">0 / 0</div>
+                <small>完整预载游戏图片 · 声音文件按首次播放缓存</small>
+            </div>
         </div>
         <div id="explanation"></div>
 
@@ -379,6 +385,5 @@
             </div>
         </div>
     </div>
-    <div id="load_imgs"></div>
 </body>
 </html>

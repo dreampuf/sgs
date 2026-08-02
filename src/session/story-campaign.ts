@@ -5,7 +5,7 @@ export type CampaignFaction = "wei" | "shu" | "wu" | "qun";
 
 export interface StorySeatDefinition {
   identity: Identity;
-  heroDefinitionId?: string;
+  heroDefinitionId: string;
 }
 
 export interface StoryBeat {
@@ -20,6 +20,7 @@ export interface StoryScenario {
   year: number;
   era: string;
   title: string;
+  difficulty: "初阵" | "鏖战" | "大会战";
   location: string;
   prologue: string[];
   objective: string;
@@ -87,6 +88,7 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         year: 184,
         era: "中平元年",
         title: "桃园举义",
+        difficulty: "初阵",
         location: "幽州 · 涿郡",
         prologue: [
           "黄巾四起，州郡告急。刘备在涿郡遇见关羽与张飞，三人约定同心救民。",
@@ -97,10 +99,10 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         defeatText: "义军未能站稳脚跟，桃园誓言仍需用下一次胜利来证明。",
         localIdentity: "lord",
         seats: [
-          { identity: "lord" },
+          { identity: "lord", heroDefinitionId: "standard:hero:刘备" },
           { identity: "loyalist", heroDefinitionId: "standard:hero:关羽" },
-          { identity: "rebel", heroDefinitionId: "wind:hero:张角" },
-          { identity: "renegade", heroDefinitionId: "standard:hero:吕布" }
+          { identity: "loyalist", heroDefinitionId: "standard:hero:张飞" },
+          { identity: "rebel", heroDefinitionId: "wind:hero:张角" }
         ],
         localHeroDefinitionIds: ["standard:hero:刘备"],
         requiredExpansionIds: ["wind", "military"],
@@ -128,6 +130,7 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         year: 190,
         era: "初平元年",
         title: "虎牢扬名",
+        difficulty: "鏖战",
         location: "司隶 · 虎牢关",
         prologue: [
           "诸侯会盟讨董，虎牢关前吕布无人能挡。",
@@ -138,15 +141,14 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         defeatText: "虎牢关仍在董卓手中，义军只能暂避锋芒。",
         localIdentity: "lord",
         seats: [
-          { identity: "lord" },
+          { identity: "lord", heroDefinitionId: "standard:hero:刘备" },
+          { identity: "loyalist", heroDefinitionId: "standard:hero:关羽" },
           { identity: "loyalist", heroDefinitionId: "standard:hero:张飞" },
           { identity: "rebel", heroDefinitionId: "forest:hero:董卓" },
-          { identity: "renegade", heroDefinitionId: "standard:hero:吕布" }
+          { identity: "rebel", heroDefinitionId: "standard:hero:吕布" },
+          { identity: "rebel", heroDefinitionId: "forest:hero:贾诩" }
         ],
-        localHeroDefinitionIds: [
-          "standard:hero:刘备",
-          "standard:hero:关羽"
-        ],
+        localHeroDefinitionIds: ["standard:hero:刘备"],
         requiredExpansionIds: ["wind", "military", "forest"],
         beats: [
           {
@@ -169,6 +171,7 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         year: 208,
         era: "建安十三年",
         title: "长坂突围",
+        difficulty: "大会战",
         location: "荆州 · 长坂坡",
         prologue: [
           "曹军南下，百姓与军队被冲散。长坂之战的目标不是争夺身份，而是护送残部突围。",
@@ -179,16 +182,16 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         defeatText: "撤退队伍被曹军截断，必须重新规划突围路线。",
         localIdentity: "lord",
         seats: [
-          { identity: "lord" },
+          { identity: "lord", heroDefinitionId: "standard:hero:赵云" },
+          { identity: "loyalist", heroDefinitionId: "standard:hero:刘备" },
+          { identity: "loyalist", heroDefinitionId: "standard:hero:张飞" },
           { identity: "loyalist", heroDefinitionId: "standard:hero:诸葛亮" },
           { identity: "rebel", heroDefinitionId: "standard:hero:曹操" },
-          { identity: "renegade", heroDefinitionId: "standard:hero:夏侯惇" }
+          { identity: "rebel", heroDefinitionId: "standard:hero:夏侯惇" },
+          { identity: "rebel", heroDefinitionId: "standard:hero:张辽" },
+          { identity: "rebel", heroDefinitionId: "standard:hero:许褚" }
         ],
-        localHeroDefinitionIds: [
-          "standard:hero:刘备",
-          "standard:hero:张飞",
-          "standard:hero:赵云"
-        ],
+        localHeroDefinitionIds: ["standard:hero:赵云"],
         requiredExpansionIds: ["wind", "military", "forest"],
         cardNames: FIRE_BATTLE_CARDS,
         beats: [
@@ -221,6 +224,7 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         year: 184,
         era: "中平元年",
         title: "陈留起兵",
+        difficulty: "初阵",
         location: "兖州 · 陈留",
         prologue: [
           "乱世初起，曹操召集宗族与乡勇，准备建立一支真正服从军令的队伍。",
@@ -231,10 +235,9 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         defeatText: "军令未能贯彻，陈留兵马被迫分散。",
         localIdentity: "lord",
         seats: [
-          { identity: "lord" },
+          { identity: "lord", heroDefinitionId: "standard:hero:曹操" },
           { identity: "loyalist", heroDefinitionId: "standard:hero:夏侯惇" },
-          { identity: "rebel", heroDefinitionId: "wind:hero:张角" },
-          { identity: "renegade", heroDefinitionId: "standard:hero:吕布" }
+          { identity: "rebel", heroDefinitionId: "wind:hero:张角" }
         ],
         localHeroDefinitionIds: ["standard:hero:曹操"],
         requiredExpansionIds: ["wind", "military"],
@@ -256,6 +259,7 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         year: 200,
         era: "建安五年",
         title: "官渡决战",
+        difficulty: "鏖战",
         location: "官渡",
         prologue: [
           "袁绍兵多粮足，曹军却已接近极限。",
@@ -266,16 +270,13 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         defeatText: "粮道被压制，曹军只能退回许都。",
         localIdentity: "lord",
         seats: [
-          { identity: "lord" },
+          { identity: "lord", heroDefinitionId: "standard:hero:曹操" },
           { identity: "loyalist", heroDefinitionId: "standard:hero:郭嘉" },
+          { identity: "loyalist", heroDefinitionId: "standard:hero:许褚" },
           { identity: "rebel", heroDefinitionId: "fire:hero:袁绍" },
-          { identity: "renegade", heroDefinitionId: "fire:hero:颜良文丑" }
+          { identity: "rebel", heroDefinitionId: "fire:hero:颜良文丑" }
         ],
-        localHeroDefinitionIds: [
-          "standard:hero:曹操",
-          "standard:hero:夏侯惇",
-          "standard:hero:许褚"
-        ],
+        localHeroDefinitionIds: ["standard:hero:曹操"],
         requiredExpansionIds: ["wind", "military", "fire"],
         cardNames: FIRE_BATTLE_CARDS,
         beats: [
@@ -293,6 +294,7 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         year: 208,
         era: "建安十三年",
         title: "赤壁逆流",
+        difficulty: "大会战",
         location: "长江 · 赤壁",
         prologue: [
           "北方大军抵达长江，陌生的水战和火攻让优势迅速消失。",
@@ -303,15 +305,15 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         defeatText: "烈火连船，北军沿华容道撤退。",
         localIdentity: "lord",
         seats: [
-          { identity: "lord" },
+          { identity: "lord", heroDefinitionId: "standard:hero:曹操" },
           { identity: "loyalist", heroDefinitionId: "standard:hero:夏侯惇" },
+          { identity: "loyalist", heroDefinitionId: "standard:hero:张辽" },
           { identity: "rebel", heroDefinitionId: "standard:hero:周瑜" },
-          { identity: "renegade", heroDefinitionId: "standard:hero:黄盖" }
+          { identity: "rebel", heroDefinitionId: "standard:hero:黄盖" },
+          { identity: "rebel", heroDefinitionId: "standard:hero:刘备" },
+          { identity: "rebel", heroDefinitionId: "standard:hero:诸葛亮" }
         ],
-        localHeroDefinitionIds: [
-          "standard:hero:曹操",
-          "standard:hero:郭嘉"
-        ],
+        localHeroDefinitionIds: ["standard:hero:曹操"],
         requiredExpansionIds: ["wind", "military", "fire"],
         cardNames: FIRE_BATTLE_CARDS,
         beats: [
@@ -338,6 +340,7 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         year: 190,
         era: "初平元年",
         title: "先锋破关",
+        difficulty: "初阵",
         location: "司隶 · 汜水关",
         prologue: [
           "孙坚担任联军先锋，最先撞上董卓军的坚固关防。",
@@ -348,10 +351,9 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         defeatText: "先锋受挫，江东军退回营地等待补给。",
         localIdentity: "lord",
         seats: [
-          { identity: "lord" },
+          { identity: "lord", heroDefinitionId: "forest:hero:孙坚" },
           { identity: "loyalist", heroDefinitionId: "standard:hero:黄盖" },
-          { identity: "rebel", heroDefinitionId: "forest:hero:董卓" },
-          { identity: "renegade", heroDefinitionId: "standard:hero:吕布" }
+          { identity: "rebel", heroDefinitionId: "forest:hero:董卓" }
         ],
         localHeroDefinitionIds: ["forest:hero:孙坚"],
         requiredExpansionIds: ["military", "forest"],
@@ -373,25 +375,24 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         year: 200,
         era: "建安五年",
         title: "江东定策",
+        difficulty: "鏖战",
         location: "吴郡",
         prologue: [
           "孙策之后，年轻的孙权需要证明江东不是依靠一人维系。",
-          "周瑜整顿水军，太史慈则代表新归附的将领。"
+          "周瑜与太史慈整合新军，北方势力则趁权力交接试探江东防线。"
         ],
-        objective: "稳住江东内部，并击退趁乱来袭的对手。",
+        objective: "以孙权统合江东诸将，并击退北方势力的试探。",
         victoryText: "江东文武归心，周瑜与太史慈进入可用名册。",
         defeatText: "各部未能形成合力，江东再次陷入动荡。",
         localIdentity: "lord",
         seats: [
-          { identity: "lord" },
+          { identity: "lord", heroDefinitionId: "standard:hero:孙权" },
           { identity: "loyalist", heroDefinitionId: "standard:hero:周瑜" },
-          { identity: "rebel", heroDefinitionId: "standard:hero:刘备" },
-          { identity: "renegade", heroDefinitionId: "fire:hero:太史慈" }
+          { identity: "loyalist", heroDefinitionId: "fire:hero:太史慈" },
+          { identity: "rebel", heroDefinitionId: "standard:hero:曹操" },
+          { identity: "rebel", heroDefinitionId: "standard:hero:夏侯惇" }
         ],
-        localHeroDefinitionIds: [
-          "standard:hero:孙权",
-          "standard:hero:黄盖"
-        ],
+        localHeroDefinitionIds: ["standard:hero:孙权"],
         requiredExpansionIds: ["military", "fire", "forest"],
         beats: [
           {
@@ -411,6 +412,7 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         year: 208,
         era: "建安十三年",
         title: "赤壁烈焰",
+        difficulty: "大会战",
         location: "长江 · 赤壁",
         prologue: [
           "曹军压境，长江成为江东最后的屏障。",
@@ -421,16 +423,16 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         defeatText: "曹军突破江防，江东进入最危险的时刻。",
         localIdentity: "lord",
         seats: [
-          { identity: "lord" },
+          { identity: "lord", heroDefinitionId: "standard:hero:周瑜" },
           { identity: "loyalist", heroDefinitionId: "standard:hero:黄盖" },
+          { identity: "loyalist", heroDefinitionId: "standard:hero:刘备" },
+          { identity: "loyalist", heroDefinitionId: "fire:hero:卧龙诸葛亮" },
           { identity: "rebel", heroDefinitionId: "standard:hero:曹操" },
-          { identity: "renegade", heroDefinitionId: "standard:hero:夏侯惇" }
+          { identity: "rebel", heroDefinitionId: "standard:hero:夏侯惇" },
+          { identity: "rebel", heroDefinitionId: "standard:hero:张辽" },
+          { identity: "rebel", heroDefinitionId: "standard:hero:许褚" }
         ],
-        localHeroDefinitionIds: [
-          "standard:hero:孙权",
-          "standard:hero:周瑜",
-          "fire:hero:太史慈"
-        ],
+        localHeroDefinitionIds: ["standard:hero:周瑜"],
         requiredExpansionIds: ["military", "fire", "forest"],
         cardNames: FIRE_BATTLE_CARDS,
         beats: [
@@ -457,6 +459,7 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         year: 184,
         era: "中平元年",
         title: "苍天已死",
+        difficulty: "初阵",
         location: "冀州 · 广宗",
         prologue: [
           "张角举起黄天旗号，各地信众同时响应。",
@@ -467,10 +470,9 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         defeatText: "广宗防线崩溃，黄巾余部转入各地。",
         localIdentity: "lord",
         seats: [
-          { identity: "lord" },
+          { identity: "lord", heroDefinitionId: "wind:hero:张角" },
           { identity: "loyalist", heroDefinitionId: "wind:hero:于吉" },
-          { identity: "rebel", heroDefinitionId: "standard:hero:曹操" },
-          { identity: "renegade", heroDefinitionId: "standard:hero:刘备" }
+          { identity: "rebel", heroDefinitionId: "standard:hero:曹操" }
         ],
         localHeroDefinitionIds: ["wind:hero:张角"],
         requiredExpansionIds: ["wind", "military", "forest"],
@@ -492,6 +494,7 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         year: 189,
         era: "中平六年",
         title: "董卓入京",
+        difficulty: "鏖战",
         location: "司隶 · 洛阳",
         prologue: [
           "朝局崩坏，董卓控制洛阳，吕布成为其最锋利的兵器。",
@@ -502,15 +505,13 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         defeatText: "洛阳局势失控，西凉军被迫收缩防线。",
         localIdentity: "lord",
         seats: [
-          { identity: "lord" },
+          { identity: "lord", heroDefinitionId: "forest:hero:董卓" },
           { identity: "loyalist", heroDefinitionId: "standard:hero:吕布" },
           { identity: "rebel", heroDefinitionId: "standard:hero:曹操" },
-          { identity: "renegade", heroDefinitionId: "forest:hero:孙坚" }
+          { identity: "rebel", heroDefinitionId: "forest:hero:孙坚" },
+          { identity: "rebel", heroDefinitionId: "standard:hero:貂蝉" }
         ],
-        localHeroDefinitionIds: [
-          "forest:hero:董卓",
-          "wind:hero:张角"
-        ],
+        localHeroDefinitionIds: ["forest:hero:董卓"],
         requiredExpansionIds: ["wind", "military", "forest"],
         beats: [
           {
@@ -530,6 +531,7 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         year: 190,
         era: "初平元年",
         title: "虎牢独战",
+        difficulty: "大会战",
         location: "司隶 · 虎牢关",
         prologue: [
           "诸侯大军压向虎牢关，吕布必须独自承担正面压力。",
@@ -540,15 +542,15 @@ export const STORY_CAMPAIGNS: Record<CampaignFaction, StoryCampaign> = {
         defeatText: "关隘失守，董卓军向长安撤退。",
         localIdentity: "lord",
         seats: [
-          { identity: "lord" },
-          { identity: "loyalist", heroDefinitionId: "standard:hero:貂蝉" },
+          { identity: "lord", heroDefinitionId: "standard:hero:吕布" },
+          { identity: "loyalist", heroDefinitionId: "forest:hero:董卓" },
+          { identity: "loyalist", heroDefinitionId: "forest:hero:贾诩" },
+          { identity: "rebel", heroDefinitionId: "standard:hero:刘备" },
           { identity: "rebel", heroDefinitionId: "standard:hero:关羽" },
-          { identity: "renegade", heroDefinitionId: "standard:hero:赵云" }
+          { identity: "rebel", heroDefinitionId: "standard:hero:张飞" },
+          { identity: "rebel", heroDefinitionId: "forest:hero:孙坚" }
         ],
-        localHeroDefinitionIds: [
-          "standard:hero:吕布",
-          "forest:hero:董卓"
-        ],
+        localHeroDefinitionIds: ["standard:hero:吕布"],
         requiredExpansionIds: ["wind", "military", "forest"],
         cardNames: FIRE_BATTLE_CARDS,
         beats: [

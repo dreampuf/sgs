@@ -190,6 +190,15 @@ export function createScriptedMatchSetup(
   if (localHeroChoices.length === 0) {
     throw new Error("scripted match produced no unlocked local hero choices");
   }
+  const fixedLocalHeroId = options.definition.seats[0]?.heroDefinitionId;
+  if (
+    fixedLocalHeroId &&
+    (localHeroChoices.length !== 1 || localHeroChoices[0] !== fixedLocalHeroId)
+  ) {
+    throw new Error(
+      "scripted match local hero choice must match the fixed first seat"
+    );
+  }
   const fixedHeroIds = options.definition.seats.flatMap((seat) =>
     seat.heroDefinitionId ? [seat.heroDefinitionId] : []
   );

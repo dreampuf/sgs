@@ -19,9 +19,16 @@ describe("story campaign timeline", () => {
     ]);
     for (const campaign of Object.values(STORY_CAMPAIGNS)) {
       expect(campaign.timeline.length).toBeGreaterThanOrEqual(3);
+      expect(campaign.timeline.map((item) => item.difficulty)).toEqual([
+        "初阵", "鏖战", "大会战"
+      ]);
       expect(campaign.timeline.map((item) => item.year)).toEqual(
         [...campaign.timeline.map((item) => item.year)].sort((a, b) => a - b)
       );
+      const playerCounts = campaign.timeline.map((item) => item.seats.length);
+      expect(playerCounts.every((count, index) =>
+        index === 0 || count > playerCounts[index - 1]!
+      )).toBe(true);
       for (const scenario of campaign.timeline) {
         const registry = createEarlyExpansionRegistry(
           scenario.requiredExpansionIds
@@ -38,6 +45,17 @@ describe("story campaign timeline", () => {
           referencedHeroIds.filter((heroId) => !heroIds.has(heroId)),
           `${scenario.id} references unavailable heroes`
         ).toEqual([]);
+        expect(scenario.localHeroDefinitionIds).toEqual([
+          scenario.seats[0]!.heroDefinitionId
+        ]);
+        expect(new Set(scenario.seats.map((seat) => seat.heroDefinitionId)).size)
+          .toBe(scenario.seats.length);
+        expect(scenario.seats.some((seat) => seat.identity === "renegade"))
+          .toBe(false);
+        expect(scenario.seats.some((seat) => seat.identity === "loyalist"))
+          .toBe(true);
+        expect(scenario.seats.some((seat) => seat.identity === "rebel"))
+          .toBe(true);
         const allowedCards = new Set(scenario.cardNames);
         const themedPrints = registry.cardPrints().filter((print) =>
           allowedCards.has(registry.card(print.definitionId).name)
@@ -82,6 +100,46 @@ describe("story campaign timeline", () => {
     ).toThrow("locked");
   });
 
+  test("grows each campaign from a fixed small encounter into a large battle", () => {
+    expect(Object.fromEntries(
+      Object.entries(STORY_CAMPAIGNS).map(([id, campaign]) => [
+        id,
+        campaign.timeline.map((scenario) => scenario.seats.length)
+      ])
+    )).toEqual({
+      shu: [4, 6, 8],
+      wei: [3, 5, 7],
+      wu: [3, 5, 8],
+      qun: [3, 5, 7]
+    });
+
+    for (const campaign of Object.values(STORY_CAMPAIGNS)) {
+      const unlocked = new Set(campaign.initialHeroDefinitionIds);
+      for (const story of campaign.timeline) {
+        const registry = createEarlyExpansionRegistry(
+          story.requiredExpansionIds
+        );
+        const setup = createScriptedMatchSetup(registry, {
+          seed: story.year,
+          definition: {
+            seats: story.seats,
+            localHeroDefinitionIds: story.localHeroDefinitionIds
+          },
+          unlockedHeroDefinitionIds: [...unlocked]
+        });
+        expect(setup.playerCount).toBe(story.seats.length);
+        expect(setup.localHeroChoices).toEqual([
+          story.seats[0]!.heroDefinitionId
+        ]);
+        expect(finalizeMatchSetup(setup, setup.localHeroChoices[0]!).seats)
+          .toEqual(expect.arrayContaining(
+            story.seats.map((seat) => expect.objectContaining(seat))
+          ));
+        story.unlockHeroDefinitionIds.forEach((heroId) => unlocked.add(heroId));
+      }
+    }
+  });
+
   test("builds fixed story seats while limiting the local roster", () => {
     const scenario = STORY_CAMPAIGNS.shu.timeline[0]!;
     const registry = createEarlyExpansionRegistry(
@@ -97,7 +155,7 @@ describe("story campaign timeline", () => {
     });
     expect(setup.localHeroChoices).toEqual(["standard:hero:刘备"]);
     expect(setup.seats.map((seat) => seat.identity)).toEqual([
-      "lord", "loyalist", "rebel", "renegade"
+      "lord", "loyalist", "loyalist", "rebel"
     ]);
     const finalized = finalizeMatchSetup(
       setup,
@@ -106,8 +164,8 @@ describe("story campaign timeline", () => {
     expect(finalized.seats.map((seat) => seat.heroDefinitionId)).toEqual([
       "standard:hero:刘备",
       "standard:hero:关羽",
-      "wind:hero:张角",
-      "standard:hero:吕布"
+      "standard:hero:张飞",
+      "wind:hero:张角"
     ]);
   });
 });

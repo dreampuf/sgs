@@ -35,6 +35,12 @@ import type {
 import {
   AdaptiveMusicDirector
 } from "./adaptive-music";
+import {
+  createAssetLoader
+} from "./asset-loader";
+import type {
+  SgsAssetLoader
+} from "./asset-loader";
 
 const selectedPackIds = (): EarlyExpansionId[] =>
   Array.from(
@@ -92,11 +98,16 @@ declare global {
       lastFailure(): string | null;
     };
     sgsAudio: SgsAudioEngine;
+    sgsAssets: SgsAssetLoader;
     sgsAdaptiveMusic: AdaptiveMusicDirector;
   }
 }
 
 window.sgsAudio = createAudioEngine();
+window.sgsAssets = createAssetLoader({
+  whenAudioCatalogReady: () => window.sgsAudio.whenCatalogReady()
+});
+void window.sgsAssets.start();
 window.sgsAdaptiveMusic = new AdaptiveMusicDirector(window.sgsAudio);
 window.sgsAudio.bindControls();
 window.sgsAudio.playMusic("music.menu");

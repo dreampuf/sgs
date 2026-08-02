@@ -35,11 +35,55 @@ function rectanglesOverlap(first, second) {
     first.bottom > second.top;
 }
 
+test('加载进度覆盖生成清单中的全部图片并等待音频目录', async ({ page }) => {
+  const errors = capturePageErrors(page);
+  await page.goto('/');
+  await page.waitForFunction(() => window.sgsAssets?.snapshot().complete, null, {
+    timeout: 20_000
+  });
+  const loading = await page.evaluate(() => ({
+    snapshot: window.sgsAssets.snapshot(),
+    display: getComputedStyle(document.querySelector('#data_load')).display,
+    phase: document.querySelector('#data_load_phase').textContent,
+    percentage: document.querySelector('#data_load_perc').textContent,
+    detail: document.querySelector('#data_load_detail').textContent
+  }));
+  expect(loading.snapshot.totalImages).toBeGreaterThan(202);
+  expect(loading.snapshot.total).toBe(loading.snapshot.totalImages + 2);
+  expect(loading.snapshot.loaded).toBe(loading.snapshot.total);
+  expect(loading.snapshot.failed).toBe(0);
+  expect(loading.snapshot.failedUrls).toEqual([]);
+  expect(loading.display).toBe('none');
+  expect(loading.phase).toBe('资源加载完成');
+  expect(loading.percentage).toBe('100%');
+  expect(loading.detail).toBe(
+    `${loading.snapshot.total} / ${loading.snapshot.total}`
+  );
+  expect(errors).toEqual([]);
+});
+
+test('单项图片失败会计入加载结果且不会卡死启动界面', async ({ page }) => {
+  await page.route('**/img/expansion/shenhua/card/analeptic.png', (route) =>
+    route.abort('failed')
+  );
+  await page.goto('/');
+  await page.waitForFunction(() => window.sgsAssets?.snapshot().complete, null, {
+    timeout: 20_000
+  });
+  const snapshot = await page.evaluate(() => window.sgsAssets.snapshot());
+  expect(snapshot.failed).toBe(1);
+  expect(snapshot.loaded + snapshot.failed).toBe(snapshot.total);
+  expect(snapshot.failedUrls).toEqual([
+    'img/expansion/shenhua/card/analeptic.png'
+  ]);
+  await expect(page.locator('#data_load')).toBeHidden();
+  await expect(page.locator('#game_start')).toBeVisible();
+});
+
 async function openStartScreen(page) {
   await page.goto('/');
-  await page.evaluate(() => {
-    const loading = document.querySelector('#data_load');
-    if (loading) loading.style.display = 'none';
+  await page.waitForFunction(() => window.sgsAssets?.snapshot().complete, null, {
+    timeout: 20_000
   });
   await expect(page.locator('#main')).toBeVisible();
   await expect(page.locator('#game_start')).toBeVisible();
@@ -95,6 +139,10 @@ async function configureState(page, fixture = {}) {
 
     const setHand = (playerId, definitions) => {
       const hand = state.zones[`zone:hand:${playerId}`];
+      const draw = state.zones['zone:draw'];
+      while (hand.length < definitions.length && draw.length > 0) {
+        hand.push(draw.shift());
+      }
       hand.forEach((cardId, index) => {
         state.cards[cardId].definitionId =
           definitions[index] || 'standard:jink';
@@ -425,6 +473,46 @@ test('原创音频目录、设置和 Core 事件音效序列接入浏览器', as
     heroDefinitionId: 'standard:hero:关羽',
     cardDefinitionId: 'standard:slash',
     line: '青龙所向，邪佞皆斩。'
+  });
+});
+
+test('音效网络失败降级为警告且不触发全局故障', async ({ page }) => {
+  const errors = capturePageErrors(page);
+  const warnings = [];
+  page.on('console', (message) => {
+    if (message.type() === 'warning') warnings.push(message.text());
+  });
+  await page.route('**/audio/sfx/card-savage-assault.ogg', (route) =>
+    route.abort('failed')
+  );
+  await page.addInitScript(() => {
+    window.__sgsUnhandledRejections = [];
+    window.addEventListener('unhandledrejection', (event) => {
+      window.__sgsUnhandledRejections.push(
+        event.reason?.message ?? String(event.reason)
+      );
+    });
+  });
+  await startCoreGame(page);
+  await page.evaluate(async () => {
+    localStorage.removeItem('sgs.last-failure-jsonl');
+    await window.sgsAudio.unlock();
+    window.sgsAudio.playSfx('card.savage-assault');
+  });
+
+  await expect.poll(() => warnings).toContainEqual(
+    expect.stringContaining('card.savage-assault')
+  );
+  expect(warnings.join('\n')).toContain(
+    '/audio/sfx/card-savage-assault.ogg'
+  );
+  expect(errors).toEqual([]);
+  expect(await page.evaluate(() => ({
+    unhandled: window.__sgsUnhandledRejections,
+    failure: localStorage.getItem('sgs.last-failure-jsonl')
+  }))).toEqual({
+    unhandled: [],
+    failure: null
   });
 });
 
@@ -1062,16 +1150,14 @@ test('剧情模式展示阵营年代线、锁定场景并进入相关人物战�
   await expect(page.locator('.story_timeline button').nth(1)).toBeDisabled();
   await expect(page.locator('#story_intro')).toContainText('桃园举义');
   await expect(page.locator('#story_intro')).toContainText('涿郡');
+  await expect(page.locator('#story_intro')).toContainText('4 人 · 初阵');
+  await expect(page.locator('#story_intro')).toContainText(
+    '我方：刘备（玩家）、关羽、张飞'
+  );
+  await expect(page.locator('#story_intro')).toContainText('敌方：张角');
   await expect(page.locator('#story_intro')).toContainText('胜利解锁：关羽、张飞');
   await page.locator('#story_continue').click();
-  await expect(page.locator('#choose_box')).toBeVisible();
-  await expect(page.locator('#identity')).toContainText('主公');
-  await expect(page.locator('.choose_role_card')).toHaveCount(1);
-  await expect(page.locator('.choose_role_card').first()).toHaveAttribute(
-    'aria-label',
-    '刘备'
-  );
-  await page.locator('.choose_role_card').first().click();
+  await expect(page.locator('#choose_box')).toHaveCount(0);
   await expect(page.locator('#story_hud')).toBeVisible();
   await expect(page.locator('#story_hud')).toContainText('桃园举义');
   await expect(page.locator('#story_event_banner')).toBeVisible();
@@ -1096,8 +1182,8 @@ test('剧情模式展示阵营年代线、锁定场景并进入相关人物战�
   expect(scenarioState.heroes).toEqual([
     'standard:hero:刘备',
     'standard:hero:关羽',
-    'wind:hero:张角',
-    'standard:hero:吕布'
+    'standard:hero:张飞',
+    'wind:hero:张角'
   ]);
   expect(scenarioState.drawNames.length).toBeGreaterThan(0);
   await page.locator('#save_game').click();
@@ -1136,9 +1222,16 @@ test('剧情胜利进度持久化后解锁下一年代事件与新武将', async
     .toContainText('虎牢扬名');
   await expect(page.locator('.story_timeline button').nth(1))
     .toHaveClass(/selected/);
-  await expect(page.locator('#story_intro')).toContainText('刘备、关羽');
+  await expect(page.locator('#story_intro')).toContainText('6 人 · 鏖战');
+  await expect(page.locator('#story_intro')).toContainText(
+    '我方：刘备（玩家）、关羽、张飞'
+  );
+  await expect(page.locator('#story_intro')).toContainText(
+    '敌方：董卓、吕布、贾诩'
+  );
   await page.locator('#story_continue').click();
-  await expect(page.locator('.choose_role_card')).toHaveCount(2);
+  await expect(page.locator('#choose_box')).toHaveCount(0);
+  await expect(page.locator('#game_toolbar')).toBeVisible();
 });
 
 test('群雄传张角发牌后拖动手牌使用真实卡牌目标而不是委托 document', async ({ page }) => {
@@ -1153,12 +1246,7 @@ test('群雄传张角发牌后拖动手牌使用真实卡牌目标而不是委�
   await page.getByRole('button', { name: /群雄传/ }).click();
   await expect(page.locator('#story_intro h2')).toHaveText('苍天已死');
   await page.locator('#story_continue').click();
-  await expect(page.locator('.choose_role_card')).toHaveCount(1);
-  await expect(page.locator('.choose_role_card')).toHaveAttribute(
-    'aria-label',
-    '张角'
-  );
-  await page.locator('.choose_role_card').click();
+  await expect(page.locator('#choose_box')).toHaveCount(0);
   await page.waitForFunction(() =>
     document.querySelectorAll('#cards > .player_card').length >= 6
   );
@@ -1375,9 +1463,10 @@ test('保存的 Core 对局可以在刷新页面后继续', async ({ page }) => 
   expect(savedTiming.activeDurationMs)
     .toBeLessThan(savedTiming.wallDurationMs + 1_000);
   await page.reload();
+  await page.waitForFunction(() => window.sgsAssets?.snapshot().complete, null, {
+    timeout: 20_000
+  });
   await page.evaluate(() => {
-    const loading = document.querySelector('#data_load');
-    if (loading) loading.style.display = 'none';
     window.sgs.motion.setInstant(true);
   });
   await expect(page.locator('#continue_game')).toBeVisible();
@@ -1411,9 +1500,8 @@ test('保存的 Core 对局可以在刷新页面后继续', async ({ page }) => 
   );
   await page.locator('#restart_game').click();
   await page.waitForLoadState('domcontentloaded');
-  await page.evaluate(() => {
-    const loading = document.querySelector('#data_load');
-    if (loading) loading.style.display = 'none';
+  await page.waitForFunction(() => window.sgsAssets?.snapshot().complete, null, {
+    timeout: 20_000
   });
   await expect(page.locator('#game_start')).toBeVisible();
   await expect(page.locator('#continue_game')).toBeHidden();
@@ -1438,9 +1526,10 @@ test('载入 Core 存档后恢复阵亡英雄的黑屏状态', async ({ page }) 
   await expect(page.locator('#save_feedback')).toHaveText('已保存');
 
   await page.reload();
+  await page.waitForFunction(() => window.sgsAssets?.snapshot().complete, null, {
+    timeout: 20_000
+  });
   await page.evaluate(() => {
-    const loading = document.querySelector('#data_load');
-    if (loading) loading.style.display = 'none';
     window.sgs.motion.setInstant(true);
   });
   await page.locator('#continue_game').click();
