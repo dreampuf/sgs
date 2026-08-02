@@ -1,0 +1,31 @@
+{
+  "assetId": "system.ui-click",
+  "command": "npm run audio:generate -- --id system.ui-click",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "80f208b08ed37a0813d62b87bf1a6c98cf816e6a6ef8eb24d46e9869415bfd50",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 512,
+      "path": "audio/generated/envelopes/system-ui-click.json",
+      "sha256": "950356280ee0fe0f09d95942cbc6969138aa77e7387efee201af7a24b4e1e2ff"
+    },
+    {
+      "bytes": 5804,
+      "path": "audio/generated/wav/sfx/system-ui-click.wav",
+      "sha256": "ac43dff60ffc19a8fee9e149bf9203dfe66f712346efb8d52bc36b772e9845b4"
+    },
+    {
+      "bytes": 1471,
+      "path": "public/audio/sfx/system-ui-click.ogg",
+      "sha256": "4ccb99a97610952121e5d50c835858f38738523057681d91afe10e8afcfd8514"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1101,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "ed05b8ada43995db17edbfc8cfd5385ceee1a37b03b466a4bc310576ccf06d91",
+  "title": "界面点击"
+}

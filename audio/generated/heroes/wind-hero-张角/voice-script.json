@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "wind:hero:张角",
+  "heroName": "张角",
+  "inspiration": "借鉴《三国演义》中黄巾起义、苍天已死与呼风唤雷形象，台词为原创改写。",
+  "lines": {
+    "death": "黄天未立，薪火莫绝。",
+    "signature": "黄天当立，雷公助我。",
+    "victory": "万民同起，旧天已倾。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180,aecho=0.8:0.18:55:0.1",
+  "rate": 155,
+  "schemaVersion": 1,
+  "style": "mystical",
+  "voice": "Eddy (Chinese (China mainland))"
+}

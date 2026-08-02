@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "fire:hero:荀彧",
+  "heroName": "荀彧",
+  "inspiration": "借鉴《三国演义》中荀彧王佐之才、奉汉与曹操分歧，台词为原创改写。",
+  "lines": {
+    "death": "汉室之心，终难两全。",
+    "signature": "驱虎吞狼，借力定局。",
+    "victory": "王佐之谋，可安天下。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=85,lowpass=f=8000,acompressor=threshold=-17dB:ratio=2:attack=16:release=160",
+  "rate": 170,
+  "schemaVersion": 1,
+  "style": "tactical",
+  "voice": "Eddy (Chinese (China mainland))"
+}

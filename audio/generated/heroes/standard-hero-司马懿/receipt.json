@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "standard:hero:司马懿",
+  "inputSha256": "46f9ac126256bf9ff99a8cfd7961544e212f39e3c52519d7c402e974b90fb85f",
+  "outputs": [
+    {
+      "bytes": 10969,
+      "path": "audio/generated/heroes/standard-hero-司马懿/theme-score.json",
+      "sha256": "4bf57f3b1f56df49681ddbe7d5d2a5b94b3f5dc7e11690bca06a9a658b14cfd7"
+    },
+    {
+      "bytes": 310,
+      "path": "audio/generated/heroes/standard-hero-司马懿/signature-envelope.json",
+      "sha256": "c7f56db100af9fcf271de5388eba9e4538f6f6b1a006b7df1f68570152caa764"
+    },
+    {
+      "bytes": 730,
+      "path": "audio/generated/heroes/standard-hero-司马懿/voice-script.json",
+      "sha256": "ca688d400c8a7ca45da04ee4ace4dcc1d1f1c4e620e6522bea8b4b2ae29ae27b"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/standard-hero-司马懿/wav/theme.wav",
+      "sha256": "14bc71ae9ad5f2506a7180512834b66950ffba0431055ec38e394bb718b2f56b"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/standard-hero-司马懿/wav/signature.wav",
+      "sha256": "0f134a4da99a5fcd74945c4e891372566d4a526b4f34fa18d1b3879e71c23962"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/standard-hero-司马懿/theme.ogg",
+      "sha256": "0e95154cc075ef5ab5befd727bf70c05cd26fdb49f7df19f541ec52dbc02d9f6"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/standard-hero-司马懿/signature.ogg",
+      "sha256": "2e209c5fe62d70c22e364949e3c75e992c7dd320e616b4976c31ab008951cd2f"
+    },
+    {
+      "bytes": 129330,
+      "path": "audio/generated/heroes/standard-hero-司马懿/voice-source/signature.aiff",
+      "sha256": "9c681e95c1a185b7c67f3dbf5c2926ebb7e49135ef4a9d79451798610c902713"
+    },
+    {
+      "bytes": 185342,
+      "path": "audio/generated/heroes/standard-hero-司马懿/wav/voice-signature.wav",
+      "sha256": "ab01da7df98df1a6b253f49be87da69de3cf194f1ceb7812bda4db7dc2eb5b9b"
+    },
+    {
+      "bytes": 29564,
+      "path": "public/audio/heroes/standard-hero-司马懿/voice-signature.ogg",
+      "sha256": "4fc423a49f7dfedfae26667f1c920242f7c8c33f19360f2b4da7838f02e0b0f5"
+    },
+    {
+      "bytes": 116222,
+      "path": "audio/generated/heroes/standard-hero-司马懿/voice-source/victory.aiff",
+      "sha256": "3d4bf044670830e24b4dc973303a61ebf654c388c0eddd8607d7c01f7040fa86"
+    },
+    {
+      "bytes": 166320,
+      "path": "audio/generated/heroes/standard-hero-司马懿/wav/voice-victory.wav",
+      "sha256": "b9163845419bb3f6a080557bb039250444c86fb0e5e77cfa12737bd921cd3dc0"
+    },
+    {
+      "bytes": 26549,
+      "path": "public/audio/heroes/standard-hero-司马懿/voice-victory.ogg",
+      "sha256": "85bc29e0e1c3c0d9a77a0ebdf10a8b98170883782ae978348339d2dd637cadc6"
+    },
+    {
+      "bytes": 122966,
+      "path": "audio/generated/heroes/standard-hero-司马懿/voice-source/death.aiff",
+      "sha256": "d1f0cbfe697db241a192a7add4d34de2c77886cf161d523d60f4fc30ffd1cb44"
+    },
+    {
+      "bytes": 176106,
+      "path": "audio/generated/heroes/standard-hero-司马懿/wav/voice-death.wav",
+      "sha256": "72d8a1053ee388f3737d6a6d1e5a8214124aa6cade98b434e57d158313fd484f"
+    },
+    {
+      "bytes": 27956,
+      "path": "public/audio/heroes/standard-hero-司马懿/voice-death.ogg",
+      "sha256": "2972154dccece85d08d1f3b67b1b09052f267f1fbb22d6789ddf99f1ca7b6737"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3105,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Eddy (Chinese (China mainland))",
+    "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180,aecho=0.8:0.18:55:0.1",
+    "rate": 155,
+    "style": "mystical"
+  }
+}

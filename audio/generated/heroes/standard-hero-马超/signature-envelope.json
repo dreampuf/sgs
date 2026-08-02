@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:马超.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:马超",
+  "kingdom": "shu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "fierce timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13205,
+  "style": "fierce"
+}

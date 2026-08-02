@@ -1,0 +1,20 @@
+{
+  "assetId": "card.jink",
+  "durationSeconds": 0.42,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "inharmonic metal partials",
+    "short impact"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.86,
+    "pitchHz": 880,
+    "weight": 0.26
+  },
+  "recipe": "metal",
+  "schemaVersion": 1,
+  "seed": 1207,
+  "specSha256": "741880c54660301417a13ada25b1264808e2fbd131c0fae527bd9a415d3fb508",
+  "title": "闪"
+}

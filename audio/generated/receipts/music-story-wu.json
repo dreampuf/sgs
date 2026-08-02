@@ -1,0 +1,31 @@
+{
+  "assetId": "music.story.wu",
+  "command": "npm run audio:generate -- --id music.story.wu",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "daab7b324e3114a5899aaeace0e859d56b0642d5b28df8adf10861c4460c7d97",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 27569,
+      "path": "audio/generated/scores/music-story-wu.json",
+      "sha256": "f54f72665d5f89a72109ff8f17756d4627d1164cfd159b2d0610150e6d50e422"
+    },
+    {
+      "bytes": 2560044,
+      "path": "audio/generated/wav/music/music-story-wu.wav",
+      "sha256": "1ab9f7a113e82f49c9299232d74f73b301f6331ba726a192140b672239943bce"
+    },
+    {
+      "bytes": 277439,
+      "path": "public/audio/music/music-story-wu.ogg",
+      "sha256": "e47ef2f1b660bf8881183b6669025c586e076caf7ee1c201826d1084f3949057"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2203,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "6cccc2d2fe140b1a718ad4e544b5faa68544dbc90e084a9a3b30d6f585ee7fb0",
+  "title": "吴 · 江东潮生"
+}

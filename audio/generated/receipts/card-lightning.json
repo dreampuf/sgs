@@ -1,0 +1,31 @@
+{
+  "assetId": "card.lightning",
+  "command": "npm run audio:generate -- --id card.lightning",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "77527000e7a5003b9149f10056d3507f1b0b27e968a9713adac607744c6d2ef1",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 545,
+      "path": "audio/generated/envelopes/card-lightning.json",
+      "sha256": "d03808f38395cadf30f5e9a5b4cdd0d4f91f9dfd1448316328e6929dd957f9c6"
+    },
+    {
+      "bytes": 86444,
+      "path": "audio/generated/wav/sfx/card-lightning.wav",
+      "sha256": "ed152ec5cdcd1e1b539b7cbf45025a4fae0bbfb0b68839f8d7986cde4f2e0fd4"
+    },
+    {
+      "bytes": 12743,
+      "path": "public/audio/sfx/card-lightning.ogg",
+      "sha256": "2d4b7b68aed8d808d05a0feeda575bd7f2f1637967f74d282e817279ae494c79"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1215,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "81459c63bf06ea29cbb964396cb5074468848e39223c6c7ec9d95e48e9061648",
+  "title": "闪电"
+}

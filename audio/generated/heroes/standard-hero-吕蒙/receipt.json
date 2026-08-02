@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "standard:hero:吕蒙",
+  "inputSha256": "71891acf3cd8e1a6c49c52f28e29e2fd615f23c7b73b272ec58399743d2f50e7",
+  "outputs": [
+    {
+      "bytes": 10960,
+      "path": "audio/generated/heroes/standard-hero-吕蒙/theme-score.json",
+      "sha256": "5ccd5c8720325663eb7a11d5487757539484aae25ab287ef3638fe1856108586"
+    },
+    {
+      "bytes": 303,
+      "path": "audio/generated/heroes/standard-hero-吕蒙/signature-envelope.json",
+      "sha256": "174c4817b34ab5cf040fd7e20cd6bd41a5fb91b4aa8007f9e83a7d9527b92b18"
+    },
+    {
+      "bytes": 711,
+      "path": "audio/generated/heroes/standard-hero-吕蒙/voice-script.json",
+      "sha256": "5d09e1dc3696f68ff4f9389d85d2402725f90c8d7fd4963a7dcbb60bbb9d4189"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/standard-hero-吕蒙/wav/theme.wav",
+      "sha256": "4c94f48bc4b295794056a97d50f74ac2f4a1d2494e4f1da45f01e3cf2651484b"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/standard-hero-吕蒙/wav/signature.wav",
+      "sha256": "4f553fda4206c9c52f89760bf208e8220daae399cc003a98e31dea69eff853e2"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/standard-hero-吕蒙/theme.ogg",
+      "sha256": "a232bbc478b6e550557c7bc443b58a66873314a636cbde4488318d97512bf27e"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/standard-hero-吕蒙/signature.ogg",
+      "sha256": "6a6dd1b3ce6dbb1e112a52b200eec25d93ca34848d172c9588723e3c2740dd47"
+    },
+    {
+      "bytes": 127250,
+      "path": "audio/generated/heroes/standard-hero-吕蒙/voice-source/signature.aiff",
+      "sha256": "f8bbb362d57ff8cc12999cfd5c4a9210dac473c1487519532882bd7e28154e5b"
+    },
+    {
+      "bytes": 178806,
+      "path": "audio/generated/heroes/standard-hero-吕蒙/wav/voice-signature.wav",
+      "sha256": "15361138c54bc1893fcab6009bc8a8c7afff0761e4b8fb4f1c86fbf8e3877321"
+    },
+    {
+      "bytes": 28358,
+      "path": "public/audio/heroes/standard-hero-吕蒙/voice-signature.ogg",
+      "sha256": "ed6b2a5b34155d717e77c1774867c884a346865d0b82f17e52487d31cb1474d9"
+    },
+    {
+      "bytes": 103268,
+      "path": "audio/generated/heroes/standard-hero-吕蒙/voice-source/victory.aiff",
+      "sha256": "f60e06174bef85677fcfb224f4aaa9cc50ec49447771308a84c17aa43eb2e3ba"
+    },
+    {
+      "bytes": 144002,
+      "path": "audio/generated/heroes/standard-hero-吕蒙/wav/voice-victory.wav",
+      "sha256": "f0040ff1cbe220aefb23c480c3f33b1b10886452c177910d854f0d33af02eb3a"
+    },
+    {
+      "bytes": 22931,
+      "path": "public/audio/heroes/standard-hero-吕蒙/voice-victory.ogg",
+      "sha256": "d1727d0b0dca56a25981ca14c3500c1ba417c60c7ff3d6db44d7d90789449dc5"
+    },
+    {
+      "bytes": 118782,
+      "path": "audio/generated/heroes/standard-hero-吕蒙/voice-source/death.aiff",
+      "sha256": "cb657f0be41a996eefa31a5ba7e5a0770e63dbe1d22bed964a682f5481698fd4"
+    },
+    {
+      "bytes": 166516,
+      "path": "audio/generated/heroes/standard-hero-吕蒙/wav/voice-death.wav",
+      "sha256": "46fc7f9e395042d2957117e110352df9bbd7300335f25a3581858ee5424e5a32"
+    },
+    {
+      "bytes": 26549,
+      "path": "public/audio/heroes/standard-hero-吕蒙/voice-death.ogg",
+      "sha256": "00f70d14a7d7e71388a17b713dd56f5dc4cec5b8894fa0a744a084a8e2ecea0a"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3303,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Eddy (Chinese (China mainland))",
+    "postprocess": "highpass=f=85,lowpass=f=8000,acompressor=threshold=-17dB:ratio=2:attack=16:release=160",
+    "rate": 170,
+    "style": "tactical"
+  }
+}

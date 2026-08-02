@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:孙权",
+  "heroName": "孙权",
+  "inspiration": "借鉴《三国演义》中坐领江东、赤壁决断与善于制衡的君主形象，台词为原创改写。",
+  "lines": {
+    "death": "父兄基业，终托何人。",
+    "signature": "衡轻重，定江东。",
+    "victory": "长江天险，尽护吴邦。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 166,
+  "schemaVersion": 1,
+  "style": "noble",
+  "voice": "Eddy (Chinese (China mainland))"
+}

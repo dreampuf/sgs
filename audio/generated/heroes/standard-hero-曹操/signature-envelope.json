@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:曹操.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:曹操",
+  "kingdom": "wei",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "noble timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13101,
+  "style": "noble"
+}

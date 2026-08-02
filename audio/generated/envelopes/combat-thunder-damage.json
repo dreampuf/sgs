@@ -1,0 +1,21 @@
+{
+  "assetId": "combat.thunder-damage",
+  "durationSeconds": 0.92,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "low thunder body",
+    "wide noise crack",
+    "electric ticks"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.72,
+    "pitchHz": 54,
+    "weight": 0.96
+  },
+  "recipe": "thunder",
+  "schemaVersion": 1,
+  "seed": 1303,
+  "specSha256": "479136ee0e1aca60bd5ee60a48a479dc66080a7555c833161b91e0866021bbe1",
+  "title": "雷电伤害"
+}

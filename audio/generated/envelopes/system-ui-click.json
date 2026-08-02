@@ -1,0 +1,19 @@
+{
+  "assetId": "system.ui-click",
+  "durationSeconds": 0.09,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "short pitched transient"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.45,
+    "pitchHz": 780,
+    "weight": 0.18
+  },
+  "recipe": "ui",
+  "schemaVersion": 1,
+  "seed": 1101,
+  "specSha256": "ed05b8ada43995db17edbfc8cfd5385ceee1a37b03b466a4bc310576ccf06d91",
+  "title": "界面点击"
+}

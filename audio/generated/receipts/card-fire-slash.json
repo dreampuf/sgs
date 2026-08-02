@@ -1,0 +1,31 @@
+{
+  "assetId": "card.fire-slash",
+  "command": "npm run audio:generate -- --id card.fire-slash",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "386851f46c73ca881f5358f167d8f09ba87d64a136ba3d57bd5739313ee4dc4d",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 545,
+      "path": "audio/generated/envelopes/card-fire-slash.json",
+      "sha256": "fc4596403f202e58664cdf6eb5c59bc81f26390ec66c36493f42df665f2d3384"
+    },
+    {
+      "bytes": 43564,
+      "path": "audio/generated/wav/sfx/card-fire-slash.wav",
+      "sha256": "8965e22c4f6fbdab2b67282485ea49c98056060cc151fac700111c969fa51b66"
+    },
+    {
+      "bytes": 6335,
+      "path": "public/audio/sfx/card-fire-slash.ogg",
+      "sha256": "7e3ab784139c5f966017f73260aad2f1bc83e6544b7ef504484aa7257cd67c1d"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1205,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "f3711093436da3fb50683c6558478cf7dcafee01ddc2deab195354acac7efcd6",
+  "title": "火杀"
+}

@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "standard:hero:甄姬",
+  "inputSha256": "5ea954870410722623e119c1b0cf75385f73ae9d72c1f7aaf348ca41cf1280c2",
+  "outputs": [
+    {
+      "bytes": 11008,
+      "path": "audio/generated/heroes/standard-hero-甄姬/theme-score.json",
+      "sha256": "c9a617cbeec07219870cefe783637ea6c4b499432f891351514ec099601f7ce8"
+    },
+    {
+      "bytes": 304,
+      "path": "audio/generated/heroes/standard-hero-甄姬/signature-envelope.json",
+      "sha256": "04f7619919cfe3ffb452febef1bab011000a127c2425f6ddeeae047846348f76"
+    },
+    {
+      "bytes": 665,
+      "path": "audio/generated/heroes/standard-hero-甄姬/voice-script.json",
+      "sha256": "1b4bf1c7ac6f66eaccea99d7bc00b41e9feb95392a453dcb8b6843444284e669"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/standard-hero-甄姬/wav/theme.wav",
+      "sha256": "59033ba8f875021554bc6bf948a90ff03ec46e43cda03dfedfe77569c234a2bc"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/standard-hero-甄姬/wav/signature.wav",
+      "sha256": "f89d95d41d7a311d85e8e842a754a28bd55180a2a77ed32b9dfca65219be4b6b"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/standard-hero-甄姬/theme.ogg",
+      "sha256": "512bf8053c2f12677ce7ccb651dca6ac2acd9c26d2de035bfa774ed626bfdbc2"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/standard-hero-甄姬/signature.ogg",
+      "sha256": "023f7d5a6ee01e732ca50c9dfd238aacf3172add57b87520dd03d7c206d7177a"
+    },
+    {
+      "bytes": 101554,
+      "path": "audio/generated/heroes/standard-hero-甄姬/voice-source/signature.aiff",
+      "sha256": "d8b125affcab414dbecece32b181b28c3dda16bb0d293504c7c3bacc5248a4cd"
+    },
+    {
+      "bytes": 141514,
+      "path": "audio/generated/heroes/standard-hero-甄姬/wav/voice-signature.wav",
+      "sha256": "264a70f7165a899a526328bf80149aa22b935a36754e501b4e2f10e74ad609d4"
+    },
+    {
+      "bytes": 22529,
+      "path": "public/audio/heroes/standard-hero-甄姬/voice-signature.ogg",
+      "sha256": "c54305b0b82dfa1d5bd0591524a53386becf1ca2a551e896b7e1ce23312d4d95"
+    },
+    {
+      "bytes": 111332,
+      "path": "audio/generated/heroes/standard-hero-甄姬/voice-source/victory.aiff",
+      "sha256": "eef778040c07c674994c814f5a52fe8d0c5a9fafcd6ea0379a37fb4a35403d13"
+    },
+    {
+      "bytes": 155704,
+      "path": "audio/generated/heroes/standard-hero-甄姬/wav/voice-victory.wav",
+      "sha256": "444b9b781039171a8d748bdcd1371fd00c051179c5778fc45e1e274a242b2cce"
+    },
+    {
+      "bytes": 24740,
+      "path": "public/audio/heroes/standard-hero-甄姬/voice-victory.ogg",
+      "sha256": "4ab1a4e4b1e53ac7de778f4aa5d3f295b41e8b8eb462bf005db9b7c7b33c1b1c"
+    },
+    {
+      "bytes": 104548,
+      "path": "audio/generated/heroes/standard-hero-甄姬/voice-source/death.aiff",
+      "sha256": "67b12cafb699d367afe0b5d20c6bfb56e9f3437152137014d56898c2d47992c9"
+    },
+    {
+      "bytes": 145860,
+      "path": "audio/generated/heroes/standard-hero-甄姬/wav/voice-death.wav",
+      "sha256": "50e765289014f0724b5f0e30201396e53e9214fa2b64ed8d39446c2c8b66f0e1"
+    },
+    {
+      "bytes": 23333,
+      "path": "public/audio/heroes/standard-hero-甄姬/voice-death.ogg",
+      "sha256": "d617d8a2edbcbc94818f8d89e5106548e4d25e28d5aef5f20e55360c64f7cac7"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3107,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Tingting",
+    "postprocess": "highpass=f=100,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+    "rate": 164,
+    "style": "graceful"
+  }
+}

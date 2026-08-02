@@ -1,0 +1,386 @@
+{
+  "assetId": "music.victory",
+  "bars": 2,
+  "bpm": 92,
+  "durationSeconds": 5.217391,
+  "events": [
+    {
+      "duration": 2.608696,
+      "instrument": "pad",
+      "midi": 50,
+      "pan": -0.38,
+      "start": 0,
+      "stem": "harmony",
+      "velocity": 0.2584
+    },
+    {
+      "duration": 2.608696,
+      "instrument": "pad",
+      "midi": 54,
+      "pan": 0.08,
+      "start": 0,
+      "stem": "harmony",
+      "velocity": 0.2119
+    },
+    {
+      "duration": 2.608696,
+      "instrument": "pad",
+      "midi": 59,
+      "pan": 0.4,
+      "start": 0,
+      "stem": "harmony",
+      "velocity": 0.2119
+    },
+    {
+      "duration": 1.121739,
+      "instrument": "bass",
+      "midi": 38,
+      "pan": 0,
+      "start": 0,
+      "stem": "bass",
+      "velocity": 0.3804
+    },
+    {
+      "duration": 1.121739,
+      "instrument": "bass",
+      "midi": 38,
+      "pan": 0,
+      "start": 1.304348,
+      "stem": "bass",
+      "velocity": 0.3804
+    },
+    {
+      "duration": 0.273913,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 0,
+      "stem": "percussion",
+      "velocity": 0.4788
+    },
+    {
+      "duration": 0.104348,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 0.326087,
+      "stem": "percussion",
+      "velocity": 0.1784
+    },
+    {
+      "duration": 0.273913,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 0.652174,
+      "stem": "percussion",
+      "velocity": 0.3968
+    },
+    {
+      "duration": 0.104348,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 0.978261,
+      "stem": "percussion",
+      "velocity": 0.1784
+    },
+    {
+      "duration": 0.273913,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 1.304348,
+      "stem": "percussion",
+      "velocity": 0.3968
+    },
+    {
+      "duration": 0.104348,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 1.630435,
+      "stem": "percussion",
+      "velocity": 0.1784
+    },
+    {
+      "duration": 0.273913,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 1.956522,
+      "stem": "percussion",
+      "velocity": 0.3968
+    },
+    {
+      "duration": 0.104348,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 2.282609,
+      "stem": "percussion",
+      "velocity": 0.1784
+    },
+    {
+      "duration": 0.282115,
+      "instrument": "pluck",
+      "midi": 71,
+      "pan": 0.298,
+      "start": 0.652174,
+      "stem": "pluck",
+      "velocity": 0.163
+    },
+    {
+      "duration": 0.378494,
+      "instrument": "pluck",
+      "midi": 71,
+      "pan": -0.052,
+      "start": 0.978261,
+      "stem": "pluck",
+      "velocity": 0.234
+    },
+    {
+      "duration": 0.379091,
+      "instrument": "pluck",
+      "midi": 71,
+      "pan": -0.475,
+      "start": 1.304348,
+      "stem": "pluck",
+      "velocity": 0.249
+    },
+    {
+      "duration": 0.362712,
+      "instrument": "pluck",
+      "midi": 71,
+      "pan": 0.014,
+      "start": 1.956522,
+      "stem": "pluck",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.40234,
+      "instrument": "pluck",
+      "midi": 71,
+      "pan": -0.416,
+      "start": 2.282609,
+      "stem": "pluck",
+      "velocity": 0.2197
+    },
+    {
+      "duration": 0.534783,
+      "instrument": "lead",
+      "midi": 71,
+      "pan": 0,
+      "start": 0,
+      "stem": "lead",
+      "velocity": 0.253
+    },
+    {
+      "duration": 0.534783,
+      "instrument": "lead",
+      "midi": 69,
+      "pan": 0.238,
+      "start": 0.652174,
+      "stem": "lead",
+      "velocity": 0.253
+    },
+    {
+      "duration": 0.534783,
+      "instrument": "lead",
+      "midi": 69,
+      "pan": -0.061,
+      "start": 1.304348,
+      "stem": "lead",
+      "velocity": 0.253
+    },
+    {
+      "duration": 0.534783,
+      "instrument": "lead",
+      "midi": 74,
+      "pan": -0.222,
+      "start": 1.956522,
+      "stem": "lead",
+      "velocity": 0.253
+    },
+    {
+      "duration": 2.608696,
+      "instrument": "pad",
+      "midi": 57,
+      "pan": -0.38,
+      "start": 2.608696,
+      "stem": "harmony",
+      "velocity": 0.2584
+    },
+    {
+      "duration": 2.608696,
+      "instrument": "pad",
+      "midi": 62,
+      "pan": 0.08,
+      "start": 2.608696,
+      "stem": "harmony",
+      "velocity": 0.2119
+    },
+    {
+      "duration": 2.608696,
+      "instrument": "pad",
+      "midi": 66,
+      "pan": 0.4,
+      "start": 2.608696,
+      "stem": "harmony",
+      "velocity": 0.2119
+    },
+    {
+      "duration": 1.121739,
+      "instrument": "bass",
+      "midi": 45,
+      "pan": 0,
+      "start": 2.608696,
+      "stem": "bass",
+      "velocity": 0.3804
+    },
+    {
+      "duration": 1.121739,
+      "instrument": "bass",
+      "midi": 45,
+      "pan": 0,
+      "start": 3.913043,
+      "stem": "bass",
+      "velocity": 0.3804
+    },
+    {
+      "duration": 0.273913,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 2.608696,
+      "stem": "percussion",
+      "velocity": 0.4788
+    },
+    {
+      "duration": 0.104348,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 2.934783,
+      "stem": "percussion",
+      "velocity": 0.1784
+    },
+    {
+      "duration": 0.273913,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 3.26087,
+      "stem": "percussion",
+      "velocity": 0.3968
+    },
+    {
+      "duration": 0.104348,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 3.586957,
+      "stem": "percussion",
+      "velocity": 0.1784
+    },
+    {
+      "duration": 0.273913,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 3.913043,
+      "stem": "percussion",
+      "velocity": 0.3968
+    },
+    {
+      "duration": 0.104348,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 4.23913,
+      "stem": "percussion",
+      "velocity": 0.1784
+    },
+    {
+      "duration": 0.273913,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 4.565217,
+      "stem": "percussion",
+      "velocity": 0.3968
+    },
+    {
+      "duration": 0.104348,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 4.891304,
+      "stem": "percussion",
+      "velocity": 0.1784
+    },
+    {
+      "duration": 0.391335,
+      "instrument": "pluck",
+      "midi": 69,
+      "pan": -0.119,
+      "start": 2.608696,
+      "stem": "pluck",
+      "velocity": 0.2582
+    },
+    {
+      "duration": 0.340266,
+      "instrument": "pluck",
+      "midi": 78,
+      "pan": 0.113,
+      "start": 4.565217,
+      "stem": "pluck",
+      "velocity": 0.2434
+    },
+    {
+      "duration": 0.534783,
+      "instrument": "lead",
+      "midi": 83,
+      "pan": 0.238,
+      "start": 2.608696,
+      "stem": "lead",
+      "velocity": 0.253
+    },
+    {
+      "duration": 0.534783,
+      "instrument": "lead",
+      "midi": 86,
+      "pan": -0.061,
+      "start": 3.26087,
+      "stem": "lead",
+      "velocity": 0.253
+    },
+    {
+      "duration": 0.534783,
+      "instrument": "lead",
+      "midi": 83,
+      "pan": -0.222,
+      "start": 3.913043,
+      "stem": "lead",
+      "velocity": 0.253
+    },
+    {
+      "duration": 0.534783,
+      "instrument": "lead",
+      "midi": 78,
+      "pan": 0.119,
+      "start": 4.565217,
+      "stem": "lead",
+      "velocity": 0.253
+    }
+  ],
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "loop": false,
+  "palette": "triumph",
+  "sampleRate": 32000,
+  "schemaVersion": 1,
+  "seed": 2401,
+  "specSha256": "2454c23da620778540ac0433f7daca9c6f2d145a688d9e4f95c938b315ef0346",
+  "title": "旌旗凯旋"
+}

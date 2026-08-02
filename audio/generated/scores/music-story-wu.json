@@ -1,0 +1,1412 @@
+{
+  "assetId": "music.story.wu",
+  "bars": 8,
+  "bpm": 96,
+  "durationSeconds": 20,
+  "events": [
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 45,
+      "pan": -0.38,
+      "start": 0,
+      "stem": "harmony",
+      "velocity": 0.2224
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 48,
+      "pan": 0.08,
+      "start": 0,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 55,
+      "pan": 0.4,
+      "start": 0,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 33,
+      "pan": 0,
+      "start": 0,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 33,
+      "pan": 0,
+      "start": 1.25,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 0,
+      "stem": "percussion",
+      "velocity": 0.3768
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 0.3125,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 0.625,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 0.9375,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 1.25,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 1.5625,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 1.875,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 2.1875,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.295367,
+      "instrument": "pluck",
+      "midi": 60,
+      "pan": 0.039,
+      "start": 0.3125,
+      "stem": "pluck",
+      "velocity": 0.2089
+    },
+    {
+      "duration": 0.421475,
+      "instrument": "pluck",
+      "midi": 57,
+      "pan": 0.48,
+      "start": 0.625,
+      "stem": "pluck",
+      "velocity": 0.2332
+    },
+    {
+      "duration": 0.386783,
+      "instrument": "pluck",
+      "midi": 60,
+      "pan": 0.436,
+      "start": 0.9375,
+      "stem": "pluck",
+      "velocity": 0.2417
+    },
+    {
+      "duration": 0.315662,
+      "instrument": "pluck",
+      "midi": 60,
+      "pan": -0.285,
+      "start": 1.5625,
+      "stem": "pluck",
+      "velocity": 0.2142
+    },
+    {
+      "duration": 0.410337,
+      "instrument": "pluck",
+      "midi": 60,
+      "pan": -0.148,
+      "start": 2.1875,
+      "stem": "pluck",
+      "velocity": 0.2599
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 67,
+      "pan": 0,
+      "start": 0,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 64,
+      "pan": 0.238,
+      "start": 1.25,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 52,
+      "pan": -0.38,
+      "start": 2.5,
+      "stem": "harmony",
+      "velocity": 0.2224
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 57,
+      "pan": 0.08,
+      "start": 2.5,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 60,
+      "pan": 0.4,
+      "start": 2.5,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 40,
+      "pan": 0,
+      "start": 2.5,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 40,
+      "pan": 0,
+      "start": 3.75,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 2.5,
+      "stem": "percussion",
+      "velocity": 0.3768
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 2.8125,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 3.125,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 3.4375,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 3.75,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 4.0625,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 4.375,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 4.6875,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.34773,
+      "instrument": "pluck",
+      "midi": 69,
+      "pan": -0.125,
+      "start": 3.4375,
+      "stem": "pluck",
+      "velocity": 0.2466
+    },
+    {
+      "duration": 0.372028,
+      "instrument": "pluck",
+      "midi": 69,
+      "pan": 0.095,
+      "start": 3.75,
+      "stem": "pluck",
+      "velocity": 0.1894
+    },
+    {
+      "duration": 0.342742,
+      "instrument": "pluck",
+      "midi": 64,
+      "pan": -0.291,
+      "start": 4.0625,
+      "stem": "pluck",
+      "velocity": 0.2518
+    },
+    {
+      "duration": 0.271976,
+      "instrument": "pluck",
+      "midi": 64,
+      "pan": -0.436,
+      "start": 4.375,
+      "stem": "pluck",
+      "velocity": 0.2172
+    },
+    {
+      "duration": 0.314515,
+      "instrument": "pluck",
+      "midi": 64,
+      "pan": 0.438,
+      "start": 4.6875,
+      "stem": "pluck",
+      "velocity": 0.1842
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 72,
+      "pan": 0.238,
+      "start": 2.5,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 79,
+      "pan": -0.061,
+      "start": 3.75,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 55,
+      "pan": -0.38,
+      "start": 5,
+      "stem": "harmony",
+      "velocity": 0.2224
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 59,
+      "pan": 0.08,
+      "start": 5,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 64,
+      "pan": 0.4,
+      "start": 5,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 43,
+      "pan": 0,
+      "start": 5,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 43,
+      "pan": 0,
+      "start": 6.25,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 5,
+      "stem": "percussion",
+      "velocity": 0.3768
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 5.3125,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 5.625,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 5.9375,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 6.25,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 6.5625,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 6.875,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 7.1875,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.360315,
+      "instrument": "pluck",
+      "midi": 71,
+      "pan": -0.465,
+      "start": 5.3125,
+      "stem": "pluck",
+      "velocity": 0.1548
+    },
+    {
+      "duration": 0.341375,
+      "instrument": "pluck",
+      "midi": 71,
+      "pan": -0.134,
+      "start": 5.625,
+      "stem": "pluck",
+      "velocity": 0.2469
+    },
+    {
+      "duration": 0.331784,
+      "instrument": "pluck",
+      "midi": 71,
+      "pan": 0.361,
+      "start": 6.25,
+      "stem": "pluck",
+      "velocity": 0.2006
+    },
+    {
+      "duration": 0.328204,
+      "instrument": "pluck",
+      "midi": 67,
+      "pan": -0.105,
+      "start": 6.5625,
+      "stem": "pluck",
+      "velocity": 0.2045
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 79,
+      "pan": -0.061,
+      "start": 5,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 81,
+      "pan": -0.222,
+      "start": 6.25,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 48,
+      "pan": -0.38,
+      "start": 7.5,
+      "stem": "harmony",
+      "velocity": 0.2224
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 55,
+      "pan": 0.08,
+      "start": 7.5,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 59,
+      "pan": 0.4,
+      "start": 7.5,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 36,
+      "pan": 0,
+      "start": 7.5,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 36,
+      "pan": 0,
+      "start": 8.75,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 7.5,
+      "stem": "percussion",
+      "velocity": 0.3768
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 7.8125,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 8.125,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 8.4375,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 8.75,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 9.0625,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 9.375,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 9.6875,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.287633,
+      "instrument": "pluck",
+      "midi": 60,
+      "pan": 0.046,
+      "start": 7.5,
+      "stem": "pluck",
+      "velocity": 0.242
+    },
+    {
+      "duration": 0.362688,
+      "instrument": "pluck",
+      "midi": 71,
+      "pan": -0.502,
+      "start": 8.4375,
+      "stem": "pluck",
+      "velocity": 0.2228
+    },
+    {
+      "duration": 0.311837,
+      "instrument": "pluck",
+      "midi": 67,
+      "pan": -0.025,
+      "start": 8.75,
+      "stem": "pluck",
+      "velocity": 0.2507
+    },
+    {
+      "duration": 0.389787,
+      "instrument": "pluck",
+      "midi": 60,
+      "pan": 0.21,
+      "start": 9.0625,
+      "stem": "pluck",
+      "velocity": 0.1958
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 76,
+      "pan": -0.222,
+      "start": 7.5,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 79,
+      "pan": 0.119,
+      "start": 8.75,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 45,
+      "pan": -0.38,
+      "start": 10,
+      "stem": "harmony",
+      "velocity": 0.2224
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 48,
+      "pan": 0.08,
+      "start": 10,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 55,
+      "pan": 0.4,
+      "start": 10,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 33,
+      "pan": 0,
+      "start": 10,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 33,
+      "pan": 0,
+      "start": 11.25,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 10,
+      "stem": "percussion",
+      "velocity": 0.3768
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 10.3125,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 10.625,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 10.9375,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 11.25,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 11.5625,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 11.875,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 12.1875,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.27749,
+      "instrument": "pluck",
+      "midi": 57,
+      "pan": -0.057,
+      "start": 10,
+      "stem": "pluck",
+      "velocity": 0.2246
+    },
+    {
+      "duration": 0.309843,
+      "instrument": "pluck",
+      "midi": 57,
+      "pan": 0.036,
+      "start": 10.625,
+      "stem": "pluck",
+      "velocity": 0.1956
+    },
+    {
+      "duration": 0.307994,
+      "instrument": "pluck",
+      "midi": 60,
+      "pan": 0.282,
+      "start": 10.9375,
+      "stem": "pluck",
+      "velocity": 0.2178
+    },
+    {
+      "duration": 0.323306,
+      "instrument": "pluck",
+      "midi": 60,
+      "pan": -0.074,
+      "start": 11.5625,
+      "stem": "pluck",
+      "velocity": 0.2423
+    },
+    {
+      "duration": 0.304045,
+      "instrument": "pluck",
+      "midi": 57,
+      "pan": -0.359,
+      "start": 11.875,
+      "stem": "pluck",
+      "velocity": 0.2413
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 69,
+      "pan": 0.119,
+      "start": 10,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 71,
+      "pan": 0.192,
+      "start": 11.25,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 47,
+      "pan": -0.38,
+      "start": 12.5,
+      "stem": "harmony",
+      "velocity": 0.2224
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 52,
+      "pan": 0.08,
+      "start": 12.5,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 57,
+      "pan": 0.4,
+      "start": 12.5,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 35,
+      "pan": 0,
+      "start": 12.5,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 35,
+      "pan": 0,
+      "start": 13.75,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 12.5,
+      "stem": "percussion",
+      "velocity": 0.3768
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 12.8125,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 13.125,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 13.4375,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 13.75,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 14.0625,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 14.375,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 14.6875,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.350885,
+      "instrument": "pluck",
+      "midi": 64,
+      "pan": 0.036,
+      "start": 12.8125,
+      "stem": "pluck",
+      "velocity": 0.1664
+    },
+    {
+      "duration": 0.390972,
+      "instrument": "pluck",
+      "midi": 59,
+      "pan": 0.108,
+      "start": 13.125,
+      "stem": "pluck",
+      "velocity": 0.2125
+    },
+    {
+      "duration": 0.410891,
+      "instrument": "pluck",
+      "midi": 59,
+      "pan": -0.472,
+      "start": 13.4375,
+      "stem": "pluck",
+      "velocity": 0.2114
+    },
+    {
+      "duration": 0.330265,
+      "instrument": "pluck",
+      "midi": 69,
+      "pan": -0.346,
+      "start": 13.75,
+      "stem": "pluck",
+      "velocity": 0.1955
+    },
+    {
+      "duration": 0.318077,
+      "instrument": "pluck",
+      "midi": 59,
+      "pan": -0.352,
+      "start": 14.0625,
+      "stem": "pluck",
+      "velocity": 0.2314
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 69,
+      "pan": 0.192,
+      "start": 12.5,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 67,
+      "pan": -0.168,
+      "start": 13.75,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 52,
+      "pan": -0.38,
+      "start": 15,
+      "stem": "harmony",
+      "velocity": 0.2224
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 57,
+      "pan": 0.08,
+      "start": 15,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 60,
+      "pan": 0.4,
+      "start": 15,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 40,
+      "pan": 0,
+      "start": 15,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 40,
+      "pan": 0,
+      "start": 16.25,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 15,
+      "stem": "percussion",
+      "velocity": 0.3768
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 15.3125,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 15.625,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 15.9375,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 16.25,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 16.5625,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 16.875,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 17.1875,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.294856,
+      "instrument": "pluck",
+      "midi": 69,
+      "pan": -0.442,
+      "start": 15.3125,
+      "stem": "pluck",
+      "velocity": 0.1859
+    },
+    {
+      "duration": 0.279488,
+      "instrument": "pluck",
+      "midi": 64,
+      "pan": -0.11,
+      "start": 16.25,
+      "stem": "pluck",
+      "velocity": 0.2326
+    },
+    {
+      "duration": 0.391532,
+      "instrument": "pluck",
+      "midi": 64,
+      "pan": -0.283,
+      "start": 16.5625,
+      "stem": "pluck",
+      "velocity": 0.1588
+    },
+    {
+      "duration": 0.326414,
+      "instrument": "pluck",
+      "midi": 69,
+      "pan": -0.026,
+      "start": 17.1875,
+      "stem": "pluck",
+      "velocity": 0.2448
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 72,
+      "pan": -0.168,
+      "start": 15,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 79,
+      "pan": -0.148,
+      "start": 16.25,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 55,
+      "pan": -0.38,
+      "start": 17.5,
+      "stem": "harmony",
+      "velocity": 0.2224
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 59,
+      "pan": 0.08,
+      "start": 17.5,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 2.5,
+      "instrument": "pad",
+      "midi": 64,
+      "pan": 0.4,
+      "start": 17.5,
+      "stem": "harmony",
+      "velocity": 0.1824
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 43,
+      "pan": 0,
+      "start": 17.5,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 1.075,
+      "instrument": "bass",
+      "midi": 43,
+      "pan": 0,
+      "start": 18.75,
+      "stem": "bass",
+      "velocity": 0.3144
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 17.5,
+      "stem": "percussion",
+      "velocity": 0.3768
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 17.8125,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 18.125,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 18.4375,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "kick",
+      "midi": 35,
+      "pan": -0.08,
+      "start": 18.75,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": 0.3,
+      "start": 19.0625,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.2625,
+      "instrument": "drum",
+      "midi": 48,
+      "pan": 0.12,
+      "start": 19.375,
+      "stem": "percussion",
+      "velocity": 0.3248
+    },
+    {
+      "duration": 0.1,
+      "instrument": "hat",
+      "midi": 78,
+      "pan": -0.3,
+      "start": 19.6875,
+      "stem": "percussion",
+      "velocity": 0.1424
+    },
+    {
+      "duration": 0.339116,
+      "instrument": "pluck",
+      "midi": 76,
+      "pan": 0.077,
+      "start": 18.4375,
+      "stem": "pluck",
+      "velocity": 0.2332
+    },
+    {
+      "duration": 0.331491,
+      "instrument": "pluck",
+      "midi": 67,
+      "pan": -0.113,
+      "start": 19.0625,
+      "stem": "pluck",
+      "velocity": 0.1994
+    },
+    {
+      "duration": 0.347593,
+      "instrument": "pluck",
+      "midi": 67,
+      "pan": -0.319,
+      "start": 19.6875,
+      "stem": "pluck",
+      "velocity": 0.2412
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 79,
+      "pan": -0.148,
+      "start": 17.5,
+      "stem": "lead",
+      "velocity": 0.208
+    },
+    {
+      "duration": 1.025,
+      "instrument": "lead",
+      "midi": 81,
+      "pan": 0.206,
+      "start": 18.75,
+      "stem": "lead",
+      "velocity": 0.208
+    }
+  ],
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "loop": true,
+  "palette": "wu",
+  "sampleRate": 32000,
+  "schemaVersion": 1,
+  "seed": 2203,
+  "specSha256": "6cccc2d2fe140b1a718ad4e544b5faa68544dbc90e084a9a3b30d6f585ee7fb0",
+  "title": "吴 · 江东潮生"
+}

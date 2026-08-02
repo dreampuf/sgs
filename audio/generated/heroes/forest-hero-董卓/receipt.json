@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "forest:hero:董卓",
+  "inputSha256": "293fd8f0e3cf969c014621271f5c50cee068724924958cfb4b9d41e2597b1276",
+  "outputs": [
+    {
+      "bytes": 11004,
+      "path": "audio/generated/heroes/forest-hero-董卓/theme-score.json",
+      "sha256": "6cc40521a0195a20e637db94aae032f1fa34b9f1b951060814bfb93ae8301a73"
+    },
+    {
+      "bytes": 296,
+      "path": "audio/generated/heroes/forest-hero-董卓/signature-envelope.json",
+      "sha256": "a9c192bfcf62e6a082d8d268abb0b31c2d942a072d6120fdf148f1c99486ec1a"
+    },
+    {
+      "bytes": 710,
+      "path": "audio/generated/heroes/forest-hero-董卓/voice-script.json",
+      "sha256": "d3b34969cd995d6a4fe15d70d7524a8010d1f818b911019ff32af91dc9d70c66"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/forest-hero-董卓/wav/theme.wav",
+      "sha256": "120ccc4b23a889516e0b39b4a498b50622aca8acea4bc71409c6ce78df272b09"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/forest-hero-董卓/wav/signature.wav",
+      "sha256": "90f936d77546812d145a8ce786ccac79665f36e7c5ef6d9d4e01e97d6b753f1a"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/forest-hero-董卓/theme.ogg",
+      "sha256": "d4ed279d7bc9bed409ede40685bf538d0aa4f5bbcd50896f024ca81fab60f725"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/forest-hero-董卓/signature.ogg",
+      "sha256": "19d59a1f05161d5fd69023ee5efc6543b5437cd9dcd09140468faf6ed6bcec6b"
+    },
+    {
+      "bytes": 125132,
+      "path": "audio/generated/heroes/forest-hero-董卓/voice-source/signature.aiff",
+      "sha256": "fc3f035f087aaa1d5fabb88171d65ec8c42d05b90c4f9ad325e6deb712b04743"
+    },
+    {
+      "bytes": 175732,
+      "path": "audio/generated/heroes/forest-hero-董卓/wav/voice-signature.wav",
+      "sha256": "f6722938f1fb814437537d0447a4638210bcc35693553fab2931e1bd3b79ee44"
+    },
+    {
+      "bytes": 27956,
+      "path": "public/audio/heroes/forest-hero-董卓/voice-signature.ogg",
+      "sha256": "1558e4fd69b4d8f1745ac66c11b7439ee357bc8ab3c71b6dd583e617b1d7165f"
+    },
+    {
+      "bytes": 115962,
+      "path": "audio/generated/heroes/forest-hero-董卓/voice-source/victory.aiff",
+      "sha256": "9dea1a04df477733cdfbcc7ab19f4c1b7faee19acc69175e936cd7f202cf77ad"
+    },
+    {
+      "bytes": 162424,
+      "path": "audio/generated/heroes/forest-hero-董卓/wav/voice-victory.wav",
+      "sha256": "439f65f6b2c1520099bbcd4ac09449ddeda25d5a9be40c815d8e830e88428d3b"
+    },
+    {
+      "bytes": 25946,
+      "path": "public/audio/heroes/forest-hero-董卓/voice-victory.ogg",
+      "sha256": "d42b70b514eda6f2bdc0298f94932ededc4f20cfb8ae108c31eade42840a60b8"
+    },
+    {
+      "bytes": 111282,
+      "path": "audio/generated/heroes/forest-hero-董卓/voice-source/death.aiff",
+      "sha256": "76b3e15c8ce9843a25c564968684dfd0abd861b101de8422e65a38dd9c3f0e47"
+    },
+    {
+      "bytes": 155632,
+      "path": "audio/generated/heroes/forest-hero-董卓/wav/voice-death.wav",
+      "sha256": "a3cf66ee6a5d28158bcc394a4671d29e0d21218cf50a2c55144acebb23a1987a"
+    },
+    {
+      "bytes": 24740,
+      "path": "public/audio/heroes/forest-hero-董卓/voice-death.ogg",
+      "sha256": "cbc00b0ccf1df564bc3fa625a3b21069cd7acbc04e2c03a99cd81de713d73fa4"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3707,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Rocko (Chinese (China mainland))",
+    "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+    "rate": 180,
+    "style": "fierce"
+  }
+}

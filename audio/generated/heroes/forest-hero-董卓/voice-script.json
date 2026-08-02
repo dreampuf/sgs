@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "forest:hero:董卓",
+  "heroName": "董卓",
+  "inspiration": "借鉴《三国演义》中乱政洛阳、酒池肉林与暴虐权臣形象，台词为原创改写。",
+  "lines": {
+    "death": "奉先何在，快来救我。",
+    "signature": "酒池未干，谁敢忤逆太师。",
+    "victory": "天下财色，尽归我手。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

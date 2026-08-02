@@ -1,0 +1,31 @@
+{
+  "assetId": "card.draw",
+  "command": "npm run audio:generate -- --id card.draw",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "a4b1b96fdc71355215d3d9098b6df60a3d16683daaa5c9fa9a0eb49cde87649b",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 513,
+      "path": "audio/generated/envelopes/card-draw.json",
+      "sha256": "f08e454e14c0ae4d38b50497ea2a00e68f4a7537d1da5a7b6df3033e72de8158"
+    },
+    {
+      "bytes": 19884,
+      "path": "audio/generated/wav/sfx/card-draw.wav",
+      "sha256": "4af645d094064864d120d630953a3c2d286cfb9054a01b44cc2917d3f5ea7c53"
+    },
+    {
+      "bytes": 3065,
+      "path": "public/audio/sfx/card-draw.ogg",
+      "sha256": "2401eec077969502e61dffebf91ed1b5187e833d705dd631922837638df7e847"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1201,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "a864a71e3732692f93815e97e8e73d339af3a58dc0827d6c6e75d40b5c4e9f41",
+  "title": "摸牌"
+}

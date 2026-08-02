@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:郭嘉.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:郭嘉",
+  "kingdom": "wei",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "mystical timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13103,
+  "style": "mystical"
+}

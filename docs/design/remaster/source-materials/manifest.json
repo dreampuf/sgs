@@ -1,0 +1,51 @@
+{
+  "schema": "sgs.source-corpus-manifest.v1",
+  "preparedAt": "2026-08-01T19:09:18.273Z",
+  "language": "zh-Hant",
+  "sourceProvider": "Chinese Wikisource / Wikimedia WS Export",
+  "licenseNote": "古籍原作屬公版；維基文庫整理文字依來源頁所示的創用 CC 姓名標示-相同方式分享條款提供。使用或再散布前請保留來源與署名，並重新核對當時條款。",
+  "works": [
+    {
+      "id": "sanguoyanyi",
+      "title": "三國演義",
+      "author": "羅貫中",
+      "edition": "毛宗崗評改一百二十回本",
+      "evidenceClass": "literary-narrative",
+      "sourcePage": "https://zh.wikisource.org/zh-hant/三國演義",
+      "exportUrl": "https://ws-export.wmcloud.org/?format=epub&lang=zh&page=%E4%B8%89%E5%9C%8B%E6%BC%94%E7%BE%A9",
+      "raw": {
+        "path": "raw/sanguoyanyi-wikisource-zh.epub",
+        "bytes": 1178610,
+        "sha256": "a2d08724f6e182ac2a6f38a50ba2018391e9265a5853a47fbcca195d5a532966"
+      },
+      "corpus": {
+        "path": "corpus/sanguoyanyi.jsonl",
+        "records": 124,
+        "chapters": 120,
+        "bytes": 1913804,
+        "sha256": "259c3c3d4ac24a91df48cbd6310d437a880b796c7ba631ce1fbae7c401eb883d"
+      }
+    },
+    {
+      "id": "sanguozhi",
+      "title": "三國志",
+      "author": "陳壽撰，裴松之注",
+      "edition": "維基文庫六十五卷本（含裴松之注與附錄）",
+      "evidenceClass": "historical-record",
+      "sourcePage": "https://zh.wikisource.org/zh-hant/三國志",
+      "exportUrl": "https://ws-export.wmcloud.org/?format=epub&lang=zh&page=%E4%B8%89%E5%9C%8B%E5%BF%97",
+      "raw": {
+        "path": "raw/sanguozhi-wikisource-zh.epub",
+        "bytes": 1647572,
+        "sha256": "919f82e842a075f3fdff8bc4f191f2e6ebc8be90dac5a2aa938ccd82f257b63a"
+      },
+      "corpus": {
+        "path": "corpus/sanguozhi.jsonl",
+        "records": 68,
+        "chapters": 65,
+        "bytes": 2571928,
+        "sha256": "191e03f1fbad02d6078efaf237f3dbb2c20eeb859c8bf66b371afcac2b1bfafd"
+      }
+    }
+  ]
+}

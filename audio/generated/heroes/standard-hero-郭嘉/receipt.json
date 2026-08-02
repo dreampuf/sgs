@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "standard:hero:郭嘉",
+  "inputSha256": "26826ffcfc3a4040cccbe38e4beb00ad348cd6e45c3a060de1ee41d766ff6ecb",
+  "outputs": [
+    {
+      "bytes": 10960,
+      "path": "audio/generated/heroes/standard-hero-郭嘉/theme-score.json",
+      "sha256": "3f460832b26e04535d3dae4f497f16384b2fc7931a464dd508705b229dcdd639"
+    },
+    {
+      "bytes": 304,
+      "path": "audio/generated/heroes/standard-hero-郭嘉/signature-envelope.json",
+      "sha256": "ef11de37ed65712b1bb60607b96efb796c2f87da04a329231bbf32d15c1a6715"
+    },
+    {
+      "bytes": 727,
+      "path": "audio/generated/heroes/standard-hero-郭嘉/voice-script.json",
+      "sha256": "b3c17496d06f4361f680add82b521393d436761973903d80f9553ccf7a217b35"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/standard-hero-郭嘉/wav/theme.wav",
+      "sha256": "712a9cf74aa2cf43c95289720af41e090eaca878c0b4ec60980bd4ff7692c8f0"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/standard-hero-郭嘉/wav/signature.wav",
+      "sha256": "b16d52ad39df56e99fe43f84af6506cda825ddac19868389cbe7ef146fa76f21"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/standard-hero-郭嘉/theme.ogg",
+      "sha256": "1fda5f234d9423ac022e372ac525b1187924dd5cd33676a64be3dc1989452f15"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/standard-hero-郭嘉/signature.ogg",
+      "sha256": "ae194e42b2c27e398d0e647912ca3cadd413f72c604e23a78027202f845535b2"
+    },
+    {
+      "bytes": 124392,
+      "path": "audio/generated/heroes/standard-hero-郭嘉/voice-source/signature.aiff",
+      "sha256": "910448f8ebb365c2bcfba41a9e6edc723542d812d7d36d9e207b6ee05af7f09e"
+    },
+    {
+      "bytes": 178176,
+      "path": "audio/generated/heroes/standard-hero-郭嘉/wav/voice-signature.wav",
+      "sha256": "3059d29c8435affe554b7e21a4110c1fbe0cae2e94fac0c05eae0709d49ff1c8"
+    },
+    {
+      "bytes": 28358,
+      "path": "public/audio/heroes/standard-hero-郭嘉/voice-signature.ogg",
+      "sha256": "b487f6e6c98760714a0e422b7ef11a0e9ccce9bdbeb209d177466d7d77afc289"
+    },
+    {
+      "bytes": 126798,
+      "path": "audio/generated/heroes/standard-hero-郭嘉/voice-source/victory.aiff",
+      "sha256": "9ac61519acd3a467cab4c811fd01292a88249b1b2200c39d6576454db7c7676e"
+    },
+    {
+      "bytes": 181668,
+      "path": "audio/generated/heroes/standard-hero-郭嘉/wav/voice-victory.wav",
+      "sha256": "c2dc7df5ecefc0f8a7a798c5ca77d707aaa93cb99769aae2d7b8081f9c1574ee"
+    },
+    {
+      "bytes": 28961,
+      "path": "public/audio/heroes/standard-hero-郭嘉/voice-victory.ogg",
+      "sha256": "7a7741fe49359b6735e0dc17f75239eeafab519325c2db6fa85be86c528260f6"
+    },
+    {
+      "bytes": 141318,
+      "path": "audio/generated/heroes/standard-hero-郭嘉/voice-source/death.aiff",
+      "sha256": "42e4df9c303ac8ed3ed6358fdbf093e7e0e81827e2ef8e1254af4f0bb19970cb"
+    },
+    {
+      "bytes": 202740,
+      "path": "audio/generated/heroes/standard-hero-郭嘉/wav/voice-death.wav",
+      "sha256": "5baebf5c35d936e1e41650db9a97d1fe02967342e9386ff2ef9b21b78c0c418e"
+    },
+    {
+      "bytes": 32204,
+      "path": "public/audio/heroes/standard-hero-郭嘉/voice-death.ogg",
+      "sha256": "3b5da197ec2e35975333fa2cac6608ed1299f3ade8c1976681b9f02ed60323fd"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3103,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Eddy (Chinese (China mainland))",
+    "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180,aecho=0.8:0.18:55:0.1",
+    "rate": 155,
+    "style": "mystical"
+  }
+}

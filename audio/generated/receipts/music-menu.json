@@ -1,0 +1,31 @@
+{
+  "assetId": "music.menu",
+  "command": "npm run audio:generate -- --id music.menu",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "2ec788b836d9afb3e19f1e2fa0606c001171c6f676d7e1cb2a241e093b5d0182",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 22569,
+      "path": "audio/generated/scores/music-menu.json",
+      "sha256": "38d81e3c941da7863d35b4afe896b83a3122184fcb8fb029c82081ee3a2a9e47"
+    },
+    {
+      "bytes": 3072044,
+      "path": "audio/generated/wav/music/music-menu.wav",
+      "sha256": "fddb72bcf3ba2b1cfb1a6453c3f8d69e2d8b2e48e2030f63e9ccc0ebd7498f22"
+    },
+    {
+      "bytes": 349793,
+      "path": "public/audio/music/music-menu.ogg",
+      "sha256": "f70c50f4e7ccd8fdb6182bae682663fffd0f32bf4c0ecbf59fb01b82baf91df6"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2101,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "3c0c0b998d7707e0c4d71a450cc5b41ba5561e0bc65f7410b0987050e080303c",
+  "title": "乱世卷首"
+}

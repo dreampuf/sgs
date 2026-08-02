@@ -1,0 +1,20 @@
+{
+  "assetId": "combat.damage",
+  "durationSeconds": 0.56,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "low body",
+    "broad transient"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.42,
+    "pitchHz": 92,
+    "weight": 0.92
+  },
+  "recipe": "impact",
+  "schemaVersion": 1,
+  "seed": 1301,
+  "specSha256": "4d9c93cd734bb6749b4094546847f1a8682ff5e1d9438b4f32518c9d722174b8",
+  "title": "普通伤害"
+}

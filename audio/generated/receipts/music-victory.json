@@ -1,0 +1,31 @@
+{
+  "assetId": "music.victory",
+  "command": "npm run audio:generate -- --id music.victory",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "9a684bb4fda484a450027c539fc0a4f5aced23d98fa964a5e73612cf31a47615",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 7821,
+      "path": "audio/generated/scores/music-victory.json",
+      "sha256": "0931eb4cc4b8159f67f1098d837a323cab0d0ac2f3b1598c9f635d9e30645c31"
+    },
+    {
+      "bytes": 667872,
+      "path": "audio/generated/wav/music/music-victory.wav",
+      "sha256": "e27caa24aec1b9c777c00761a2a0f562336f7f3c7fb9dcd48335a1690d4aa047"
+    },
+    {
+      "bytes": 73461,
+      "path": "public/audio/music/music-victory.ogg",
+      "sha256": "d039bc4b351678a0df5603b6d393a22ec380bcf487cb70a4dc8ab2fc5e9ccb87"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2401,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "2454c23da620778540ac0433f7daca9c6f2d145a688d9e4f95c938b315ef0346",
+  "title": "旌旗凯旋"
+}

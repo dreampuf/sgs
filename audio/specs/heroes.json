@@ -1,0 +1,849 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "sgs-hero-audio-v1",
+  "rendering": {
+    "sampleRate": 32000,
+    "themeBpm": 96,
+    "themeBars": 4,
+    "adaptiveGroup": "battle-96-a",
+    "maleVoice": "Eddy (Chinese (China mainland))",
+    "femaleVoice": "Tingting",
+    "fierceVoice": "Rocko (Chinese (China mainland))",
+    "agedVoice": "Grandpa (Chinese (China mainland))"
+  },
+  "heroes": [
+    {
+      "definitionId": "standard:hero:曹操",
+      "name": "曹操",
+      "kingdom": "wei",
+      "gender": "male",
+      "skills": ["standard:skill:护驾", "standard:skill:奸雄"],
+      "signatureCardIds": ["standard:duel", "standard:nullification"],
+      "seed": 3101,
+      "voiceStyle": "noble",
+      "theme": { "motif": [0, 2, 4, 3, 1, 0], "energy": 0.78 },
+      "inspiration": "借鉴《三国演义》中煮酒论英雄、挟天子与奸雄形象，台词为原创改写。",
+      "lines": {
+        "signature": "天下权谋，尽在此局。",
+        "victory": "乱世归心，霸业自此而始。",
+        "death": "霸业未成，孤心不甘。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:张辽",
+      "name": "张辽",
+      "kingdom": "wei",
+      "gender": "male",
+      "skills": ["standard:skill:突袭"],
+      "signatureCardIds": ["standard:snatch"],
+      "seed": 3102,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 3, 4, 2, 3, 0], "energy": 0.88 },
+      "inspiration": "借鉴《三国演义》中逍遥津威震江东的战事，台词为原创改写。",
+      "lines": {
+        "signature": "逍遥津前，谁敢再进。",
+        "victory": "八百锐士，足破千军。",
+        "death": "合肥之威，终有尽时。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:郭嘉",
+      "name": "郭嘉",
+      "kingdom": "wei",
+      "gender": "male",
+      "skills": ["standard:skill:天妒", "standard:skill:遗计"],
+      "signatureCardIds": ["standard:amazing-grace"],
+      "seed": 3103,
+      "voiceStyle": "mystical",
+      "theme": { "motif": [0, 4, 2, 3, 1, 0], "energy": 0.48 },
+      "inspiration": "借鉴《三国演义》中郭嘉料敌、遗计定辽东的谋士形象，台词为原创改写。",
+      "lines": {
+        "signature": "天机虽远，我已先知。",
+        "victory": "算定胜负，不劳强攻。",
+        "death": "此身先去，遗策尚存。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:夏侯惇",
+      "name": "夏侯惇",
+      "kingdom": "wei",
+      "gender": "male",
+      "skills": ["standard:skill:刚烈"],
+      "signatureCardIds": ["standard:duel"],
+      "seed": 3104,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 1, 3, 4, 2, 0], "energy": 0.9 },
+      "inspiration": "借鉴《三国演义》中拔矢啖睛与刚烈不屈的形象，台词为原创改写。",
+      "lines": {
+        "signature": "伤我一分，必还十分。",
+        "victory": "独胆在此，谁能阻我。",
+        "death": "此目虽失，忠烈不灭。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:司马懿",
+      "name": "司马懿",
+      "kingdom": "wei",
+      "gender": "male",
+      "skills": ["standard:skill:反馈", "standard:skill:鬼才"],
+      "signatureCardIds": ["standard:lightning"],
+      "seed": 3105,
+      "voiceStyle": "mystical",
+      "theme": { "motif": [0, 3, 1, 4, 2, 0], "energy": 0.56 },
+      "inspiration": "借鉴《三国演义》中隐忍待时、与诸葛亮斗智的形象，台词为原创改写。",
+      "lines": {
+        "signature": "天命可测，更可改写。",
+        "victory": "忍到最后，才是赢家。",
+        "death": "棋局未终，奈何先退。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:许褚",
+      "name": "许褚",
+      "kingdom": "wei",
+      "gender": "male",
+      "skills": ["standard:skill:裸衣"],
+      "signatureCardIds": ["standard:slash"],
+      "seed": 3106,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 2, 3, 1, 4, 0], "energy": 0.94 },
+      "inspiration": "借鉴《三国演义》中裸衣斗马超、护卫曹操的虎痴形象，台词为原创改写。",
+      "lines": {
+        "signature": "卸甲又如何，看我破阵。",
+        "victory": "虎痴在前，敌军尽退。",
+        "death": "主公，末将不能再护驾了。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:甄姬",
+      "name": "甄姬",
+      "kingdom": "wei",
+      "gender": "female",
+      "skills": ["standard:skill:洛神", "standard:skill:倾国"],
+      "signatureCardIds": ["standard:jink"],
+      "seed": 3107,
+      "voiceStyle": "graceful",
+      "theme": { "motif": [0, 4, 3, 2, 1, 0], "energy": 0.38 },
+      "inspiration": "借鉴洛神意象与《三国演义》中甄氏身世，台词为原创改写。",
+      "lines": {
+        "signature": "凌波微步，洛水无尘。",
+        "victory": "清辉照水，乱云终散。",
+        "death": "洛水东流，此梦亦休。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:刘备",
+      "name": "刘备",
+      "kingdom": "shu",
+      "gender": "male",
+      "skills": ["standard:skill:激将", "standard:skill:仁德"],
+      "signatureCardIds": ["standard:peach", "standard:god-salvation"],
+      "seed": 3201,
+      "voiceStyle": "noble",
+      "theme": { "motif": [0, 1, 3, 4, 2, 0], "energy": 0.62 },
+      "inspiration": "借鉴《三国演义》中桃园结义、携民渡江与仁德之主形象，台词为原创改写。",
+      "lines": {
+        "signature": "以仁聚众，以义同行。",
+        "victory": "同心扶汉，山河可复。",
+        "death": "汉室未兴，愧对诸君。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:关羽",
+      "name": "关羽",
+      "kingdom": "shu",
+      "gender": "male",
+      "skills": ["standard:skill:武圣"],
+      "signatureCardIds": ["standard:slash", "standard:blade"],
+      "seed": 3202,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 3, 4, 3, 1, 0], "energy": 0.9 },
+      "inspiration": "借鉴《三国演义》中温酒斩将、千里走单骑与忠义形象，台词为原创改写。",
+      "lines": {
+        "signature": "青龙所向，邪佞皆斩。",
+        "victory": "义字当先，千里亦归。",
+        "death": "大义无亏，唯恨未归。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:张飞",
+      "name": "张飞",
+      "kingdom": "shu",
+      "gender": "male",
+      "skills": ["standard:skill:咆哮"],
+      "signatureCardIds": ["standard:slash", "standard:spear"],
+      "seed": 3203,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 4, 3, 4, 2, 0], "energy": 1 },
+      "inspiration": "借鉴《三国演义》中长坂桥喝退曹军的猛将形象，台词为原创改写。",
+      "lines": {
+        "signature": "燕人张飞在此，谁敢来战。",
+        "victory": "一声断喝，万军退散。",
+        "death": "哥哥，翼德先走一步。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:赵云",
+      "name": "赵云",
+      "kingdom": "shu",
+      "gender": "male",
+      "skills": ["standard:skill:龙胆"],
+      "signatureCardIds": ["standard:slash", "standard:jink"],
+      "seed": 3204,
+      "voiceStyle": "noble",
+      "theme": { "motif": [0, 2, 4, 1, 3, 0], "energy": 0.86 },
+      "inspiration": "借鉴《三国演义》中长坂坡七进七出与常胜将军形象，台词为原创改写。",
+      "lines": {
+        "signature": "龙胆照银枪，进退皆无惧。",
+        "victory": "一身是胆，长坂亦平。",
+        "death": "此枪虽止，忠胆长存。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:马超",
+      "name": "马超",
+      "kingdom": "shu",
+      "gender": "male",
+      "skills": ["standard:skill:马术", "standard:skill:铁骑"],
+      "signatureCardIds": ["standard:slash", "standard:chitu"],
+      "seed": 3205,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 3, 1, 4, 3, 0], "energy": 0.94 },
+      "inspiration": "借鉴《三国演义》中潼关追曹、锦马超与西凉铁骑形象，台词为原创改写。",
+      "lines": {
+        "signature": "西凉铁骑，踏破敌阵。",
+        "victory": "锦旗过处，无人可挡。",
+        "death": "父仇未雪，壮志难酬。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:诸葛亮",
+      "name": "诸葛亮",
+      "kingdom": "shu",
+      "gender": "male",
+      "skills": ["standard:skill:观星", "standard:skill:空城"],
+      "signatureCardIds": ["standard:lightning", "standard:nullification"],
+      "seed": 3206,
+      "voiceStyle": "mystical",
+      "theme": { "motif": [0, 4, 2, 1, 3, 0], "energy": 0.44 },
+      "inspiration": "借鉴《三国演义》中隆中对、借东风、空城与北伐形象，台词为原创改写。",
+      "lines": {
+        "signature": "观天察势，胜负已明。",
+        "victory": "运筹帷幄，强敌自退。",
+        "death": "出师未捷，汉业难兴。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:黄月英",
+      "name": "黄月英",
+      "kingdom": "shu",
+      "gender": "female",
+      "skills": ["standard:skill:集智", "standard:skill:奇才"],
+      "signatureCardIds": ["standard:ex-nihilo", "standard:iron-chain"],
+      "seed": 3207,
+      "voiceStyle": "graceful",
+      "theme": { "motif": [0, 2, 1, 4, 3, 0], "energy": 0.54 },
+      "inspiration": "借鉴木牛流马、机关巧思及诸葛亮贤内助的文学形象，台词为原创改写。",
+      "lines": {
+        "signature": "巧思成机，寻常亦可制胜。",
+        "victory": "机关算尽，局势尽在掌中。",
+        "death": "尚有一策，未能交予孔明。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:孙权",
+      "name": "孙权",
+      "kingdom": "wu",
+      "gender": "male",
+      "skills": ["standard:skill:救援", "standard:skill:制衡"],
+      "signatureCardIds": ["standard:amazing-grace"],
+      "seed": 3301,
+      "voiceStyle": "noble",
+      "theme": { "motif": [0, 4, 3, 1, 2, 0], "energy": 0.66 },
+      "inspiration": "借鉴《三国演义》中坐领江东、赤壁决断与善于制衡的君主形象，台词为原创改写。",
+      "lines": {
+        "signature": "衡轻重，定江东。",
+        "victory": "长江天险，尽护吴邦。",
+        "death": "父兄基业，终托何人。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:周瑜",
+      "name": "周瑜",
+      "kingdom": "wu",
+      "gender": "male",
+      "skills": ["standard:skill:反间", "standard:skill:英姿"],
+      "signatureCardIds": ["standard:fire-attack", "standard:duel"],
+      "seed": 3302,
+      "voiceStyle": "noble",
+      "theme": { "motif": [0, 3, 4, 1, 3, 0], "energy": 0.76 },
+      "inspiration": "借鉴《三国演义》中赤壁火攻、群英会与儒将英姿，台词为原创改写。",
+      "lines": {
+        "signature": "弦音未绝，敌计已乱。",
+        "victory": "东风既起，烈焰连营。",
+        "death": "江东未定，公瑾不甘。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:吕蒙",
+      "name": "吕蒙",
+      "kingdom": "wu",
+      "gender": "male",
+      "skills": ["standard:skill:克己"],
+      "signatureCardIds": ["standard:nullification"],
+      "seed": 3303,
+      "voiceStyle": "tactical",
+      "theme": { "motif": [0, 1, 4, 3, 2, 0], "energy": 0.58 },
+      "inspiration": "借鉴《三国演义》中白衣渡江、士别三日与克己待机形象，台词为原创改写。",
+      "lines": {
+        "signature": "藏锋待时，一击定荆州。",
+        "victory": "白衣渡江，兵不血刃。",
+        "death": "荆州虽下，旧梦难安。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:陆逊",
+      "name": "陆逊",
+      "kingdom": "wu",
+      "gender": "male",
+      "skills": ["standard:skill:连营", "standard:skill:谦逊"],
+      "signatureCardIds": ["standard:iron-chain", "standard:fire-attack"],
+      "seed": 3304,
+      "voiceStyle": "tactical",
+      "theme": { "motif": [0, 2, 4, 2, 1, 0], "energy": 0.6 },
+      "inspiration": "借鉴《三国演义》中夷陵火烧连营与谦逊持重的儒将形象，台词为原创改写。",
+      "lines": {
+        "signature": "不争一时，待其自乱。",
+        "victory": "连营火起，骄兵尽破。",
+        "death": "江火已熄，壮志难续。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:甘宁",
+      "name": "甘宁",
+      "kingdom": "wu",
+      "gender": "male",
+      "skills": ["standard:skill:奇袭"],
+      "signatureCardIds": ["standard:dismantlement", "standard:snatch"],
+      "seed": 3305,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 4, 1, 3, 2, 0], "energy": 0.9 },
+      "inspiration": "借鉴《三国演义》中百骑劫魏营与锦帆贼形象，台词为原创改写。",
+      "lines": {
+        "signature": "锦帆夜渡，直取中军。",
+        "victory": "百骑出营，片甲不留。",
+        "death": "铃声既止，锦帆难归。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:黄盖",
+      "name": "黄盖",
+      "kingdom": "wu",
+      "gender": "male",
+      "skills": ["standard:skill:苦肉"],
+      "signatureCardIds": ["standard:fire-attack"],
+      "seed": 3306,
+      "voiceStyle": "aged",
+      "theme": { "motif": [0, 3, 2, 4, 1, 0], "energy": 0.82 },
+      "inspiration": "借鉴《三国演义》中苦肉计、诈降与赤壁纵火，台词为原创改写。",
+      "lines": {
+        "signature": "皮肉之苦，换敌一场大火。",
+        "victory": "老卒一计，亦能焚尽强军。",
+        "death": "赤壁火烈，老夫无憾。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:大乔",
+      "name": "大乔",
+      "kingdom": "wu",
+      "gender": "female",
+      "skills": ["standard:skill:国色", "standard:skill:流离"],
+      "signatureCardIds": ["standard:indulgence"],
+      "seed": 3307,
+      "voiceStyle": "graceful",
+      "theme": { "motif": [0, 4, 2, 3, 1, 0], "energy": 0.4 },
+      "inspiration": "借鉴二乔、江东国色与乱世流离的文学意象，台词为原创改写。",
+      "lines": {
+        "signature": "江花照影，烽火自移。",
+        "victory": "烟波平处，江东无恙。",
+        "death": "伯符，江水送我来寻你。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:孙尚香",
+      "name": "孙尚香",
+      "kingdom": "wu",
+      "gender": "female",
+      "skills": ["standard:skill:结姻", "standard:skill:枭姬"],
+      "signatureCardIds": ["standard:peach", "standard:crossbow"],
+      "seed": 3308,
+      "voiceStyle": "graceful",
+      "theme": { "motif": [0, 2, 3, 4, 1, 0], "energy": 0.7 },
+      "inspiration": "借鉴《三国演义》中甘露寺招亲与弓腰姬形象，台词为原创改写。",
+      "lines": {
+        "signature": "红妆亦可披甲上阵。",
+        "victory": "弓弦既满，江山亦定。",
+        "death": "两岸相隔，此生难归。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:吕布",
+      "name": "吕布",
+      "kingdom": "qun",
+      "gender": "male",
+      "skills": ["standard:skill:无双"],
+      "signatureCardIds": ["standard:duel", "standard:halberd"],
+      "seed": 3401,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 4, 4, 3, 2, 0], "energy": 1 },
+      "inspiration": "借鉴《三国演义》中虎牢关战三英、辕门射戟与人中吕布形象，台词为原创改写。",
+      "lines": {
+        "signature": "方天画戟之下，何人敢称英雄。",
+        "victory": "天下勇武，唯我无双。",
+        "death": "若得良主，何至今日。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:华佗",
+      "name": "华佗",
+      "kingdom": "qun",
+      "gender": "male",
+      "skills": ["standard:skill:急救", "standard:skill:青囊"],
+      "signatureCardIds": ["standard:peach", "standard:god-salvation"],
+      "seed": 3402,
+      "voiceStyle": "aged",
+      "theme": { "motif": [0, 1, 2, 4, 3, 0], "energy": 0.34 },
+      "inspiration": "借鉴《三国演义》中刮骨疗毒、麻沸散与医者仁心形象，台词为原创改写。",
+      "lines": {
+        "signature": "悬壶济世，伤者莫惧。",
+        "victory": "兵戈虽烈，生机未绝。",
+        "death": "青囊未传，苍生何辜。"
+      }
+    },
+    {
+      "definitionId": "standard:hero:貂蝉",
+      "name": "貂蝉",
+      "kingdom": "qun",
+      "gender": "female",
+      "skills": ["standard:skill:闭月", "standard:skill:离间"],
+      "signatureCardIds": ["standard:duel"],
+      "seed": 3403,
+      "voiceStyle": "graceful",
+      "theme": { "motif": [0, 3, 1, 4, 2, 0], "energy": 0.52 },
+      "inspiration": "借鉴《三国演义》中连环计、月下焚香与离间董吕，台词为原创改写。",
+      "lines": {
+        "signature": "一舞乱心，两雄自斗。",
+        "victory": "月色如旧，权臣已除。",
+        "death": "连环虽成，身世终如浮萍。"
+      }
+    },
+    {
+      "definitionId": "wind:hero:夏侯渊",
+      "name": "夏侯渊",
+      "kingdom": "wei",
+      "gender": "male",
+      "skills": ["wind:skill:神速"],
+      "signatureCardIds": ["standard:slash", "standard:chitu"],
+      "seed": 3501,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 3, 4, 1, 2, 0], "energy": 0.92 },
+      "inspiration": "借鉴《三国演义》中急袭千里、定军山争战与神速形象，台词为原创改写。",
+      "lines": {
+        "signature": "兵贵神速，迟一步便是败。",
+        "victory": "千里奔袭，一日定军。",
+        "death": "定军山险，误我一世。"
+      }
+    },
+    {
+      "definitionId": "wind:hero:曹仁",
+      "name": "曹仁",
+      "kingdom": "wei",
+      "gender": "male",
+      "skills": ["wind:skill:据守"],
+      "signatureCardIds": ["standard:eight-diagram"],
+      "seed": 3502,
+      "voiceStyle": "tactical",
+      "theme": { "motif": [0, 2, 1, 3, 4, 0], "energy": 0.64 },
+      "inspiration": "借鉴《三国演义》中守樊城、固守待援的魏国大将形象，台词为原创改写。",
+      "lines": {
+        "signature": "坚城在手，任你百攻。",
+        "victory": "守得一寸，便得全军。",
+        "death": "城在人在，城破人亡。"
+      }
+    },
+    {
+      "definitionId": "wind:hero:黄忠",
+      "name": "黄忠",
+      "kingdom": "shu",
+      "gender": "male",
+      "skills": ["wind:skill:烈弓"],
+      "signatureCardIds": ["standard:slash", "standard:kylin-bow"],
+      "seed": 3503,
+      "voiceStyle": "aged",
+      "theme": { "motif": [0, 4, 2, 4, 1, 0], "energy": 0.86 },
+      "inspiration": "借鉴《三国演义》中定军山斩夏侯渊、老将烈弓形象，台词为原创改写。",
+      "lines": {
+        "signature": "老将开弓，百步穿杨。",
+        "victory": "定军山上，再立新功。",
+        "death": "弓弦尚紧，奈何力尽。"
+      }
+    },
+    {
+      "definitionId": "wind:hero:魏延",
+      "name": "魏延",
+      "kingdom": "shu",
+      "gender": "male",
+      "skills": ["wind:skill:狂骨"],
+      "signatureCardIds": ["standard:slash"],
+      "seed": 3504,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 3, 1, 4, 4, 0], "energy": 0.9 },
+      "inspiration": "借鉴《三国演义》中子午谷奇谋、勇烈与反骨争议，台词为原创改写。",
+      "lines": {
+        "signature": "险道奇兵，才是真破局。",
+        "victory": "谁说此计不可成。",
+        "death": "无人信我，空负将才。"
+      }
+    },
+    {
+      "definitionId": "wind:hero:小乔",
+      "name": "小乔",
+      "kingdom": "wu",
+      "gender": "female",
+      "skills": ["wind:skill:天香", "wind:skill:红颜"],
+      "signatureCardIds": ["standard:peach"],
+      "seed": 3505,
+      "voiceStyle": "graceful",
+      "theme": { "motif": [0, 4, 3, 1, 4, 0], "energy": 0.4 },
+      "inspiration": "借鉴铜雀台、二乔与江东红颜的文学意象，台词为原创改写。",
+      "lines": {
+        "signature": "一缕天香，借风而去。",
+        "victory": "春风入江，花影无恙。",
+        "death": "公瑾，香魂随你而去。"
+      }
+    },
+    {
+      "definitionId": "wind:hero:周泰",
+      "name": "周泰",
+      "kingdom": "wu",
+      "gender": "male",
+      "skills": ["wind:skill:不屈"],
+      "signatureCardIds": ["standard:wine"],
+      "seed": 3506,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 1, 3, 2, 4, 0], "energy": 0.88 },
+      "inspiration": "借鉴《三国演义》中宣城救主、满身创痕仍不屈的形象，台词为原创改写。",
+      "lines": {
+        "signature": "百创在身，寸步不退。",
+        "victory": "伤痕作甲，再护江东。",
+        "death": "主公无恙，周泰足矣。"
+      }
+    },
+    {
+      "definitionId": "wind:hero:张角",
+      "name": "张角",
+      "kingdom": "qun",
+      "gender": "male",
+      "skills": ["wind:skill:雷击", "wind:skill:鬼道", "wind:skill:黄天"],
+      "signatureCardIds": ["standard:lightning", "standard:thunder-slash"],
+      "seed": 3507,
+      "voiceStyle": "mystical",
+      "theme": { "motif": [0, 1, 4, 3, 1, 0], "energy": 0.82 },
+      "inspiration": "借鉴《三国演义》中黄巾起义、苍天已死与呼风唤雷形象，台词为原创改写。",
+      "lines": {
+        "signature": "黄天当立，雷公助我。",
+        "victory": "万民同起，旧天已倾。",
+        "death": "黄天未立，薪火莫绝。"
+      }
+    },
+    {
+      "definitionId": "wind:hero:于吉",
+      "name": "于吉",
+      "kingdom": "qun",
+      "gender": "male",
+      "skills": ["wind:skill:蛊惑"],
+      "signatureCardIds": ["standard:nullification"],
+      "seed": 3508,
+      "voiceStyle": "mystical",
+      "theme": { "motif": [0, 4, 1, 2, 3, 0], "energy": 0.48 },
+      "inspiration": "借鉴《三国演义》中于吉幻术、惑众与孙策心病故事，台词为原创改写。",
+      "lines": {
+        "signature": "真作假时，谁能分辨。",
+        "victory": "人心既惑，胜负皆幻。",
+        "death": "形可灭，幻念不散。"
+      }
+    },
+    {
+      "definitionId": "fire:hero:典韦",
+      "name": "典韦",
+      "kingdom": "wei",
+      "gender": "male",
+      "skills": ["fire:skill:强袭"],
+      "signatureCardIds": ["standard:slash"],
+      "seed": 3601,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 4, 3, 2, 4, 0], "energy": 1 },
+      "inspiration": "借鉴《三国演义》中宛城断后、双戟护主的古之恶来形象，台词为原创改写。",
+      "lines": {
+        "signature": "双戟虽失，铁拳尚在。",
+        "victory": "恶来守门，贼军莫入。",
+        "death": "主公快走，典韦断后。"
+      }
+    },
+    {
+      "definitionId": "fire:hero:荀彧",
+      "name": "荀彧",
+      "kingdom": "wei",
+      "gender": "male",
+      "skills": ["fire:skill:驱虎", "fire:skill:节命"],
+      "signatureCardIds": ["standard:duel"],
+      "seed": 3602,
+      "voiceStyle": "tactical",
+      "theme": { "motif": [0, 2, 4, 1, 2, 0], "energy": 0.46 },
+      "inspiration": "借鉴《三国演义》中荀彧王佐之才、奉汉与曹操分歧，台词为原创改写。",
+      "lines": {
+        "signature": "驱虎吞狼，借力定局。",
+        "victory": "王佐之谋，可安天下。",
+        "death": "汉室之心，终难两全。"
+      }
+    },
+    {
+      "definitionId": "fire:hero:庞统",
+      "name": "庞统",
+      "kingdom": "shu",
+      "gender": "male",
+      "skills": ["fire:skill:连环", "fire:skill:涅槃"],
+      "signatureCardIds": ["standard:iron-chain"],
+      "seed": 3603,
+      "voiceStyle": "mystical",
+      "theme": { "motif": [0, 3, 2, 4, 1, 0], "energy": 0.58 },
+      "inspiration": "借鉴《三国演义》中连环计、凤雏与落凤坡故事，台词为原创改写。",
+      "lines": {
+        "signature": "铁索相连，一火俱焚。",
+        "victory": "凤翼虽隐，奇谋已成。",
+        "death": "落凤坡前，天命难违。"
+      }
+    },
+    {
+      "definitionId": "fire:hero:卧龙诸葛亮",
+      "name": "卧龙诸葛亮",
+      "kingdom": "shu",
+      "gender": "male",
+      "skills": ["fire:skill:八阵", "fire:skill:火计", "fire:skill:看破"],
+      "signatureCardIds": ["standard:fire-attack", "standard:nullification"],
+      "seed": 3604,
+      "voiceStyle": "mystical",
+      "theme": { "motif": [0, 4, 2, 3, 1, 0], "energy": 0.62 },
+      "inspiration": "借鉴《三国演义》中博望坡、借东风、八阵图与卧龙奇谋，台词为原创改写。",
+      "lines": {
+        "signature": "东风已至，火势可成。",
+        "victory": "八阵开合，强敌困其中。",
+        "death": "卧龙既逝，秋风独寒。"
+      }
+    },
+    {
+      "definitionId": "fire:hero:太史慈",
+      "name": "太史慈",
+      "kingdom": "wu",
+      "gender": "male",
+      "skills": ["fire:skill:天义"],
+      "signatureCardIds": ["standard:slash"],
+      "seed": 3605,
+      "voiceStyle": "noble",
+      "theme": { "motif": [0, 3, 4, 2, 1, 0], "energy": 0.88 },
+      "inspiration": "借鉴《三国演义》中神亭酣战、北海报恩与信义形象，台词为原创改写。",
+      "lines": {
+        "signature": "受人之恩，当以死报。",
+        "victory": "天义在胸，长枪无悔。",
+        "death": "大丈夫当立功于世，奈何。"
+      }
+    },
+    {
+      "definitionId": "fire:hero:袁绍",
+      "name": "袁绍",
+      "kingdom": "qun",
+      "gender": "male",
+      "skills": ["fire:skill:乱击", "fire:skill:血裔"],
+      "signatureCardIds": ["standard:archery-attack"],
+      "seed": 3606,
+      "voiceStyle": "noble",
+      "theme": { "motif": [0, 4, 3, 1, 4, 0], "energy": 0.82 },
+      "inspiration": "借鉴《三国演义》中四世三公、诸侯盟主与官渡之战形象，台词为原创改写。",
+      "lines": {
+        "signature": "河北雄兵，万箭齐发。",
+        "victory": "四世威望，天下归附。",
+        "death": "官渡一败，基业尽空。"
+      }
+    },
+    {
+      "definitionId": "fire:hero:颜良文丑",
+      "name": "颜良文丑",
+      "kingdom": "qun",
+      "gender": "male",
+      "skills": ["fire:skill:双雄"],
+      "signatureCardIds": ["standard:duel"],
+      "seed": 3607,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 3, 4, 3, 4, 0], "energy": 0.96 },
+      "inspiration": "借鉴《三国演义》中河北双雄、白马延津之战，台词为原创改写。",
+      "lines": {
+        "signature": "河北双雄，同进同退。",
+        "victory": "双刃并出，谁可争锋。",
+        "death": "兄弟同心，奈何同殒。"
+      }
+    },
+    {
+      "definitionId": "fire:hero:庞德",
+      "name": "庞德",
+      "kingdom": "qun",
+      "gender": "male",
+      "skills": ["standard:skill:马术", "fire:skill:猛进"],
+      "signatureCardIds": ["standard:slash"],
+      "seed": 3608,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 1, 4, 2, 3, 0], "energy": 0.92 },
+      "inspiration": "借鉴《三国演义》中抬棺决战、樊城拒降的勇烈形象，台词为原创改写。",
+      "lines": {
+        "signature": "棺木在后，此战只进不退。",
+        "victory": "猛进破阵，生死皆轻。",
+        "death": "宁死阵前，绝不屈膝。"
+      }
+    },
+    {
+      "definitionId": "forest:hero:徐晃",
+      "name": "徐晃",
+      "kingdom": "wei",
+      "gender": "male",
+      "skills": ["forest:skill:断粮"],
+      "signatureCardIds": ["standard:supply-shortage"],
+      "seed": 3701,
+      "voiceStyle": "tactical",
+      "theme": { "motif": [0, 2, 3, 1, 4, 0], "energy": 0.72 },
+      "inspiration": "借鉴《三国演义》中樊城解围、治军严整与断敌粮道，台词为原创改写。",
+      "lines": {
+        "signature": "先断粮道，再破军心。",
+        "victory": "军纪如山，樊城已解。",
+        "death": "大斧虽折，军令未失。"
+      }
+    },
+    {
+      "definitionId": "forest:hero:曹丕",
+      "name": "曹丕",
+      "kingdom": "wei",
+      "gender": "male",
+      "skills": ["forest:skill:行殇", "forest:skill:放逐", "forest:skill:颂威"],
+      "signatureCardIds": ["standard:indulgence"],
+      "seed": 3702,
+      "voiceStyle": "noble",
+      "theme": { "motif": [0, 4, 1, 3, 2, 0], "energy": 0.62 },
+      "inspiration": "借鉴《三国演义》中魏代汉、兄弟相争与帝王权术，台词为原创改写。",
+      "lines": {
+        "signature": "成王败者，皆归新朝。",
+        "victory": "魏统已立，四海当颂。",
+        "death": "帝业初成，竟如此短促。"
+      }
+    },
+    {
+      "definitionId": "forest:hero:孟获",
+      "name": "孟获",
+      "kingdom": "shu",
+      "gender": "male",
+      "skills": ["forest:skill:祸首", "forest:skill:再起"],
+      "signatureCardIds": ["standard:savage-assault"],
+      "seed": 3703,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 3, 1, 4, 2, 0], "energy": 0.9 },
+      "inspiration": "借鉴《三国演义》中七擒七纵、南中之王与不服再战形象，台词为原创改写。",
+      "lines": {
+        "signature": "南中勇士，随我再战。",
+        "victory": "山林万众，皆听号令。",
+        "death": "这一次，竟再也起不来了。"
+      }
+    },
+    {
+      "definitionId": "forest:hero:祝融",
+      "name": "祝融",
+      "kingdom": "shu",
+      "gender": "female",
+      "skills": ["forest:skill:巨象", "forest:skill:烈刃"],
+      "signatureCardIds": ["standard:savage-assault", "standard:fire-slash"],
+      "seed": 3704,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 4, 2, 1, 3, 0], "energy": 0.88 },
+      "inspiration": "借鉴《三国演义》中祝融夫人飞刀、巨象与南中女将形象，台词为原创改写。",
+      "lines": {
+        "signature": "烈刃飞出，巨象随行。",
+        "victory": "南中女儿，亦可冠三军。",
+        "death": "大王，祝融不能再战。"
+      }
+    },
+    {
+      "definitionId": "forest:hero:孙坚",
+      "name": "孙坚",
+      "kingdom": "wu",
+      "gender": "male",
+      "skills": ["forest:skill:英魂"],
+      "signatureCardIds": ["standard:duel"],
+      "seed": 3705,
+      "voiceStyle": "noble",
+      "theme": { "motif": [0, 2, 4, 3, 1, 0], "energy": 0.86 },
+      "inspiration": "借鉴《三国演义》中江东猛虎、传国玉玺与跨江征战，台词为原创改写。",
+      "lines": {
+        "signature": "江东猛虎，魂佑子弟。",
+        "victory": "孙氏基业，自此奠定。",
+        "death": "江东儿郎，替我守住基业。"
+      }
+    },
+    {
+      "definitionId": "forest:hero:鲁肃",
+      "name": "鲁肃",
+      "kingdom": "wu",
+      "gender": "male",
+      "skills": ["forest:skill:好施", "forest:skill:缔盟"],
+      "signatureCardIds": ["standard:amazing-grace"],
+      "seed": 3706,
+      "voiceStyle": "tactical",
+      "theme": { "motif": [0, 1, 3, 4, 2, 0], "energy": 0.48 },
+      "inspiration": "借鉴《三国演义》中联刘抗曹、单刀会斡旋与宽厚长者形象，台词为原创改写。",
+      "lines": {
+        "signature": "合纵分利，方可共拒强敌。",
+        "victory": "盟约既成，江汉无忧。",
+        "death": "联盟若散，江东危矣。"
+      }
+    },
+    {
+      "definitionId": "forest:hero:董卓",
+      "name": "董卓",
+      "kingdom": "qun",
+      "gender": "male",
+      "skills": ["forest:skill:酒池", "forest:skill:肉林", "forest:skill:崩坏", "forest:skill:暴虐"],
+      "signatureCardIds": ["standard:wine"],
+      "seed": 3707,
+      "voiceStyle": "fierce",
+      "theme": { "motif": [0, 1, 4, 4, 3, 0], "energy": 0.96 },
+      "inspiration": "借鉴《三国演义》中乱政洛阳、酒池肉林与暴虐权臣形象，台词为原创改写。",
+      "lines": {
+        "signature": "酒池未干，谁敢忤逆太师。",
+        "victory": "天下财色，尽归我手。",
+        "death": "奉先何在，快来救我。"
+      }
+    },
+    {
+      "definitionId": "forest:hero:贾诩",
+      "name": "贾诩",
+      "kingdom": "qun",
+      "gender": "male",
+      "skills": ["forest:skill:完杀", "forest:skill:乱武", "forest:skill:帷幕"],
+      "signatureCardIds": ["standard:savage-assault", "standard:duel"],
+      "seed": 3708,
+      "voiceStyle": "mystical",
+      "theme": { "motif": [0, 4, 1, 3, 4, 0], "energy": 0.68 },
+      "inspiration": "借鉴《三国演义》中毒士乱武、宛城献策与明哲自保，台词为原创改写。",
+      "lines": {
+        "signature": "乱世无常，先让众人自相残杀。",
+        "victory": "帷幕之后，生路只留一条。",
+        "death": "算尽人心，仍漏了天命。"
+      }
+    }
+  ]
+}

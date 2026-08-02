@@ -1,0 +1,20 @@
+{
+  "assetId": "card.savage-assault",
+  "durationSeconds": 1.2,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "war drum pattern",
+    "crowd noise bed"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.42,
+    "pitchHz": 82,
+    "weight": 0.94
+  },
+  "recipe": "horde",
+  "schemaVersion": 1,
+  "seed": 1211,
+  "specSha256": "d42f0b8f380791f29a15dbe8e8ae24b28a28393d3942b30731e83c147eb16259",
+  "title": "南蛮入侵"
+}

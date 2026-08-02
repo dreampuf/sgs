@@ -237,4 +237,85 @@ describe("delayed trick state machine", () => {
       expect(result.state.zones[DISCARD_PILE]).toContain(lightningId);
     }
   });
+
+  test("Lightning killing the lord cannot advance beyond GameEnded", () => {
+    const state = createGameState({
+      seed: 34,
+      currentPlayerId: "p1",
+      phase: "judgment",
+      players: [
+        {
+          id: "p1",
+          identity: "lord",
+          heroDefinitionId: "hero:p1",
+          maxHp: 4,
+          hp: 1,
+          hand: [STANDARD_CARD.lightning]
+        },
+        {
+          id: "p2",
+          identity: "loyalist",
+          heroDefinitionId: "hero:p2",
+          maxHp: 4
+        },
+        {
+          id: "p3",
+          identity: "rebel",
+          heroDefinitionId: "hero:p3",
+          maxHp: 4
+        },
+        {
+          id: "p4",
+          identity: "renegade",
+          heroDefinitionId: "hero:p4",
+          maxHp: 4
+        }
+      ],
+      drawPile: [{
+        definitionId: STANDARD_CARD.slash,
+        suit: "spade",
+        rank: 5
+      }]
+    });
+    const lightningId = card(state, "p1", STANDARD_CARD.lightning);
+    state.zones[handZone("p1")] = [];
+    state.zones[judgmentZone("p1")]!.push(lightningId);
+    state.cards[lightningId]!.sourcePlayerId = "p4";
+
+    let result = dispatch(
+      state,
+      { type: "advance-phase", playerId: "p1" },
+      registry
+    );
+    while (result.pendingDecision) {
+      result = dispatch(
+        result.state,
+        {
+          type: "pass",
+          playerId: result.pendingDecision.playerId,
+          decisionId: result.pendingDecision.id
+        },
+        registry
+      );
+    }
+
+    expect(result.state.phase).toBe("finished");
+    expect(result.state.pendingDecision).toBeNull();
+    expect(result.state.stack).toEqual([]);
+    expect(result.state.triggerQueue).toEqual([]);
+    expect(result.state.effectPlans).toEqual({});
+    expect(result.state.zones["zone:processing"]).toEqual([]);
+    expect(result.state.eventLog.at(-1)).toMatchObject({
+      type: "GameEnded",
+      winnerIds: ["p3"]
+    });
+    expect(result.state.eventLog).not.toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          type: "PhaseChanged",
+          from: "finished"
+        })
+      ])
+    );
+  });
 });

@@ -1,12 +1,11 @@
 import type { ContentRegistry, HeroDefinition } from "./registry";
 import { shuffle } from "./rng";
-import type { PlayerId } from "./types";
-
-export type Identity =
-  | "lord"
-  | "loyalist"
-  | "rebel"
-  | "renegade";
+import {
+  MAX_STANDARD_PLAYERS,
+  MIN_STANDARD_PLAYERS
+} from "./ruleset";
+import type { Identity, PlayerId } from "./types";
+export type { Identity } from "./types";
 
 export interface MatchSeat {
   id: PlayerId;
@@ -24,23 +23,59 @@ export interface MatchSetup {
   localHeroChoices: string[];
 }
 
-const IDENTITY_COUNTS: Record<number, Record<Identity, number>> = {
-  2: { lord: 1, loyalist: 0, rebel: 1, renegade: 0 },
-  3: { lord: 1, loyalist: 0, rebel: 1, renegade: 1 },
-  4: { lord: 1, loyalist: 1, rebel: 1, renegade: 1 },
-  5: { lord: 1, loyalist: 1, rebel: 2, renegade: 1 },
-  6: { lord: 1, loyalist: 1, rebel: 3, renegade: 1 },
-  7: { lord: 1, loyalist: 2, rebel: 3, renegade: 1 },
-  8: { lord: 1, loyalist: 2, rebel: 4, renegade: 1 },
-  9: { lord: 1, loyalist: 3, rebel: 4, renegade: 1 },
-  10: { lord: 1, loyalist: 3, rebel: 5, renegade: 1 }
-};
+export interface ScriptedMatchDefinition {
+  seats: Array<{
+    identity: Identity;
+    heroDefinitionId?: string;
+  }>;
+  localHeroDefinitionIds: string[];
+}
+
+export const MIN_IDENTITY_PLAYERS = MIN_STANDARD_PLAYERS;
+export const MAX_IDENTITY_PLAYERS = MAX_STANDARD_PLAYERS;
+
+/**
+ * Large tables keep the classic 2-8 player split, then add a second
+ * renegade at 9 players and a third at 15 players. The remaining seats keep
+ * rebels one or two seats ahead of loyalists to offset the lord's extra HP
+ * and public identity.
+ */
+export function identityCounts(
+  playerCount: number
+): Readonly<Record<Identity, number>> {
+  if (
+    !Number.isInteger(playerCount) ||
+    playerCount < MIN_IDENTITY_PLAYERS ||
+    playerCount > MAX_IDENTITY_PLAYERS
+  ) {
+    throw new Error(
+      `identity mode supports ${MIN_IDENTITY_PLAYERS}-${
+        MAX_IDENTITY_PLAYERS
+      } players: ${playerCount}`
+    );
+  }
+  if (playerCount === 2) {
+    return { lord: 1, loyalist: 0, rebel: 1, renegade: 0 };
+  }
+  if (playerCount === 3) {
+    return { lord: 1, loyalist: 0, rebel: 1, renegade: 1 };
+  }
+  if (playerCount === 4) {
+    return { lord: 1, loyalist: 1, rebel: 1, renegade: 1 };
+  }
+  const renegade = playerCount <= 8 ? 1 : playerCount <= 14 ? 2 : 3;
+  const factionSeats = playerCount - 1 - renegade;
+  const loyalist = Math.floor((factionSeats - 1) / 2);
+  return {
+    lord: 1,
+    loyalist,
+    rebel: factionSeats - loyalist,
+    renegade
+  };
+}
 
 function identities(playerCount: number): Identity[] {
-  const counts = IDENTITY_COUNTS[playerCount];
-  if (!counts) {
-    throw new Error(`identity mode supports 2-10 players: ${playerCount}`);
-  }
+  const counts = identityCounts(playerCount);
   return (Object.entries(counts) as Array<[Identity, number]>)
     .flatMap(([identity, count]) =>
       Array.from({ length: count }, () => identity)
@@ -64,7 +99,7 @@ export function createMatchSetup(
 ): MatchSetup {
   const localPlayerId = options.localPlayerId ?? "player-1";
   const heroPool = completeHeroes(registry);
-  const requiredHeroes = options.playerCount * 3 + 1;
+  const requiredHeroes = Math.max(options.playerCount, 3);
   if (heroPool.length < requiredHeroes) {
     throw new Error(
       `not enough complete heroes: need ${requiredHeroes}, have ${heroPool.length}`
@@ -88,10 +123,7 @@ export function createMatchSetup(
     shuffledIdentities.items[0]!
   ];
   const shuffledHeroes = shuffle(heroPool.map((hero) => hero.id), rngState);
-  const availableHeroDefinitionIds = shuffledHeroes.items.slice(
-    0,
-    requiredHeroes
-  );
+  const availableHeroDefinitionIds = shuffledHeroes.items;
   const seats = shuffledIdentities.items.map((identity, index): MatchSeat => ({
     id: index === 0 ? localPlayerId : `player-${index + 1}`,
     identity,
@@ -129,6 +161,62 @@ export function createMatchSetup(
     contentPacks: registry.installedContentPacks(),
     seats,
     availableHeroDefinitionIds,
+    localHeroChoices
+  };
+}
+
+export function createScriptedMatchSetup(
+  registry: ContentRegistry,
+  options: {
+    seed: number;
+    localPlayerId?: PlayerId;
+    definition: ScriptedMatchDefinition;
+    unlockedHeroDefinitionIds?: string[];
+  }
+): MatchSetup {
+  const localPlayerId = options.localPlayerId ?? "player-1";
+  if (options.definition.seats.length < 2) {
+    throw new Error("scripted match requires at least two seats");
+  }
+  const completeHeroIds = new Set(
+    completeHeroes(registry).map((hero) => hero.id)
+  );
+  const unlocked = options.unlockedHeroDefinitionIds
+    ? new Set(options.unlockedHeroDefinitionIds)
+    : null;
+  const localHeroChoices = options.definition.localHeroDefinitionIds.filter(
+    (heroId) => completeHeroIds.has(heroId) && (!unlocked || unlocked.has(heroId))
+  );
+  if (localHeroChoices.length === 0) {
+    throw new Error("scripted match produced no unlocked local hero choices");
+  }
+  const fixedHeroIds = options.definition.seats.flatMap((seat) =>
+    seat.heroDefinitionId ? [seat.heroDefinitionId] : []
+  );
+  for (const heroId of [...fixedHeroIds, ...localHeroChoices]) {
+    if (!completeHeroIds.has(heroId)) {
+      throw new Error(`scripted match references unavailable hero: ${heroId}`);
+    }
+  }
+  const seats = options.definition.seats.map((seat, index): MatchSeat => {
+    const value: MatchSeat = {
+      id: index === 0 ? localPlayerId : `player-${index + 1}`,
+      identity: seat.identity,
+      isAI: index !== 0
+    };
+    if (index !== 0 && seat.heroDefinitionId) {
+      value.heroDefinitionId = seat.heroDefinitionId;
+    }
+    return value;
+  });
+  return {
+    seed: options.seed,
+    playerCount: seats.length,
+    contentPacks: registry.installedContentPacks(),
+    seats,
+    availableHeroDefinitionIds: [
+      ...new Set([...localHeroChoices, ...fixedHeroIds])
+    ],
     localHeroChoices
   };
 }

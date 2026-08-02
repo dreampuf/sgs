@@ -117,7 +117,7 @@ const amazingGrace: WorkflowDefinition = {
   run({ state, context, data, input }): WorkflowResult {
     const phase = text(data, "phase") ?? "prepare";
     const storedPlayerIds = strings(data, "playerIds");
-    const playerIds = storedPlayerIds.length > 0
+    const playerIds = "playerIds" in data
       ? storedPlayerIds
       : state.turnOrder.filter((playerId) => state.players[playerId]?.alive);
     if (phase === "prepare") {

@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:吕布.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:吕布",
+  "kingdom": "qun",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "fierce timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13401,
+  "style": "fierce"
+}

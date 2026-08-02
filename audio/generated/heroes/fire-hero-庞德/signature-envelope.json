@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.fire:hero:庞德.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "fire:hero:庞德",
+  "kingdom": "qun",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "fierce timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13608,
+  "style": "fierce"
+}

@@ -132,6 +132,12 @@ const shensu: WorkflowDefinition = {
     const { state, context, data, input } = runtime;
     const mode = number(data, "mode") ?? 1;
     const selectedCards = strings(data, "selectedCards");
+    const slashTargets = aliveOthers(state, context.sourceId).filter(
+      (playerId) => runtime.canBeTargetedByDefinition(
+        STANDARD_CARD.slash,
+        playerId
+      )
+    );
     if (input?.type === "option-selected") {
       if (input.option !== "activate") return {};
       if (mode === 2) {
@@ -155,7 +161,7 @@ const shensu: WorkflowDefinition = {
           type: "select-players",
           playerId: context.sourceId,
           cardId: context.cardId,
-          selectablePlayerIds: aliveOthers(state, context.sourceId),
+          selectablePlayerIds: slashTargets,
           minimum: 1,
           maximum: 1,
           reason: "shensu-target"
@@ -169,7 +175,7 @@ const shensu: WorkflowDefinition = {
           type: "select-players",
           playerId: context.sourceId,
           cardId: context.cardId,
-          selectablePlayerIds: aliveOthers(state, context.sourceId),
+          selectablePlayerIds: slashTargets,
           minimum: 1,
           maximum: 1,
           reason: "shensu-target"
@@ -589,6 +595,18 @@ function pindianWorkflow(
     id,
     run(runtime) {
       const { state, context, data, input } = runtime;
+      if (text(data, "phase") === "after-pindian-result") {
+        const opponentId = text(data, "opponentId");
+        if (!opponentId) return {};
+        const continuation = onResult(
+          runtime,
+          data.won === true,
+          opponentId
+        );
+        return Array.isArray(continuation)
+          ? { effects: continuation }
+          : continuation;
+      }
       if (
         id === EARLY_WORKFLOW.quhu &&
         input?.type === "players-selected"
@@ -676,14 +694,32 @@ function pindianWorkflow(
         const result = Array.isArray(continuation)
           ? { effects: continuation }
           : continuation;
+        const pindianMoves = moveCards(
+          [sourceCardId, opponentCardId],
+          DISCARD_PILE,
+          "pindian"
+        );
+        if (result.decision) {
+          return {
+            effects: [
+              ...pindianMoves,
+              {
+                type: "run-workflow",
+                workflowId: id,
+                context,
+                data: {
+                  phase: "after-pindian-result",
+                  won: sourceRank > opponentRank,
+                  opponentId
+                }
+              }
+            ]
+          };
+        }
         return {
           ...result,
           effects: [
-            ...moveCards(
-              [sourceCardId, opponentCardId],
-              DISCARD_PILE,
-              "pindian"
-            ),
+            ...pindianMoves,
             ...(result.effects ?? [])
           ]
         };
@@ -1397,7 +1433,7 @@ const luanwu: WorkflowDefinition = {
     context,
     data,
     input,
-    canTargetDefinition,
+    canBeTargetedByDefinition,
     distanceBetween
   }) {
     const players = strings(data, "players").length > 0
@@ -1425,7 +1461,7 @@ const luanwu: WorkflowDefinition = {
       .filter(
         (item) =>
           item.distance === nearest &&
-          canTargetDefinition(actorId, STANDARD_CARD.slash, item.playerId)
+          canBeTargetedByDefinition(STANDARD_CARD.slash, item.playerId)
       )
       .map((item) => item.playerId);
     if (input?.type === "responded") {
@@ -1511,7 +1547,7 @@ const luanwu: WorkflowDefinition = {
         type: "respond-card",
         playerId: actorId,
         cardId: context.cardId,
-        acceptedDefinitionIds: [STANDARD_CARD.slash],
+        acceptedDefinitionIds: SLASH_CARD_IDS,
         passAllowed: true,
         responseKind: "slash",
         ...(targets[0] ? { opponentId: targets[0] } : {})
@@ -1619,6 +1655,12 @@ const BASIC_OR_TRICK = [
   STANDARD_CARD.nullification,
   STANDARD_CARD.ironChain,
   STANDARD_CARD.fireAttack
+];
+
+const SLASH_CARD_IDS = [
+  STANDARD_CARD.slash,
+  STANDARD_CARD.fireSlash,
+  STANDARD_CARD.thunderSlash
 ];
 
 const windSkills: Record<string, SkillDefinition> = {
@@ -1763,9 +1805,13 @@ const windSkills: Record<string, SkillDefinition> = {
       maximumUsesPerTurn: 1,
       program: {
         steps: [{
-          type: "move-materials",
-          to: { type: "zone", zone: "hand", player: "target" },
-          reason: "give"
+          type: "for-each-player",
+          players: "targets",
+          steps: [{
+            type: "move-materials",
+            to: { type: "zone", zone: "hand", player: "target" },
+            reason: "give"
+          }]
         }]
       }
     }]
@@ -2019,7 +2065,7 @@ const fireSkills: Record<string, SkillDefinition> = {
       },
       {
         type: "modify-usage",
-        definitionId: STANDARD_CARD.slash,
+        cardTag: "response:slash",
         unlimited: true,
         ownerMark: { mark: "tianyi-success", equals: true }
       },
@@ -2032,7 +2078,7 @@ const fireSkills: Record<string, SkillDefinition> = {
       },
       {
         type: "forbid-card-use",
-        definitionIds: [STANDARD_CARD.slash],
+        cardTags: ["response:slash"],
         ownerMark: { mark: "tianyi-failed", equals: true }
       },
       {
@@ -2537,9 +2583,9 @@ const forestSkills: Record<string, SkillDefinition> = {
     implementation: "complete",
     abilities: [{
       type: "forbid-targeting-owner",
-      cardTags: ["targeting:trick"],
+      cardCategories: ["trick"],
       cardColor: "black",
-      excludedCardTags: ["targeting:collateral"]
+      excludedDefinitionIds: [STANDARD_CARD.collateral]
     }]
   }
 };

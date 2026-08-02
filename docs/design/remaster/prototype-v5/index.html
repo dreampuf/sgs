@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>山河铸印 v5 密度原型</title>
+  <link rel="stylesheet" href="./prototype.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="utility-bar">
+      <div class="audio-controls" aria-label="声音控制">
+        <button type="button" aria-label="背景音乐">♫</button>
+        <button type="button" aria-label="游戏音效">♬</button>
+      </div>
+      <div class="turn-status"><strong>第 3 回合</strong><span>出牌阶段</span></div>
+      <nav class="utility-actions" aria-label="对局菜单">
+        <a id="player-count-toggle" href="?players=20">20 人</a>
+        <button type="button">保存</button>
+        <button type="button">导出</button>
+        <button type="button" class="icon-button" aria-label="更多">•••</button>
+      </nav>
+    </header>
+
+    <section class="opponents" aria-label="其他玩家">
+      <article class="seat faction-shu" tabindex="0" data-skills="仁德、激将" data-equipment="青釭剑、赤兔" data-status="乐不思蜀">
+        <img class="seat-portrait" src="/img/generals/big/liubei.png" alt="刘备">
+        <div class="seat-info">
+          <header><strong>刘备</strong><span class="faction">蜀</span><span class="identity">忠</span></header>
+          <div class="seat-state"><b>6</b><span class="hp">● ● ●</span><span>4 手牌</span></div>
+          <div class="skill-row"><button>仁德</button><button>激将</button></div>
+          <div class="status-row"><span>青釭剑</span><span>赤兔</span><span class="delayed">乐</span></div>
+        </div>
+      </article>
+
+      <article class="seat faction-wei current-seat" tabindex="0" data-skills="天妒、遗计" data-equipment="八卦阵" data-status="无延时牌">
+        <img class="seat-portrait" src="/img/generals/big/guojia.png" alt="郭嘉">
+        <div class="seat-info">
+          <header><strong>郭嘉</strong><span class="faction">魏</span><span class="identity">主</span></header>
+          <div class="seat-state"><b>4</b><span class="hp">● ● ●</span><span>3 手牌</span></div>
+          <div class="skill-row"><button>天妒</button><button>遗计</button></div>
+          <div class="status-row"><span>八卦阵</span><span class="empty">无延时牌</span></div>
+        </div>
+      </article>
+
+      <article class="seat faction-qun target-seat" tabindex="0" data-skills="无双" data-equipment="方天画戟" data-status="兵粮寸断">
+        <img class="seat-portrait" src="/img/generals/big/lvbu.png" alt="吕布">
+        <div class="seat-info">
+          <header><strong>吕布</strong><span class="faction">群</span><span class="identity">反</span></header>
+          <div class="seat-state"><b>3</b><span class="hp">● ●</span><span>2 手牌</span></div>
+          <div class="skill-row"><button>无双</button></div>
+          <div class="status-row"><span>方天画戟</span><span class="delayed">兵</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="stage" aria-label="牌局舞台">
+      <ol class="phase-rail" aria-label="回合阶段">
+        <li>开始</li><li>判定</li><li>摸牌</li><li class="active">出牌</li><li>弃牌</li><li>结束</li>
+      </ol>
+      <div class="action-scene">
+        <span class="source-label">你</span>
+        <img class="active-card" src="/img/generals/card/duel.png" alt="决斗">
+        <span class="target-line" aria-hidden="true"></span>
+        <span class="target-label">吕布</span>
+      </div>
+      <div class="pile-group" aria-label="牌堆与弃牌堆">
+        <figure><figcaption>弃牌 12</figcaption><img src="/img/generals/card/jink.png" alt="弃牌堆顶"></figure>
+        <figure class="draw-pile"><figcaption>牌堆 29</figcaption><img src="/img/system/card_back.png" alt="牌堆"></figure>
+      </div>
+      <p class="context-prompt">选择一张手牌使用，或结束出牌阶段</p>
+      <aside id="seat-detail" class="seat-detail" aria-live="polite" hidden>
+        <button id="seat-detail-close" type="button" aria-label="关闭玩家详情">×</button>
+        <strong></strong>
+        <span class="seat-detail-state"></span>
+        <span class="seat-detail-skills"></span>
+        <span class="seat-detail-equipment"></span>
+        <span class="seat-detail-status"></span>
+      </aside>
+    </section>
+
+    <section class="local-dock" aria-label="本地玩家区域">
+      <div class="equipment-rail" aria-label="装备和延时牌">
+        <strong>装备</strong>
+        <button class="equipment-slot" title="青釭剑"><img src="/img/generals/card/qinggang_sword.png" alt=""><span>青釭剑</span><small>+2</small></button>
+        <button class="equipment-slot" title="八卦阵"><img src="/img/generals/card/eight_diagram.png" alt=""><span>八卦阵</span><small>防具</small></button>
+        <button class="equipment-slot" title="赤兔"><img src="/img/generals/card/chitu.png" alt=""><span>赤兔</span><small>-1</small></button>
+        <button class="equipment-slot empty-slot" title="防御坐骑"><span>防御坐骑</span><small>空</small></button>
+        <button class="equipment-more" title="查看全部装备">装备</button>
+      </div>
+
+      <div class="hand" aria-label="手牌">
+        <button class="hand-card"><img src="/img/generals/card/dismantlement.png" alt="过河拆桥"></button>
+        <button class="hand-card"><img src="/img/generals/card/ex_nihilo.png" alt="无中生有"></button>
+        <button class="hand-card selected"><img src="/img/generals/card/duel.png" alt="决斗"></button>
+        <button class="hand-card"><img src="/img/generals/card/jink.png" alt="闪"></button>
+        <button class="hand-card"><img src="/img/generals/card/amazing_grace.png" alt="五谷丰登"></button>
+        <button class="hand-card"><img src="/img/generals/card/lightning.png" alt="闪电"></button>
+        <button class="hand-card"><img src="/img/generals/card/spear.png" alt="丈八蛇矛"></button>
+        <button class="hand-card"><img src="/img/generals/card/god_salvation.png" alt="桃园结义"></button>
+      </div>
+
+      <div class="action-cluster" aria-label="当前操作">
+        <button class="primary">出牌</button>
+        <button>取消</button>
+        <button class="end-turn">弃牌</button>
+      </div>
+
+      <article class="local-hero faction-wei">
+        <img src="/img/generals/big/xuchu.png" alt="许褚">
+        <div class="local-summary"><span class="faction">魏</span><strong>许褚</strong><span class="hp">● ● ● ●</span></div>
+        <div class="local-skills"><button>裸衣</button><button>虎痴</button></div>
+      </article>
+    </section>
+  </main>
+  <script src="./prototype.js"></script>
+</body>
+</html>

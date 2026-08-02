@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "fire:hero:袁绍",
+  "heroName": "袁绍",
+  "inspiration": "借鉴《三国演义》中四世三公、诸侯盟主与官渡之战形象，台词为原创改写。",
+  "lines": {
+    "death": "官渡一败，基业尽空。",
+    "signature": "河北雄兵，万箭齐发。",
+    "victory": "四世威望，天下归附。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 166,
+  "schemaVersion": 1,
+  "style": "noble",
+  "voice": "Eddy (Chinese (China mainland))"
+}

@@ -1,0 +1,20 @@
+{
+  "assetId": "card.equip",
+  "durationSeconds": 0.62,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "inharmonic metal partials",
+    "short impact"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.58,
+    "pitchHz": 260,
+    "weight": 0.68
+  },
+  "recipe": "metal",
+  "schemaVersion": 1,
+  "seed": 1218,
+  "specSha256": "a6aa2639bd5f2273b63f5534cb82689f6a35fb52abe442a225de2aafd207324f",
+  "title": "装备"
+}

@@ -1,0 +1,31 @@
+{
+  "assetId": "combat.thunder-damage",
+  "command": "npm run audio:generate -- --id combat.thunder-damage",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "d2406eb74a0a1e6e5d23ebd6586bc97b53a438b854b5c6653c0547cdf54b87c5",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 561,
+      "path": "audio/generated/envelopes/combat-thunder-damage.json",
+      "sha256": "0b77023fe5fdc67eb65f74a4cb28a1fe31b441e311832ce4bfcd7d836e6ff8a9"
+    },
+    {
+      "bytes": 58924,
+      "path": "audio/generated/wav/sfx/combat-thunder-damage.wav",
+      "sha256": "4668c1e5901f7382fb63cd356dd9548514664ecb94251b870124f04915d690b5"
+    },
+    {
+      "bytes": 8720,
+      "path": "public/audio/sfx/combat-thunder-damage.ogg",
+      "sha256": "7c7c802a3523f94e51f696caab4dcca896c41d51a4c94dccc3c6104089deee17"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1303,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "479136ee0e1aca60bd5ee60a48a479dc66080a7555c833161b91e0866021bbe1",
+  "title": "雷电伤害"
+}

@@ -1,0 +1,20 @@
+{
+  "assetId": "system.your-turn",
+  "durationSeconds": 0.72,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "pitched motif",
+    "soft shimmer"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.58,
+    "pitchHz": 523.25,
+    "weight": 0.32
+  },
+  "recipe": "signal",
+  "schemaVersion": 1,
+  "seed": 1102,
+  "specSha256": "5dd90d2afa580abd42607c00461808d1114c60bb817c291a01098d88a713a4b0",
+  "title": "轮到玩家"
+}

@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "standard:hero:曹操",
+  "inputSha256": "ad9ec36eaddc173821fcc280a8640093d0e30a100e8322b6fa10a3223adfef72",
+  "outputs": [
+    {
+      "bytes": 10984,
+      "path": "audio/generated/heroes/standard-hero-曹操/theme-score.json",
+      "sha256": "69801b042284904c47c88542440bd1eb8cda6ec1150367ce5de728f51f368da5"
+    },
+    {
+      "bytes": 298,
+      "path": "audio/generated/heroes/standard-hero-曹操/signature-envelope.json",
+      "sha256": "1a8cf638a866dfa9ab43a5c6a080bc24335dd27329d85544312076eaf865468f"
+    },
+    {
+      "bytes": 705,
+      "path": "audio/generated/heroes/standard-hero-曹操/voice-script.json",
+      "sha256": "6a467bc27bb4cca3d8738b11c5603c286c8d453791ed92ce53d3b97702bb4d19"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/standard-hero-曹操/wav/theme.wav",
+      "sha256": "b55ae1d2090973a65bbbe7a2cc7e13727d6b39e8732d335a57c2a4152d085ddc"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/standard-hero-曹操/wav/signature.wav",
+      "sha256": "d9851a8057984bda9709218fa2080c97200cf8e84d775e5ea0eb3551131f77a7"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/standard-hero-曹操/theme.ogg",
+      "sha256": "3381f22e8c506c32a68edd826ee9170c97ccf5bc0a08d530d228a17952a860ae"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/standard-hero-曹操/signature.ogg",
+      "sha256": "f3c0bbe2a81a6e6a67e768ba4a9b1a967f91a671a5af30a4b3e9bf0fa22a356c"
+    },
+    {
+      "bytes": 120202,
+      "path": "audio/generated/heroes/standard-hero-曹操/voice-source/signature.aiff",
+      "sha256": "fb25b73c969957477f0d558e2f208ddaa7f613dfb559f360c443c264285aeb1b"
+    },
+    {
+      "bytes": 168578,
+      "path": "audio/generated/heroes/standard-hero-曹操/wav/voice-signature.wav",
+      "sha256": "29f2bd79d2c6038e5d418af3fda04a4a1dcdadf9275de5826c9438e1e1ab6df2"
+    },
+    {
+      "bytes": 26750,
+      "path": "public/audio/heroes/standard-hero-曹操/voice-signature.ogg",
+      "sha256": "6c8f5baac126953e5ac0f042fb8ef9d448ac0daee07cf30325e4fa03c5ca7074"
+    },
+    {
+      "bytes": 122564,
+      "path": "audio/generated/heroes/standard-hero-曹操/voice-source/victory.aiff",
+      "sha256": "6ed10564d772d04deee73123a892b863b3f325549a341842553bd61309209230"
+    },
+    {
+      "bytes": 172006,
+      "path": "audio/generated/heroes/standard-hero-曹操/wav/voice-victory.wav",
+      "sha256": "5d288891f633f37378169b4488f0cef79cd64cc35317c7f324c5a3837bdcfa39"
+    },
+    {
+      "bytes": 27353,
+      "path": "public/audio/heroes/standard-hero-曹操/voice-victory.ogg",
+      "sha256": "487e3e040d5d65903f3da0fe8c23fbc0b1c2668de54dc5fd3df72d4e09f15bc7"
+    },
+    {
+      "bytes": 105384,
+      "path": "audio/generated/heroes/standard-hero-曹操/voice-source/death.aiff",
+      "sha256": "64a6146ba245e66c5a6da6f1cc325c72e1c303bca6fde3412b802ad522660170"
+    },
+    {
+      "bytes": 147072,
+      "path": "audio/generated/heroes/standard-hero-曹操/wav/voice-death.wav",
+      "sha256": "ba703c60fa1e736dc2e88cc7b5e0b1075571498d4a6fc50fcf23945206b1fe28"
+    },
+    {
+      "bytes": 23534,
+      "path": "public/audio/heroes/standard-hero-曹操/voice-death.ogg",
+      "sha256": "45f8e26f19771bebc1cbb284fec57035b6e13a8af1a401c6897e81465a7c1e88"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3101,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Eddy (Chinese (China mainland))",
+    "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+    "rate": 166,
+    "style": "noble"
+  }
+}

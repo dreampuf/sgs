@@ -54,6 +54,12 @@ const allSkillNames = new Set([
 allSkillNames.forEach((skill) => {
   assert(sgs.SKILL_EXPLANATION_MAPPING[skill], `missing skill explanation: ${skill}`);
 });
+const allCardNames = new Set(sgs.CARD.map((card) => card.name));
+allCardNames.forEach((cardName) => {
+  const explanation = sgs.CARD_EXPLANATION_MAPPING[cardName];
+  assert(explanation, `missing card explanation: ${cardName}`);
+  assert(explanation.category && explanation.target && explanation.description);
+});
 
 function makePlayer(name, identity, heroName) {
   const hero = sgs.HERO.find((item) => item.name === heroName) || sgs.HERO[0];

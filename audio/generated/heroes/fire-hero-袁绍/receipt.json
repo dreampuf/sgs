@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "fire:hero:袁绍",
+  "inputSha256": "b4492d4e2f54421f75fbf4386eb96a740a3069de5d1c15c636b3a443ffa47fd6",
+  "outputs": [
+    {
+      "bytes": 10968,
+      "path": "audio/generated/heroes/fire-hero-袁绍/theme-score.json",
+      "sha256": "d6158d35c54faae61346ea6431e30c9c28a0dc9ca74ddc113d286f00bd3e865d"
+    },
+    {
+      "bytes": 290,
+      "path": "audio/generated/heroes/fire-hero-袁绍/signature-envelope.json",
+      "sha256": "5db9ae621efc0b44ad85225c21435ecc83b4f54be4acb657410b3534539ea614"
+    },
+    {
+      "bytes": 701,
+      "path": "audio/generated/heroes/fire-hero-袁绍/voice-script.json",
+      "sha256": "effec960e587c9081aaa034dc484d869833ff5ef86fd94bbda0db3d20cf91c3e"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/fire-hero-袁绍/wav/theme.wav",
+      "sha256": "38d69a93586105f26328730438472c0975532484d746f02377392b625024974d"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/fire-hero-袁绍/wav/signature.wav",
+      "sha256": "23b452a9e7533989badcaed364ed44c942b779ece7082e3def7242aba4b1f570"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/fire-hero-袁绍/theme.ogg",
+      "sha256": "33f07d4563aa3dd006271736764a79225c4787dd7fd167bdb2318e69e14be7bf"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/fire-hero-袁绍/signature.ogg",
+      "sha256": "95c0bd0043dc1b7c82c7130d90e0ea18d98a625c1daf4dbfbe52fdd83e13cf3f"
+    },
+    {
+      "bytes": 117634,
+      "path": "audio/generated/heroes/fire-hero-袁绍/voice-source/signature.aiff",
+      "sha256": "7fe7159f86bd994fdd05097d9299b4fe06206e28f407d485d252c213e524e2d6"
+    },
+    {
+      "bytes": 164850,
+      "path": "audio/generated/heroes/fire-hero-袁绍/wav/voice-signature.wav",
+      "sha256": "a8849e786abea3530b16226cf460aaa22f55a0ee65c12464c8794af7bbc14a8f"
+    },
+    {
+      "bytes": 26348,
+      "path": "public/audio/heroes/fire-hero-袁绍/voice-signature.ogg",
+      "sha256": "c97a1aa6631a68e4123f0248d6a32aec3202f9170a0c5b21501e4c0fb2569cac"
+    },
+    {
+      "bytes": 111274,
+      "path": "audio/generated/heroes/fire-hero-袁绍/voice-source/victory.aiff",
+      "sha256": "7ae6410c47475eefec1ee166679b7aabc1b9afd8eba7dda9873d168e54ee6e1a"
+    },
+    {
+      "bytes": 155620,
+      "path": "audio/generated/heroes/fire-hero-袁绍/wav/voice-victory.wav",
+      "sha256": "52acdb75890929607867fad8b9d8f4d0e54e259ecf52d87e4f371c6aaa85649b"
+    },
+    {
+      "bytes": 24740,
+      "path": "public/audio/heroes/fire-hero-袁绍/voice-victory.ogg",
+      "sha256": "6572849c512b9af41405c952e1e338727f57ab75a716580f30a251f031a5f483"
+    },
+    {
+      "bytes": 113136,
+      "path": "audio/generated/heroes/fire-hero-袁绍/voice-source/death.aiff",
+      "sha256": "c6c810c18edd0c9c939563d4944042166b83e88e2cb13dc1b64ee06fe46436c1"
+    },
+    {
+      "bytes": 158322,
+      "path": "audio/generated/heroes/fire-hero-袁绍/wav/voice-death.wav",
+      "sha256": "5e01c9f479590c6e48063e2f8f574c6c75dbddbf43be048aeab8b198c8837d82"
+    },
+    {
+      "bytes": 25142,
+      "path": "public/audio/heroes/fire-hero-袁绍/voice-death.ogg",
+      "sha256": "9430e9e5da4980728efbbeae0fdc3279a3f52103bf12bde3646aa1e1323ef609"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3606,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Eddy (Chinese (China mainland))",
+    "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+    "rate": 166,
+    "style": "noble"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.fire:hero:颜良文丑.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "fire:hero:颜良文丑",
+  "kingdom": "qun",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "fierce timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13607,
+  "style": "fierce"
+}

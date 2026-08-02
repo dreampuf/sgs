@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:许褚.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:许褚",
+  "kingdom": "wei",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "fierce timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13106,
+  "style": "fierce"
+}

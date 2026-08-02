@@ -1,0 +1,31 @@
+{
+  "assetId": "music.dominant",
+  "command": "npm run audio:generate -- --id music.dominant",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "dfa6682305ba2fe4536e43868a7b153882a846e6548784f1bd4721276a87fb92",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 31772,
+      "path": "audio/generated/scores/music-dominant.json",
+      "sha256": "c4452cc3f5177a1657e365f009eab352da58b3dc155c8de5bcfd2fcf6a9689af"
+    },
+    {
+      "bytes": 2560044,
+      "path": "audio/generated/wav/music/music-dominant.wav",
+      "sha256": "981e399f985022c01af5c2cbd0e2b1b34c0a40115e7906b3de8967f1833a5301"
+    },
+    {
+      "bytes": 245477,
+      "path": "public/audio/music/music-dominant.ogg",
+      "sha256": "36653dc57ec599c9af2d4d374f34d07338cb541767a0d2b023fa58c069be42ae"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2303,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "718d41660632db194148735280a930d23b83642cb33fb27e845323ef38c054ca",
+  "title": "破阵"
+}

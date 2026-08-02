@@ -1,0 +1,20 @@
+{
+  "assetId": "card.play",
+  "durationSeconds": 0.42,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "paper noise",
+    "table transient"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.52,
+    "pitchHz": 620,
+    "weight": 0.28
+  },
+  "recipe": "card",
+  "schemaVersion": 1,
+  "seed": 1203,
+  "specSha256": "817acc80e75f1a4c6766393f59c114c6b1627ccb2ea89590a018d9db5073c2df",
+  "title": "通用出牌"
+}

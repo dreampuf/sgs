@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:吕布",
+  "heroName": "吕布",
+  "inspiration": "借鉴《三国演义》中虎牢关战三英、辕门射戟与人中吕布形象，台词为原创改写。",
+  "lines": {
+    "death": "若得良主，何至今日。",
+    "signature": "方天画戟之下，何人敢称英雄。",
+    "victory": "天下勇武，唯我无双。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

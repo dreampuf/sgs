@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "fire:hero:颜良文丑",
+  "heroName": "颜良文丑",
+  "inspiration": "借鉴《三国演义》中河北双雄、白马延津之战，台词为原创改写。",
+  "lines": {
+    "death": "兄弟同心，奈何同殒。",
+    "signature": "河北双雄，同进同退。",
+    "victory": "双刃并出，谁可争锋。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

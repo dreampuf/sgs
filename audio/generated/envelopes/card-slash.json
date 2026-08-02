@@ -1,0 +1,20 @@
+{
+  "assetId": "card.slash",
+  "durationSeconds": 0.54,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "swept air",
+    "blade body"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.68,
+    "pitchHz": 180,
+    "weight": 0.68
+  },
+  "recipe": "slash",
+  "schemaVersion": 1,
+  "seed": 1204,
+  "specSha256": "cc8fd56586c2a42597c221eae1e390c3495505984af2f512f30c7959e5fb820d",
+  "title": "杀"
+}

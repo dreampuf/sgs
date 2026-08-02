@@ -1,0 +1,31 @@
+{
+  "assetId": "card.amazing-grace",
+  "command": "npm run audio:generate -- --id card.amazing-grace",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "5900ce078f78b8fdc4eedc1c64f716d5657d4fb305d398cfad244bfb60926f89",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 526,
+      "path": "audio/generated/envelopes/card-amazing-grace.json",
+      "sha256": "cbd30a52f28739edb287580f763ec75d8e85933cd585779bc3853bba2d12e1fd"
+    },
+    {
+      "bytes": 67244,
+      "path": "audio/generated/wav/sfx/card-amazing-grace.wav",
+      "sha256": "9ebefeedfc52700f1c73d9789e65aef8dacd39291029e3350a6c2faf908652b2"
+    },
+    {
+      "bytes": 12233,
+      "path": "public/audio/sfx/card-amazing-grace.ogg",
+      "sha256": "76b6400e7bca3d20b998e940631f101f6203a946573beda5ad8ae13792a04ea9"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1213,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "0e1e1c45644d6b78d563397c14c2c6a7e1129fc1e4493b08b3c05cdc1b5c2cda",
+  "title": "五谷丰登"
+}

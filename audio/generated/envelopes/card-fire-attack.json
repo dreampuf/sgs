@@ -1,0 +1,21 @@
+{
+  "assetId": "card.fire-attack",
+  "durationSeconds": 0.98,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "filtered flame noise",
+    "low impact",
+    "crackle grains"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.9,
+    "pitchHz": 118,
+    "weight": 0.86
+  },
+  "recipe": "fire",
+  "schemaVersion": 1,
+  "seed": 1216,
+  "specSha256": "d5537e847e252086366305686e09558f518ca6efd98e8db75c8862a7caf0628e",
+  "title": "火攻"
+}

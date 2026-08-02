@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:周瑜",
+  "heroName": "周瑜",
+  "inspiration": "借鉴《三国演义》中赤壁火攻、群英会与儒将英姿，台词为原创改写。",
+  "lines": {
+    "death": "江东未定，公瑾不甘。",
+    "signature": "弦音未绝，敌计已乱。",
+    "victory": "东风既起，烈焰连营。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 166,
+  "schemaVersion": 1,
+  "style": "noble",
+  "voice": "Eddy (Chinese (China mainland))"
+}

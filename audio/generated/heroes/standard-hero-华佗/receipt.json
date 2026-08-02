@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "standard:hero:华佗",
+  "inputSha256": "2c507a65c87a80ab7eed70684301cb0923b819c83c000ae645814d8c4ccc1c4a",
+  "outputs": [
+    {
+      "bytes": 10984,
+      "path": "audio/generated/heroes/standard-hero-华佗/theme-score.json",
+      "sha256": "097d96aef70bb78022c87e58a6493b56ca9a3ffce0fa25b7b155006608be73f3"
+    },
+    {
+      "bytes": 296,
+      "path": "audio/generated/heroes/standard-hero-华佗/signature-envelope.json",
+      "sha256": "adc2742e2bd9687b32b9b6c4d85ac408e9f836879b3f868d4149b03e8548675c"
+    },
+    {
+      "bytes": 704,
+      "path": "audio/generated/heroes/standard-hero-华佗/voice-script.json",
+      "sha256": "aea767e1e6c31ff39858c49d3097976a3ceab12a3e199b053e4e19acea921245"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/standard-hero-华佗/wav/theme.wav",
+      "sha256": "d20906c11a45653e69a52d0064b9ecd3e194725cddb0249cbcc7ad34a19ba990"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/standard-hero-华佗/wav/signature.wav",
+      "sha256": "3a8611a1b59498bb5ca26b3a3a89f20303d91d71d3dae279f3dcb42f71684e2a"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/standard-hero-华佗/theme.ogg",
+      "sha256": "b47618a774297ce7d13d52a16f9e19fc8e2671d7f94033974b855e2388c3a07c"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/standard-hero-华佗/signature.ogg",
+      "sha256": "bf03c484319ae51b12e2cf0296fc012af4b97ff859703900ddcf371239e4c64d"
+    },
+    {
+      "bytes": 123278,
+      "path": "audio/generated/heroes/standard-hero-华佗/voice-source/signature.aiff",
+      "sha256": "63206b4dca61e3b1ada5b62ebda9eda95287564ae5f01d202afba63d1f0bb32c"
+    },
+    {
+      "bytes": 173042,
+      "path": "audio/generated/heroes/standard-hero-华佗/wav/voice-signature.wav",
+      "sha256": "57d68c97cd4929ae4fff52a9d32a5753204c8b6a8b82b47f5c42a4ae6f02121a"
+    },
+    {
+      "bytes": 27554,
+      "path": "public/audio/heroes/standard-hero-华佗/voice-signature.ogg",
+      "sha256": "bc27c027275fed585ba1d77419ab5611443884fd9b3927fc944724967c2ce8b3"
+    },
+    {
+      "bytes": 121570,
+      "path": "audio/generated/heroes/standard-hero-华佗/voice-source/victory.aiff",
+      "sha256": "47a4b1e5a67d872cc974a1accd42b2dad1fc5410e30a83bbc73e291eaead29f1"
+    },
+    {
+      "bytes": 170562,
+      "path": "audio/generated/heroes/standard-hero-华佗/wav/voice-victory.wav",
+      "sha256": "7c2924d61d00098c75c25cb9b8e0b6ef962132a16feafd703a453bb44ecb39bb"
+    },
+    {
+      "bytes": 27152,
+      "path": "public/audio/heroes/standard-hero-华佗/voice-victory.ogg",
+      "sha256": "3227ff34c26d870d574e6900ebd35098656161a6727094b81627a8253457f059"
+    },
+    {
+      "bytes": 139214,
+      "path": "audio/generated/heroes/standard-hero-华佗/voice-source/death.aiff",
+      "sha256": "77c972676ed76685451528c81829e8cf9848d90de07bbd6309a8b7443c48922c"
+    },
+    {
+      "bytes": 196168,
+      "path": "audio/generated/heroes/standard-hero-华佗/wav/voice-death.wav",
+      "sha256": "dc0d3b3f5d329a94ca861e87cc172c77ecc6d75279521d5cdc2108108a3a6bf8"
+    },
+    {
+      "bytes": 31199,
+      "path": "public/audio/heroes/standard-hero-华佗/voice-death.ogg",
+      "sha256": "184e10880dd871badb19a9e44b2d6d970190ca8cae54d4237c145d58a31205f8"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3402,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Grandpa (Chinese (China mainland))",
+    "postprocess": "highpass=f=65,lowpass=f=6500,acompressor=threshold=-18dB:ratio=2:attack=25:release=220",
+    "rate": 145,
+    "style": "aged"
+  }
+}

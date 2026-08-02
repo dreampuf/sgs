@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "wind:hero:小乔",
+  "inputSha256": "842978e8688965bc55c397ba93d77f6e4b9ab7745231b7cbaf71eb3f2827d064",
+  "outputs": [
+    {
+      "bytes": 10947,
+      "path": "audio/generated/heroes/wind-hero-小乔/theme-score.json",
+      "sha256": "c9100d35adbe37e62333544e86d14f50c5ffa4524b72adcd99a12c51ac29a179"
+    },
+    {
+      "bytes": 295,
+      "path": "audio/generated/heroes/wind-hero-小乔/signature-envelope.json",
+      "sha256": "b0cfa27a18d41e8b32bc8785ebdf1fbd4b627b3d2a7b4f79d7d1d811a6ab914b"
+    },
+    {
+      "bytes": 661,
+      "path": "audio/generated/heroes/wind-hero-小乔/voice-script.json",
+      "sha256": "0b0dbaa99e25443d368f2cb72b47653d33f74001d2df569b5f0a02bd529e242e"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/wind-hero-小乔/wav/theme.wav",
+      "sha256": "135e82fa7ab1c236bddf6ee5b790e53537d33b667090bc00a61dbf8467422c2a"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/wind-hero-小乔/wav/signature.wav",
+      "sha256": "34df1d8cc8351beeca9adcd89076004ed932df4ad4d751f27fff4562f0a6ee27"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/wind-hero-小乔/theme.ogg",
+      "sha256": "1ee85ef658247bb71a765df503623d9a764929f94305166aef68a13fb0364715"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/wind-hero-小乔/signature.ogg",
+      "sha256": "12fbf65e8e2399b61b63eadd89088fd518f9e2f4ce1e7e0a44acc491484735e3"
+    },
+    {
+      "bytes": 102554,
+      "path": "audio/generated/heroes/wind-hero-小乔/voice-source/signature.aiff",
+      "sha256": "87bcd4f8fc986e296c87056216e008c248051c6bad37095dc40e9af08eac4200"
+    },
+    {
+      "bytes": 142966,
+      "path": "audio/generated/heroes/wind-hero-小乔/wav/voice-signature.wav",
+      "sha256": "9c9077a5a08d82d9c08353c6f0ba69136d46cfe93445b9b7565aadf5d0aa8445"
+    },
+    {
+      "bytes": 22730,
+      "path": "public/audio/heroes/wind-hero-小乔/voice-signature.ogg",
+      "sha256": "6ed5b8bdff910919279fea761db0b285d9886235b2c766a6bd3b4f8a2f05eeeb"
+    },
+    {
+      "bytes": 106340,
+      "path": "audio/generated/heroes/wind-hero-小乔/voice-source/victory.aiff",
+      "sha256": "62ec336a1e985fe08fa73bf40f4f44813c1c2d4d625e6f0152dbba9c2832e98b"
+    },
+    {
+      "bytes": 148460,
+      "path": "audio/generated/heroes/wind-hero-小乔/wav/voice-victory.wav",
+      "sha256": "c20cb37a3463a6dbbb6d7eb6c5c48a35f201321a552b7262df9c9f380540581e"
+    },
+    {
+      "bytes": 23735,
+      "path": "public/audio/heroes/wind-hero-小乔/voice-victory.ogg",
+      "sha256": "241595bf48e8747d237488acdb8db52e82e5b3b46932dcff740a2f61f23c9c18"
+    },
+    {
+      "bytes": 103892,
+      "path": "audio/generated/heroes/wind-hero-小乔/voice-source/death.aiff",
+      "sha256": "31ca08ea27eed1a7297fb646b18cd799bccfaf9de0c27d2a3d639eb9b80733ad"
+    },
+    {
+      "bytes": 144908,
+      "path": "audio/generated/heroes/wind-hero-小乔/wav/voice-death.wav",
+      "sha256": "dfa0f324d9c370b00e5adce41f10e19efdfdd1460b6a3f4979bbc9e8af8934b2"
+    },
+    {
+      "bytes": 23132,
+      "path": "public/audio/heroes/wind-hero-小乔/voice-death.ogg",
+      "sha256": "b8efd6cedc93804218b24835a5c800f42a17c1b3a0e01e5d02cdb245143d7813"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3505,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Tingting",
+    "postprocess": "highpass=f=100,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+    "rate": 164,
+    "style": "graceful"
+  }
+}

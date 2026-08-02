@@ -1,0 +1,31 @@
+{
+  "assetId": "card.play",
+  "command": "npm run audio:generate -- --id card.play",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "f6c0c670131cebab248cbad10a4044669141e853d75dad87ea5978a7454b2317",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 519,
+      "path": "audio/generated/envelopes/card-play.json",
+      "sha256": "b734fd1b5ff7ebde93a4b46a72a55a18a4f5daa7c0708d71e865db134361b769"
+    },
+    {
+      "bytes": 26924,
+      "path": "audio/generated/wav/sfx/card-play.wav",
+      "sha256": "0dc1a59ede780ecf32042bfaa6e5004106b6efe30ebb36f47e0681c5d071c6d4"
+    },
+    {
+      "bytes": 4061,
+      "path": "public/audio/sfx/card-play.ogg",
+      "sha256": "ba3d521833239d59fc17b854e5cc1799057ebde9e56d694348d72e66a7133d21"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1203,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "817acc80e75f1a4c6766393f59c114c6b1627ccb2ea89590a018d9db5073c2df",
+  "title": "通用出牌"
+}

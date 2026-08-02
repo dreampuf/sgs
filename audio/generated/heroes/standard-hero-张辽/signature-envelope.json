@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:张辽.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:张辽",
+  "kingdom": "wei",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "fierce timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13102,
+  "style": "fierce"
+}

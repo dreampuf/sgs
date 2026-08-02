@@ -1,0 +1,31 @@
+{
+  "assetId": "combat.death",
+  "command": "npm run audio:generate -- --id combat.death",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "839065b98ff897e52fcadaef21539af7f9b9560b96c27779d1e3bbc9d22e180c",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 540,
+      "path": "audio/generated/envelopes/combat-death.json",
+      "sha256": "b6a6d8a0cd5bdd3d05553b5154961b3c6a94949e8393d13e5cf2434f2ddfd66d"
+    },
+    {
+      "bytes": 105644,
+      "path": "audio/generated/wav/sfx/combat-death.wav",
+      "sha256": "21e4ed752e0b64a4da20cea3f1ee893e0bcaf9255043d376f4df9cb117edc12c"
+    },
+    {
+      "bytes": 15867,
+      "path": "public/audio/sfx/combat-death.ogg",
+      "sha256": "bb270870f2e5f5f01e397aaf99efcd72303794f776f1b1f5c8b324475b4baa2d"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1403,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "925e8ca14c61ff554ac18c3068faa40bd8f70b28577cbd5a4e35541da066b709",
+  "title": "角色阵亡"
+}

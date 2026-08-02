@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.forest:hero:祝融.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "forest:hero:祝融",
+  "kingdom": "shu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "fierce timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13704,
+  "style": "fierce"
+}

@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.forest:hero:贾诩.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "forest:hero:贾诩",
+  "kingdom": "qun",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "mystical timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13708,
+  "style": "mystical"
+}

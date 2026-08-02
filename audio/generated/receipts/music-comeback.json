@@ -1,0 +1,31 @@
+{
+  "assetId": "music.comeback",
+  "command": "npm run audio:generate -- --id music.comeback",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "26c590b6e17aa66d18c5a90ef43a9cdba124740e76375395b8e21b57de3c5e91",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 32314,
+      "path": "audio/generated/scores/music-comeback.json",
+      "sha256": "5d81cf5a82b1ed226211ec29466bbcd034c9447670334cd64b0ea5e546e39851"
+    },
+    {
+      "bytes": 2560044,
+      "path": "audio/generated/wav/music/music-comeback.wav",
+      "sha256": "5415ee38cad047dd6aef9e6e3d1ffbda859d60c18cff3ed8921630fe12d1f5e7"
+    },
+    {
+      "bytes": 284734,
+      "path": "public/audio/music/music-comeback.ogg",
+      "sha256": "2f7feb2dac2981631704f1d9216a78894c20994ffe401012db4a457f1765e2b1"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2306,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "90248e37399fcd9ff94cb27847f05af8c32ab2894246ec09f9cfcc531b3c77ad",
+  "title": "逆转"
+}

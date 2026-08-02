@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.fire:hero:典韦.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "fire:hero:典韦",
+  "kingdom": "wei",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "fierce timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13601,
+  "style": "fierce"
+}

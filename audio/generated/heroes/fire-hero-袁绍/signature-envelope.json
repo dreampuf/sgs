@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.fire:hero:袁绍.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "fire:hero:袁绍",
+  "kingdom": "qun",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "noble timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13606,
+  "style": "noble"
+}

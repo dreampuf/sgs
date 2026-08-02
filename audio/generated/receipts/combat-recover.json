@@ -1,0 +1,31 @@
+{
+  "assetId": "combat.recover",
+  "command": "npm run audio:generate -- --id combat.recover",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "a1800de15a6b2d7a441d6e995404c65d904bd5e033ba6ac51c7e1d87ae134d1e",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 539,
+      "path": "audio/generated/envelopes/combat-recover.json",
+      "sha256": "a2ab32aeee1aad7b96a58b21845c1efca35d0d1add90c7b71450ca806b4926e9"
+    },
+    {
+      "bytes": 58924,
+      "path": "audio/generated/wav/sfx/combat-recover.wav",
+      "sha256": "00d3aa1f71c8e483e3f1b64900c271440143772e8c553475222ebd472397ead1"
+    },
+    {
+      "bytes": 10217,
+      "path": "public/audio/sfx/combat-recover.ogg",
+      "sha256": "6f1dc63c83ec6f4d6a72ca7bf000d3e23ae19913a9fed53dd521359b3f4493fe"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1304,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "25c7d1a5e7a428853118c558dfd44ba6b08d6cb47d863633232d044cdd53853e",
+  "title": "恢复体力"
+}

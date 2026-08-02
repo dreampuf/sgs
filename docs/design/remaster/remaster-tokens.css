@@ -1,0 +1,87 @@
+:root[data-theme="shanhe-zhuyin"] {
+  color-scheme: dark;
+
+  --ink-950: #0a1118;
+  --ink-900: #111b25;
+  --ink-800: #1a2732;
+  --ink-700: #2a3944;
+  --paper-100: #f4f0e7;
+  --paper-200: #e9e1d2;
+  --paper-400: #b8aea0;
+  --bronze-300: #d4b06a;
+  --bronze-500: #a88648;
+  --bronze-700: #665331;
+
+  --faction-wei: #477fae;
+  --faction-shu: #668a50;
+  --faction-wu: #b64d42;
+  --faction-qun: #9a7a42;
+  --faction-qun-ink: #34302a;
+
+  --state-danger: #b6493a;
+  --state-recover: #63a06f;
+  --state-thunder: #6d83bd;
+  --state-disabled: #615d56;
+  --state-focus: #b6493a;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  --gap-control: 4px;
+  --gap-component: 8px;
+  --gap-region: 12px;
+  --toolbar-height: 32px;
+  --opponent-region-height: clamp(108px, 17dvh, 128px);
+  --local-region-height: clamp(136px, 21dvh, 154px);
+  --opponent-seat-width: clamp(132px, 14vw, 180px);
+  --local-hero-width: clamp(112px, 11vw, 132px);
+  --equipment-strip-width: 142px;
+  --equipment-strip-height: 25px;
+  --micro-seat-desktop-width: 122px;
+  --micro-seat-desktop-height: 64px;
+  --micro-seat-tablet-width: 104px;
+  --micro-seat-mobile-width: 92px;
+
+  --radius-seal: 2px;
+  --radius-card: 8px;
+  --radius-panel: 6px;
+
+  --font-display: "STKaiti", "KaiTi", "Noto Serif SC", serif;
+  --font-ui: "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
+  --font-number: "SFMono-Regular", "Roboto Mono", ui-monospace, monospace;
+
+  --text-caption: clamp(0.6875rem, 0.65rem + 0.18vw, 0.8125rem);
+  --text-body: clamp(0.8125rem, 0.76rem + 0.24vw, 1rem);
+  --text-label: clamp(0.875rem, 0.8rem + 0.34vw, 1.125rem);
+  --text-title: clamp(1.25rem, 1rem + 1.1vw, 2rem);
+
+  --shadow-panel: 0 16px 42px rgb(0 0 0 / 42%);
+  --shadow-card: 0 8px 20px rgb(0 0 0 / 48%);
+  --glow-focus: 0 0 0 1px var(--state-focus), 0 10px 24px rgb(10 17 24 / 28%);
+
+  --motion-feedback: 120ms;
+  --motion-state: 220ms;
+  --motion-card: 360ms;
+  --motion-scene: 650ms;
+  --ease-enter: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  --touch-target: 44px;
+  --card-width-compact: clamp(72px, 20vw, 92px);
+  --card-width-medium: clamp(82px, 10vw, 112px);
+  --card-width-wide: clamp(92px, 7.2vw, 124px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-theme="shanhe-zhuyin"] {
+    --motion-feedback: 1ms;
+    --motion-state: 1ms;
+    --motion-card: 1ms;
+    --motion-scene: 1ms;
+  }
+}

@@ -1,0 +1,576 @@
+{
+  "adaptiveGroup": "battle-96-a",
+  "assetId": "music.hero.forest:hero:曹丕",
+  "bars": 4,
+  "bpm": 96,
+  "durationSeconds": 10,
+  "energy": 0.62,
+  "events": [
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 45,
+      "pan": -0.42,
+      "start": 0,
+      "stem": "harmony",
+      "velocity": 0.1858
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 48,
+      "pan": 0,
+      "start": 0,
+      "stem": "harmony",
+      "velocity": 0.1486
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 55,
+      "pan": 0.42,
+      "start": 0,
+      "stem": "harmony",
+      "velocity": 0.1486
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 33,
+      "pan": 0,
+      "start": 0,
+      "stem": "bass",
+      "velocity": 0.2854
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 33,
+      "pan": 0,
+      "start": 1.25,
+      "stem": "bass",
+      "velocity": 0.2854
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 0,
+      "stem": "percussion",
+      "velocity": 0.326
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 0.625,
+      "stem": "percussion",
+      "velocity": 0.264
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 1.25,
+      "stem": "percussion",
+      "velocity": 0.264
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 1.875,
+      "stem": "percussion",
+      "velocity": 0.264
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 57,
+      "pan": 0,
+      "start": 0,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 67,
+      "pan": 0.172,
+      "start": 0.416667,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 59,
+      "pan": 0.214,
+      "start": 0.833333,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 64,
+      "pan": 0.094,
+      "start": 1.25,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 60,
+      "pan": -0.097,
+      "start": 1.666667,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 57,
+      "pan": -0.215,
+      "start": 2.083333,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 52,
+      "pan": -0.42,
+      "start": 2.5,
+      "stem": "harmony",
+      "velocity": 0.1858
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 57,
+      "pan": 0,
+      "start": 2.5,
+      "stem": "harmony",
+      "velocity": 0.1486
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 60,
+      "pan": 0.42,
+      "start": 2.5,
+      "stem": "harmony",
+      "velocity": 0.1486
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 40,
+      "pan": 0,
+      "start": 2.5,
+      "stem": "bass",
+      "velocity": 0.2854
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 40,
+      "pan": 0,
+      "start": 3.75,
+      "stem": "bass",
+      "velocity": 0.2854
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 2.5,
+      "stem": "percussion",
+      "velocity": 0.326
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 3.125,
+      "stem": "percussion",
+      "velocity": 0.264
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 3.75,
+      "stem": "percussion",
+      "velocity": 0.264
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 4.375,
+      "stem": "percussion",
+      "velocity": 0.264
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 64,
+      "pan": -0.17,
+      "start": 2.5,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 72,
+      "pan": 0.004,
+      "start": 2.916667,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 67,
+      "pan": 0.175,
+      "start": 3.333333,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 71,
+      "pan": 0.213,
+      "start": 3.75,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 69,
+      "pan": 0.091,
+      "start": 4.166667,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 64,
+      "pan": -0.101,
+      "start": 4.583333,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 55,
+      "pan": -0.42,
+      "start": 5,
+      "stem": "harmony",
+      "velocity": 0.1858
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 59,
+      "pan": 0,
+      "start": 5,
+      "stem": "harmony",
+      "velocity": 0.1486
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 64,
+      "pan": 0.42,
+      "start": 5,
+      "stem": "harmony",
+      "velocity": 0.1486
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 43,
+      "pan": 0,
+      "start": 5,
+      "stem": "bass",
+      "velocity": 0.2854
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 43,
+      "pan": 0,
+      "start": 6.25,
+      "stem": "bass",
+      "velocity": 0.2854
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 5,
+      "stem": "percussion",
+      "velocity": 0.326
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 5.625,
+      "stem": "percussion",
+      "velocity": 0.264
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 6.25,
+      "stem": "percussion",
+      "velocity": 0.264
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 6.875,
+      "stem": "percussion",
+      "velocity": 0.264
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 67,
+      "pan": -0.216,
+      "start": 5,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 76,
+      "pan": -0.168,
+      "start": 5.416667,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 69,
+      "pan": 0.007,
+      "start": 5.833333,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 72,
+      "pan": 0.177,
+      "start": 6.25,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 71,
+      "pan": 0.212,
+      "start": 6.666667,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 67,
+      "pan": 0.087,
+      "start": 7.083333,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 48,
+      "pan": -0.42,
+      "start": 7.5,
+      "stem": "harmony",
+      "velocity": 0.1858
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 55,
+      "pan": 0,
+      "start": 7.5,
+      "stem": "harmony",
+      "velocity": 0.1486
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 59,
+      "pan": 0.42,
+      "start": 7.5,
+      "stem": "harmony",
+      "velocity": 0.1486
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 36,
+      "pan": 0,
+      "start": 7.5,
+      "stem": "bass",
+      "velocity": 0.2854
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 36,
+      "pan": 0,
+      "start": 8.75,
+      "stem": "bass",
+      "velocity": 0.2854
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 7.5,
+      "stem": "percussion",
+      "velocity": 0.326
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 8.125,
+      "stem": "percussion",
+      "velocity": 0.264
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 8.75,
+      "stem": "percussion",
+      "velocity": 0.264
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 9.375,
+      "stem": "percussion",
+      "velocity": 0.264
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 60,
+      "pan": -0.104,
+      "start": 7.5,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 71,
+      "pan": -0.216,
+      "start": 7.916667,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 64,
+      "pan": -0.165,
+      "start": 8.333333,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 69,
+      "pan": 0.011,
+      "start": 8.75,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 67,
+      "pan": 0.179,
+      "start": 9.166667,
+      "stem": "lead",
+      "velocity": 0.2616
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "horn",
+      "midi": 60,
+      "pan": 0.211,
+      "start": 9.583333,
+      "stem": "lead",
+      "velocity": 0.2616
+    }
+  ],
+  "heroDefinitionId": "forest:hero:曹丕",
+  "motif": [
+    0,
+    4,
+    1,
+    3,
+    2,
+    0
+  ],
+  "progression": [
+    0,
+    3,
+    4,
+    2
+  ],
+  "rootMidi": 45,
+  "scale": [
+    0,
+    2,
+    3,
+    7,
+    10
+  ],
+  "schemaVersion": 1,
+  "seed": 3702,
+  "title": "曹丕·英雄主题"
+}

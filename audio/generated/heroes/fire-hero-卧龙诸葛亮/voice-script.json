@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "fire:hero:卧龙诸葛亮",
+  "heroName": "卧龙诸葛亮",
+  "inspiration": "借鉴《三国演义》中博望坡、借东风、八阵图与卧龙奇谋，台词为原创改写。",
+  "lines": {
+    "death": "卧龙既逝，秋风独寒。",
+    "signature": "东风已至，火势可成。",
+    "victory": "八阵开合，强敌困其中。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180,aecho=0.8:0.18:55:0.1",
+  "rate": 155,
+  "schemaVersion": 1,
+  "style": "mystical",
+  "voice": "Eddy (Chinese (China mainland))"
+}

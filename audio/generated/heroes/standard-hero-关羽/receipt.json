@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "standard:hero:关羽",
+  "inputSha256": "faea774bddc6c4f67f6c4b8469eaaa9ae907569caad6701297114b6273eb99a5",
+  "outputs": [
+    {
+      "bytes": 10955,
+      "path": "audio/generated/heroes/standard-hero-关羽/theme-score.json",
+      "sha256": "276f59351e0f34a74ab55281fd8b5ce9b482152ccf0063437126525859fdb3ae"
+    },
+    {
+      "bytes": 300,
+      "path": "audio/generated/heroes/standard-hero-关羽/signature-envelope.json",
+      "sha256": "e1ce511c74d920c96e7732102bd030105b0ca42d6f427096f928fc4f864ad3c0"
+    },
+    {
+      "bytes": 703,
+      "path": "audio/generated/heroes/standard-hero-关羽/voice-script.json",
+      "sha256": "383653f9675d6bed53e299708336ca096ab6ba5c7cdabf7a49d51146efb4d92b"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/standard-hero-关羽/wav/theme.wav",
+      "sha256": "57b289287f3f718d075109c76916ec1265543295168e5b2a16e5820b2cd1c8b5"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/standard-hero-关羽/wav/signature.wav",
+      "sha256": "89b47ad977edd32c358bab7d1312f36d520c0d5e98debe3d47d67cb7494bc432"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/standard-hero-关羽/theme.ogg",
+      "sha256": "54b27b02fe3572df951bd6fc4be1ccac18e4f5b55323545288ec6f70846d05ba"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/standard-hero-关羽/signature.ogg",
+      "sha256": "4e56e9ecad758b2c58cd1a78cb7afd8db4eda417725c4ba9d5936165fee8c545"
+    },
+    {
+      "bytes": 115952,
+      "path": "audio/generated/heroes/standard-hero-关羽/voice-source/signature.aiff",
+      "sha256": "8ab11ec986e607a5f8d822ab962f3d7e2f2fcd24d4830a1e7180ad781cf58338"
+    },
+    {
+      "bytes": 162410,
+      "path": "audio/generated/heroes/standard-hero-关羽/wav/voice-signature.wav",
+      "sha256": "bb4867af03fea370f9010df59e34a45ce33d82b8d2d70a1ea40c73444443e8c5"
+    },
+    {
+      "bytes": 25946,
+      "path": "public/audio/heroes/standard-hero-关羽/voice-signature.ogg",
+      "sha256": "e9c2be9be66436f1768dcfaa758db28fd32a6cf73ec1708017a08dd3c62de418"
+    },
+    {
+      "bytes": 108452,
+      "path": "audio/generated/heroes/standard-hero-关羽/voice-source/victory.aiff",
+      "sha256": "b2aef59b0818d42aa0baba73ba133cc252562ec2f62b838db92c884825fe6da2"
+    },
+    {
+      "bytes": 151526,
+      "path": "audio/generated/heroes/standard-hero-关羽/wav/voice-victory.wav",
+      "sha256": "1d86a726eb8e6acabeda700134eb835b9d5cb51adc5616d721f200cc81750d6b"
+    },
+    {
+      "bytes": 24137,
+      "path": "public/audio/heroes/standard-hero-关羽/voice-victory.ogg",
+      "sha256": "404c51a352438ff38b00b03f66280b73965fb902402af8e7fbcb5136b27ad367"
+    },
+    {
+      "bytes": 106082,
+      "path": "audio/generated/heroes/standard-hero-关羽/voice-source/death.aiff",
+      "sha256": "dd1936544b7d8e0b8f135b9b70eefdb26ab0482f0050234942b4e00ad9bfb587"
+    },
+    {
+      "bytes": 148086,
+      "path": "audio/generated/heroes/standard-hero-关羽/wav/voice-death.wav",
+      "sha256": "9f588569e3ffa225c6e7f1696e78524fb0e1722213738bc4b1378b3b5f707f06"
+    },
+    {
+      "bytes": 23534,
+      "path": "public/audio/heroes/standard-hero-关羽/voice-death.ogg",
+      "sha256": "93669e82c4198d7e76d9bbe3ca27112da4b31b70126ca255c2c113e1fcffdd19"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3202,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Rocko (Chinese (China mainland))",
+    "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+    "rate": 180,
+    "style": "fierce"
+  }
+}

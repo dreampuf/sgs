@@ -1,0 +1,20 @@
+{
+  "assetId": "system.judgment",
+  "durationSeconds": 1.04,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "ceremonial drum",
+    "suspended bell"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.56,
+    "pitchHz": 146.83,
+    "weight": 0.78
+  },
+  "recipe": "judgment",
+  "schemaVersion": 1,
+  "seed": 1401,
+  "specSha256": "9b8f876b1e8994e0c1e3113b1240768d005b7c5016a3eeeed466f9f338baa219",
+  "title": "判定翻牌"
+}

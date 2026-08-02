@@ -1,0 +1,31 @@
+{
+  "assetId": "card.peach",
+  "command": "npm run audio:generate -- --id card.peach",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "31cad854686e63e60aecbe3cb0c75e01120d6d3836aa3bbb24310e76162dd9b9",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 523,
+      "path": "audio/generated/envelopes/card-peach.json",
+      "sha256": "529bf286057dabdfcdbaf147f48f6921935174bda7aaf3505201db9db2862c16"
+    },
+    {
+      "bytes": 52524,
+      "path": "audio/generated/wav/sfx/card-peach.wav",
+      "sha256": "69674dc78fdf5b04959959b5f55bd1f931b29a3d1008ee738c5ee9d63c682c39"
+    },
+    {
+      "bytes": 9349,
+      "path": "public/audio/sfx/card-peach.ogg",
+      "sha256": "6431089ecf6b39a9a341eecece965f8f9d6035a4acea79a5f045f9aeee032950"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1208,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "9d608e05ff62cc072819754f61e2ce80ca9c644bd5a75781a9684b8e61ff6020",
+  "title": "桃"
+}

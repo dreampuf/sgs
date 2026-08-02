@@ -1,0 +1,31 @@
+{
+  "assetId": "card.archery-attack",
+  "command": "npm run audio:generate -- --id card.archery-attack",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "32331a0494c2f16cec1ebda76912e35b9f8d5346e90d1e48097d9926e25daef9",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 535,
+      "path": "audio/generated/envelopes/card-archery-attack.json",
+      "sha256": "6406e6d5b47f72259a05c2901bfeb298989d7aea614858c3a42aafb49407050b"
+    },
+    {
+      "bytes": 67244,
+      "path": "audio/generated/wav/sfx/card-archery-attack.wav",
+      "sha256": "20e90a04ca39b35093c93027883a8f9e6818194280ca32516d54341349ad1c28"
+    },
+    {
+      "bytes": 9363,
+      "path": "public/audio/sfx/card-archery-attack.ogg",
+      "sha256": "97cf37ed3482ae7a7b037f1e25d1cc0fa8132b351b1f06981c929f940213867a"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1212,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "9bc62b0548ebb8d1ed21dac70f643e5d9ac2131f98c981d703340016605bd39b",
+  "title": "万箭齐发"
+}

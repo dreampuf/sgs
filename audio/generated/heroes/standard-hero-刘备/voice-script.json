@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:刘备",
+  "heroName": "刘备",
+  "inspiration": "借鉴《三国演义》中桃园结义、携民渡江与仁德之主形象，台词为原创改写。",
+  "lines": {
+    "death": "汉室未兴，愧对诸君。",
+    "signature": "以仁聚众，以义同行。",
+    "victory": "同心扶汉，山河可复。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 166,
+  "schemaVersion": 1,
+  "style": "noble",
+  "voice": "Eddy (Chinese (China mainland))"
+}

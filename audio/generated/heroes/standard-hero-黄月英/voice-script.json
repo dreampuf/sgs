@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:黄月英",
+  "heroName": "黄月英",
+  "inspiration": "借鉴木牛流马、机关巧思及诸葛亮贤内助的文学形象，台词为原创改写。",
+  "lines": {
+    "death": "尚有一策，未能交予孔明。",
+    "signature": "巧思成机，寻常亦可制胜。",
+    "victory": "机关算尽，局势尽在掌中。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=100,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 164,
+  "schemaVersion": 1,
+  "style": "graceful",
+  "voice": "Tingting"
+}

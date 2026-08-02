@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.forest:hero:徐晃.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "forest:hero:徐晃",
+  "kingdom": "wei",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "tactical timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13701,
+  "style": "tactical"
+}

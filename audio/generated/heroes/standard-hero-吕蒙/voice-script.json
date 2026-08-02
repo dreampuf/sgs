@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:吕蒙",
+  "heroName": "吕蒙",
+  "inspiration": "借鉴《三国演义》中白衣渡江、士别三日与克己待机形象，台词为原创改写。",
+  "lines": {
+    "death": "荆州虽下，旧梦难安。",
+    "signature": "藏锋待时，一击定荆州。",
+    "victory": "白衣渡江，兵不血刃。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=85,lowpass=f=8000,acompressor=threshold=-17dB:ratio=2:attack=16:release=160",
+  "rate": 170,
+  "schemaVersion": 1,
+  "style": "tactical",
+  "voice": "Eddy (Chinese (China mainland))"
+}

@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.forest:hero:鲁肃.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "forest:hero:鲁肃",
+  "kingdom": "wu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "tactical timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13706,
+  "style": "tactical"
+}

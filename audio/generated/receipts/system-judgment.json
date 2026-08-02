@@ -1,0 +1,31 @@
+{
+  "assetId": "system.judgment",
+  "command": "npm run audio:generate -- --id system.judgment",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "893a94aab915ca7102c0cfff3aa0308c33d8b0f6f41b40b09ff03b4dad4e87d7",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 535,
+      "path": "audio/generated/envelopes/system-judgment.json",
+      "sha256": "d852f957337bffd2c94c97f75620f516d421030401c9d895ca357444c4c18650"
+    },
+    {
+      "bytes": 66604,
+      "path": "audio/generated/wav/sfx/system-judgment.wav",
+      "sha256": "4b2438bd85289128c23d35126a4078af712050d3347fbc4ae30ebb12b668b5d4"
+    },
+    {
+      "bytes": 10785,
+      "path": "public/audio/sfx/system-judgment.ogg",
+      "sha256": "e9b66ad58087f742b60357a8b9693ca5a375b5ea1dca3a869d3c0f4f996349f7"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1401,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "9b8f876b1e8994e0c1e3113b1240768d005b7c5016a3eeeed466f9f338baa219",
+  "title": "判定翻牌"
+}

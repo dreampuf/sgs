@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "fire:hero:颜良文丑",
+  "inputSha256": "60362bb0a208a6c39d466dc66fed82da79c0e080512f4ebee9130e765b2453d1",
+  "outputs": [
+    {
+      "bytes": 11018,
+      "path": "audio/generated/heroes/fire-hero-颜良文丑/theme-score.json",
+      "sha256": "b4d05976f6a5bbddb18a471b5463a085bda5e0169bcbdecae1856df6a8163f76"
+    },
+    {
+      "bytes": 304,
+      "path": "audio/generated/heroes/fire-hero-颜良文丑/signature-envelope.json",
+      "sha256": "301f0fffd757ae6ee5d1b7a1f6dad62f98223c8e3a39c8e29357584fa484ecf4"
+    },
+    {
+      "bytes": 699,
+      "path": "audio/generated/heroes/fire-hero-颜良文丑/voice-script.json",
+      "sha256": "99e127957455bc63daf8da1b4ba5f545e00e282d3bda89b2324c7e54bb7b972b"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/fire-hero-颜良文丑/wav/theme.wav",
+      "sha256": "c912775afc9720690be139fe102a6b58900ea6b844d4e6d702795c0fb5a62884"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/fire-hero-颜良文丑/wav/signature.wav",
+      "sha256": "11533c77f6476be55887ade847098b13d73cf35939e564dc41b6d34160af6adb"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/fire-hero-颜良文丑/theme.ogg",
+      "sha256": "c2376b292202820223ca617ec66dbfb122328b268cb964b65b799dc1f0f90eac"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/fire-hero-颜良文丑/signature.ogg",
+      "sha256": "0478966e1d4e3b9f8172ea3c5a6f39aab49dc7015cda46392911d869d1de7ca4"
+    },
+    {
+      "bytes": 121866,
+      "path": "audio/generated/heroes/fire-hero-颜良文丑/voice-source/signature.aiff",
+      "sha256": "850c2640ddcb55a3c1038f19cc67c113f7bf336f306351f409cde63c6ee61ca6"
+    },
+    {
+      "bytes": 170992,
+      "path": "audio/generated/heroes/fire-hero-颜良文丑/wav/voice-signature.wav",
+      "sha256": "2c6790067edc7adb7fe9ef3ece74e1afb162ad1060b80c3128d5f22f1207871f"
+    },
+    {
+      "bytes": 27152,
+      "path": "public/audio/heroes/fire-hero-颜良文丑/voice-signature.ogg",
+      "sha256": "360cfdd8c580b9b5b3962387a9b33e395d9a058f5981513e2cdd52435e879e19"
+    },
+    {
+      "bytes": 125394,
+      "path": "audio/generated/heroes/fire-hero-颜良文丑/voice-source/victory.aiff",
+      "sha256": "54afb3e2ab187f2fb3bbae407a816fa77b6cffe477660c245a53f8a74632664b"
+    },
+    {
+      "bytes": 176112,
+      "path": "audio/generated/heroes/fire-hero-颜良文丑/wav/voice-victory.wav",
+      "sha256": "eb3163f0f6e33bff653af32ee33dc8ea8465a10284b366c8598000ff905c9c25"
+    },
+    {
+      "bytes": 27956,
+      "path": "public/audio/heroes/fire-hero-颜良文丑/voice-victory.ogg",
+      "sha256": "857313483772161dedd27da966cefcc0d589bcd0d8ec109a4ffdb4899f6d2fd3"
+    },
+    {
+      "bytes": 114106,
+      "path": "audio/generated/heroes/fire-hero-颜良文丑/voice-source/death.aiff",
+      "sha256": "e63765893a28b1238461e7e80e96ea4a51fddd68d454c57d0406449ce18666c4"
+    },
+    {
+      "bytes": 159730,
+      "path": "audio/generated/heroes/fire-hero-颜良文丑/wav/voice-death.wav",
+      "sha256": "7ca1598a0111e8a5f0d1a70d118145c11fb1508435bbfc3f6ae684798e0470e9"
+    },
+    {
+      "bytes": 25544,
+      "path": "public/audio/heroes/fire-hero-颜良文丑/voice-death.ogg",
+      "sha256": "ca0fce734c707b297c762b00943f8039b72a5ecbf62cd23feddb74c3e0ca1632"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3607,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Rocko (Chinese (China mainland))",
+    "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+    "rate": 180,
+    "style": "fierce"
+  }
+}

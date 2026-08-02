@@ -5,10 +5,17 @@
   "description": "单页三国杀棋牌游戏",
   "scripts": {
     "assets:early": "node scripts/fetch-early-expansion-assets.mjs",
+    "audio:generate": "node scripts/generate-audio.mjs",
+    "audio:verify": "node scripts/generate-audio.mjs --verify",
+    "audio:heroes": "node scripts/generate-hero-audio.mjs",
+    "audio:heroes:verify": "node scripts/generate-hero-audio.mjs --verify",
     "test": "npm run test:core && npm run test:logic && npm run test:ui",
-    "test:core": "vitest run",
+    "test:core": "vitest run --coverage",
+    "test:core:fast": "vitest run",
+    "test:coverage": "npm run test:core",
+    "test:soak": "SGS_SOAK_STEPS=240 SGS_SOAK_TURNS=20 vitest run test/core/coverage-guided-soak.test.ts",
     "typecheck": "tsc --noEmit",
-    "test:logic": "node test/random.test.js && node test/smoke.test.js && node test/native-motion.test.js && node test/content-matrix.test.js && node test/card-rules.test.js && node test/delayed-rules.test.js && node test/dying-rules.test.js && node test/turn-matrix.test.js && node test/hero-matrix.test.js",
+    "test:logic": "node test/random.test.js && node test/smoke.test.js && node test/native-motion.test.js && node test/audio-assets.test.js && node test/content-matrix.test.js && node test/card-rules.test.js && node test/delayed-rules.test.js && node test/dying-rules.test.js && node test/turn-matrix.test.js && node test/hero-matrix.test.js",
     "test:ui": "playwright test",
     "build": "vite build",
     "serve": "vite --host 0.0.0.0 --port 8080",
@@ -16,6 +23,7 @@
   },
   "devDependencies": {
     "@playwright/test": "1.62.0",
+    "@vitest/coverage-v8": "^4.1.10",
     "typescript": "^7.0.2",
     "vite": "^8.1.5",
     "vitest": "^4.1.10"

@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.forest:hero:董卓.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "forest:hero:董卓",
+  "kingdom": "qun",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "fierce timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13707,
+  "style": "fierce"
+}

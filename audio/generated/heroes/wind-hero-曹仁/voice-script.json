@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "wind:hero:曹仁",
+  "heroName": "曹仁",
+  "inspiration": "借鉴《三国演义》中守樊城、固守待援的魏国大将形象，台词为原创改写。",
+  "lines": {
+    "death": "城在人在，城破人亡。",
+    "signature": "坚城在手，任你百攻。",
+    "victory": "守得一寸，便得全军。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=85,lowpass=f=8000,acompressor=threshold=-17dB:ratio=2:attack=16:release=160",
+  "rate": 170,
+  "schemaVersion": 1,
+  "style": "tactical",
+  "voice": "Eddy (Chinese (China mainland))"
+}

@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "forest:hero:贾诩",
+  "heroName": "贾诩",
+  "inspiration": "借鉴《三国演义》中毒士乱武、宛城献策与明哲自保，台词为原创改写。",
+  "lines": {
+    "death": "算尽人心，仍漏了天命。",
+    "signature": "乱世无常，先让众人自相残杀。",
+    "victory": "帷幕之后，生路只留一条。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180,aecho=0.8:0.18:55:0.1",
+  "rate": 155,
+  "schemaVersion": 1,
+  "style": "mystical",
+  "voice": "Eddy (Chinese (China mainland))"
+}

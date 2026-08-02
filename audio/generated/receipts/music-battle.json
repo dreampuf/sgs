@@ -1,0 +1,31 @@
+{
+  "assetId": "music.battle",
+  "command": "npm run audio:generate -- --id music.battle",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "19195f34a53b0b57e417868d40755f94e22206e07baf4c63d0ca3c87104772e1",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 30237,
+      "path": "audio/generated/scores/music-battle.json",
+      "sha256": "892e0bad54768a4633bbd041a6506dc497ff190a43a3e4bf4e6b100f6a0d959e"
+    },
+    {
+      "bytes": 2560044,
+      "path": "audio/generated/wav/music/music-battle.wav",
+      "sha256": "c544f9d0735019163317811380b317286fb0f5a772b71ac30246f0f18749424b"
+    },
+    {
+      "bytes": 277471,
+      "path": "public/audio/music/music-battle.ogg",
+      "sha256": "2098261634a6ddb3cb7943b644a41cf514a0c7288c576d977db042cfa52a9cb0"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2301,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "04462e4a4e83e20ae4c4d5ffbfd1e7ee092c079c7d91b5cd0f926d4ee9dcd31d",
+  "title": "鏖兵"
+}

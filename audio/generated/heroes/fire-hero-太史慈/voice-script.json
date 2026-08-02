@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "fire:hero:太史慈",
+  "heroName": "太史慈",
+  "inspiration": "借鉴《三国演义》中神亭酣战、北海报恩与信义形象，台词为原创改写。",
+  "lines": {
+    "death": "大丈夫当立功于世，奈何。",
+    "signature": "受人之恩，当以死报。",
+    "victory": "天义在胸，长枪无悔。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 166,
+  "schemaVersion": 1,
+  "style": "noble",
+  "voice": "Eddy (Chinese (China mainland))"
+}

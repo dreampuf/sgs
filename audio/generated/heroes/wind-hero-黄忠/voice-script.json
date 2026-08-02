@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "wind:hero:黄忠",
+  "heroName": "黄忠",
+  "inspiration": "借鉴《三国演义》中定军山斩夏侯渊、老将烈弓形象，台词为原创改写。",
+  "lines": {
+    "death": "弓弦尚紧，奈何力尽。",
+    "signature": "老将开弓，百步穿杨。",
+    "victory": "定军山上，再立新功。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=65,lowpass=f=6500,acompressor=threshold=-18dB:ratio=2:attack=25:release=220",
+  "rate": 145,
+  "schemaVersion": 1,
+  "style": "aged",
+  "voice": "Grandpa (Chinese (China mainland))"
+}

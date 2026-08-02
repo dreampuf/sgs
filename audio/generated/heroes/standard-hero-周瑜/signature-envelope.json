@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:周瑜.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:周瑜",
+  "kingdom": "wu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "noble timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13302,
+  "style": "noble"
+}

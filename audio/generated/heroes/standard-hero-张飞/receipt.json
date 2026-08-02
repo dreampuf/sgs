@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "standard:hero:张飞",
+  "inputSha256": "1dd9a2d4e02bbc8da221c847e14f6f4324001dd209f4f0dc0c123ad16921fcf2",
+  "outputs": [
+    {
+      "bytes": 10909,
+      "path": "audio/generated/heroes/standard-hero-张飞/theme-score.json",
+      "sha256": "61915832ae8e25204a16a904fdec50e23e7f45f5d8a6c6e1bfb37799d2bd8e31"
+    },
+    {
+      "bytes": 300,
+      "path": "audio/generated/heroes/standard-hero-张飞/signature-envelope.json",
+      "sha256": "e4e2081d434e4663dd52c02278666507efe4f4ee0d449f111b096930028603f4"
+    },
+    {
+      "bytes": 700,
+      "path": "audio/generated/heroes/standard-hero-张飞/voice-script.json",
+      "sha256": "12f7add9277b68476b527f54ec9262e1036a9b74f4350c3b520ade7c098ee14a"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/standard-hero-张飞/wav/theme.wav",
+      "sha256": "02b6bd4129a7fa0636246b6509ca1db325bd6bf6031c2f048b0b1c7d9dfbd68a"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/standard-hero-张飞/wav/signature.wav",
+      "sha256": "585aa167b83020ffe70e09b9a4615e285e04b21aa6e0c1a8fa4b9559306f46be"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/standard-hero-张飞/theme.ogg",
+      "sha256": "b9122623cb08e5f13798e1e4389da8a3814955bf7ea7fb8059640bfd98d418ab"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/standard-hero-张飞/signature.ogg",
+      "sha256": "5339a8d00dea7e49b7566dfce3426b5d3236328964af62c5fa8a7b0bbbaa4553"
+    },
+    {
+      "bytes": 132442,
+      "path": "audio/generated/heroes/standard-hero-张飞/voice-source/signature.aiff",
+      "sha256": "12ff58f6022617a088a01e3a06a8e69b0c22d5f78d3a1e1b57a44d06fcc69dbd"
+    },
+    {
+      "bytes": 186340,
+      "path": "audio/generated/heroes/standard-hero-张飞/wav/voice-signature.wav",
+      "sha256": "6f6260133eb00c3745af28f6cffb536da41a3031f301cfefe52f541e9fb0decd"
+    },
+    {
+      "bytes": 29564,
+      "path": "public/audio/heroes/standard-hero-张飞/voice-signature.ogg",
+      "sha256": "eef8b8104f4aaf282827d3751cf443972eb27e9f2e74bee3dad74f78647a03d6"
+    },
+    {
+      "bytes": 115508,
+      "path": "audio/generated/heroes/standard-hero-张飞/voice-source/victory.aiff",
+      "sha256": "26643206df4a92d353f2bae7394ece348257ff88b76829a9aa6698f908451b84"
+    },
+    {
+      "bytes": 161766,
+      "path": "audio/generated/heroes/standard-hero-张飞/wav/voice-victory.wav",
+      "sha256": "6882e049a6892a79c3da9eed8a70ae1ca3e7ad15e6376b4058d26a7a4bd1fe8e"
+    },
+    {
+      "bytes": 25745,
+      "path": "public/audio/heroes/standard-hero-张飞/voice-victory.ogg",
+      "sha256": "4ce85e732ca0065a2f6f0393b02c914ae8335d6013ad707231a9c1cacf58654a"
+    },
+    {
+      "bytes": 101848,
+      "path": "audio/generated/heroes/standard-hero-张飞/voice-source/death.aiff",
+      "sha256": "9d61b318ac6fba1fb6ea484f68b8abff021d51d9f491d44319badc2a04b3506b"
+    },
+    {
+      "bytes": 141942,
+      "path": "audio/generated/heroes/standard-hero-张飞/wav/voice-death.wav",
+      "sha256": "7d828f6c3e9383c8c5d3635b7c5ec7a1cfed7cc5ac5f90e38aa2ce666d8bba41"
+    },
+    {
+      "bytes": 22730,
+      "path": "public/audio/heroes/standard-hero-张飞/voice-death.ogg",
+      "sha256": "f895ae54745b2193d83f3a2bc475b9170a95b4ad283c05fcf13484ed0477e03c"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3203,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Rocko (Chinese (China mainland))",
+    "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+    "rate": 180,
+    "style": "fierce"
+  }
+}

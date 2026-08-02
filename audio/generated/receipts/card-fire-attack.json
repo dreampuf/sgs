@@ -1,0 +1,31 @@
+{
+  "assetId": "card.fire-attack",
+  "command": "npm run audio:generate -- --id card.fire-attack",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "b4655c3ac077041a3123bd31a32255cebb1a8fd63c21ffe6b72ae08435191e6f",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 545,
+      "path": "audio/generated/envelopes/card-fire-attack.json",
+      "sha256": "8c984c506916fb8a13e60e89d2b5356a493d74ecacad8d4dc6283961523e2713"
+    },
+    {
+      "bytes": 62764,
+      "path": "audio/generated/wav/sfx/card-fire-attack.wav",
+      "sha256": "f4f34549f294ac2bb450f85f87b43ff7bae2fc7b5807fa981a764e7fc4402907"
+    },
+    {
+      "bytes": 8697,
+      "path": "public/audio/sfx/card-fire-attack.ogg",
+      "sha256": "d4e36c4c07e7e3fcbcd96d88189334164bde2d7d9524ccb5f1212a00e4d4adfd"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1216,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "d5537e847e252086366305686e09558f518ca6efd98e8db75c8862a7caf0628e",
+  "title": "火攻"
+}

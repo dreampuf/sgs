@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:张飞",
+  "heroName": "张飞",
+  "inspiration": "借鉴《三国演义》中长坂桥喝退曹军的猛将形象，台词为原创改写。",
+  "lines": {
+    "death": "哥哥，翼德先走一步。",
+    "signature": "燕人张飞在此，谁敢来战。",
+    "victory": "一声断喝，万军退散。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

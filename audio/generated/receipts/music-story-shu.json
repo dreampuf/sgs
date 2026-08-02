@@ -1,0 +1,31 @@
+{
+  "assetId": "music.story.shu",
+  "command": "npm run audio:generate -- --id music.story.shu",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "3e45b479faf420d6e0e69a35e3333c104cd241076f74cc32c8c9c469114fada0",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 27309,
+      "path": "audio/generated/scores/music-story-shu.json",
+      "sha256": "c2f1f8d9c3f8df96735d889451ae09cf7969dc6a4cffc3822461cb8be2b5322d"
+    },
+    {
+      "bytes": 2560044,
+      "path": "audio/generated/wav/music/music-story-shu.wav",
+      "sha256": "84564c876227ad1741ce7fa72bdc0047b44699407aa0f5a26d562f1cb0ec4440"
+    },
+    {
+      "bytes": 277326,
+      "path": "public/audio/music/music-story-shu.ogg",
+      "sha256": "baa69469808b22d909c1ce2df68ac196ac58ae7fe2b0659f82877ea41a365f05"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2202,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "e4a11b2b673c1ebdde3e602250a803d2b91a144608822020daf537ac24b35dff",
+  "title": "蜀 · 山河同心"
+}

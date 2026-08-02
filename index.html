@@ -7,7 +7,6 @@
     <link type="text/css" href="css/choose_card.css" rel="stylesheet" media="screen" />
     <link type="text/css" href="css/player_others.css" rel="stylesheet" media="screen" />
     <link type="text/css" href="css/player.css" rel="stylesheet" media="screen" />
-    <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
     <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="logic_func.js"></script>
     <script type="text/javascript" src="ui_shell.js"></script>
@@ -18,19 +17,91 @@
     <script type="module" src="/src/browser/bootstrap.ts"></script>
 </head>
 <body>
-    <audio id="sound" src="" autoplay="false"></audio>
     <div id="main">
-        <div id="" style="width:100%; position:absolute;"><img src="img/system/main_top.png" style="width:1000px;" /></div>
+        <div id="home_scene" data-mode="identity" data-faction="identity">
+            <div class="home_scene_background" aria-hidden="true"></div>
+            <div class="home_scene_shade" aria-hidden="true"></div>
+            <header id="home_brand">
+                <span class="home_brand_kicker">乱世 · 英雄 · 谋略</span>
+                <h1>三国杀</h1>
+                <p>执掌军令，在每一次抉择中改写天下</p>
+            </header>
+            <div id="home_scene_caption">
+                <span>当前战局</span>
+                <strong>标准身份场</strong>
+                <small>四方势力，同局争锋</small>
+            </div>
+        </div>
+        <div id="main_frame_top"><img src="img/system/main_top.png" alt="" /></div>
         <!-- 游戏开始 -->
         <div id="start_options">
-            <div>选择早期扩展包</div>
-            <label title="2009 年 3 月发行；11 个技能规则与素材均已接入 Core。同期报道的具体日期存在冲突，故只保留月份精度。"><input type="checkbox" class="expansion_pack" value="wind" checked="checked" /> 风</label>
-            <label title="2009-09-21 发行的神话再临·军争篇游戏牌扩充。"><input type="checkbox" class="expansion_pack" value="military" checked="checked" /> 军争</label>
-            <label title="2009-11-16 发行；13 个新增技能规则与素材均已接入 Core。"><input type="checkbox" class="expansion_pack" value="fire" /> 火</label>
-            <label title="2010-07-29 发行；18 个技能规则与素材均已接入 Core。"><input type="checkbox" class="expansion_pack" value="forest" /> 林</label>
-            <span class="ai_option">AI：<select id="ai_level"><option value="0">简单</option><option value="1" selected="selected">普通</option><option value="2">困难</option></select></span>
+            <div class="home_command_heading">
+                <span>选择战局</span>
+                <strong>整军待发</strong>
+            </div>
+            <div id="mode_options" aria-label="游戏模式">
+                <label class="mode_card mode_selected">
+                    <input type="radio" name="game_mode" value="identity" checked="checked" />
+                    <strong>标准身份场</strong>
+                    <span>2～20 人身份局，各自完成阵营目标</span>
+                </label>
+                <label class="mode_card">
+                    <input type="radio" name="game_mode" value="story" />
+                    <strong>剧情模式</strong>
+                    <span>桃园举义：带章节目标与剧情结算</span>
+                </label>
+            </div>
+            <div id="identity_player_options">
+                <span class="player_count_label">人数</span>
+                <div class="player_count_control" role="group" aria-label="身份场人数">
+                    <button type="button" data-player-count-delta="-1" aria-label="减少一名玩家">−</button>
+                    <input id="identity_player_count" type="range" min="2" max="20" step="1" value="4" aria-label="身份场人数" />
+                    <button type="button" data-player-count-delta="1" aria-label="增加一名玩家">＋</button>
+                    <output id="identity_player_count_value" for="identity_player_count">4 人</output>
+                </div>
+                <span id="identity_mix_preview" aria-live="polite"></span>
+            </div>
+            <div id="expansion_pack_options" class="home_rule_options" hidden>
+                <span class="home_rule_label">扩展包</span>
+                <label title="2009 年 3 月发行；11 个技能规则与素材均已接入 Core。同期报道的具体日期存在冲突，故只保留月份精度。"><input type="checkbox" class="expansion_pack" value="wind" checked="checked" /> 风</label>
+                <label title="2009-09-21 发行的神话再临·军争篇游戏牌扩充。"><input type="checkbox" class="expansion_pack" value="military" checked="checked" /> 军争</label>
+                <label title="2009-11-16 发行；13 个新增技能规则与素材均已接入 Core。"><input type="checkbox" class="expansion_pack" value="fire" checked="checked" /> 火</label>
+                <label title="2010-07-29 发行；18 个技能规则与素材均已接入 Core。"><input type="checkbox" class="expansion_pack" value="forest" checked="checked" /> 林</label>
+            </div>
         </div>
-        <div id="game_start" role="button" aria-label="开始游戏">开始</div>
+        <div id="game_start" role="button" aria-label="开始游戏">
+            <span>开始征战</span><small>ENTER BATTLE</small>
+        </div>
+        <button id="continue_game" type="button">继续游戏</button>
+
+        <div id="game_toolbar" aria-label="对局菜单">
+            <label class="audio_control" title="背景音乐音量">
+                <button id="music_toggle" type="button" aria-pressed="true">音乐：开</button>
+                <input id="music_volume" type="range" min="0" max="100" step="1" value="32" aria-label="背景音乐音量" />
+            </label>
+            <label class="audio_control" title="游戏音效音量">
+                <button id="sfx_toggle" type="button" aria-pressed="true">音效：开</button>
+                <input id="sfx_volume" type="range" min="0" max="100" step="1" value="62" aria-label="游戏音效音量" />
+            </label>
+            <button id="nullification_prompt_toggle" class="preference_switch" type="button" role="switch" aria-checked="true">
+                <span>无懈询问</span><i aria-hidden="true"></i><small>开</small>
+            </button>
+            <button id="peach_prompt_toggle" class="preference_switch" type="button" role="switch" aria-checked="true">
+                <span>桃询问</span><i aria-hidden="true"></i><small>开</small>
+            </button>
+            <button id="save_game" type="button">保存</button>
+            <button id="export_debug" type="button">导出调试</button>
+            <button id="restart_game" type="button">重新开一局</button>
+            <span id="save_feedback" role="status" aria-live="polite"></span>
+        </div>
+        <div id="story_hud">
+            <strong></strong>
+            <span></span>
+        </div>
+        <div id="story_event_banner" role="status" aria-live="polite">
+            <strong></strong>
+            <span></span>
+        </div>
         
         <div class="role" id="role2">
             <!-- 国家 -->
@@ -169,6 +240,9 @@
         <div id="gameinfo">
         </div>
         <div id="action_prompt" role="status" aria-live="polite"></div>
+        <div id="guhuo_feedback" role="status" aria-live="polite">
+            <strong></strong><span></span>
+        </div>
         <!-- 牌堆 -->
         <div id="cards_last">
             <img src="img/system/card_back.png" style="left:10px; top:10px;" />
@@ -176,13 +250,16 @@
             <img src="img/system/card_back.png" />
         </div>
         <!-- 进度条 -->
-        <div class="player_progress_bar">
+        <div id="player_progress_bar" class="player_progress_bar">
             <img class="player_progress_bg" src="img/system/progress/big/progress_bg.png" />
-            <img class="player_progress" src="img/system/progress/big/progress.png" />
+            <img id="player_progress" class="player_progress" src="img/system/progress/big/progress.png" />
             <img class="player_progress_bg" src="img/system/progress/big/progress_border.png" />
         </div>
         <!-- 打出去的牌 -->
         <div id="played_card_box"></div>
+        <div id="card_play_drop_zone" aria-hidden="true">
+            <span>拖到此处出牌</span>
+        </div>
         <!-- 可见弃牌堆（仅展示最上方一张） -->
         <div id="discard_pile_box" title="弃牌堆"></div>
         <!-- 玩家部分 Begin -->
@@ -227,7 +304,7 @@
             <!-- 按钮 End -->
             
             <!-- 玩家英雄头像、国家、名称 -->
-            <div id="player_head">
+            <div id="player_head" aria-hidden="true">
                 <img id="player_head_img" src="img/system/none.png" />
                 <div id="player_name_back">
                 </div>
@@ -252,6 +329,55 @@
             <div id="data_load_perc"></div>
         </div>
         <div id="explanation"></div>
+
+        <div id="story_intro" class="lifecycle_overlay" aria-modal="true" role="dialog">
+            <div class="story_panel">
+                <div class="story_campaigns" aria-label="阵营战役"></div>
+                <div class="story_timeline" aria-label="年代事件表"></div>
+                <span class="story_era"></span>
+                <h2></h2>
+                <div class="story_location"></div>
+                <div class="story_copy"></div>
+                <div class="story_objective"></div>
+                <div class="story_roster"></div>
+                <button id="story_continue" type="button">进入战局</button>
+                <button id="story_back" type="button">返回</button>
+            </div>
+        </div>
+
+        <div id="game_result" class="lifecycle_overlay" aria-modal="true" role="dialog">
+            <div class="result_glow"></div>
+            <div class="result_panel">
+                <div class="result_seal" aria-hidden="true"></div>
+                <h1 class="result_title"></h1>
+                <p class="result_subtitle"></p>
+                <p class="result_story"></p>
+                <div class="result_overview"></div>
+                <div class="result_statistics_scroll" role="region" aria-label="战局统计，可滚动" tabindex="0">
+                    <table class="result_statistics">
+                        <thead>
+                            <tr>
+                                <th>武将</th>
+                                <th>身份</th>
+                                <th>用牌</th>
+                                <th>响应</th>
+                                <th>技能</th>
+                                <th>伤害</th>
+                                <th>承伤</th>
+                                <th>回复</th>
+                                <th>击杀</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="result_actions">
+                    <button id="story_next" type="button">进入下一战</button>
+                    <button id="play_again" type="button">再来一局</button>
+                    <button id="result_main_menu" type="button">返回主菜单</button>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="load_imgs"></div>
 </body>

@@ -386,6 +386,64 @@ describe("standard card catalog migration", () => {
     expect(result.state.players.p3?.marks.chained).toBe(true);
   });
 
+  test("one Nullification only cancels one Savage Assault target", () => {
+    const state = createGameState({
+      seed: 2029,
+      players: [
+        {
+          id: "p1",
+          heroDefinitionId: "hero:p1",
+          maxHp: 4,
+          hand: [STANDARD_CARD.savageAssault]
+        },
+        {
+          id: "p2",
+          heroDefinitionId: "hero:p2",
+          maxHp: 4,
+          hand: [STANDARD_CARD.nullification]
+        },
+        { id: "p3", heroDefinitionId: "hero:p3", maxHp: 4 }
+      ]
+    });
+    let result = dispatch(
+      state,
+      {
+        type: "use-card",
+        playerId: "p1",
+        cardId: state.zones[handZone("p1")]![0]!,
+        targetIds: []
+      },
+      registry
+    );
+    while (result.pendingDecision?.playerId !== "p2") {
+      result = passCurrent(result);
+    }
+    result = dispatch(
+      result.state,
+      {
+        type: "respond-card",
+        playerId: "p2",
+        decisionId: result.pendingDecision.id,
+        cardId: result.state.zones[handZone("p2")]![0]!
+      },
+      registry
+    );
+    while (
+      result.pendingDecision?.type === "respond-card" &&
+      result.pendingDecision.responseKind === "nullification"
+    ) {
+      result = passCurrent(result);
+    }
+    expect(result.pendingDecision).toMatchObject({
+      type: "respond-card",
+      playerId: "p3",
+      responseKind: "slash"
+    });
+    result = passCurrent(result);
+    expect(result.state.players.p2?.hp).toBe(4);
+    expect(result.state.players.p3?.hp).toBe(3);
+  });
+
   test("weapon range and horses change slash targets from seat distance", () => {
     let state = createGameState({
       seed: 2028,
@@ -833,6 +891,79 @@ describe("standard card catalog migration", () => {
         })
       ])
     );
+  });
+
+  test("one Nullification skips one Amazing Grace choice, not the whole pool", () => {
+    const state = createGameState({
+      seed: 20311,
+      players: [
+        {
+          id: "p1",
+          heroDefinitionId: "hero:p1",
+          maxHp: 4,
+          hand: [STANDARD_CARD.amazingGrace]
+        },
+        {
+          id: "p2",
+          heroDefinitionId: "hero:p2",
+          maxHp: 4,
+          hand: [STANDARD_CARD.nullification]
+        },
+        { id: "p3", heroDefinitionId: "hero:p3", maxHp: 4 }
+      ],
+      drawPile: [
+        STANDARD_CARD.slash,
+        STANDARD_CARD.jink,
+        STANDARD_CARD.peach
+      ]
+    });
+    let result = dispatch(
+      state,
+      {
+        type: "use-card",
+        playerId: "p1",
+        cardId: state.zones[handZone("p1")]![0]!,
+        targetIds: []
+      },
+      registry
+    );
+    expect(result.state.eventLog).toContainEqual(
+      expect.objectContaining({
+        type: "CardsRevealed",
+        reason: "amazing-grace"
+      })
+    );
+    while (result.pendingDecision?.playerId !== "p2") {
+      result = passCurrent(result);
+    }
+    result = dispatch(
+      result.state,
+      {
+        type: "respond-card",
+        playerId: "p2",
+        decisionId: result.pendingDecision.id,
+        cardId: result.state.zones[handZone("p2")]![0]!
+      },
+      registry
+    );
+    while (result.pendingDecision) {
+      if (result.pendingDecision.type === "respond-card") {
+        result = passCurrent(result);
+      } else {
+        const choice = getLegalActions(result.state, registry).find(
+          (action) => action.type === "choose-cards"
+        )!;
+        result = dispatch(result.state, choice, registry);
+      }
+    }
+    expect(result.state.zones[handZone("p1")]).toHaveLength(0);
+    expect(result.state.zones[handZone("p2")]).toHaveLength(1);
+    expect(result.state.zones[handZone("p3")]).toHaveLength(1);
+    expect(result.state.eventLog.filter(
+      (event) =>
+        event.type === "CardCancelled" &&
+        event.cardId === state.zones[handZone("p1")]![0]
+    )).toHaveLength(1);
   });
 
   test("Fire Attack reveals, discards a matching suit, then deals fire damage", () => {

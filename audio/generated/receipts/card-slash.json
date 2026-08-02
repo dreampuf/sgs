@@ -1,0 +1,31 @@
+{
+  "assetId": "card.slash",
+  "command": "npm run audio:generate -- --id card.slash",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "b274146fac0908ac1a959d14863942908672c73627e13e5715e8f2468079a9f7",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 505,
+      "path": "audio/generated/envelopes/card-slash.json",
+      "sha256": "183b516a74a007033e4b6e33e24e07be2a27ad15b52b5250f7f007fabc3dc827"
+    },
+    {
+      "bytes": 34604,
+      "path": "audio/generated/wav/sfx/card-slash.wav",
+      "sha256": "e9e4febcc0b44511ad5aebc54eee8c48295f8da3150fcc373da265d416d9420c"
+    },
+    {
+      "bytes": 4961,
+      "path": "public/audio/sfx/card-slash.ogg",
+      "sha256": "0068c9e03b3dd29a0d555b4e1cf3ee69765c2009f5f5f880d5f06b27b87ba734"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1204,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "cc8fd56586c2a42597c221eae1e390c3495505984af2f512f30c7959e5fb820d",
+  "title": "杀"
+}

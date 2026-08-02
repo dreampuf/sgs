@@ -42,6 +42,7 @@ export type CardResolutionRule =
         skillIds: string[];
         cardColor?: "red" | "black";
         excludedDefinitionIds?: string[];
+        ownerHandEmpty?: boolean;
       };
     }
   | {
@@ -101,9 +102,10 @@ export function composeTargetResolution(
       (left, right) =>
         (left.priority ?? 0) - (right.priority ?? 0) ||
         left.id.localeCompare(right.id)
-    );
+  );
   let current = target.effects.map((effect) => structuredClone(effect));
   for (const rule of rules) {
+    if (current.length === 0) break;
     if (rule.scope === "each-target") {
       if (rule.operation.type === "exclude-target-with-skills") {
         const card = state.cards[context.cardId];
@@ -120,6 +122,10 @@ export function composeTargetResolution(
           !rule.operation.excludedDefinitionIds?.includes(definition.id) &&
           rule.operation.skillIds.some((skillId) =>
             state.players[target.targetId]?.skillIds.includes(skillId)
+          ) &&
+          (
+            !rule.operation.ownerHandEmpty ||
+            (state.zones[`zone:hand:${target.targetId}`]?.length ?? 0) === 0
           )
         ) {
           current = [];
@@ -150,6 +156,7 @@ export function composeTargetResolution(
       type: "negatable",
       sourceId: context.sourceId,
       cardId: context.cardId,
+      targetId: target.targetId,
       responderIds: state.turnOrder.filter(
         (playerId) => state.players[playerId]?.alive
       ),
@@ -217,6 +224,7 @@ export function composeCardResolution(
     (rule) =>
       rule.scope === "target-or-card" &&
       !hasTargetScopes &&
+      !definition.tags?.includes("resolution:per-target-nullification") &&
       !isZeroTargetAlternative(definition, context.targetIds)
   );
   const responderIds = state.turnOrder.filter(

@@ -1,0 +1,141 @@
+{
+  "schema": "sgs.source-knowledge-manifest.v1",
+  "generatedAt": "2026-08-01T19:46:28.097Z",
+  "method": {
+    "deterministic": [
+      "chapter and volume indexing",
+      "exact alias matching",
+      "reign-title matching",
+      "appearance cue extraction",
+      "MOE idiom trie matching"
+    ],
+    "curated": [
+      "major timeline",
+      "game person aliases",
+      "major places",
+      "Three Kingdoms expressions and source classification"
+    ],
+    "caveat": "自动识别结果是检索索引，不等于学术定论；用于成品前须阅读所引原文，并复核时代、地名和裴注层次。"
+  },
+  "counts": {
+    "units": 185,
+    "stories": 240,
+    "biographySections": 384,
+    "gamePeople": 49,
+    "places": 78,
+    "timelineMentions": 881,
+    "curatedTimelineEvents": 27,
+    "appearancePassages": 139,
+    "curatedVisualPassages": 34,
+    "citedWorks": 408,
+    "moeDictionaryRows": 5489,
+    "matchedMoeIdioms": 430,
+    "curatedExpressions": 34
+  },
+  "upstream": [
+    {
+      "path": "corpus/sanguoyanyi.jsonl",
+      "bytes": 1913804,
+      "sha256": "259c3c3d4ac24a91df48cbd6310d437a880b796c7ba631ce1fbae7c401eb883d"
+    },
+    {
+      "path": "corpus/sanguozhi.jsonl",
+      "bytes": 2571928,
+      "sha256": "191e03f1fbad02d6078efaf237f3dbb2c20eeb859c8bf66b371afcac2b1bfafd"
+    },
+    {
+      "path": "raw/sanguoyanyi-wikisource-zh.epub",
+      "bytes": 1178610,
+      "sha256": "a2d08724f6e182ac2a6f38a50ba2018391e9265a5853a47fbcca195d5a532966"
+    },
+    {
+      "path": "raw/sanguozhi-wikisource-zh.epub",
+      "bytes": 1647572,
+      "sha256": "919f82e842a075f3fdff8bc4f191f2e6ebc8be90dac5a2aa938ccd82f257b63a"
+    },
+    {
+      "path": "raw/dict_idioms_2020_20260625.zip",
+      "bytes": 5324394,
+      "sha256": "99df354539f251c32bd923567a06af26cf3f4790690738d277e68c4a3cebc7aa"
+    },
+    {
+      "path": "curation.json",
+      "bytes": 32385,
+      "sha256": "7fccfdaf2de027381b4dd6073e36307a7816f1fbdfeb22fdef9ee004f4bfde2c"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "knowledge/units.jsonl",
+      "records": 185,
+      "bytes": 101223,
+      "sha256": "45fc72db92b16600f287ea771420fe432c3aa6799d0b449c9adefdcca47675c1"
+    },
+    {
+      "path": "knowledge/stories.jsonl",
+      "records": 240,
+      "bytes": 64687,
+      "sha256": "9b8a22d4eea8bce631dff984ca5b6c1c7b5df405895180236669f363f29fcd09"
+    },
+    {
+      "path": "knowledge/biography-sections.jsonl",
+      "records": 384,
+      "bytes": 2453558,
+      "sha256": "96fa42e98d33ed4f4c2015104893e68871821f75c32c11577f98b65c023d7768"
+    },
+    {
+      "path": "knowledge/people-game.jsonl",
+      "records": 49,
+      "bytes": 219723,
+      "sha256": "1759675d26fc94fafa896a802dfb92b02457b58f7e51cce12c7fd9e3ddc3b2af"
+    },
+    {
+      "path": "knowledge/places.jsonl",
+      "records": 78,
+      "bytes": 940109,
+      "sha256": "1a2b27f8431ec9684c5a5d90c85fe2769e43497bc57cdd979f745370b0e7bad8"
+    },
+    {
+      "path": "knowledge/timeline-mentions.jsonl",
+      "records": 881,
+      "bytes": 732277,
+      "sha256": "8f2a5501a1aa9a570ac920d88a88fd73c7f6b93c2a0757707c84b3f6dfa9650d"
+    },
+    {
+      "path": "knowledge/timeline-curated.jsonl",
+      "records": 27,
+      "bytes": 50770,
+      "sha256": "16b923bad78d95dbab8556a782a28375cf33fef9bf749ca299f6cf1d121aed00"
+    },
+    {
+      "path": "knowledge/appearance-passages.jsonl",
+      "records": 139,
+      "bytes": 101287,
+      "sha256": "567a3305e97ff9a7c5fdcf4a0e9e8a281fb3c9f3c9a069cef6de5b84c1acdc8a"
+    },
+    {
+      "path": "knowledge/visual-passages-curated.jsonl",
+      "records": 34,
+      "bytes": 43925,
+      "sha256": "cbefa4d58c556dba6ae996a2df717a4c21ea8e220834de0416e14b76c7d8e4e8"
+    },
+    {
+      "path": "knowledge/cited-works.jsonl",
+      "records": 408,
+      "bytes": 584998,
+      "sha256": "2a121629801e6423fd3b7eca2715d6ff043b474ac2c3f6e7762e42bcb3e2b663"
+    },
+    {
+      "path": "knowledge/idiom-matches-moe.jsonl",
+      "records": 430,
+      "bytes": 697464,
+      "sha256": "c493743b94f5cc3a81148f61613111b681b4ca8b682261198c81be77cf769ef8"
+    },
+    {
+      "path": "knowledge/expressions-curated.jsonl",
+      "records": 34,
+      "bytes": 48811,
+      "sha256": "fc5eb9d9d40a8209b8abd15696b27144cae25c97ae21bfce58a3206564f34c48"
+    }
+  ]
+}

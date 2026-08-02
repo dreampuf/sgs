@@ -1,0 +1,20 @@
+{
+  "assetId": "card.nullification",
+  "durationSeconds": 0.82,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "rising cancellation sweep",
+    "glass partials"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.88,
+    "pitchHz": 330,
+    "weight": 0.48
+  },
+  "recipe": "nullify",
+  "schemaVersion": 1,
+  "seed": 1214,
+  "specSha256": "aa0be2e75740206beb2ab0c3229806d3ac4f800e6bd7fcad6401d10bcca37b94",
+  "title": "无懈可击"
+}

@@ -2,6 +2,7 @@
 
 (function() {
     var instant = false,
+        speed = 1,
         generation = 0,
         activeAnimations = new Set(),
         activeTasks = new Set(),
@@ -20,7 +21,7 @@
             return [];
         if(target.nodeType)
             return [target];
-        if(target.jquery || typeof target.length == 'number')
+        if(typeof target.length == 'number')
             return Array.prototype.slice.call(target).filter(function(item) {
                 return item && item.nodeType;
             });
@@ -85,9 +86,13 @@
         });
     };
 
+    var scaledMilliseconds = function(milliseconds) {
+        return Math.max(0, Number(milliseconds) || 0) / speed;
+    };
+
     var animateElement = function(element, keyframes, options) {
         options = options || {};
-        var duration = instant ? 0 : Math.max(0, Number(options.duration) || 0),
+        var duration = instant ? 0 : scaledMilliseconds(options.duration),
             finalFrame = keyframes[keyframes.length - 1] || {},
             shouldApplyFinal = options.applyFinal !== false;
 
@@ -101,7 +106,7 @@
 
         var animation = element.animate(keyframes, {
                 duration: duration,
-                delay: options.delay || 0,
+                delay: scaledMilliseconds(options.delay),
                 easing: options.easing || 'ease',
                 fill: 'forwards',
                 iterations: options.iterations || 1,
@@ -154,6 +159,7 @@
     var delay = function(milliseconds) {
         if(instant || milliseconds <= 0)
             return Promise.resolve();
+        milliseconds = scaledMilliseconds(milliseconds);
         return trackTask(new Promise(function(resolve) {
             var timer = window.setTimeout(function() {
                 activeDelays.delete(timer);
@@ -232,6 +238,23 @@
         },
         isInstant: function() {
             return instant;
+        },
+        setSpeed: function(value) {
+            speed = Math.max(1, Math.min(4, Number(value) || 1));
+            if(document.documentElement) {
+                document.documentElement.setAttribute(
+                    'data-sgs-motion-speed',
+                    speed.toFixed(2)
+                );
+            }
+            return speed;
+        },
+        setPlayerCount: function(playerCount) {
+            var count = Math.max(2, Math.min(20, Number(playerCount) || 4));
+            return this.setSpeed(1 + Math.max(0, count - 4) * 0.125);
+        },
+        getSpeed: function() {
+            return speed;
         }
     };
 })(sgs);

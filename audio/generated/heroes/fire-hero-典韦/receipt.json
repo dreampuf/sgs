@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "fire:hero:典韦",
+  "inputSha256": "43222c0f2148421e26873a6ca3a52091f20baf2c0791983a7fde28f48b39746e",
+  "outputs": [
+    {
+      "bytes": 10901,
+      "path": "audio/generated/heroes/fire-hero-典韦/theme-score.json",
+      "sha256": "372d0f392013010df0d9bbdefab0b98f91279bed6e80638502148630bc96ab3d"
+    },
+    {
+      "bytes": 292,
+      "path": "audio/generated/heroes/fire-hero-典韦/signature-envelope.json",
+      "sha256": "1cd4b3d011c3932c68fcc9e9b0a5f7c7129c2e603b88bfb0d4ba6a4311c5cde0"
+    },
+    {
+      "bytes": 702,
+      "path": "audio/generated/heroes/fire-hero-典韦/voice-script.json",
+      "sha256": "2063c4014b1fa2255a90f998fe313cd066b9a8a140567c12de358b02f8316add"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/fire-hero-典韦/wav/theme.wav",
+      "sha256": "6a8d2c520b1b65ed28bb1c95287ea64eee5b1cac19a2069b52dc4db06cd42add"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/fire-hero-典韦/wav/signature.wav",
+      "sha256": "89af766bc6d5f93c0d32f20c36bb7a0f89fc8ff6cf417b7001e4e5839cef6c11"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/fire-hero-典韦/theme.ogg",
+      "sha256": "17059a528899b5e9846a4d93a6c63b53cbafffcf6b1497692c93593ef89a1a1d"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/fire-hero-典韦/signature.ogg",
+      "sha256": "6d9e2ad33afeb9172fa84804d52ebc200338661735fc905813ab3033d417fddc"
+    },
+    {
+      "bytes": 121866,
+      "path": "audio/generated/heroes/fire-hero-典韦/voice-source/signature.aiff",
+      "sha256": "9c1f09091e2a5407347ac68fada320cdb8899d084365c527a336c7155759edb0"
+    },
+    {
+      "bytes": 170992,
+      "path": "audio/generated/heroes/fire-hero-典韦/wav/voice-signature.wav",
+      "sha256": "54f8fa1505c1e78e4929e56f1d75fef9f94642ecde463181553655a280ed0580"
+    },
+    {
+      "bytes": 27152,
+      "path": "public/audio/heroes/fire-hero-典韦/voice-signature.ogg",
+      "sha256": "55731b33398b52b36ba9ffdb82f5176068aa74cb3af6b132f10f41d227a5789a"
+    },
+    {
+      "bytes": 102808,
+      "path": "audio/generated/heroes/fire-hero-典韦/voice-source/victory.aiff",
+      "sha256": "3d10c0c7a20e52ef4ac7ffe2a6d83f14ecbbe2e577f48a6fcbd5db005de5eafe"
+    },
+    {
+      "bytes": 143334,
+      "path": "audio/generated/heroes/fire-hero-典韦/wav/voice-victory.wav",
+      "sha256": "ee1985349e237472f02e1055dd7f9bfeab3b10f08476a06418ba3a8c1adf069c"
+    },
+    {
+      "bytes": 22931,
+      "path": "public/audio/heroes/fire-hero-典韦/voice-victory.ogg",
+      "sha256": "bc7b0159f1960fc3256e5a1cdf6d05915336600faf3637fe7d34c78463ed45e7"
+    },
+    {
+      "bytes": 120192,
+      "path": "audio/generated/heroes/fire-hero-典韦/voice-source/death.aiff",
+      "sha256": "ef84ddb654ce4cfe8e66b2ef4de2bff5e0d35b6239f04f5a4d981c2b296fdca2"
+    },
+    {
+      "bytes": 168562,
+      "path": "audio/generated/heroes/fire-hero-典韦/wav/voice-death.wav",
+      "sha256": "8bb32810f871218b027c004d6a80f7b9f74248b545ff8d796cbc6d2a25bfcf90"
+    },
+    {
+      "bytes": 26750,
+      "path": "public/audio/heroes/fire-hero-典韦/voice-death.ogg",
+      "sha256": "880717f33169a14ebaec25c17b9af60c2f17e9bd56de0bfaf75ca398c977641c"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3601,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Rocko (Chinese (China mainland))",
+    "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+    "rate": 180,
+    "style": "fierce"
+  }
+}

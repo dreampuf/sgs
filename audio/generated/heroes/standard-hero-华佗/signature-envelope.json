@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:华佗.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:华佗",
+  "kingdom": "qun",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "aged timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13402,
+  "style": "aged"
+}

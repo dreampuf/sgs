@@ -85,7 +85,7 @@
 - `data.js`：旧矩阵夹具以及 UI 图片/名称展示目录，不再决定生产身份、武将技能、牌堆或规则。
 - `logic_func.js`：无规则权威的通用小工具。
 - `ui_shell.js`、`main.js`、`interface.js`、`animation.js`：创建和投影 UI ViewModel、提交 Core 命令、消费领域事件。
-- `CoreBoutAdapter`：把现有 jQuery 页面适配到 `GameSession`；公开方法直接接收卡牌和目标，不再传递万能 `Operate` 对象。
+- `CoreBoutAdapter`：把原生 DOM 页面适配到 `GameSession`；公开方法直接接收卡牌和目标，不再传递万能 `Operate` 对象。
 
 因此，旧文件仍存在不代表旧协议仍在生产路径。后续若重写 View，可以删除 adapter 和展示目录副本，但那是 UI 替换，不是规则迁移的未完成项。
 

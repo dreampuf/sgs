@@ -1,0 +1,31 @@
+{
+  "assetId": "card.iron-chain",
+  "command": "npm run audio:generate -- --id card.iron-chain",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "3bc48d9e545199fb73a2241a3279892c9c23dff8ef853d84ea32aefc26ae9cce",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 534,
+      "path": "audio/generated/envelopes/card-iron-chain.json",
+      "sha256": "01e7c101cf022f338292860a73b1a48816db91fe8fc0ba0dd925aea198bb7733"
+    },
+    {
+      "bytes": 55084,
+      "path": "audio/generated/wav/sfx/card-iron-chain.wav",
+      "sha256": "6e282c19110026687174e5d04eed01ff832f8cc31332b95d7fa378880e4969a6"
+    },
+    {
+      "bytes": 8843,
+      "path": "public/audio/sfx/card-iron-chain.ogg",
+      "sha256": "e07dc8b3adced807881ca608ec350464c8411f342c63622b1ea74daacb99787b"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1217,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "3021a4d9d6c204eefb53d06af3471ccd7d6e9f8e3ce75f9615d4ea3bc7c7ccd9",
+  "title": "铁索连环"
+}

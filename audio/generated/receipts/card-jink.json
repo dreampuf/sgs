@@ -1,0 +1,31 @@
+{
+  "assetId": "card.jink",
+  "command": "npm run audio:generate -- --id card.jink",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "8de1ae5f0a542c7736eb68afb1aca1d82747512aa27ea044ea21b72fba77d466",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 522,
+      "path": "audio/generated/envelopes/card-jink.json",
+      "sha256": "f944981f05da5be8b3404d465ceeea1ffc3d12586d5ac39aa2a11b702be3fc48"
+    },
+    {
+      "bytes": 26924,
+      "path": "audio/generated/wav/sfx/card-jink.wav",
+      "sha256": "918525ac49a52591fc164c2c3abe756fe70f131ee7ca355f94c5105d936281ec"
+    },
+    {
+      "bytes": 5066,
+      "path": "public/audio/sfx/card-jink.ogg",
+      "sha256": "ad3d9ac421d1ac4d3d371a4be539f36d17ca63a921eca78dbfb6955485ef2264"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1207,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "741880c54660301417a13ada25b1264808e2fbd131c0fae527bd9a415d3fb508",
+  "title": "闪"
+}

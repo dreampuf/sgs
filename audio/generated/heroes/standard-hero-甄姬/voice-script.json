@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:甄姬",
+  "heroName": "甄姬",
+  "inspiration": "借鉴洛神意象与《三国演义》中甄氏身世，台词为原创改写。",
+  "lines": {
+    "death": "洛水东流，此梦亦休。",
+    "signature": "凌波微步，洛水无尘。",
+    "victory": "清辉照水，乱云终散。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=100,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 164,
+  "schemaVersion": 1,
+  "style": "graceful",
+  "voice": "Tingting"
+}

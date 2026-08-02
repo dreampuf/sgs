@@ -272,6 +272,30 @@ export class LegalActionResolver {
     );
     return materialSets.flatMap((materialCardIds) =>
       targetSets.filter((targetIds) => {
+        if (rule.cardUse) {
+          const sourceId = rule.cardUse.source === "actor"
+            ? actorId
+            : targetIds[rule.cardUse.source.targetIndex];
+          const projectedTargets = rule.cardUse.targetIndexes.map(
+            (index) => targetIds[index]
+          );
+          if (!sourceId || projectedTargets.some((targetId) => !targetId)) {
+            return false;
+          }
+          const legalProjectedTargets = this.#catalog.targetSets(
+            state,
+            sourceId,
+            rule.cardUse.definitionId
+          );
+          if (!legalProjectedTargets.some((candidate) =>
+            candidate.length === projectedTargets.length &&
+            candidate.every((targetId, index) =>
+              targetId === projectedTargets[index]
+            )
+          )) {
+            return false;
+          }
+        }
         if (
           rule.constraints?.includes(
             "material-count-equals-target-hand-difference"
@@ -389,7 +413,8 @@ export class LegalActionResolver {
         ? state.cards[action.cardId]?.definitionId
         : action.definitionId;
       if (!definitionId) return true;
-      const tags = this.#catalog.card(definitionId).tags ?? [];
+      const definition = this.#catalog.card(definitionId);
+      const tags = definition.tags ?? [];
       const suit = action.type === "use-card"
         ? this.#catalog.effectiveCardSuit(
             state,
@@ -408,12 +433,17 @@ export class LegalActionResolver {
         : suit === "club" || suit === "spade"
           ? "black"
           : undefined;
+      const matchesCard =
+        rule.definitionIds?.includes(definitionId) === true ||
+        rule.cardCategories?.includes(definition.category) === true ||
+        rule.cardTags?.some((tag) => tags.includes(tag)) === true;
       return (
-        !rule.cardTags.some((tag) => tags.includes(tag)) ||
+        !matchesCard ||
         (
           rule.cardColor !== undefined &&
           rule.cardColor !== color
         ) ||
+        rule.excludedDefinitionIds?.includes(definitionId) === true ||
         rule.excludedCardTags?.some((tag) => tags.includes(tag)) === true
       );
     });

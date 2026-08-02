@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.wind:hero:曹仁.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "wind:hero:曹仁",
+  "kingdom": "wei",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "tactical timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13502,
+  "style": "tactical"
+}

@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:关羽",
+  "heroName": "关羽",
+  "inspiration": "借鉴《三国演义》中温酒斩将、千里走单骑与忠义形象，台词为原创改写。",
+  "lines": {
+    "death": "大义无亏，唯恨未归。",
+    "signature": "青龙所向，邪佞皆斩。",
+    "victory": "义字当先，千里亦归。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

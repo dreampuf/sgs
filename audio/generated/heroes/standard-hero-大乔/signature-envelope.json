@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:大乔.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:大乔",
+  "kingdom": "wu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "graceful timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13307,
+  "style": "graceful"
+}

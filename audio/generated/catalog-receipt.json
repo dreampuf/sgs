@@ -1,0 +1,13 @@
+{
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "output": {
+    "bytes": 7092,
+    "path": "public/audio/catalog.json",
+    "sha256": "5212cfcb95c42c90c86726136c7d30f6f78d859592a3697ad93991045bda5da4"
+  },
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "ab2d8e9220c19b7f63d65bb2733b2f566728d9a0dd7a84eb0d40a072409e58ff"
+}

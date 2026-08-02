@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "wind:hero:周泰",
+  "inputSha256": "f4a490b11eef65dad37d124c80507ebd74ddf51bbd25d1a6fc35b426cee5b0f5",
+  "outputs": [
+    {
+      "bytes": 11000,
+      "path": "audio/generated/heroes/wind-hero-周泰/theme-score.json",
+      "sha256": "27282a9c22236fda20d3b60f7c191ee4e0e3103d8286f0a9b1e955ad347fa476"
+    },
+    {
+      "bytes": 291,
+      "path": "audio/generated/heroes/wind-hero-周泰/signature-envelope.json",
+      "sha256": "e8f8d48ed6fffd8a027c2f7810ba206b9277664856b9e282814b377f666ef9e4"
+    },
+    {
+      "bytes": 699,
+      "path": "audio/generated/heroes/wind-hero-周泰/voice-script.json",
+      "sha256": "720f3062cdc09632b0602ae94a99859c5e4032c5fc8c28c1c4f7c0e0528c19d4"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/wind-hero-周泰/wav/theme.wav",
+      "sha256": "e73f1917868d2ec163275cd8dd63b880a4ff103b725d8bd0fd95485b2f83a2b1"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/wind-hero-周泰/wav/signature.wav",
+      "sha256": "3258fe191447c8b0e1885083ea39e422f611d98dbcfa070a89d4793093994697"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/wind-hero-周泰/theme.ogg",
+      "sha256": "3eaab0573b4e0fa9fe9d87f71bc188ce39cdfa384d216453f5bf5a1dbddac93c"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/wind-hero-周泰/signature.ogg",
+      "sha256": "f015449820e1f9a7f5edaf169d1c410b98166a880fd589c05bd0639a6ae0fdd9"
+    },
+    {
+      "bytes": 113852,
+      "path": "audio/generated/heroes/wind-hero-周泰/voice-source/signature.aiff",
+      "sha256": "09d6868fa4f340746f9a0bb0b6d73faef540346a209a3853985aacf03c04d236"
+    },
+    {
+      "bytes": 159362,
+      "path": "audio/generated/heroes/wind-hero-周泰/wav/voice-signature.wav",
+      "sha256": "dedb7ecfb7efbeba79241a433cfa0cc774029042840c5c40350732a2c956c2dd"
+    },
+    {
+      "bytes": 25343,
+      "path": "public/audio/heroes/wind-hero-周泰/voice-signature.ogg",
+      "sha256": "9d9cddcc38ff5ca193b0d2fa546c1048f902935ffac85349ad16a3ad2ce9b008"
+    },
+    {
+      "bytes": 114106,
+      "path": "audio/generated/heroes/wind-hero-周泰/voice-source/victory.aiff",
+      "sha256": "905af52e25f71065e030cfbd75b7831f7d48e2aa94c25f2538a81185da909356"
+    },
+    {
+      "bytes": 159730,
+      "path": "audio/generated/heroes/wind-hero-周泰/wav/voice-victory.wav",
+      "sha256": "681c324733443e2b66eff7f4d5f029ade17c9f02fbbf97f40c1d3847996ff85e"
+    },
+    {
+      "bytes": 25544,
+      "path": "public/audio/heroes/wind-hero-周泰/voice-victory.ogg",
+      "sha256": "5ef3205b1fc6fdf884b83a8558d6c2e61df63517be77c437670c521a098055bf"
+    },
+    {
+      "bytes": 101140,
+      "path": "audio/generated/heroes/wind-hero-周泰/voice-source/death.aiff",
+      "sha256": "078d407c7ff24391dd01d8a58c25431ed7919668aa6ba0cb34299646f9203c6f"
+    },
+    {
+      "bytes": 140914,
+      "path": "audio/generated/heroes/wind-hero-周泰/wav/voice-death.wav",
+      "sha256": "0671b23db95d2e6b9eca8bc66ebe7cdfc09eea665dc3609323a4045dfeeb0d05"
+    },
+    {
+      "bytes": 22529,
+      "path": "public/audio/heroes/wind-hero-周泰/voice-death.ogg",
+      "sha256": "6e55cafd41fb042c8e57ffe0ac2d722fafffea85044c4dbafd20c3070ae0aa00"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3506,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Rocko (Chinese (China mainland))",
+    "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+    "rate": 180,
+    "style": "fierce"
+  }
+}

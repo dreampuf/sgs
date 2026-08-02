@@ -1,0 +1,20 @@
+{
+  "assetId": "card.peach",
+  "durationSeconds": 0.82,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "ascending pentatonic motif",
+    "soft shimmer"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.58,
+    "pitchHz": 392,
+    "weight": 0.28
+  },
+  "recipe": "heal",
+  "schemaVersion": 1,
+  "seed": 1208,
+  "specSha256": "9d608e05ff62cc072819754f61e2ce80ca9c644bd5a75781a9684b8e61ff6020",
+  "title": "桃"
+}

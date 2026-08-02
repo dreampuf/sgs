@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.fire:hero:卧龙诸葛亮.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "fire:hero:卧龙诸葛亮",
+  "kingdom": "shu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "mystical timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13604,
+  "style": "mystical"
+}

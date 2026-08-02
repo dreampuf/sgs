@@ -1,0 +1,31 @@
+{
+  "assetId": "combat.damage",
+  "command": "npm run audio:generate -- --id combat.damage",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "32167ee5d8fa2cd26889a59493913ac1f7ab0419692532cd1dd377b29d823d37",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 521,
+      "path": "audio/generated/envelopes/combat-damage.json",
+      "sha256": "3fc6f1b7d7b19fba4467fd9cb9d63cf3468cd008f2c0e389ed77d23aa1a41454"
+    },
+    {
+      "bytes": 35884,
+      "path": "audio/generated/wav/sfx/combat-damage.wav",
+      "sha256": "ca1e5c3df9cf23b1d84f32da1a4438945d53579d5ede965f40cb2baa40040e12"
+    },
+    {
+      "bytes": 5531,
+      "path": "public/audio/sfx/combat-damage.ogg",
+      "sha256": "d0ac855d8317798ff794b61c9d9b644e990b2c95c5316dc40c4f4248d41e060a"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1301,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "4d9c93cd734bb6749b4094546847f1a8682ff5e1d9438b4f32518c9d722174b8",
+  "title": "普通伤害"
+}

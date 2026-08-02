@@ -1,0 +1,31 @@
+{
+  "assetId": "combat.fire-damage",
+  "command": "npm run audio:generate -- --id combat.fire-damage",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "916b230b7a9e15e4bf14affbecbfc0f6d5229cedc72e81d028939cf96cfa1716",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 553,
+      "path": "audio/generated/envelopes/combat-fire-damage.json",
+      "sha256": "06b51b3982442c37e3a2a5f147f4a516406290e9e436a18d4a1fd46e34100612"
+    },
+    {
+      "bytes": 52524,
+      "path": "audio/generated/wav/sfx/combat-fire-damage.wav",
+      "sha256": "5bf5fb9c09f9ee29b6e30fdfb47d37b27e2a9546db58393bc34bf0364426a70a"
+    },
+    {
+      "bytes": 7494,
+      "path": "public/audio/sfx/combat-fire-damage.ogg",
+      "sha256": "30de4e72d5bf17cc4631db340965ce6f45c52eec39f2820de6360b471922e1a4"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1302,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "d72f5b8cdf039968bfbf224c5037883403f341f5fa5abfd953f7242d4f91de34",
+  "title": "火焰伤害"
+}

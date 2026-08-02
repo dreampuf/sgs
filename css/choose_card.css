@@ -4,6 +4,7 @@
 #choose_box_bgcover
 {
     position:absolute;
+    z-index:40;
     margin: 0 auto;
     float:top;
     width: 1000px;
@@ -16,6 +17,7 @@
 #choose_box
 {
     position: absolute;
+    z-index:41;
     width: 100%;
     height: 100%;
     left: 0;
@@ -53,6 +55,24 @@
 #choose_box_title img, #choose_box_title font
 {
     left:0;
+}
+.choose_box_context
+{
+    position:absolute;
+    box-sizing:border-box;
+    top:28px;
+    left:18px;
+    right:18px;
+    min-height:26px;
+    padding:5px 9px;
+    border:1px solid rgba(210, 171, 91, 0.5);
+    border-radius:3px;
+    color:#f0dfae;
+    background:rgba(35, 24, 14, 0.82);
+    font-size:12px;
+    line-height:16px;
+    text-align:center;
+    white-space:normal;
 }
 #choose_cards
 {
@@ -123,6 +143,234 @@
 .hidden_choice_card > img
 {
     object-fit:cover;
+}
+
+/* 观星：一次完成牌堆顶/底的排序。 */
+.guanxing_arrange_box #choose_box_content
+{
+    overflow:hidden;
+    border:1px solid rgba(222, 186, 108, 0.72);
+    background:
+        linear-gradient(rgba(34, 24, 15, 0.93), rgba(18, 13, 9, 0.97)),
+        url("../img/system/card_choose_bg.png") center/cover;
+}
+.guanxing_arrange_box #choose_box_title
+{
+    top:8px;
+    height:25px;
+    line-height:25px;
+    border-radius:2px;
+    background:linear-gradient(90deg, transparent, #6e3f20, transparent);
+}
+.guanxing_arrange_box .choose_box_context
+{
+    top:38px;
+}
+.guanxing_board
+{
+    position:absolute;
+    display:flex;
+    align-items:stretch;
+    gap:12px;
+    top:80px;
+    left:18px;
+    right:18px;
+    height:158px;
+}
+.guanxing_zone
+{
+    position:relative;
+    min-width:0;
+    padding:32px 8px 7px;
+    border:1px solid rgba(198, 158, 82, 0.55);
+    border-radius:4px;
+    background:rgba(16, 12, 9, 0.68);
+    box-shadow:inset 0 0 18px rgba(0, 0, 0, 0.55);
+}
+.guanxing_top_zone
+{
+    flex:3 1 0;
+}
+.guanxing_bottom_zone
+{
+    flex:2 1 0;
+}
+.guanxing_zone_heading
+{
+    position:absolute;
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    top:7px;
+    left:10px;
+    right:10px;
+    color:#e8d39e;
+    font-size:12px;
+    white-space:nowrap;
+}
+.guanxing_zone_heading strong
+{
+    color:#fff1bf;
+    font-size:14px;
+}
+.guanxing_zone_heading span
+{
+    overflow:hidden;
+    color:#bba678;
+    text-overflow:ellipsis;
+}
+.guanxing_sequence
+{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    box-sizing:border-box;
+    width:100%;
+    height:119px;
+    padding:3px;
+    overflow-x:auto;
+    border:1px dashed rgba(218, 185, 111, 0.38);
+    border-radius:3px;
+}
+.guanxing_sequence:empty::after
+{
+    display:block;
+    width:100%;
+    color:#8f805f;
+    font-size:12px;
+    text-align:center;
+    content:"拖到这里";
+}
+.guanxing_card
+{
+    position:relative;
+    flex:0 0 74px;
+    width:74px;
+    height:104px;
+    overflow:hidden;
+    border:1px solid rgba(244, 215, 143, 0.75);
+    border-radius:4px;
+    cursor:grab;
+    touch-action:none;
+    user-select:none;
+    box-shadow:2px 2px 6px rgba(0, 0, 0, 0.8);
+    transition:transform 100ms ease, box-shadow 100ms ease;
+}
+.guanxing_card:hover,
+.guanxing_card:focus
+{
+    outline:none;
+    transform:translateY(-3px);
+    box-shadow:0 0 0 2px rgba(246, 210, 122, 0.65),
+        3px 4px 8px rgba(0, 0, 0, 0.85);
+}
+.guanxing_card.dragging
+{
+    cursor:grabbing;
+    opacity:0.46;
+}
+.guanxing_card > img
+{
+    display:block;
+    width:74px;
+    height:104px;
+}
+.guanxing_card .pat_num
+{
+    transform:scale(0.8);
+    transform-origin:top left;
+}
+.guanxing_order
+{
+    position:absolute;
+    z-index:3;
+    right:3px;
+    bottom:3px;
+    min-width:16px;
+    height:16px;
+    border:1px solid #e7c97f;
+    border-radius:9px;
+    color:#fff4c7;
+    background:rgba(65, 37, 18, 0.9);
+    font-size:11px;
+    line-height:16px;
+    text-align:center;
+    pointer-events:none;
+}
+.guanxing_deck_divider
+{
+    position:relative;
+    flex:0 0 42px;
+    border-left:2px solid rgba(232, 202, 133, 0.72);
+}
+.guanxing_deck_divider span
+{
+    position:absolute;
+    bottom:4px;
+    left:8px;
+    width:32px;
+    color:#d8c38d;
+    font-size:11px;
+    text-align:center;
+}
+.guanxing_deck_stack
+{
+    position:absolute;
+    top:40px;
+    left:8px;
+    width:31px;
+    height:44px;
+}
+.guanxing_deck_stack i
+{
+    position:absolute;
+    width:28px;
+    height:40px;
+    border:1px solid #b99a5d;
+    border-radius:2px;
+    background:#5a321b url("../img/system/card_back.png") center/cover;
+    box-shadow:1px 1px 3px #000;
+}
+.guanxing_deck_stack i:nth-child(2)
+{
+    left:3px;
+    top:3px;
+}
+.guanxing_deck_stack i:nth-child(3)
+{
+    left:6px;
+    top:6px;
+}
+.guanxing_actions
+{
+    position:absolute;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:16px;
+    left:18px;
+    right:18px;
+    bottom:15px;
+    color:#bca979;
+    font-size:12px;
+}
+#guanxing_confirm
+{
+    min-width:104px;
+    height:31px;
+    border:1px solid #d8b76e;
+    border-radius:3px;
+    color:#fff0bd;
+    background:linear-gradient(#81502b, #4f2b17);
+    cursor:pointer;
+    box-shadow:0 1px 3px #000;
+}
+#guanxing_confirm:hover,
+#guanxing_confirm:focus
+{
+    outline:none;
+    color:#fff8df;
+    background:linear-gradient(#a36632, #64351a);
 }
 /* 身份 */
 #identity

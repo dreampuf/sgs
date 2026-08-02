@@ -1,0 +1,21 @@
+{
+  "catalog": {
+    "bytes": 94357,
+    "path": "public/audio/heroes/catalog.json",
+    "sha256": "d78b17ca95bd0925eaef66908181330ebeebbf6f2ddf9937cc28a7283798a9ab"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroCount": 49,
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "source": "audio/specs/heroes.json",
+  "sourceSha256": "80b5465d893f013b1af654d96d00205cc242497325e2a93acd5f05fc1ec20eee"
+}

@@ -206,6 +206,10 @@ export interface WorkflowRunContext {
     definitionId: CardDefinitionId,
     targetId: PlayerId
   ): boolean;
+  canBeTargetedByDefinition(
+    definitionId: CardDefinitionId,
+    targetId: PlayerId
+  ): boolean;
   distanceBetween(sourceId: PlayerId, targetId: PlayerId): number;
   attackRange(playerId: PlayerId): number;
 }
@@ -403,6 +407,16 @@ export interface ActiveAbilityRule {
     equals: number | boolean;
   };
   grantedToKingdom?: HeroDefinition["kingdom"];
+  /**
+   * Some active skills ultimately use a normal card definition. Declaring
+   * that projection lets target legality (空城、谦逊, distance, and future
+   * restrictions) be checked before the skill is offered to UI or AI.
+   */
+  cardUse?: {
+    definitionId: CardDefinitionId;
+    source: "actor" | { targetIndex: number };
+    targetIndexes: number[];
+  };
   constraints?: Array<
     | "material-count-equals-target-hand-difference"
     | "equipped-weapon-means-distance-one"
@@ -431,10 +445,13 @@ export interface CardPropertyAbilityRule {
 export type LegalActionAbilityRule =
   | {
       type: "forbid-targeting-owner";
-      cardTags: string[];
+      cardTags?: string[];
+      cardCategories?: CardDefinition["category"][];
+      definitionIds?: CardDefinitionId[];
       ownerHandEmpty?: boolean;
       cardColor?: "red" | "black";
       excludedCardTags?: string[];
+      excludedDefinitionIds?: CardDefinitionId[];
     }
   | {
       type: "allow-end-turn";
@@ -532,6 +549,62 @@ export class ContentRegistry {
       }
     }
     return rules;
+  }
+
+  #definitionCanTarget(
+    state: GameState,
+    definition: CardDefinition,
+    targetId: PlayerId
+  ): boolean {
+    const owner = state.players[targetId];
+    if (!owner?.alive) return false;
+    const rules: Array<Extract<
+      LegalActionAbilityRule,
+      { type: "forbid-targeting-owner" }
+    >> = [];
+    for (const skillId of owner.skillIds) {
+      for (const rule of this.skill(skillId).abilities ?? []) {
+        if (rule.type === "forbid-targeting-owner") rules.push(rule);
+      }
+    }
+    for (const cardId of state.zones[equipmentZone(targetId)] ?? []) {
+      const definitionId = state.cards[cardId]?.definitionId;
+      if (!definitionId) continue;
+      for (const rule of this.card(definitionId).abilities ?? []) {
+        if (rule.type === "forbid-targeting-owner") rules.push(rule);
+      }
+    }
+    const tags = definition.tags ?? [];
+    return rules.every((rule) => {
+      // Color-sensitive restrictions are completed later, when the physical
+      // card or virtual materials are known to LegalActionResolver.
+      if (rule.cardColor !== undefined) return true;
+      if (
+        rule.ownerHandEmpty &&
+        (state.zones[`zone:hand:${targetId}`]?.length ?? 0) > 0
+      ) {
+        return true;
+      }
+      const matchesCard =
+        rule.definitionIds?.includes(definition.id) === true ||
+        rule.cardCategories?.includes(definition.category) === true ||
+        rule.cardTags?.some((tag) => tags.includes(tag)) === true;
+      return !matchesCard ||
+        rule.excludedDefinitionIds?.includes(definition.id) === true ||
+        rule.excludedCardTags?.some((tag) => tags.includes(tag)) === true;
+    });
+  }
+
+  canBeTargetedByDefinition(
+    state: GameState,
+    definitionId: CardDefinitionId,
+    targetId: PlayerId
+  ): boolean {
+    return this.#definitionCanTarget(
+      state,
+      this.card(definitionId),
+      targetId
+    );
   }
 
   canUseDefinition(
@@ -1010,7 +1083,9 @@ export class ContentRegistry {
       sourceId,
       definition.target,
       modifiers
-    );
+    ).filter((targetIds) => targetIds.every((targetId) =>
+      this.#definitionCanTarget(state, definition, targetId)
+    ));
   }
 
   #abilityQueries() {

@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "forest:hero:鲁肃",
+  "heroName": "鲁肃",
+  "inspiration": "借鉴《三国演义》中联刘抗曹、单刀会斡旋与宽厚长者形象，台词为原创改写。",
+  "lines": {
+    "death": "联盟若散，江东危矣。",
+    "signature": "合纵分利，方可共拒强敌。",
+    "victory": "盟约既成，江汉无忧。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=85,lowpass=f=8000,acompressor=threshold=-17dB:ratio=2:attack=16:release=160",
+  "rate": 170,
+  "schemaVersion": 1,
+  "style": "tactical",
+  "voice": "Eddy (Chinese (China mainland))"
+}

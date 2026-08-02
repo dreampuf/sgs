@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.wind:hero:夏侯渊.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "wind:hero:夏侯渊",
+  "kingdom": "wei",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "fierce timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13501,
+  "style": "fierce"
+}

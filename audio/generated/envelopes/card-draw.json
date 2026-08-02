@@ -1,0 +1,20 @@
+{
+  "assetId": "card.draw",
+  "durationSeconds": 0.31,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "paper noise",
+    "table transient"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.62,
+    "pitchHz": 860,
+    "weight": 0.16
+  },
+  "recipe": "card",
+  "schemaVersion": 1,
+  "seed": 1201,
+  "specSha256": "a864a71e3732692f93815e97e8e73d339af3a58dc0827d6c6e75d40b5c4e9f41",
+  "title": "摸牌"
+}

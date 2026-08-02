@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "standard:hero:夏侯惇",
+  "inputSha256": "0cf47715ab4d82e9e31be293aaf03014b9bb88aed6bbc567e95aa25450c88fac",
+  "outputs": [
+    {
+      "bytes": 10964,
+      "path": "audio/generated/heroes/standard-hero-夏侯惇/theme-score.json",
+      "sha256": "f10066f0cedddbc933384365467effc288cd9650b87aa5832d2957ae169095cd"
+    },
+    {
+      "bytes": 306,
+      "path": "audio/generated/heroes/standard-hero-夏侯惇/signature-envelope.json",
+      "sha256": "0801ee00a4b4ce5cae25a53f87ec6f970491f3673141196b2e8ff4d597e969c7"
+    },
+    {
+      "bytes": 700,
+      "path": "audio/generated/heroes/standard-hero-夏侯惇/voice-script.json",
+      "sha256": "fb7fda6b50872b9e2b69945bb8e21ea85addea658b3a99bea68f5d4ba2709445"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/standard-hero-夏侯惇/wav/theme.wav",
+      "sha256": "6c74999686b396db77bcd259138cae4939e7454ac1b452f60b241a0dd5a6bb71"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/standard-hero-夏侯惇/wav/signature.wav",
+      "sha256": "65a2e5f5991fd3ecc5c60a8fee00d11ddd59ef8a84cbd28bf7a401c85c46d85c"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/standard-hero-夏侯惇/theme.ogg",
+      "sha256": "94a5f61aff7b919aa0b4a234c4e5ae58b463745b02d912526ae7c0e0b47796ab"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/standard-hero-夏侯惇/signature.ogg",
+      "sha256": "401d32978d3166fb83f7f51346a195789fe8ebb6a8604a40c81983ede03b32a7"
+    },
+    {
+      "bytes": 102110,
+      "path": "audio/generated/heroes/standard-hero-夏侯惇/voice-source/signature.aiff",
+      "sha256": "3838e839077407ac0ad8a7b06a23222721206b9879a1479a2753b487022c56a2"
+    },
+    {
+      "bytes": 142322,
+      "path": "audio/generated/heroes/standard-hero-夏侯惇/wav/voice-signature.wav",
+      "sha256": "bd8c661c42b5bb5629858894b369152af0196188e73dbad087bb66874c484eb8"
+    },
+    {
+      "bytes": 22730,
+      "path": "public/audio/heroes/standard-hero-夏侯惇/voice-signature.ogg",
+      "sha256": "d9149f754dcaaeb5f3293116b0d46430b85cf3687d715bd2552c7c4d6263a10e"
+    },
+    {
+      "bytes": 111726,
+      "path": "audio/generated/heroes/standard-hero-夏侯惇/voice-source/victory.aiff",
+      "sha256": "c388ab3fea8dc02a34feff1a1fb90ee1aaf0f4da77dbba4a7e910980ba11be9c"
+    },
+    {
+      "bytes": 156276,
+      "path": "audio/generated/heroes/standard-hero-夏侯惇/wav/voice-victory.wav",
+      "sha256": "030958372eecc6f3c2bad0cf411c7f81f72588fbb4174a9a783d872cd95d0bc2"
+    },
+    {
+      "bytes": 24941,
+      "path": "public/audio/heroes/standard-hero-夏侯惇/voice-victory.ogg",
+      "sha256": "c4089209a754b0efa01ca259baf798215eb17b1b9352cdbc9b87ae4534502c22"
+    },
+    {
+      "bytes": 106082,
+      "path": "audio/generated/heroes/standard-hero-夏侯惇/voice-source/death.aiff",
+      "sha256": "9790a95bf847315fa6d15f92dd7d1df9ef94778b74d4862cda2c5e2f4ea9d68e"
+    },
+    {
+      "bytes": 148086,
+      "path": "audio/generated/heroes/standard-hero-夏侯惇/wav/voice-death.wav",
+      "sha256": "e172e127148d4b55b0c7cdfb674724854a9da2ee30906bdd34ba18996be03843"
+    },
+    {
+      "bytes": 23534,
+      "path": "public/audio/heroes/standard-hero-夏侯惇/voice-death.ogg",
+      "sha256": "db0ed3f68fde40ce291486edad4ed33417e2618186fdca7fa18fdbd7e8e4fe29"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3104,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Rocko (Chinese (China mainland))",
+    "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+    "rate": 180,
+    "style": "fierce"
+  }
+}

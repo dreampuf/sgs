@@ -1,0 +1,3249 @@
+{
+  "encoding": "ogg",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroes": {
+    "fire:hero:典韦": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-典韦/voice-death.ogg"
+            }
+          ],
+          "line": "主公快走，典韦断后。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/fire-hero-典韦/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/fire-hero-典韦/voice-signature.ogg"
+            }
+          ],
+          "line": "双戟虽失，铁拳尚在。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/fire-hero-典韦/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-典韦/voice-victory.ogg"
+            }
+          ],
+          "line": "恶来守门，贼军莫入。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中宛城断后、双戟护主的古之恶来形象，台词为原创改写。",
+      "kingdom": "wei",
+      "name": "典韦",
+      "signatureCardIds": [
+        "standard:slash"
+      ],
+      "skillIds": [
+        "fire:skill:强袭"
+      ],
+      "themeId": "music.hero.fire:hero:典韦"
+    },
+    "fire:hero:卧龙诸葛亮": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-卧龙诸葛亮/voice-death.ogg"
+            }
+          ],
+          "line": "卧龙既逝，秋风独寒。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/fire-hero-卧龙诸葛亮/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/fire-hero-卧龙诸葛亮/voice-signature.ogg"
+            }
+          ],
+          "line": "东风已至，火势可成。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/fire-hero-卧龙诸葛亮/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-卧龙诸葛亮/voice-victory.ogg"
+            }
+          ],
+          "line": "八阵开合，强敌困其中。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中博望坡、借东风、八阵图与卧龙奇谋，台词为原创改写。",
+      "kingdom": "shu",
+      "name": "卧龙诸葛亮",
+      "signatureCardIds": [
+        "standard:fire-attack",
+        "standard:nullification"
+      ],
+      "skillIds": [
+        "fire:skill:八阵",
+        "fire:skill:火计",
+        "fire:skill:看破"
+      ],
+      "themeId": "music.hero.fire:hero:卧龙诸葛亮"
+    },
+    "fire:hero:太史慈": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-太史慈/voice-death.ogg"
+            }
+          ],
+          "line": "大丈夫当立功于世，奈何。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/fire-hero-太史慈/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/fire-hero-太史慈/voice-signature.ogg"
+            }
+          ],
+          "line": "受人之恩，当以死报。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/fire-hero-太史慈/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-太史慈/voice-victory.ogg"
+            }
+          ],
+          "line": "天义在胸，长枪无悔。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中神亭酣战、北海报恩与信义形象，台词为原创改写。",
+      "kingdom": "wu",
+      "name": "太史慈",
+      "signatureCardIds": [
+        "standard:slash"
+      ],
+      "skillIds": [
+        "fire:skill:天义"
+      ],
+      "themeId": "music.hero.fire:hero:太史慈"
+    },
+    "fire:hero:庞德": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-庞德/voice-death.ogg"
+            }
+          ],
+          "line": "宁死阵前，绝不屈膝。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/fire-hero-庞德/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/fire-hero-庞德/voice-signature.ogg"
+            }
+          ],
+          "line": "棺木在后，此战只进不退。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/fire-hero-庞德/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-庞德/voice-victory.ogg"
+            }
+          ],
+          "line": "猛进破阵，生死皆轻。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中抬棺决战、樊城拒降的勇烈形象，台词为原创改写。",
+      "kingdom": "qun",
+      "name": "庞德",
+      "signatureCardIds": [
+        "standard:slash"
+      ],
+      "skillIds": [
+        "standard:skill:马术",
+        "fire:skill:猛进"
+      ],
+      "themeId": "music.hero.fire:hero:庞德"
+    },
+    "fire:hero:庞统": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-庞统/voice-death.ogg"
+            }
+          ],
+          "line": "落凤坡前，天命难违。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/fire-hero-庞统/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/fire-hero-庞统/voice-signature.ogg"
+            }
+          ],
+          "line": "铁索相连，一火俱焚。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/fire-hero-庞统/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-庞统/voice-victory.ogg"
+            }
+          ],
+          "line": "凤翼虽隐，奇谋已成。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中连环计、凤雏与落凤坡故事，台词为原创改写。",
+      "kingdom": "shu",
+      "name": "庞统",
+      "signatureCardIds": [
+        "standard:iron-chain"
+      ],
+      "skillIds": [
+        "fire:skill:连环",
+        "fire:skill:涅槃"
+      ],
+      "themeId": "music.hero.fire:hero:庞统"
+    },
+    "fire:hero:荀彧": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-荀彧/voice-death.ogg"
+            }
+          ],
+          "line": "汉室之心，终难两全。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/fire-hero-荀彧/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/fire-hero-荀彧/voice-signature.ogg"
+            }
+          ],
+          "line": "驱虎吞狼，借力定局。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/fire-hero-荀彧/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-荀彧/voice-victory.ogg"
+            }
+          ],
+          "line": "王佐之谋，可安天下。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中荀彧王佐之才、奉汉与曹操分歧，台词为原创改写。",
+      "kingdom": "wei",
+      "name": "荀彧",
+      "signatureCardIds": [
+        "standard:duel"
+      ],
+      "skillIds": [
+        "fire:skill:驱虎",
+        "fire:skill:节命"
+      ],
+      "themeId": "music.hero.fire:hero:荀彧"
+    },
+    "fire:hero:袁绍": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-袁绍/voice-death.ogg"
+            }
+          ],
+          "line": "官渡一败，基业尽空。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/fire-hero-袁绍/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/fire-hero-袁绍/voice-signature.ogg"
+            }
+          ],
+          "line": "河北雄兵，万箭齐发。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/fire-hero-袁绍/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-袁绍/voice-victory.ogg"
+            }
+          ],
+          "line": "四世威望，天下归附。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中四世三公、诸侯盟主与官渡之战形象，台词为原创改写。",
+      "kingdom": "qun",
+      "name": "袁绍",
+      "signatureCardIds": [
+        "standard:archery-attack"
+      ],
+      "skillIds": [
+        "fire:skill:乱击",
+        "fire:skill:血裔"
+      ],
+      "themeId": "music.hero.fire:hero:袁绍"
+    },
+    "fire:hero:颜良文丑": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-颜良文丑/voice-death.ogg"
+            }
+          ],
+          "line": "兄弟同心，奈何同殒。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/fire-hero-颜良文丑/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/fire-hero-颜良文丑/voice-signature.ogg"
+            }
+          ],
+          "line": "河北双雄，同进同退。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/fire-hero-颜良文丑/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/fire-hero-颜良文丑/voice-victory.ogg"
+            }
+          ],
+          "line": "双刃并出，谁可争锋。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中河北双雄、白马延津之战，台词为原创改写。",
+      "kingdom": "qun",
+      "name": "颜良文丑",
+      "signatureCardIds": [
+        "standard:duel"
+      ],
+      "skillIds": [
+        "fire:skill:双雄"
+      ],
+      "themeId": "music.hero.fire:hero:颜良文丑"
+    },
+    "forest:hero:孙坚": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-孙坚/voice-death.ogg"
+            }
+          ],
+          "line": "江东儿郎，替我守住基业。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/forest-hero-孙坚/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/forest-hero-孙坚/voice-signature.ogg"
+            }
+          ],
+          "line": "江东猛虎，魂佑子弟。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/forest-hero-孙坚/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-孙坚/voice-victory.ogg"
+            }
+          ],
+          "line": "孙氏基业，自此奠定。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中江东猛虎、传国玉玺与跨江征战，台词为原创改写。",
+      "kingdom": "wu",
+      "name": "孙坚",
+      "signatureCardIds": [
+        "standard:duel"
+      ],
+      "skillIds": [
+        "forest:skill:英魂"
+      ],
+      "themeId": "music.hero.forest:hero:孙坚"
+    },
+    "forest:hero:孟获": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-孟获/voice-death.ogg"
+            }
+          ],
+          "line": "这一次，竟再也起不来了。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/forest-hero-孟获/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/forest-hero-孟获/voice-signature.ogg"
+            }
+          ],
+          "line": "南中勇士，随我再战。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/forest-hero-孟获/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-孟获/voice-victory.ogg"
+            }
+          ],
+          "line": "山林万众，皆听号令。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中七擒七纵、南中之王与不服再战形象，台词为原创改写。",
+      "kingdom": "shu",
+      "name": "孟获",
+      "signatureCardIds": [
+        "standard:savage-assault"
+      ],
+      "skillIds": [
+        "forest:skill:祸首",
+        "forest:skill:再起"
+      ],
+      "themeId": "music.hero.forest:hero:孟获"
+    },
+    "forest:hero:徐晃": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-徐晃/voice-death.ogg"
+            }
+          ],
+          "line": "大斧虽折，军令未失。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/forest-hero-徐晃/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/forest-hero-徐晃/voice-signature.ogg"
+            }
+          ],
+          "line": "先断粮道，再破军心。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/forest-hero-徐晃/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-徐晃/voice-victory.ogg"
+            }
+          ],
+          "line": "军纪如山，樊城已解。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中樊城解围、治军严整与断敌粮道，台词为原创改写。",
+      "kingdom": "wei",
+      "name": "徐晃",
+      "signatureCardIds": [
+        "standard:supply-shortage"
+      ],
+      "skillIds": [
+        "forest:skill:断粮"
+      ],
+      "themeId": "music.hero.forest:hero:徐晃"
+    },
+    "forest:hero:曹丕": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-曹丕/voice-death.ogg"
+            }
+          ],
+          "line": "帝业初成，竟如此短促。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/forest-hero-曹丕/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/forest-hero-曹丕/voice-signature.ogg"
+            }
+          ],
+          "line": "成王败者，皆归新朝。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/forest-hero-曹丕/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-曹丕/voice-victory.ogg"
+            }
+          ],
+          "line": "魏统已立，四海当颂。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中魏代汉、兄弟相争与帝王权术，台词为原创改写。",
+      "kingdom": "wei",
+      "name": "曹丕",
+      "signatureCardIds": [
+        "standard:indulgence"
+      ],
+      "skillIds": [
+        "forest:skill:行殇",
+        "forest:skill:放逐",
+        "forest:skill:颂威"
+      ],
+      "themeId": "music.hero.forest:hero:曹丕"
+    },
+    "forest:hero:祝融": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-祝融/voice-death.ogg"
+            }
+          ],
+          "line": "大王，祝融不能再战。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/forest-hero-祝融/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/forest-hero-祝融/voice-signature.ogg"
+            }
+          ],
+          "line": "烈刃飞出，巨象随行。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/forest-hero-祝融/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-祝融/voice-victory.ogg"
+            }
+          ],
+          "line": "南中女儿，亦可冠三军。"
+        }
+      },
+      "gender": "female",
+      "inspiration": "借鉴《三国演义》中祝融夫人飞刀、巨象与南中女将形象，台词为原创改写。",
+      "kingdom": "shu",
+      "name": "祝融",
+      "signatureCardIds": [
+        "standard:savage-assault",
+        "standard:fire-slash"
+      ],
+      "skillIds": [
+        "forest:skill:巨象",
+        "forest:skill:烈刃"
+      ],
+      "themeId": "music.hero.forest:hero:祝融"
+    },
+    "forest:hero:董卓": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-董卓/voice-death.ogg"
+            }
+          ],
+          "line": "奉先何在，快来救我。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/forest-hero-董卓/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/forest-hero-董卓/voice-signature.ogg"
+            }
+          ],
+          "line": "酒池未干，谁敢忤逆太师。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/forest-hero-董卓/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-董卓/voice-victory.ogg"
+            }
+          ],
+          "line": "天下财色，尽归我手。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中乱政洛阳、酒池肉林与暴虐权臣形象，台词为原创改写。",
+      "kingdom": "qun",
+      "name": "董卓",
+      "signatureCardIds": [
+        "standard:wine"
+      ],
+      "skillIds": [
+        "forest:skill:酒池",
+        "forest:skill:肉林",
+        "forest:skill:崩坏",
+        "forest:skill:暴虐"
+      ],
+      "themeId": "music.hero.forest:hero:董卓"
+    },
+    "forest:hero:贾诩": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-贾诩/voice-death.ogg"
+            }
+          ],
+          "line": "算尽人心，仍漏了天命。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/forest-hero-贾诩/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/forest-hero-贾诩/voice-signature.ogg"
+            }
+          ],
+          "line": "乱世无常，先让众人自相残杀。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/forest-hero-贾诩/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-贾诩/voice-victory.ogg"
+            }
+          ],
+          "line": "帷幕之后，生路只留一条。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中毒士乱武、宛城献策与明哲自保，台词为原创改写。",
+      "kingdom": "qun",
+      "name": "贾诩",
+      "signatureCardIds": [
+        "standard:savage-assault",
+        "standard:duel"
+      ],
+      "skillIds": [
+        "forest:skill:完杀",
+        "forest:skill:乱武",
+        "forest:skill:帷幕"
+      ],
+      "themeId": "music.hero.forest:hero:贾诩"
+    },
+    "forest:hero:鲁肃": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-鲁肃/voice-death.ogg"
+            }
+          ],
+          "line": "联盟若散，江东危矣。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/forest-hero-鲁肃/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/forest-hero-鲁肃/voice-signature.ogg"
+            }
+          ],
+          "line": "合纵分利，方可共拒强敌。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/forest-hero-鲁肃/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/forest-hero-鲁肃/voice-victory.ogg"
+            }
+          ],
+          "line": "盟约既成，江汉无忧。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中联刘抗曹、单刀会斡旋与宽厚长者形象，台词为原创改写。",
+      "kingdom": "wu",
+      "name": "鲁肃",
+      "signatureCardIds": [
+        "standard:amazing-grace"
+      ],
+      "skillIds": [
+        "forest:skill:好施",
+        "forest:skill:缔盟"
+      ],
+      "themeId": "music.hero.forest:hero:鲁肃"
+    },
+    "standard:hero:关羽": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-关羽/voice-death.ogg"
+            }
+          ],
+          "line": "大义无亏，唯恨未归。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-关羽/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-关羽/voice-signature.ogg"
+            }
+          ],
+          "line": "青龙所向，邪佞皆斩。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-关羽/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-关羽/voice-victory.ogg"
+            }
+          ],
+          "line": "义字当先，千里亦归。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中温酒斩将、千里走单骑与忠义形象，台词为原创改写。",
+      "kingdom": "shu",
+      "name": "关羽",
+      "signatureCardIds": [
+        "standard:slash",
+        "standard:blade"
+      ],
+      "skillIds": [
+        "standard:skill:武圣"
+      ],
+      "themeId": "music.hero.standard:hero:关羽"
+    },
+    "standard:hero:刘备": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-刘备/voice-death.ogg"
+            }
+          ],
+          "line": "汉室未兴，愧对诸君。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-刘备/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-刘备/voice-signature.ogg"
+            }
+          ],
+          "line": "以仁聚众，以义同行。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-刘备/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-刘备/voice-victory.ogg"
+            }
+          ],
+          "line": "同心扶汉，山河可复。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中桃园结义、携民渡江与仁德之主形象，台词为原创改写。",
+      "kingdom": "shu",
+      "name": "刘备",
+      "signatureCardIds": [
+        "standard:peach",
+        "standard:god-salvation"
+      ],
+      "skillIds": [
+        "standard:skill:激将",
+        "standard:skill:仁德"
+      ],
+      "themeId": "music.hero.standard:hero:刘备"
+    },
+    "standard:hero:华佗": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-华佗/voice-death.ogg"
+            }
+          ],
+          "line": "青囊未传，苍生何辜。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-华佗/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-华佗/voice-signature.ogg"
+            }
+          ],
+          "line": "悬壶济世，伤者莫惧。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-华佗/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-华佗/voice-victory.ogg"
+            }
+          ],
+          "line": "兵戈虽烈，生机未绝。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中刮骨疗毒、麻沸散与医者仁心形象，台词为原创改写。",
+      "kingdom": "qun",
+      "name": "华佗",
+      "signatureCardIds": [
+        "standard:peach",
+        "standard:god-salvation"
+      ],
+      "skillIds": [
+        "standard:skill:急救",
+        "standard:skill:青囊"
+      ],
+      "themeId": "music.hero.standard:hero:华佗"
+    },
+    "standard:hero:司马懿": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-司马懿/voice-death.ogg"
+            }
+          ],
+          "line": "棋局未终，奈何先退。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-司马懿/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-司马懿/voice-signature.ogg"
+            }
+          ],
+          "line": "天命可测，更可改写。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-司马懿/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-司马懿/voice-victory.ogg"
+            }
+          ],
+          "line": "忍到最后，才是赢家。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中隐忍待时、与诸葛亮斗智的形象，台词为原创改写。",
+      "kingdom": "wei",
+      "name": "司马懿",
+      "signatureCardIds": [
+        "standard:lightning"
+      ],
+      "skillIds": [
+        "standard:skill:反馈",
+        "standard:skill:鬼才"
+      ],
+      "themeId": "music.hero.standard:hero:司马懿"
+    },
+    "standard:hero:吕布": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-吕布/voice-death.ogg"
+            }
+          ],
+          "line": "若得良主，何至今日。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-吕布/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-吕布/voice-signature.ogg"
+            }
+          ],
+          "line": "方天画戟之下，何人敢称英雄。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-吕布/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-吕布/voice-victory.ogg"
+            }
+          ],
+          "line": "天下勇武，唯我无双。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中虎牢关战三英、辕门射戟与人中吕布形象，台词为原创改写。",
+      "kingdom": "qun",
+      "name": "吕布",
+      "signatureCardIds": [
+        "standard:duel",
+        "standard:halberd"
+      ],
+      "skillIds": [
+        "standard:skill:无双"
+      ],
+      "themeId": "music.hero.standard:hero:吕布"
+    },
+    "standard:hero:吕蒙": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-吕蒙/voice-death.ogg"
+            }
+          ],
+          "line": "荆州虽下，旧梦难安。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-吕蒙/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-吕蒙/voice-signature.ogg"
+            }
+          ],
+          "line": "藏锋待时，一击定荆州。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-吕蒙/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-吕蒙/voice-victory.ogg"
+            }
+          ],
+          "line": "白衣渡江，兵不血刃。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中白衣渡江、士别三日与克己待机形象，台词为原创改写。",
+      "kingdom": "wu",
+      "name": "吕蒙",
+      "signatureCardIds": [
+        "standard:nullification"
+      ],
+      "skillIds": [
+        "standard:skill:克己"
+      ],
+      "themeId": "music.hero.standard:hero:吕蒙"
+    },
+    "standard:hero:周瑜": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-周瑜/voice-death.ogg"
+            }
+          ],
+          "line": "江东未定，公瑾不甘。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-周瑜/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-周瑜/voice-signature.ogg"
+            }
+          ],
+          "line": "弦音未绝，敌计已乱。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-周瑜/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-周瑜/voice-victory.ogg"
+            }
+          ],
+          "line": "东风既起，烈焰连营。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中赤壁火攻、群英会与儒将英姿，台词为原创改写。",
+      "kingdom": "wu",
+      "name": "周瑜",
+      "signatureCardIds": [
+        "standard:fire-attack",
+        "standard:duel"
+      ],
+      "skillIds": [
+        "standard:skill:反间",
+        "standard:skill:英姿"
+      ],
+      "themeId": "music.hero.standard:hero:周瑜"
+    },
+    "standard:hero:夏侯惇": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-夏侯惇/voice-death.ogg"
+            }
+          ],
+          "line": "此目虽失，忠烈不灭。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-夏侯惇/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-夏侯惇/voice-signature.ogg"
+            }
+          ],
+          "line": "伤我一分，必还十分。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-夏侯惇/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-夏侯惇/voice-victory.ogg"
+            }
+          ],
+          "line": "独胆在此，谁能阻我。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中拔矢啖睛与刚烈不屈的形象，台词为原创改写。",
+      "kingdom": "wei",
+      "name": "夏侯惇",
+      "signatureCardIds": [
+        "standard:duel"
+      ],
+      "skillIds": [
+        "standard:skill:刚烈"
+      ],
+      "themeId": "music.hero.standard:hero:夏侯惇"
+    },
+    "standard:hero:大乔": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-大乔/voice-death.ogg"
+            }
+          ],
+          "line": "伯符，江水送我来寻你。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-大乔/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-大乔/voice-signature.ogg"
+            }
+          ],
+          "line": "江花照影，烽火自移。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-大乔/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-大乔/voice-victory.ogg"
+            }
+          ],
+          "line": "烟波平处，江东无恙。"
+        }
+      },
+      "gender": "female",
+      "inspiration": "借鉴二乔、江东国色与乱世流离的文学意象，台词为原创改写。",
+      "kingdom": "wu",
+      "name": "大乔",
+      "signatureCardIds": [
+        "standard:indulgence"
+      ],
+      "skillIds": [
+        "standard:skill:国色",
+        "standard:skill:流离"
+      ],
+      "themeId": "music.hero.standard:hero:大乔"
+    },
+    "standard:hero:孙尚香": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-孙尚香/voice-death.ogg"
+            }
+          ],
+          "line": "两岸相隔，此生难归。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-孙尚香/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-孙尚香/voice-signature.ogg"
+            }
+          ],
+          "line": "红妆亦可披甲上阵。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-孙尚香/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-孙尚香/voice-victory.ogg"
+            }
+          ],
+          "line": "弓弦既满，江山亦定。"
+        }
+      },
+      "gender": "female",
+      "inspiration": "借鉴《三国演义》中甘露寺招亲与弓腰姬形象，台词为原创改写。",
+      "kingdom": "wu",
+      "name": "孙尚香",
+      "signatureCardIds": [
+        "standard:peach",
+        "standard:crossbow"
+      ],
+      "skillIds": [
+        "standard:skill:结姻",
+        "standard:skill:枭姬"
+      ],
+      "themeId": "music.hero.standard:hero:孙尚香"
+    },
+    "standard:hero:孙权": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-孙权/voice-death.ogg"
+            }
+          ],
+          "line": "父兄基业，终托何人。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-孙权/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-孙权/voice-signature.ogg"
+            }
+          ],
+          "line": "衡轻重，定江东。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-孙权/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-孙权/voice-victory.ogg"
+            }
+          ],
+          "line": "长江天险，尽护吴邦。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中坐领江东、赤壁决断与善于制衡的君主形象，台词为原创改写。",
+      "kingdom": "wu",
+      "name": "孙权",
+      "signatureCardIds": [
+        "standard:amazing-grace"
+      ],
+      "skillIds": [
+        "standard:skill:救援",
+        "standard:skill:制衡"
+      ],
+      "themeId": "music.hero.standard:hero:孙权"
+    },
+    "standard:hero:张辽": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-张辽/voice-death.ogg"
+            }
+          ],
+          "line": "合肥之威，终有尽时。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-张辽/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-张辽/voice-signature.ogg"
+            }
+          ],
+          "line": "逍遥津前，谁敢再进。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-张辽/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-张辽/voice-victory.ogg"
+            }
+          ],
+          "line": "八百锐士，足破千军。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中逍遥津威震江东的战事，台词为原创改写。",
+      "kingdom": "wei",
+      "name": "张辽",
+      "signatureCardIds": [
+        "standard:snatch"
+      ],
+      "skillIds": [
+        "standard:skill:突袭"
+      ],
+      "themeId": "music.hero.standard:hero:张辽"
+    },
+    "standard:hero:张飞": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-张飞/voice-death.ogg"
+            }
+          ],
+          "line": "哥哥，翼德先走一步。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-张飞/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-张飞/voice-signature.ogg"
+            }
+          ],
+          "line": "燕人张飞在此，谁敢来战。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-张飞/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-张飞/voice-victory.ogg"
+            }
+          ],
+          "line": "一声断喝，万军退散。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中长坂桥喝退曹军的猛将形象，台词为原创改写。",
+      "kingdom": "shu",
+      "name": "张飞",
+      "signatureCardIds": [
+        "standard:slash",
+        "standard:spear"
+      ],
+      "skillIds": [
+        "standard:skill:咆哮"
+      ],
+      "themeId": "music.hero.standard:hero:张飞"
+    },
+    "standard:hero:曹操": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-曹操/voice-death.ogg"
+            }
+          ],
+          "line": "霸业未成，孤心不甘。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-曹操/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-曹操/voice-signature.ogg"
+            }
+          ],
+          "line": "天下权谋，尽在此局。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-曹操/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-曹操/voice-victory.ogg"
+            }
+          ],
+          "line": "乱世归心，霸业自此而始。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中煮酒论英雄、挟天子与奸雄形象，台词为原创改写。",
+      "kingdom": "wei",
+      "name": "曹操",
+      "signatureCardIds": [
+        "standard:duel",
+        "standard:nullification"
+      ],
+      "skillIds": [
+        "standard:skill:护驾",
+        "standard:skill:奸雄"
+      ],
+      "themeId": "music.hero.standard:hero:曹操"
+    },
+    "standard:hero:甄姬": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-甄姬/voice-death.ogg"
+            }
+          ],
+          "line": "洛水东流，此梦亦休。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-甄姬/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-甄姬/voice-signature.ogg"
+            }
+          ],
+          "line": "凌波微步，洛水无尘。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-甄姬/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-甄姬/voice-victory.ogg"
+            }
+          ],
+          "line": "清辉照水，乱云终散。"
+        }
+      },
+      "gender": "female",
+      "inspiration": "借鉴洛神意象与《三国演义》中甄氏身世，台词为原创改写。",
+      "kingdom": "wei",
+      "name": "甄姬",
+      "signatureCardIds": [
+        "standard:jink"
+      ],
+      "skillIds": [
+        "standard:skill:洛神",
+        "standard:skill:倾国"
+      ],
+      "themeId": "music.hero.standard:hero:甄姬"
+    },
+    "standard:hero:甘宁": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-甘宁/voice-death.ogg"
+            }
+          ],
+          "line": "铃声既止，锦帆难归。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-甘宁/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-甘宁/voice-signature.ogg"
+            }
+          ],
+          "line": "锦帆夜渡，直取中军。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-甘宁/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-甘宁/voice-victory.ogg"
+            }
+          ],
+          "line": "百骑出营，片甲不留。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中百骑劫魏营与锦帆贼形象，台词为原创改写。",
+      "kingdom": "wu",
+      "name": "甘宁",
+      "signatureCardIds": [
+        "standard:dismantlement",
+        "standard:snatch"
+      ],
+      "skillIds": [
+        "standard:skill:奇袭"
+      ],
+      "themeId": "music.hero.standard:hero:甘宁"
+    },
+    "standard:hero:许褚": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-许褚/voice-death.ogg"
+            }
+          ],
+          "line": "主公，末将不能再护驾了。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-许褚/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-许褚/voice-signature.ogg"
+            }
+          ],
+          "line": "卸甲又如何，看我破阵。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-许褚/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-许褚/voice-victory.ogg"
+            }
+          ],
+          "line": "虎痴在前，敌军尽退。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中裸衣斗马超、护卫曹操的虎痴形象，台词为原创改写。",
+      "kingdom": "wei",
+      "name": "许褚",
+      "signatureCardIds": [
+        "standard:slash"
+      ],
+      "skillIds": [
+        "standard:skill:裸衣"
+      ],
+      "themeId": "music.hero.standard:hero:许褚"
+    },
+    "standard:hero:诸葛亮": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-诸葛亮/voice-death.ogg"
+            }
+          ],
+          "line": "出师未捷，汉业难兴。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-诸葛亮/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-诸葛亮/voice-signature.ogg"
+            }
+          ],
+          "line": "观天察势，胜负已明。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-诸葛亮/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-诸葛亮/voice-victory.ogg"
+            }
+          ],
+          "line": "运筹帷幄，强敌自退。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中隆中对、借东风、空城与北伐形象，台词为原创改写。",
+      "kingdom": "shu",
+      "name": "诸葛亮",
+      "signatureCardIds": [
+        "standard:lightning",
+        "standard:nullification"
+      ],
+      "skillIds": [
+        "standard:skill:观星",
+        "standard:skill:空城"
+      ],
+      "themeId": "music.hero.standard:hero:诸葛亮"
+    },
+    "standard:hero:貂蝉": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-貂蝉/voice-death.ogg"
+            }
+          ],
+          "line": "连环虽成，身世终如浮萍。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-貂蝉/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-貂蝉/voice-signature.ogg"
+            }
+          ],
+          "line": "一舞乱心，两雄自斗。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-貂蝉/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-貂蝉/voice-victory.ogg"
+            }
+          ],
+          "line": "月色如旧，权臣已除。"
+        }
+      },
+      "gender": "female",
+      "inspiration": "借鉴《三国演义》中连环计、月下焚香与离间董吕，台词为原创改写。",
+      "kingdom": "qun",
+      "name": "貂蝉",
+      "signatureCardIds": [
+        "standard:duel"
+      ],
+      "skillIds": [
+        "standard:skill:闭月",
+        "standard:skill:离间"
+      ],
+      "themeId": "music.hero.standard:hero:貂蝉"
+    },
+    "standard:hero:赵云": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-赵云/voice-death.ogg"
+            }
+          ],
+          "line": "此枪虽止，忠胆长存。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-赵云/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-赵云/voice-signature.ogg"
+            }
+          ],
+          "line": "龙胆照银枪，进退皆无惧。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-赵云/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-赵云/voice-victory.ogg"
+            }
+          ],
+          "line": "一身是胆，长坂亦平。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中长坂坡七进七出与常胜将军形象，台词为原创改写。",
+      "kingdom": "shu",
+      "name": "赵云",
+      "signatureCardIds": [
+        "standard:slash",
+        "standard:jink"
+      ],
+      "skillIds": [
+        "standard:skill:龙胆"
+      ],
+      "themeId": "music.hero.standard:hero:赵云"
+    },
+    "standard:hero:郭嘉": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-郭嘉/voice-death.ogg"
+            }
+          ],
+          "line": "此身先去，遗策尚存。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-郭嘉/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-郭嘉/voice-signature.ogg"
+            }
+          ],
+          "line": "天机虽远，我已先知。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-郭嘉/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-郭嘉/voice-victory.ogg"
+            }
+          ],
+          "line": "算定胜负，不劳强攻。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中郭嘉料敌、遗计定辽东的谋士形象，台词为原创改写。",
+      "kingdom": "wei",
+      "name": "郭嘉",
+      "signatureCardIds": [
+        "standard:amazing-grace"
+      ],
+      "skillIds": [
+        "standard:skill:天妒",
+        "standard:skill:遗计"
+      ],
+      "themeId": "music.hero.standard:hero:郭嘉"
+    },
+    "standard:hero:陆逊": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-陆逊/voice-death.ogg"
+            }
+          ],
+          "line": "江火已熄，壮志难续。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-陆逊/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-陆逊/voice-signature.ogg"
+            }
+          ],
+          "line": "不争一时，待其自乱。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-陆逊/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-陆逊/voice-victory.ogg"
+            }
+          ],
+          "line": "连营火起，骄兵尽破。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中夷陵火烧连营与谦逊持重的儒将形象，台词为原创改写。",
+      "kingdom": "wu",
+      "name": "陆逊",
+      "signatureCardIds": [
+        "standard:iron-chain",
+        "standard:fire-attack"
+      ],
+      "skillIds": [
+        "standard:skill:连营",
+        "standard:skill:谦逊"
+      ],
+      "themeId": "music.hero.standard:hero:陆逊"
+    },
+    "standard:hero:马超": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-马超/voice-death.ogg"
+            }
+          ],
+          "line": "父仇未雪，壮志难酬。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-马超/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-马超/voice-signature.ogg"
+            }
+          ],
+          "line": "西凉铁骑，踏破敌阵。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-马超/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-马超/voice-victory.ogg"
+            }
+          ],
+          "line": "锦旗过处，无人可挡。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中潼关追曹、锦马超与西凉铁骑形象，台词为原创改写。",
+      "kingdom": "shu",
+      "name": "马超",
+      "signatureCardIds": [
+        "standard:slash",
+        "standard:chitu"
+      ],
+      "skillIds": [
+        "standard:skill:马术",
+        "standard:skill:铁骑"
+      ],
+      "themeId": "music.hero.standard:hero:马超"
+    },
+    "standard:hero:黄月英": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-黄月英/voice-death.ogg"
+            }
+          ],
+          "line": "尚有一策，未能交予孔明。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-黄月英/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-黄月英/voice-signature.ogg"
+            }
+          ],
+          "line": "巧思成机，寻常亦可制胜。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-黄月英/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-黄月英/voice-victory.ogg"
+            }
+          ],
+          "line": "机关算尽，局势尽在掌中。"
+        }
+      },
+      "gender": "female",
+      "inspiration": "借鉴木牛流马、机关巧思及诸葛亮贤内助的文学形象，台词为原创改写。",
+      "kingdom": "shu",
+      "name": "黄月英",
+      "signatureCardIds": [
+        "standard:ex-nihilo",
+        "standard:iron-chain"
+      ],
+      "skillIds": [
+        "standard:skill:集智",
+        "standard:skill:奇才"
+      ],
+      "themeId": "music.hero.standard:hero:黄月英"
+    },
+    "standard:hero:黄盖": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-黄盖/voice-death.ogg"
+            }
+          ],
+          "line": "赤壁火烈，老夫无憾。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/standard-hero-黄盖/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/standard-hero-黄盖/voice-signature.ogg"
+            }
+          ],
+          "line": "皮肉之苦，换敌一场大火。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/standard-hero-黄盖/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/standard-hero-黄盖/voice-victory.ogg"
+            }
+          ],
+          "line": "老卒一计，亦能焚尽强军。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中苦肉计、诈降与赤壁纵火，台词为原创改写。",
+      "kingdom": "wu",
+      "name": "黄盖",
+      "signatureCardIds": [
+        "standard:fire-attack"
+      ],
+      "skillIds": [
+        "standard:skill:苦肉"
+      ],
+      "themeId": "music.hero.standard:hero:黄盖"
+    },
+    "wind:hero:于吉": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-于吉/voice-death.ogg"
+            }
+          ],
+          "line": "形可灭，幻念不散。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/wind-hero-于吉/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/wind-hero-于吉/voice-signature.ogg"
+            }
+          ],
+          "line": "真作假时，谁能分辨。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/wind-hero-于吉/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-于吉/voice-victory.ogg"
+            }
+          ],
+          "line": "人心既惑，胜负皆幻。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中于吉幻术、惑众与孙策心病故事，台词为原创改写。",
+      "kingdom": "qun",
+      "name": "于吉",
+      "signatureCardIds": [
+        "standard:nullification"
+      ],
+      "skillIds": [
+        "wind:skill:蛊惑"
+      ],
+      "themeId": "music.hero.wind:hero:于吉"
+    },
+    "wind:hero:周泰": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-周泰/voice-death.ogg"
+            }
+          ],
+          "line": "主公无恙，周泰足矣。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/wind-hero-周泰/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/wind-hero-周泰/voice-signature.ogg"
+            }
+          ],
+          "line": "百创在身，寸步不退。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/wind-hero-周泰/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-周泰/voice-victory.ogg"
+            }
+          ],
+          "line": "伤痕作甲，再护江东。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中宣城救主、满身创痕仍不屈的形象，台词为原创改写。",
+      "kingdom": "wu",
+      "name": "周泰",
+      "signatureCardIds": [
+        "standard:wine"
+      ],
+      "skillIds": [
+        "wind:skill:不屈"
+      ],
+      "themeId": "music.hero.wind:hero:周泰"
+    },
+    "wind:hero:夏侯渊": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-夏侯渊/voice-death.ogg"
+            }
+          ],
+          "line": "定军山险，误我一世。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/wind-hero-夏侯渊/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/wind-hero-夏侯渊/voice-signature.ogg"
+            }
+          ],
+          "line": "兵贵神速，迟一步便是败。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/wind-hero-夏侯渊/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-夏侯渊/voice-victory.ogg"
+            }
+          ],
+          "line": "千里奔袭，一日定军。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中急袭千里、定军山争战与神速形象，台词为原创改写。",
+      "kingdom": "wei",
+      "name": "夏侯渊",
+      "signatureCardIds": [
+        "standard:slash",
+        "standard:chitu"
+      ],
+      "skillIds": [
+        "wind:skill:神速"
+      ],
+      "themeId": "music.hero.wind:hero:夏侯渊"
+    },
+    "wind:hero:小乔": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-小乔/voice-death.ogg"
+            }
+          ],
+          "line": "公瑾，香魂随你而去。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/wind-hero-小乔/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/wind-hero-小乔/voice-signature.ogg"
+            }
+          ],
+          "line": "一缕天香，借风而去。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/wind-hero-小乔/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-小乔/voice-victory.ogg"
+            }
+          ],
+          "line": "春风入江，花影无恙。"
+        }
+      },
+      "gender": "female",
+      "inspiration": "借鉴铜雀台、二乔与江东红颜的文学意象，台词为原创改写。",
+      "kingdom": "wu",
+      "name": "小乔",
+      "signatureCardIds": [
+        "standard:peach"
+      ],
+      "skillIds": [
+        "wind:skill:天香",
+        "wind:skill:红颜"
+      ],
+      "themeId": "music.hero.wind:hero:小乔"
+    },
+    "wind:hero:张角": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-张角/voice-death.ogg"
+            }
+          ],
+          "line": "黄天未立，薪火莫绝。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/wind-hero-张角/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/wind-hero-张角/voice-signature.ogg"
+            }
+          ],
+          "line": "黄天当立，雷公助我。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/wind-hero-张角/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-张角/voice-victory.ogg"
+            }
+          ],
+          "line": "万民同起，旧天已倾。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中黄巾起义、苍天已死与呼风唤雷形象，台词为原创改写。",
+      "kingdom": "qun",
+      "name": "张角",
+      "signatureCardIds": [
+        "standard:lightning",
+        "standard:thunder-slash"
+      ],
+      "skillIds": [
+        "wind:skill:雷击",
+        "wind:skill:鬼道",
+        "wind:skill:黄天"
+      ],
+      "themeId": "music.hero.wind:hero:张角"
+    },
+    "wind:hero:曹仁": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-曹仁/voice-death.ogg"
+            }
+          ],
+          "line": "城在人在，城破人亡。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/wind-hero-曹仁/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/wind-hero-曹仁/voice-signature.ogg"
+            }
+          ],
+          "line": "坚城在手，任你百攻。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/wind-hero-曹仁/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-曹仁/voice-victory.ogg"
+            }
+          ],
+          "line": "守得一寸，便得全军。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中守樊城、固守待援的魏国大将形象，台词为原创改写。",
+      "kingdom": "wei",
+      "name": "曹仁",
+      "signatureCardIds": [
+        "standard:eight-diagram"
+      ],
+      "skillIds": [
+        "wind:skill:据守"
+      ],
+      "themeId": "music.hero.wind:hero:曹仁"
+    },
+    "wind:hero:魏延": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-魏延/voice-death.ogg"
+            }
+          ],
+          "line": "无人信我，空负将才。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/wind-hero-魏延/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/wind-hero-魏延/voice-signature.ogg"
+            }
+          ],
+          "line": "险道奇兵，才是真破局。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/wind-hero-魏延/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-魏延/voice-victory.ogg"
+            }
+          ],
+          "line": "谁说此计不可成。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中子午谷奇谋、勇烈与反骨争议，台词为原创改写。",
+      "kingdom": "shu",
+      "name": "魏延",
+      "signatureCardIds": [
+        "standard:slash"
+      ],
+      "skillIds": [
+        "wind:skill:狂骨"
+      ],
+      "themeId": "music.hero.wind:hero:魏延"
+    },
+    "wind:hero:黄忠": {
+      "cues": {
+        "death": {
+          "assets": [
+            {
+              "delayMs": 60,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-黄忠/voice-death.ogg"
+            }
+          ],
+          "line": "弓弦尚紧，奈何力尽。"
+        },
+        "signature": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.46,
+              "url": "/audio/heroes/wind-hero-黄忠/signature.ogg"
+            },
+            {
+              "delayMs": 90,
+              "gain": 0.92,
+              "url": "/audio/heroes/wind-hero-黄忠/voice-signature.ogg"
+            }
+          ],
+          "line": "老将开弓，百步穿杨。"
+        },
+        "victory": {
+          "assets": [
+            {
+              "delayMs": 0,
+              "gain": 0.38,
+              "url": "/audio/heroes/wind-hero-黄忠/signature.ogg"
+            },
+            {
+              "delayMs": 120,
+              "gain": 1,
+              "url": "/audio/heroes/wind-hero-黄忠/voice-victory.ogg"
+            }
+          ],
+          "line": "定军山上，再立新功。"
+        }
+      },
+      "gender": "male",
+      "inspiration": "借鉴《三国演义》中定军山斩夏侯渊、老将烈弓形象，台词为原创改写。",
+      "kingdom": "shu",
+      "name": "黄忠",
+      "signatureCardIds": [
+        "standard:slash",
+        "standard:kylin-bow"
+      ],
+      "skillIds": [
+        "wind:skill:烈弓"
+      ],
+      "themeId": "music.hero.wind:hero:黄忠"
+    }
+  },
+  "music": {
+    "music.hero.fire:hero:典韦": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "fire:hero:典韦",
+      "loop": true,
+      "title": "典韦·英雄主题",
+      "url": "/audio/heroes/fire-hero-典韦/theme.ogg"
+    },
+    "music.hero.fire:hero:卧龙诸葛亮": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "fire:hero:卧龙诸葛亮",
+      "loop": true,
+      "title": "卧龙诸葛亮·英雄主题",
+      "url": "/audio/heroes/fire-hero-卧龙诸葛亮/theme.ogg"
+    },
+    "music.hero.fire:hero:太史慈": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "fire:hero:太史慈",
+      "loop": true,
+      "title": "太史慈·英雄主题",
+      "url": "/audio/heroes/fire-hero-太史慈/theme.ogg"
+    },
+    "music.hero.fire:hero:庞德": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "fire:hero:庞德",
+      "loop": true,
+      "title": "庞德·英雄主题",
+      "url": "/audio/heroes/fire-hero-庞德/theme.ogg"
+    },
+    "music.hero.fire:hero:庞统": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "fire:hero:庞统",
+      "loop": true,
+      "title": "庞统·英雄主题",
+      "url": "/audio/heroes/fire-hero-庞统/theme.ogg"
+    },
+    "music.hero.fire:hero:荀彧": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "fire:hero:荀彧",
+      "loop": true,
+      "title": "荀彧·英雄主题",
+      "url": "/audio/heroes/fire-hero-荀彧/theme.ogg"
+    },
+    "music.hero.fire:hero:袁绍": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "fire:hero:袁绍",
+      "loop": true,
+      "title": "袁绍·英雄主题",
+      "url": "/audio/heroes/fire-hero-袁绍/theme.ogg"
+    },
+    "music.hero.fire:hero:颜良文丑": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "fire:hero:颜良文丑",
+      "loop": true,
+      "title": "颜良文丑·英雄主题",
+      "url": "/audio/heroes/fire-hero-颜良文丑/theme.ogg"
+    },
+    "music.hero.forest:hero:孙坚": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "forest:hero:孙坚",
+      "loop": true,
+      "title": "孙坚·英雄主题",
+      "url": "/audio/heroes/forest-hero-孙坚/theme.ogg"
+    },
+    "music.hero.forest:hero:孟获": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "forest:hero:孟获",
+      "loop": true,
+      "title": "孟获·英雄主题",
+      "url": "/audio/heroes/forest-hero-孟获/theme.ogg"
+    },
+    "music.hero.forest:hero:徐晃": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "forest:hero:徐晃",
+      "loop": true,
+      "title": "徐晃·英雄主题",
+      "url": "/audio/heroes/forest-hero-徐晃/theme.ogg"
+    },
+    "music.hero.forest:hero:曹丕": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "forest:hero:曹丕",
+      "loop": true,
+      "title": "曹丕·英雄主题",
+      "url": "/audio/heroes/forest-hero-曹丕/theme.ogg"
+    },
+    "music.hero.forest:hero:祝融": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "forest:hero:祝融",
+      "loop": true,
+      "title": "祝融·英雄主题",
+      "url": "/audio/heroes/forest-hero-祝融/theme.ogg"
+    },
+    "music.hero.forest:hero:董卓": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "forest:hero:董卓",
+      "loop": true,
+      "title": "董卓·英雄主题",
+      "url": "/audio/heroes/forest-hero-董卓/theme.ogg"
+    },
+    "music.hero.forest:hero:贾诩": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "forest:hero:贾诩",
+      "loop": true,
+      "title": "贾诩·英雄主题",
+      "url": "/audio/heroes/forest-hero-贾诩/theme.ogg"
+    },
+    "music.hero.forest:hero:鲁肃": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "forest:hero:鲁肃",
+      "loop": true,
+      "title": "鲁肃·英雄主题",
+      "url": "/audio/heroes/forest-hero-鲁肃/theme.ogg"
+    },
+    "music.hero.standard:hero:关羽": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:关羽",
+      "loop": true,
+      "title": "关羽·英雄主题",
+      "url": "/audio/heroes/standard-hero-关羽/theme.ogg"
+    },
+    "music.hero.standard:hero:刘备": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:刘备",
+      "loop": true,
+      "title": "刘备·英雄主题",
+      "url": "/audio/heroes/standard-hero-刘备/theme.ogg"
+    },
+    "music.hero.standard:hero:华佗": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:华佗",
+      "loop": true,
+      "title": "华佗·英雄主题",
+      "url": "/audio/heroes/standard-hero-华佗/theme.ogg"
+    },
+    "music.hero.standard:hero:司马懿": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:司马懿",
+      "loop": true,
+      "title": "司马懿·英雄主题",
+      "url": "/audio/heroes/standard-hero-司马懿/theme.ogg"
+    },
+    "music.hero.standard:hero:吕布": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:吕布",
+      "loop": true,
+      "title": "吕布·英雄主题",
+      "url": "/audio/heroes/standard-hero-吕布/theme.ogg"
+    },
+    "music.hero.standard:hero:吕蒙": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:吕蒙",
+      "loop": true,
+      "title": "吕蒙·英雄主题",
+      "url": "/audio/heroes/standard-hero-吕蒙/theme.ogg"
+    },
+    "music.hero.standard:hero:周瑜": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:周瑜",
+      "loop": true,
+      "title": "周瑜·英雄主题",
+      "url": "/audio/heroes/standard-hero-周瑜/theme.ogg"
+    },
+    "music.hero.standard:hero:夏侯惇": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:夏侯惇",
+      "loop": true,
+      "title": "夏侯惇·英雄主题",
+      "url": "/audio/heroes/standard-hero-夏侯惇/theme.ogg"
+    },
+    "music.hero.standard:hero:大乔": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:大乔",
+      "loop": true,
+      "title": "大乔·英雄主题",
+      "url": "/audio/heroes/standard-hero-大乔/theme.ogg"
+    },
+    "music.hero.standard:hero:孙尚香": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:孙尚香",
+      "loop": true,
+      "title": "孙尚香·英雄主题",
+      "url": "/audio/heroes/standard-hero-孙尚香/theme.ogg"
+    },
+    "music.hero.standard:hero:孙权": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:孙权",
+      "loop": true,
+      "title": "孙权·英雄主题",
+      "url": "/audio/heroes/standard-hero-孙权/theme.ogg"
+    },
+    "music.hero.standard:hero:张辽": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:张辽",
+      "loop": true,
+      "title": "张辽·英雄主题",
+      "url": "/audio/heroes/standard-hero-张辽/theme.ogg"
+    },
+    "music.hero.standard:hero:张飞": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:张飞",
+      "loop": true,
+      "title": "张飞·英雄主题",
+      "url": "/audio/heroes/standard-hero-张飞/theme.ogg"
+    },
+    "music.hero.standard:hero:曹操": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:曹操",
+      "loop": true,
+      "title": "曹操·英雄主题",
+      "url": "/audio/heroes/standard-hero-曹操/theme.ogg"
+    },
+    "music.hero.standard:hero:甄姬": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:甄姬",
+      "loop": true,
+      "title": "甄姬·英雄主题",
+      "url": "/audio/heroes/standard-hero-甄姬/theme.ogg"
+    },
+    "music.hero.standard:hero:甘宁": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:甘宁",
+      "loop": true,
+      "title": "甘宁·英雄主题",
+      "url": "/audio/heroes/standard-hero-甘宁/theme.ogg"
+    },
+    "music.hero.standard:hero:许褚": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:许褚",
+      "loop": true,
+      "title": "许褚·英雄主题",
+      "url": "/audio/heroes/standard-hero-许褚/theme.ogg"
+    },
+    "music.hero.standard:hero:诸葛亮": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:诸葛亮",
+      "loop": true,
+      "title": "诸葛亮·英雄主题",
+      "url": "/audio/heroes/standard-hero-诸葛亮/theme.ogg"
+    },
+    "music.hero.standard:hero:貂蝉": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:貂蝉",
+      "loop": true,
+      "title": "貂蝉·英雄主题",
+      "url": "/audio/heroes/standard-hero-貂蝉/theme.ogg"
+    },
+    "music.hero.standard:hero:赵云": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:赵云",
+      "loop": true,
+      "title": "赵云·英雄主题",
+      "url": "/audio/heroes/standard-hero-赵云/theme.ogg"
+    },
+    "music.hero.standard:hero:郭嘉": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:郭嘉",
+      "loop": true,
+      "title": "郭嘉·英雄主题",
+      "url": "/audio/heroes/standard-hero-郭嘉/theme.ogg"
+    },
+    "music.hero.standard:hero:陆逊": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:陆逊",
+      "loop": true,
+      "title": "陆逊·英雄主题",
+      "url": "/audio/heroes/standard-hero-陆逊/theme.ogg"
+    },
+    "music.hero.standard:hero:马超": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:马超",
+      "loop": true,
+      "title": "马超·英雄主题",
+      "url": "/audio/heroes/standard-hero-马超/theme.ogg"
+    },
+    "music.hero.standard:hero:黄月英": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:黄月英",
+      "loop": true,
+      "title": "黄月英·英雄主题",
+      "url": "/audio/heroes/standard-hero-黄月英/theme.ogg"
+    },
+    "music.hero.standard:hero:黄盖": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "standard:hero:黄盖",
+      "loop": true,
+      "title": "黄盖·英雄主题",
+      "url": "/audio/heroes/standard-hero-黄盖/theme.ogg"
+    },
+    "music.hero.wind:hero:于吉": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "wind:hero:于吉",
+      "loop": true,
+      "title": "于吉·英雄主题",
+      "url": "/audio/heroes/wind-hero-于吉/theme.ogg"
+    },
+    "music.hero.wind:hero:周泰": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "wind:hero:周泰",
+      "loop": true,
+      "title": "周泰·英雄主题",
+      "url": "/audio/heroes/wind-hero-周泰/theme.ogg"
+    },
+    "music.hero.wind:hero:夏侯渊": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "wind:hero:夏侯渊",
+      "loop": true,
+      "title": "夏侯渊·英雄主题",
+      "url": "/audio/heroes/wind-hero-夏侯渊/theme.ogg"
+    },
+    "music.hero.wind:hero:小乔": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "wind:hero:小乔",
+      "loop": true,
+      "title": "小乔·英雄主题",
+      "url": "/audio/heroes/wind-hero-小乔/theme.ogg"
+    },
+    "music.hero.wind:hero:张角": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "wind:hero:张角",
+      "loop": true,
+      "title": "张角·英雄主题",
+      "url": "/audio/heroes/wind-hero-张角/theme.ogg"
+    },
+    "music.hero.wind:hero:曹仁": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "wind:hero:曹仁",
+      "loop": true,
+      "title": "曹仁·英雄主题",
+      "url": "/audio/heroes/wind-hero-曹仁/theme.ogg"
+    },
+    "music.hero.wind:hero:魏延": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "wind:hero:魏延",
+      "loop": true,
+      "title": "魏延·英雄主题",
+      "url": "/audio/heroes/wind-hero-魏延/theme.ogg"
+    },
+    "music.hero.wind:hero:黄忠": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 4,
+      "bpm": 96,
+      "durationSeconds": 10,
+      "heroDefinitionId": "wind:hero:黄忠",
+      "loop": true,
+      "title": "黄忠·英雄主题",
+      "url": "/audio/heroes/wind-hero-黄忠/theme.ogg"
+    }
+  },
+  "sampleRate": 32000,
+  "schemaVersion": 1
+}

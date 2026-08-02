@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:貂蝉.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:貂蝉",
+  "kingdom": "qun",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "graceful timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13403,
+  "style": "graceful"
+}

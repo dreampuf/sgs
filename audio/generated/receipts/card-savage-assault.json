@@ -1,0 +1,31 @@
+{
+  "assetId": "card.savage-assault",
+  "command": "npm run audio:generate -- --id card.savage-assault",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "b843fd51c8867c20b368f59cde20ef5444d70c2dbe179ecf876308d0aea9e936",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 533,
+      "path": "audio/generated/envelopes/card-savage-assault.json",
+      "sha256": "0528faa41f09adbc3397b4956b9e4888a154e28fedbb3221586751340f4c497a"
+    },
+    {
+      "bytes": 76844,
+      "path": "audio/generated/wav/sfx/card-savage-assault.wav",
+      "sha256": "c10c974e8d14a2f58b77a64fb4cc2a4b0fd9cf993e5b729bd13480264cc3f11f"
+    },
+    {
+      "bytes": 10769,
+      "path": "public/audio/sfx/card-savage-assault.ogg",
+      "sha256": "4a627be819af5890aef662a8e4f1b13f38a9345c4d469881c768e17e2ace3792"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1211,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "d42f0b8f380791f29a15dbe8e8ae24b28a28393d3942b30731e83c147eb16259",
+  "title": "南蛮入侵"
+}

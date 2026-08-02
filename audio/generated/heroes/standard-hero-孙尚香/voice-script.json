@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:孙尚香",
+  "heroName": "孙尚香",
+  "inspiration": "借鉴《三国演义》中甘露寺招亲与弓腰姬形象，台词为原创改写。",
+  "lines": {
+    "death": "两岸相隔，此生难归。",
+    "signature": "红妆亦可披甲上阵。",
+    "victory": "弓弦既满，江山亦定。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=100,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 164,
+  "schemaVersion": 1,
+  "style": "graceful",
+  "voice": "Tingting"
+}

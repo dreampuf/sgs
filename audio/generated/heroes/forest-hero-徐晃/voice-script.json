@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "forest:hero:徐晃",
+  "heroName": "徐晃",
+  "inspiration": "借鉴《三国演义》中樊城解围、治军严整与断敌粮道，台词为原创改写。",
+  "lines": {
+    "death": "大斧虽折，军令未失。",
+    "signature": "先断粮道，再破军心。",
+    "victory": "军纪如山，樊城已解。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=85,lowpass=f=8000,acompressor=threshold=-17dB:ratio=2:attack=16:release=160",
+  "rate": 170,
+  "schemaVersion": 1,
+  "style": "tactical",
+  "voice": "Eddy (Chinese (China mainland))"
+}

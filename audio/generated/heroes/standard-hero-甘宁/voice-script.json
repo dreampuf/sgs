@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:甘宁",
+  "heroName": "甘宁",
+  "inspiration": "借鉴《三国演义》中百骑劫魏营与锦帆贼形象，台词为原创改写。",
+  "lines": {
+    "death": "铃声既止，锦帆难归。",
+    "signature": "锦帆夜渡，直取中军。",
+    "victory": "百骑出营，片甲不留。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

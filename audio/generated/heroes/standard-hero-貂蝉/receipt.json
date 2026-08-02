@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "standard:hero:貂蝉",
+  "inputSha256": "e321837cf7ed875a09a94c888feb034c2635a047f6d5f3dad699c53e1fa4e054",
+  "outputs": [
+    {
+      "bytes": 11008,
+      "path": "audio/generated/heroes/standard-hero-貂蝉/theme-score.json",
+      "sha256": "06e94c29a15a8e826f6ff326462b06b6776e8a285151b81c89d48272e1a57ee9"
+    },
+    {
+      "bytes": 304,
+      "path": "audio/generated/heroes/standard-hero-貂蝉/signature-envelope.json",
+      "sha256": "5c40e9ba25479cf03ccadae24043141c8c71d7da8bffbb047bc8506d590c555b"
+    },
+    {
+      "bytes": 683,
+      "path": "audio/generated/heroes/standard-hero-貂蝉/voice-script.json",
+      "sha256": "31ba0c132bcb101ba9eb82ac514dea1acee230d754cd3f70d77bcbae1d0b9d2b"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/standard-hero-貂蝉/wav/theme.wav",
+      "sha256": "e81d7c345161fd3e981dcc83b1cae70038b9aba7314d0d4fa25e5d8bd0299586"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/standard-hero-貂蝉/wav/signature.wav",
+      "sha256": "2143fba05aff46865ee6b2baec351fca76b61af57706c8ca57f5db03a63aad21"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/standard-hero-貂蝉/theme.ogg",
+      "sha256": "8a7bfe3cb58cb03a799dd15400dc93e3ffa0339f3e0cc25b06f1c47dd9fa434b"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/standard-hero-貂蝉/signature.ogg",
+      "sha256": "a8bc15df4dadf8cc3c7ec73e58b2a618dc012336009161c7283615ff636c1ed4"
+    },
+    {
+      "bytes": 104604,
+      "path": "audio/generated/heroes/standard-hero-貂蝉/voice-source/signature.aiff",
+      "sha256": "660e8711798188fba875fa3a57be60e0d9a8694148477f8e841928ab8c07e5a2"
+    },
+    {
+      "bytes": 145940,
+      "path": "audio/generated/heroes/standard-hero-貂蝉/wav/voice-signature.wav",
+      "sha256": "48b0e9d2b8f50b88e97b40e152e30e510af50d5f293bc2318c95f8d0ef88e0c1"
+    },
+    {
+      "bytes": 23333,
+      "path": "public/audio/heroes/standard-hero-貂蝉/voice-signature.ogg",
+      "sha256": "f746be43b563af68bc9b9dac4afaf751d4a6bc255e2e013f8c43b5ed89aca57d"
+    },
+    {
+      "bytes": 109202,
+      "path": "audio/generated/heroes/standard-hero-貂蝉/voice-source/victory.aiff",
+      "sha256": "638f7ec439a67090f34e6bcc2d0a335c244f68b3eb339966723217b0da28a2ef"
+    },
+    {
+      "bytes": 152614,
+      "path": "audio/generated/heroes/standard-hero-貂蝉/wav/voice-victory.wav",
+      "sha256": "3bcc98a90ee39f10a3baee76f595c5abd10d8a890063889953e65c40f0ff7271"
+    },
+    {
+      "bytes": 24338,
+      "path": "public/audio/heroes/standard-hero-貂蝉/voice-victory.ogg",
+      "sha256": "681c72653d1d13e058cca3491608ffaa62dc9fe25f14dbbf32b0a7ea4b29538d"
+    },
+    {
+      "bytes": 134322,
+      "path": "audio/generated/heroes/standard-hero-貂蝉/voice-source/death.aiff",
+      "sha256": "d4cb96b49fc0b364158e59f9cf6950ede8af4a93a3fb816d493120cc8f45c55c"
+    },
+    {
+      "bytes": 189070,
+      "path": "audio/generated/heroes/standard-hero-貂蝉/wav/voice-death.wav",
+      "sha256": "dd4952d8f5bd18d583f0f925c41329ee8ee1edef7cde8fa3c1a7d059914b2247"
+    },
+    {
+      "bytes": 29966,
+      "path": "public/audio/heroes/standard-hero-貂蝉/voice-death.ogg",
+      "sha256": "9227304a45c78c234786a0d06cfb130ca24892828ce3691a2880b443ae162ebe"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3403,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Tingting",
+    "postprocess": "highpass=f=100,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+    "rate": 164,
+    "style": "graceful"
+  }
+}

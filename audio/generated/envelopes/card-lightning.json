@@ -1,0 +1,21 @@
+{
+  "assetId": "card.lightning",
+  "durationSeconds": 1.35,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "low thunder body",
+    "wide noise crack",
+    "electric ticks"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.76,
+    "pitchHz": 62,
+    "weight": 1
+  },
+  "recipe": "thunder",
+  "schemaVersion": 1,
+  "seed": 1215,
+  "specSha256": "81459c63bf06ea29cbb964396cb5074468848e39223c6c7ec9d95e48e9061648",
+  "title": "闪电"
+}

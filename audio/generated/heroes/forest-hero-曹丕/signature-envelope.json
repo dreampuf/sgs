@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.forest:hero:曹丕.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "forest:hero:曹丕",
+  "kingdom": "wei",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "noble timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13702,
+  "style": "noble"
+}

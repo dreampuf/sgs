@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.forest:hero:孙坚.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "forest:hero:孙坚",
+  "kingdom": "wu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "noble timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13705,
+  "style": "noble"
+}

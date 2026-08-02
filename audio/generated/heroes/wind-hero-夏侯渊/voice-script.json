@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "wind:hero:夏侯渊",
+  "heroName": "夏侯渊",
+  "inspiration": "借鉴《三国演义》中急袭千里、定军山争战与神速形象，台词为原创改写。",
+  "lines": {
+    "death": "定军山险，误我一世。",
+    "signature": "兵贵神速，迟一步便是败。",
+    "victory": "千里奔袭，一日定军。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

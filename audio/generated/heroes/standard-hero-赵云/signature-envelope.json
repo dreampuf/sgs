@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:赵云.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:赵云",
+  "kingdom": "shu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "noble timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13204,
+  "style": "noble"
+}

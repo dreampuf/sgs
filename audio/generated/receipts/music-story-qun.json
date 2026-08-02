@@ -1,0 +1,31 @@
+{
+  "assetId": "music.story.qun",
+  "command": "npm run audio:generate -- --id music.story.qun",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "d8cdf222f9d2664c158b44188c3a864f597ffd40d7b42c14406adee2c85eb7fa",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 32293,
+      "path": "audio/generated/scores/music-story-qun.json",
+      "sha256": "d85dde5a516e8bf71fa6334fe261a5444d1eae72e9ded6a61f2b6ade3f3b0307"
+    },
+    {
+      "bytes": 2560044,
+      "path": "audio/generated/wav/music/music-story-qun.wav",
+      "sha256": "834f403abdd8c748275c5737fe35645eece4a843ae3fe8c792b1d100b8595fc6"
+    },
+    {
+      "bytes": 277996,
+      "path": "public/audio/music/music-story-qun.ogg",
+      "sha256": "cc87500db18b03e574fd6ebae31fb7d2283c46417102add77b6df07599176f77"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2204,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "64ae0b87a22d26334242fe19d855e0fba2368198cdb1f6dc87ba98d0360c7401",
+  "title": "群 · 风雷并起"
+}

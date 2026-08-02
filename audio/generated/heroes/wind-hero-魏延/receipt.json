@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "wind:hero:魏延",
+  "inputSha256": "0e13012cc835f1c445612bb3ad5d462cb909054c636c084981b63c0793adde3a",
+  "outputs": [
+    {
+      "bytes": 10947,
+      "path": "audio/generated/heroes/wind-hero-魏延/theme-score.json",
+      "sha256": "66a0da705350b2473d8a5b07f09effe0b894ea17c0a9af35a6e48cb255728db0"
+    },
+    {
+      "bytes": 292,
+      "path": "audio/generated/heroes/wind-hero-魏延/signature-envelope.json",
+      "sha256": "88e707cb3d3dba44b10e3c17a1c8c960c53001fa1ca14d243672c88569d5578c"
+    },
+    {
+      "bytes": 690,
+      "path": "audio/generated/heroes/wind-hero-魏延/voice-script.json",
+      "sha256": "c2914c7973f437ab30e22503079bffe4733dc5e771992d112f34688c7de1b603"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/wind-hero-魏延/wav/theme.wav",
+      "sha256": "1771ba7c337a51ed61ce88dad05083af0baa5bd3dfe943e0a0e6fba06e0873d4"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/wind-hero-魏延/wav/signature.wav",
+      "sha256": "2c853e37bf4eef4ce8d9fabf8475edf507711ea4cded81e1e0d4a3e7983c2aeb"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/wind-hero-魏延/theme.ogg",
+      "sha256": "e14f7c60385420237e2968d23f2e81b346c820da4295cf8b13c0281c69845961"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/wind-hero-魏延/signature.ogg",
+      "sha256": "de4a06d2c70ba8e04ced633c1ed5fe5cb358068bf9da49182c06e6a81a826dea"
+    },
+    {
+      "bytes": 119044,
+      "path": "audio/generated/heroes/wind-hero-魏延/voice-source/signature.aiff",
+      "sha256": "2907e50eace2742ac2b2e6af43c5f935f30ac7cbd925d8aee2f5d6c0d70e8404"
+    },
+    {
+      "bytes": 166896,
+      "path": "audio/generated/heroes/wind-hero-魏延/wav/voice-signature.wav",
+      "sha256": "f2f23ee35cca04e9196f99a71a77c48835124853717cc658b75552edcdd19aab"
+    },
+    {
+      "bytes": 26549,
+      "path": "public/audio/heroes/wind-hero-魏延/voice-signature.ogg",
+      "sha256": "f26e8d03c607db5296531002089cfd6ff4b235b8ef2206ca6c3922e406fd0e04"
+    },
+    {
+      "bytes": 90820,
+      "path": "audio/generated/heroes/wind-hero-魏延/voice-source/victory.aiff",
+      "sha256": "59b092db8a0fd7810dd6d39510e41638c342374ab887911767047e1402c8a36e"
+    },
+    {
+      "bytes": 125936,
+      "path": "audio/generated/heroes/wind-hero-魏延/wav/voice-victory.wav",
+      "sha256": "0c414264af8bc93461eedacc144151dc00215a9daeab392a2a37461898f255da"
+    },
+    {
+      "bytes": 20090,
+      "path": "public/audio/heroes/wind-hero-魏延/voice-victory.ogg",
+      "sha256": "2cdf95e786a65065ce99d5270c9e0a7fb787de8999b5a5e9be590a50dd6e34b9"
+    },
+    {
+      "bytes": 114092,
+      "path": "audio/generated/heroes/wind-hero-魏延/voice-source/death.aiff",
+      "sha256": "a3e32d118fe4ef7e6d0ba54c384580c9538255c3d55cdb257f848494d41aa92f"
+    },
+    {
+      "bytes": 159710,
+      "path": "audio/generated/heroes/wind-hero-魏延/wav/voice-death.wav",
+      "sha256": "10e13583d99233719b34597f0345d192e6efea9ff51a09e0dd291a379c6cc1cc"
+    },
+    {
+      "bytes": 25544,
+      "path": "public/audio/heroes/wind-hero-魏延/voice-death.ogg",
+      "sha256": "10861628eafba820a6593a663939e5b87ed6d984c83c4c55f6441afacc0185ad"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3504,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Rocko (Chinese (China mainland))",
+    "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+    "rate": 180,
+    "style": "fierce"
+  }
+}

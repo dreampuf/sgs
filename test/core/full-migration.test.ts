@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import {
   STANDARD_CARD,
+  STANDARD_RULESET,
   createEarlyExpansionRegistry,
   createGameState,
   createMatchSetup,
@@ -8,6 +9,7 @@ import {
   finalizeMatchSetup,
   getLegalActions,
   handZone,
+  identityCounts,
   serializeGameState,
   deserializeGameState
 } from "../../src/core";
@@ -39,14 +41,14 @@ describe("early expansion migration completeness", () => {
     }
   });
 
-  test("MatchSetup owns 2-10 player identities, hero offers, and pack metadata", () => {
+  test("MatchSetup owns 2-20 player identities, hero offers, and pack metadata", () => {
     const registry = createEarlyExpansionRegistry([
       "wind",
       "military",
       "fire",
       "forest"
     ]);
-    for (let playerCount = 2; playerCount <= 10; playerCount += 1) {
+    for (let playerCount = 2; playerCount <= 20; playerCount += 1) {
       const setup = createMatchSetup(registry, {
         seed: 20260728 + playerCount,
         playerCount,
@@ -55,6 +57,10 @@ describe("early expansion migration completeness", () => {
       expect(setup.seats).toHaveLength(playerCount);
       expect(setup.seats.filter((seat) => seat.identity === "lord"))
         .toHaveLength(1);
+      expect(setup.seats).toHaveLength(
+        Object.values(identityCounts(playerCount))
+          .reduce((total, count) => total + count, 0)
+      );
       expect(setup.localHeroChoices.length).toBeGreaterThan(0);
       const finalized = finalizeMatchSetup(
         setup,
@@ -81,6 +87,45 @@ describe("early expansion migration completeness", () => {
         )
       ).toBe(true);
     }
+  });
+
+  test("large-table identity bands add renegades without weakening rebels", () => {
+    expect([
+      2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+      12, 13, 14, 15, 16, 17, 18, 19, 20
+    ].map((players) => [players, identityCounts(players)])).toEqual([
+      [2, { lord: 1, loyalist: 0, rebel: 1, renegade: 0 }],
+      [3, { lord: 1, loyalist: 0, rebel: 1, renegade: 1 }],
+      [4, { lord: 1, loyalist: 1, rebel: 1, renegade: 1 }],
+      [5, { lord: 1, loyalist: 1, rebel: 2, renegade: 1 }],
+      [6, { lord: 1, loyalist: 1, rebel: 3, renegade: 1 }],
+      [7, { lord: 1, loyalist: 2, rebel: 3, renegade: 1 }],
+      [8, { lord: 1, loyalist: 2, rebel: 4, renegade: 1 }],
+      [9, { lord: 1, loyalist: 2, rebel: 4, renegade: 2 }],
+      [10, { lord: 1, loyalist: 3, rebel: 4, renegade: 2 }],
+      [11, { lord: 1, loyalist: 3, rebel: 5, renegade: 2 }],
+      [12, { lord: 1, loyalist: 4, rebel: 5, renegade: 2 }],
+      [13, { lord: 1, loyalist: 4, rebel: 6, renegade: 2 }],
+      [14, { lord: 1, loyalist: 5, rebel: 6, renegade: 2 }],
+      [15, { lord: 1, loyalist: 5, rebel: 6, renegade: 3 }],
+      [16, { lord: 1, loyalist: 5, rebel: 7, renegade: 3 }],
+      [17, { lord: 1, loyalist: 6, rebel: 7, renegade: 3 }],
+      [18, { lord: 1, loyalist: 6, rebel: 8, renegade: 3 }],
+      [19, { lord: 1, loyalist: 7, rebel: 8, renegade: 3 }],
+      [20, { lord: 1, loyalist: 7, rebel: 9, renegade: 3 }]
+    ]);
+    expect(STANDARD_RULESET).toMatchObject({ minPlayers: 2, maxPlayers: 20 });
+    expect(() => identityCounts(21)).toThrow(
+      "identity mode supports 2-20 players"
+    );
+    expect(() => createGameState({
+      seed: 31,
+      players: Array.from({ length: 21 }, (_, index) => ({
+        id: `p${index + 1}`,
+        heroDefinitionId: `fixture:p${index + 1}`,
+        maxHp: 4
+      }))
+    })).toThrow("a game requires 2-20 players");
   });
 
   test("schema v3 snapshots preserve the installed pack manifest", () => {

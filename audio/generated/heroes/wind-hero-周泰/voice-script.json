@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "wind:hero:周泰",
+  "heroName": "周泰",
+  "inspiration": "借鉴《三国演义》中宣城救主、满身创痕仍不屈的形象，台词为原创改写。",
+  "lines": {
+    "death": "主公无恙，周泰足矣。",
+    "signature": "百创在身，寸步不退。",
+    "victory": "伤痕作甲，再护江东。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "fire:hero:太史慈",
+  "inputSha256": "4ab6dbdbbbd7ec42828dd49badeb8f09f2054e38ce0a830dfd7387470f0ef955",
+  "outputs": [
+    {
+      "bytes": 10985,
+      "path": "audio/generated/heroes/fire-hero-太史慈/theme-score.json",
+      "sha256": "76428722f977bc8c7f85a323c4c6843909797d9e3d070a673557b26c252e4b84"
+    },
+    {
+      "bytes": 295,
+      "path": "audio/generated/heroes/fire-hero-太史慈/signature-envelope.json",
+      "sha256": "022679ff1f0331cc8f453daf542a39878d77fb96b0139cde8535ebfa0ba22789"
+    },
+    {
+      "bytes": 707,
+      "path": "audio/generated/heroes/fire-hero-太史慈/voice-script.json",
+      "sha256": "1f95001d3276f24fa2e89ef144c2353164bdef3c09c581acb514e6eb3493a4f4"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/fire-hero-太史慈/wav/theme.wav",
+      "sha256": "9fd09d72406027c75226de905480d94c779afcfd34fc422c8942179af13db6c9"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/fire-hero-太史慈/wav/signature.wav",
+      "sha256": "795deee197de3f7c216af48ccdc7bf5da1a84e517a3f053ae3a0b9bd01f4f5d5"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/fire-hero-太史慈/theme.ogg",
+      "sha256": "75751381b2717732e1dbf6ce46a3b0264fa19c69148f5f11e8a19f4dbbef5672"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/fire-hero-太史慈/signature.ogg",
+      "sha256": "2788e372c91deee9cf09d0374ceb142c5205b53e144ab7835a9e38e7809eb2f5"
+    },
+    {
+      "bytes": 111982,
+      "path": "audio/generated/heroes/fire-hero-太史慈/voice-source/signature.aiff",
+      "sha256": "08b9e9bd028b151246ba0749619c82348a855a8de7cfcf18c9417fd94630c1e1"
+    },
+    {
+      "bytes": 156648,
+      "path": "audio/generated/heroes/fire-hero-太史慈/wav/voice-signature.wav",
+      "sha256": "6c6615b8593c3f7407ba36ccf27c24b3d170f47336d48d7a283562cbe359c540"
+    },
+    {
+      "bytes": 24941,
+      "path": "public/audio/heroes/fire-hero-太史慈/voice-signature.ogg",
+      "sha256": "02de2c3cb898946289e07539034c67c6ca90c5a8ad6f0938bc0fad13fc0f41c1"
+    },
+    {
+      "bytes": 121614,
+      "path": "audio/generated/heroes/fire-hero-太史慈/voice-source/victory.aiff",
+      "sha256": "ce23e599d1c3b8cadb31a217955133c7da47d1800dcf5a45038666d3f5a06d2e"
+    },
+    {
+      "bytes": 170626,
+      "path": "audio/generated/heroes/fire-hero-太史慈/wav/voice-victory.wav",
+      "sha256": "3a5927e2f5a17f39fd9e1c330d285831f7b65dc7a71d114ff17e2f8dc856d199"
+    },
+    {
+      "bytes": 27152,
+      "path": "public/audio/heroes/fire-hero-太史慈/voice-victory.ogg",
+      "sha256": "27304012631c69979c412b5ea63bbb922a41e29747a051786bb8cb876612d4d8"
+    },
+    {
+      "bytes": 123722,
+      "path": "audio/generated/heroes/fire-hero-太史慈/voice-source/death.aiff",
+      "sha256": "6273da00e9779ddfbbea2d581fab40a9658e0d19f505a18419dda2e4bbef3d7a"
+    },
+    {
+      "bytes": 173686,
+      "path": "audio/generated/heroes/fire-hero-太史慈/wav/voice-death.wav",
+      "sha256": "4c8414eb2b2a311b1aa5aece6de9fd5c5fe96a3bf50ab230701e09bdea5c9b8a"
+    },
+    {
+      "bytes": 27554,
+      "path": "public/audio/heroes/fire-hero-太史慈/voice-death.ogg",
+      "sha256": "81f2a9c6ae03a3c77aacb70edd848469a2b6df8c44577e270c57a56514498c43"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3605,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Eddy (Chinese (China mainland))",
+    "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+    "rate": 166,
+    "style": "noble"
+  }
+}

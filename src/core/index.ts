@@ -20,4 +20,8 @@ export * from "../session/game-session";
 export * from "../ai/observation";
 export * from "../ai/policy-agent";
 export * from "../ai/self-play";
+export * from "../ai/identity-inference";
 export * from "../ui/game-controller";
+export * from "../replay/jsonl";
+export * from "../testing/model-explorer";
+export * from "../browser/animation-semantics";

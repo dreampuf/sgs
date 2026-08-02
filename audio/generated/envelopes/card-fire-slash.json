@@ -1,0 +1,21 @@
+{
+  "assetId": "card.fire-slash",
+  "durationSeconds": 0.68,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "filtered flame noise",
+    "low impact",
+    "crackle grains"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.78,
+    "pitchHz": 150,
+    "weight": 0.72
+  },
+  "recipe": "fire",
+  "schemaVersion": 1,
+  "seed": 1205,
+  "specSha256": "f3711093436da3fb50683c6558478cf7dcafee01ddc2deab195354acac7efcd6",
+  "title": "火杀"
+}

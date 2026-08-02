@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "wind:hero:黄忠",
+  "inputSha256": "88736453c99f928eeaf3ed1e1cd94a5c519a9f5482536a7fcc353fb9b22bb42e",
+  "outputs": [
+    {
+      "bytes": 10976,
+      "path": "audio/generated/heroes/wind-hero-黄忠/theme-score.json",
+      "sha256": "505408303133fcbb2b417058136c9458766447936e91e086d49d81c701b2c306"
+    },
+    {
+      "bytes": 288,
+      "path": "audio/generated/heroes/wind-hero-黄忠/signature-envelope.json",
+      "sha256": "e1539d57d2e6cd690d669b07aba5f6bc05255f62d2fc9817f9723a5cecfc4941"
+    },
+    {
+      "bytes": 697,
+      "path": "audio/generated/heroes/wind-hero-黄忠/voice-script.json",
+      "sha256": "685f1a28f5cc894625ca038433415175e948708fce34ff6c4fbcdb17699e119c"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/wind-hero-黄忠/wav/theme.wav",
+      "sha256": "097521520c66928ec59e8927114357c603b0780d80d7b489afb0263f56562b72"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/wind-hero-黄忠/wav/signature.wav",
+      "sha256": "f897dd3c4dde67f7d1550990dcff62cf18ff46994f9b34ebcac607ece01b9afc"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/wind-hero-黄忠/theme.ogg",
+      "sha256": "661e8a46865737c132062104a745d7ad20ebbd81ad5736287c2f44642133b1bb"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/wind-hero-黄忠/signature.ogg",
+      "sha256": "bade3f9e401e15ebbe3386e3f72f22730b543ee9a430f1caf281f397ffa24d07"
+    },
+    {
+      "bytes": 125384,
+      "path": "audio/generated/heroes/wind-hero-黄忠/voice-source/signature.aiff",
+      "sha256": "ee0d5390baeff6f0d6e48179f3d8f0af2a477dc375b026758ef62a28a48b69e7"
+    },
+    {
+      "bytes": 176098,
+      "path": "audio/generated/heroes/wind-hero-黄忠/wav/voice-signature.wav",
+      "sha256": "42e7e1e21afd084ab15f0b518b69e8bf2852c3d1a41a1ee9ea32b455d7700789"
+    },
+    {
+      "bytes": 27956,
+      "path": "public/audio/heroes/wind-hero-黄忠/voice-signature.ogg",
+      "sha256": "74eb62a0f215366cbf26a79ca61160b8f10a7c842b77c9cc4366bbe83faedc13"
+    },
+    {
+      "bytes": 123888,
+      "path": "audio/generated/heroes/wind-hero-黄忠/voice-source/victory.aiff",
+      "sha256": "08b315385ba2b29041330994f9209812ab73d68acf4be17354c85e711b2548d2"
+    },
+    {
+      "bytes": 173926,
+      "path": "audio/generated/heroes/wind-hero-黄忠/wav/voice-victory.wav",
+      "sha256": "cddc32b029749d61ab85f501c47e3bc4b3f76d0bd6ee2f237b014fff6cb749fb"
+    },
+    {
+      "bytes": 27755,
+      "path": "public/audio/heroes/wind-hero-黄忠/voice-victory.ogg",
+      "sha256": "d49c39c9ffbc2af853ce0ef46b54337c54ca2d8847e549418e997566838fabab"
+    },
+    {
+      "bytes": 122972,
+      "path": "audio/generated/heroes/wind-hero-黄忠/voice-source/death.aiff",
+      "sha256": "f869402dfd887449401ef71c481631bdaedec05405ca370f3a07cfa502ff283e"
+    },
+    {
+      "bytes": 172598,
+      "path": "audio/generated/heroes/wind-hero-黄忠/wav/voice-death.wav",
+      "sha256": "40955aafe2006a4301a6dfba946b862e777d272d18b1605863eb510f64c58ca9"
+    },
+    {
+      "bytes": 27554,
+      "path": "public/audio/heroes/wind-hero-黄忠/voice-death.ogg",
+      "sha256": "46328f1a3cd43853272bf5a3b9a8e915c5c4b8c1283d356f34a0b13d6de462d7"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3503,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Grandpa (Chinese (China mainland))",
+    "postprocess": "highpass=f=65,lowpass=f=6500,acompressor=threshold=-18dB:ratio=2:attack=25:release=220",
+    "rate": 145,
+    "style": "aged"
+  }
+}

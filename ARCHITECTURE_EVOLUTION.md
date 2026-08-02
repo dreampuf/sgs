@@ -486,7 +486,7 @@ UI、AI、网络客户端和测试都消费同一 `LegalAction[]`。它既是防
 
 这次重构已经让生产入口不再加载 `logic.js`、`logic_ai.js` 和 `logic_interpreter.js`，但浏览器还不是纯新架构。
 
-[`index.html`](index.html) 仍加载 `data.js`、`logic_func.js`、`main.js`、`interface.js` 和 `animation.js`。[`CoreBoutAdapter`](src/browser/core-bout-adapter.ts) 维护 UI ViewModel 与 Core ID 的双向映射，再把 `DomainEvent` 投影到现有 jQuery 页面。身份配置、主公候选、选将池和最终座次已经由 Core `MatchSetup` 产生，`main.js` 只负责展示选择并提交结果。
+[`index.html`](index.html) 仍加载 `data.js`、`logic_func.js`、`main.js`、`interface.js` 和 `animation.js`。[`CoreBoutAdapter`](src/browser/core-bout-adapter.ts) 维护 UI ViewModel 与 Core ID 的双向映射，再把 `DomainEvent` 投影到原生 DOM 页面。身份配置、主公候选、选将池和最终座次已经由 Core `MatchSetup` 产生，`main.js` 只负责展示选择并提交结果。
 
 这层桥接是迁移手段，不应被画成最终架构。真正清理完成的标准是：
 
@@ -497,7 +497,7 @@ MatchSetup 直接创建规则集和玩家
   -> 当前 View 只渲染 ViewModel 和 DomainEvent
 ```
 
-规则与交互协议已经完成迁移；adapter 和展示数据副本只剩 UI 适配职责。以后替换 jQuery View 时可以一起删除，但不再影响规则唯一性。
+规则与交互协议已经完成迁移，jQuery 依赖也已从生产入口、事件层和动画层移除；adapter 和展示数据副本只剩 UI 适配职责，不再影响规则唯一性。
 
 规则侧也还有边界要继续打磨：
 

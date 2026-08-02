@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.wind:hero:黄忠.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "wind:hero:黄忠",
+  "kingdom": "shu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "aged timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13503,
+  "style": "aged"
+}

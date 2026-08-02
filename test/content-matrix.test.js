@@ -31,6 +31,17 @@ assert.deepStrictEqual(
   [],
   'the rule matrix must not contain cards absent from the deck',
 );
+assert.deepStrictEqual(
+  Object.keys(sgs.CARD_EXPLANATION_MAPPING).sort(),
+  [...cardNames].sort(),
+  'card explanations must cover exactly the 43 playable card names',
+);
+cardNames.forEach((name) => {
+  const explanation = sgs.CARD_EXPLANATION_MAPPING[name];
+  assert(explanation.category, `missing card category: ${name}`);
+  assert(explanation.target, `missing card target explanation: ${name}`);
+  assert(explanation.description, `missing card effect explanation: ${name}`);
+});
 
 assert.strictEqual(sgs.HERO.length, 49, 'expected 25 standard and 24 regular expansion generals');
 sgs.HERO.forEach((hero) => {

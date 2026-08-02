@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:吕蒙.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:吕蒙",
+  "kingdom": "wu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "tactical timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13303,
+  "style": "tactical"
+}

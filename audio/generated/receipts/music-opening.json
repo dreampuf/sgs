@@ -1,0 +1,31 @@
+{
+  "assetId": "music.opening",
+  "command": "npm run audio:generate -- --id music.opening",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "77e1aadc7f89e883aa49be2ad05d8476fbb7301aaa004ba140ea100394f0fe60",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 28970,
+      "path": "audio/generated/scores/music-opening.json",
+      "sha256": "9e396d3941b3f99e5ade48f9d3d83817e3ea21ce394a2dc9244a13bf4c9a8771"
+    },
+    {
+      "bytes": 2560044,
+      "path": "audio/generated/wav/music/music-opening.wav",
+      "sha256": "91cddf78bccaacdf3ed8989074a86c9939a7aeffb0dd8e838e35cfff858b1006"
+    },
+    {
+      "bytes": 281131,
+      "path": "public/audio/music/music-opening.ogg",
+      "sha256": "a385f11ef81c6644d5aadb5a704608dbb625e5c23414ce7d2f84756603c11ea8"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2300,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "51857fd5f16ce9ac9a00d6b8d0700dddb5a1137a62caf0c520d578e459b9884f",
+  "title": "列阵"
+}

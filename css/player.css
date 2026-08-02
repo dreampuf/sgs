@@ -52,6 +52,11 @@
     display:block;
     opacity: 0.3;
 }
+#player.player_dead #player_cover
+{
+    display: block !important;
+    opacity: 0.55;
+}
 
 /*** 装备区域 ***/
 .img_box
@@ -90,6 +95,51 @@
     float: left;
     font-weight: bold;
 }
+#attack.equipment_skill_available
+{
+    cursor:pointer;
+    border-radius:2px;
+    background:rgba(170, 102, 24, 0.16);
+    box-shadow:
+        0 0 5px 1px rgba(255, 201, 72, 0.72),
+        inset 0 0 4px rgba(255, 224, 139, 0.28);
+    transition:
+        background 120ms ease,
+        box-shadow 120ms ease,
+        filter 120ms ease;
+}
+#attack.equipment_skill_available .equip_border
+{
+    filter:drop-shadow(0 0 3px rgba(255, 211, 91, 0.95));
+}
+#attack.equipment_skill_available .equip_img
+{
+    filter:brightness(1.08) saturate(1.08);
+}
+#attack.equipment_skill_active .equip_border
+{
+    filter:
+        brightness(1.35)
+        drop-shadow(0 0 6px #fff1a1)
+        drop-shadow(0 0 4px #ffb52e);
+}
+#attack.equipment_skill_active
+{
+    background:rgba(255, 229, 145, 0.28);
+    box-shadow:
+        0 0 10px 3px rgba(255, 239, 165, 0.98),
+        0 0 5px 1px rgba(255, 160, 25, 0.95),
+        inset 0 0 6px rgba(255, 252, 220, 0.72);
+}
+#attack.equipment_skill_active .equip_img
+{
+    filter:brightness(1.42) saturate(1.24);
+}
+#attack.equipment_skill_available:focus
+{
+    outline:1px solid #ffe07a;
+    outline-offset:1px;
+}
    .equip_border
     {
         left:0;
@@ -103,6 +153,33 @@
         width:137px;
         height:21px;
         margin:2px;
+        object-fit:cover;
+        object-position:center;
+    }
+    #attack[data-card-name="古锭刀"] .equip_img
+    {
+        object-position:center 38%;
+    }
+    #attack_horse[data-card-name="骅骝"] .equip_img
+    {
+        object-position:center 44%;
+    }
+    .equip_crop_name
+    {
+        position:absolute;
+        z-index:1;
+        top:3px;
+        left:40px;
+        right:40px;
+        overflow:hidden;
+        color:#28170d;
+        font-size:12px;
+        font-weight:bold;
+        line-height:18px;
+        text-align:center;
+        text-overflow:ellipsis;
+        text-shadow:0 1px rgba(255,255,255,0.72);
+        white-space:nowrap;
     }
     .equip_pattern
     {
@@ -157,6 +234,39 @@
     height: 131px;
     cursor: pointer;
     display: block;
+}
+.player_card.action_skill_material_selectable
+{
+    filter:brightness(1.08);
+}
+.player_card.action_skill_material_selected
+{
+    outline:3px solid #e7c769;
+    border-radius:3px;
+    box-shadow:0 0 12px 3px rgba(245, 205, 91, 0.9);
+}
+#attack.action_skill_material_selectable,
+#defend.action_skill_material_selectable,
+#attack_horse.action_skill_material_selectable,
+#defend_horse.action_skill_material_selectable
+{
+    cursor:pointer;
+    border-radius:2px;
+    background:rgba(170, 102, 24, 0.18);
+    box-shadow:
+        0 0 5px 1px rgba(255, 201, 72, 0.78),
+        inset 0 0 4px rgba(255, 224, 139, 0.28);
+}
+#attack.action_skill_material_selected,
+#defend.action_skill_material_selected,
+#attack_horse.action_skill_material_selected,
+#defend_horse.action_skill_material_selected
+{
+    background:rgba(255, 229, 145, 0.3);
+    box-shadow:
+        0 0 10px 3px rgba(255, 239, 165, 0.98),
+        0 0 5px 1px rgba(255, 160, 25, 0.95),
+        inset 0 0 6px rgba(255, 252, 220, 0.72);
 }
 .pat_num
 {
@@ -296,6 +406,7 @@
 /* 玩家国家 */
 #player_country
 {
+    display:none;
     position:absolute;
     top:2px;
     left:2px;
@@ -305,11 +416,17 @@
 /* 玩家头像 */
 #player_head
 {
+    display: none;
     position: absolute;
+    z-index:45;
     top: 8px;
     right: 43px;
     width: 113px;
     height: 106px;
+}
+#main.game_scene_active #player_head
+{
+    display: block;
 }
 #player_head_img
 {

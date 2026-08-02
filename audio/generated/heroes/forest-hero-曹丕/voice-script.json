@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "forest:hero:曹丕",
+  "heroName": "曹丕",
+  "inspiration": "借鉴《三国演义》中魏代汉、兄弟相争与帝王权术，台词为原创改写。",
+  "lines": {
+    "death": "帝业初成，竟如此短促。",
+    "signature": "成王败者，皆归新朝。",
+    "victory": "魏统已立，四海当颂。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 166,
+  "schemaVersion": 1,
+  "style": "noble",
+  "voice": "Eddy (Chinese (China mainland))"
+}

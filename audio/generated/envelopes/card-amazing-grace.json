@@ -1,0 +1,20 @@
+{
+  "assetId": "card.amazing-grace",
+  "durationSeconds": 1.05,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "pentatonic bells",
+    "soft bed"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.7,
+    "pitchHz": 440,
+    "weight": 0.34
+  },
+  "recipe": "bells",
+  "schemaVersion": 1,
+  "seed": 1213,
+  "specSha256": "0e1e1c45644d6b78d563397c14c2c6a7e1129fc1e4493b08b3c05cdc1b5c2cda",
+  "title": "五谷丰登"
+}

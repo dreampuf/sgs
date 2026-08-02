@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:许褚",
+  "heroName": "许褚",
+  "inspiration": "借鉴《三国演义》中裸衣斗马超、护卫曹操的虎痴形象，台词为原创改写。",
+  "lines": {
+    "death": "主公，末将不能再护驾了。",
+    "signature": "卸甲又如何，看我破阵。",
+    "victory": "虎痴在前，敌军尽退。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

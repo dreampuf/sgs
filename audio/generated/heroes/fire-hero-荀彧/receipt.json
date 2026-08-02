@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "fire:hero:荀彧",
+  "inputSha256": "adda69a6e7999f1bc172fdbab1069afa8ff2e4c9d7f572d725abd70c4234b5ef",
+  "outputs": [
+    {
+      "bytes": 10952,
+      "path": "audio/generated/heroes/fire-hero-荀彧/theme-score.json",
+      "sha256": "2b4ca5ec8d77721637135f2ec59620f8d1eefe078cb3119b19f29d8a5d08e789"
+    },
+    {
+      "bytes": 296,
+      "path": "audio/generated/heroes/fire-hero-荀彧/signature-envelope.json",
+      "sha256": "6bc33f92e2036147ac32b403c6011828399dadc80ed6f1c4ad22b25d2400abda"
+    },
+    {
+      "bytes": 698,
+      "path": "audio/generated/heroes/fire-hero-荀彧/voice-script.json",
+      "sha256": "7e83b5d3dc6040220b1deed43e3217ff0c32c152ac76c4576cd111de55e382fc"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/fire-hero-荀彧/wav/theme.wav",
+      "sha256": "0741a68620dc123db944dc005a6edd5feead78aff689f7cbbf6ee156eb691998"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/fire-hero-荀彧/wav/signature.wav",
+      "sha256": "1f4e3d3143d2300770134fa00c17d77c59a9d712b51b42982b1afe5057cabbe4"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/fire-hero-荀彧/theme.ogg",
+      "sha256": "1f307e3eae709eebb71caa86916ff178dbbe39ec912dfb3f91d9e38aec4fc42a"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/fire-hero-荀彧/signature.ogg",
+      "sha256": "92e10ea41e58e224b4dfb6f08298a62437651577a305b8048be458ebdf329ea9"
+    },
+    {
+      "bytes": 120194,
+      "path": "audio/generated/heroes/fire-hero-荀彧/voice-source/signature.aiff",
+      "sha256": "41ddfad4b5787c48d4158971b20ecbae9d983c42c1cebca62c7fe4c64f73482f"
+    },
+    {
+      "bytes": 168566,
+      "path": "audio/generated/heroes/fire-hero-荀彧/wav/voice-signature.wav",
+      "sha256": "a8998ee8d4e2b0e82694f12505f1703e3e69e9d25f95b3b60398603c833763d1"
+    },
+    {
+      "bytes": 26750,
+      "path": "public/audio/heroes/fire-hero-荀彧/voice-signature.ogg",
+      "sha256": "5e8b946c87a0f339e0ad182b9a51197126e67576727c625e6abf3106dde9c68c"
+    },
+    {
+      "bytes": 114802,
+      "path": "audio/generated/heroes/fire-hero-荀彧/voice-source/victory.aiff",
+      "sha256": "19be9386524cbaa5f5795e9aaa47974a1df6dca79ca14d78733cb89092949836"
+    },
+    {
+      "bytes": 160740,
+      "path": "audio/generated/heroes/fire-hero-荀彧/wav/voice-victory.wav",
+      "sha256": "a9940a20ee8846dd2e51e52582fc177a59f8dfed2df7a811c100beaf44bb786f"
+    },
+    {
+      "bytes": 25544,
+      "path": "public/audio/heroes/fire-hero-荀彧/voice-victory.ogg",
+      "sha256": "101c612cc945a76e50ff537b8f158ac692c923b1dad08b563a4ae239a3977535"
+    },
+    {
+      "bytes": 123984,
+      "path": "audio/generated/heroes/fire-hero-荀彧/voice-source/death.aiff",
+      "sha256": "f3dfc0b8ffdf2a590797408f4cad0b8eb690e8dac036f541209003fb71e3fd66"
+    },
+    {
+      "bytes": 174066,
+      "path": "audio/generated/heroes/fire-hero-荀彧/wav/voice-death.wav",
+      "sha256": "9cd05b7c8e81ced651ffaedd4edcbc8c18530dbe6711bf3f5403b5d3cedaf4af"
+    },
+    {
+      "bytes": 27755,
+      "path": "public/audio/heroes/fire-hero-荀彧/voice-death.ogg",
+      "sha256": "abb4a96abf49aafe07d9189819127a15195bfd301b05b0a1abf5f24f5d51227c"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3602,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Eddy (Chinese (China mainland))",
+    "postprocess": "highpass=f=85,lowpass=f=8000,acompressor=threshold=-17dB:ratio=2:attack=16:release=160",
+    "rate": 170,
+    "style": "tactical"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "assetId": "card.duel",
+  "command": "npm run audio:generate -- --id card.duel",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "7cc50c9b64204db82cf13084817a368f8e7b6949eabfeb82a56786c6bc8f3c6e",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 522,
+      "path": "audio/generated/envelopes/card-duel.json",
+      "sha256": "5ef9b2765a519593fad03166ca1e215cfd95d510774ae7ee7ff1bc1e50aa68fc"
+    },
+    {
+      "bytes": 56364,
+      "path": "audio/generated/wav/sfx/card-duel.wav",
+      "sha256": "8ad618a5501240776b3ab7652b7d9ab4585e32d485a93843f1e98d1f780af43c"
+    },
+    {
+      "bytes": 8645,
+      "path": "public/audio/sfx/card-duel.ogg",
+      "sha256": "cc3bfe3bb5defa065c7e11e2ec1838d0aa966ced1eaad4ca27e3740ab7356248"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1210,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "9d335ce48533730618f8dca892b09b596655700376e444058b7a002959b5e2ae",
+  "title": "决斗"
+}

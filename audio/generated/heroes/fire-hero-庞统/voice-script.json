@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "fire:hero:庞统",
+  "heroName": "庞统",
+  "inspiration": "借鉴《三国演义》中连环计、凤雏与落凤坡故事，台词为原创改写。",
+  "lines": {
+    "death": "落凤坡前，天命难违。",
+    "signature": "铁索相连，一火俱焚。",
+    "victory": "凤翼虽隐，奇谋已成。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180,aecho=0.8:0.18:55:0.1",
+  "rate": 155,
+  "schemaVersion": 1,
+  "style": "mystical",
+  "voice": "Eddy (Chinese (China mainland))"
+}

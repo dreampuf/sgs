@@ -1,0 +1,31 @@
+{
+  "assetId": "system.your-turn",
+  "command": "npm run audio:generate -- --id system.your-turn",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "e1ab97daaad22ed28b300e204682892d321add757885353d85c9e7fa87e15afa",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 530,
+      "path": "audio/generated/envelopes/system-your-turn.json",
+      "sha256": "3428f60ee027e05fea1e7b622643445d5e7cb12312919e7fc9a87fdbe909a864"
+    },
+    {
+      "bytes": 46124,
+      "path": "audio/generated/wav/sfx/system-your-turn.wav",
+      "sha256": "e0294abf0e706c359ffbbd5c77124399bd646bd3c7cfda957f492910ca319534"
+    },
+    {
+      "bytes": 9177,
+      "path": "public/audio/sfx/system-your-turn.ogg",
+      "sha256": "875b31f9542361e951dde3f7152ebf47b9efcc8e707aed9269305a6b3422d6cd"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1102,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "5dd90d2afa580abd42607c00461808d1114c60bb817c291a01098d88a713a4b0",
+  "title": "轮到玩家"
+}

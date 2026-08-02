@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:夏侯惇",
+  "heroName": "夏侯惇",
+  "inspiration": "借鉴《三国演义》中拔矢啖睛与刚烈不屈的形象，台词为原创改写。",
+  "lines": {
+    "death": "此目虽失，忠烈不灭。",
+    "signature": "伤我一分，必还十分。",
+    "victory": "独胆在此，谁能阻我。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

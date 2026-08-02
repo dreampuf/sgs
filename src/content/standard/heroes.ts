@@ -90,6 +90,11 @@ const COMPLETE_SKILLS: Record<string, SkillDefinition> = {
           ]
         },
         maximumUsesPerTurn: 1,
+        cardUse: {
+          definitionId: "standard:slash",
+          source: "actor",
+          targetIndexes: [0]
+        },
         program: {
           steps: [{
             type: "run-workflow",
@@ -337,6 +342,11 @@ const COMPLETE_SKILLS: Record<string, SkillDefinition> = {
         ]
       },
       maximumUsesPerTurn: 1,
+      cardUse: {
+        definitionId: "standard:duel",
+        source: { targetIndex: 0 },
+        targetIndexes: [1]
+      },
       program: {
         steps: [{
           type: "use-card-definition",

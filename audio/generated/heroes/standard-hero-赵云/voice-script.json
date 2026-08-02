@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:赵云",
+  "heroName": "赵云",
+  "inspiration": "借鉴《三国演义》中长坂坡七进七出与常胜将军形象，台词为原创改写。",
+  "lines": {
+    "death": "此枪虽止，忠胆长存。",
+    "signature": "龙胆照银枪，进退皆无惧。",
+    "victory": "一身是胆，长坂亦平。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 166,
+  "schemaVersion": 1,
+  "style": "noble",
+  "voice": "Eddy (Chinese (China mainland))"
+}

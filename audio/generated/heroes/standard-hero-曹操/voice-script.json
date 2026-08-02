@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:曹操",
+  "heroName": "曹操",
+  "inspiration": "借鉴《三国演义》中煮酒论英雄、挟天子与奸雄形象，台词为原创改写。",
+  "lines": {
+    "death": "霸业未成，孤心不甘。",
+    "signature": "天下权谋，尽在此局。",
+    "victory": "乱世归心，霸业自此而始。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 166,
+  "schemaVersion": 1,
+  "style": "noble",
+  "voice": "Eddy (Chinese (China mainland))"
+}

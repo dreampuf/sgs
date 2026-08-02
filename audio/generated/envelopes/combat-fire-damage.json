@@ -1,0 +1,21 @@
+{
+  "assetId": "combat.fire-damage",
+  "durationSeconds": 0.82,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "filtered flame noise",
+    "low impact",
+    "crackle grains"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.84,
+    "pitchHz": 90,
+    "weight": 0.94
+  },
+  "recipe": "fire",
+  "schemaVersion": 1,
+  "seed": 1302,
+  "specSha256": "d72f5b8cdf039968bfbf224c5037883403f341f5fa5abfd953f7242d4f91de34",
+  "title": "火焰伤害"
+}

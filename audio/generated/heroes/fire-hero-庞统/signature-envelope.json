@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.fire:hero:庞统.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "fire:hero:庞统",
+  "kingdom": "shu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "mystical timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13603,
+  "style": "mystical"
+}

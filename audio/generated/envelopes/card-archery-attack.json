@@ -1,0 +1,20 @@
+{
+  "assetId": "card.archery-attack",
+  "durationSeconds": 1.05,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "layered air sweeps",
+    "wood impacts"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.82,
+    "pitchHz": 230,
+    "weight": 0.62
+  },
+  "recipe": "arrows",
+  "schemaVersion": 1,
+  "seed": 1212,
+  "specSha256": "9bc62b0548ebb8d1ed21dac70f643e5d9ac2131f98c981d703340016605bd39b",
+  "title": "万箭齐发"
+}

@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "forest:hero:徐晃",
+  "inputSha256": "42d16255f4c65c5352e46528946492f1afdb8410de4f3d310aed5b76ede156c5",
+  "outputs": [
+    {
+      "bytes": 10956,
+      "path": "audio/generated/heroes/forest-hero-徐晃/theme-score.json",
+      "sha256": "d3ac6f0490fbbec25011d1a2a686739b178b6a3130600a836eda0ccada898953"
+    },
+    {
+      "bytes": 300,
+      "path": "audio/generated/heroes/forest-hero-徐晃/signature-envelope.json",
+      "sha256": "491c1930a21f548e0a07286d28038e2174e99c91e935d118106b2428d224d1f9"
+    },
+    {
+      "bytes": 700,
+      "path": "audio/generated/heroes/forest-hero-徐晃/voice-script.json",
+      "sha256": "b0011e3a45dddd6876a981df4cb4e738b4c78cb6a9d11627aaa923d94c2a7bab"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/forest-hero-徐晃/wav/theme.wav",
+      "sha256": "7716ca4715ab5496ed96b9b282f47be651b6762ab3900fd92bbe50d062397729"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/forest-hero-徐晃/wav/signature.wav",
+      "sha256": "359c08c631ca916937be4cb4a092d23c4538f9b5650fa7540b97745e17ff55a1"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/forest-hero-徐晃/theme.ogg",
+      "sha256": "512984dd8313564479f8792318b42366909fb59c27a1e3a8786c2c98bb017f70"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/forest-hero-徐晃/signature.ogg",
+      "sha256": "e038770cd7be889a48144715cde25af49ee026b44063b96e679a5263bcdba5b8"
+    },
+    {
+      "bytes": 118342,
+      "path": "audio/generated/heroes/forest-hero-徐晃/voice-source/signature.aiff",
+      "sha256": "39028b3f207ca69ee61225bbd6a44d4c6d7c0ba690a7834787e70e772fae4155"
+    },
+    {
+      "bytes": 165878,
+      "path": "audio/generated/heroes/forest-hero-徐晃/wav/voice-signature.wav",
+      "sha256": "42a6c0ba801ded1326a8fe0b4ae66a00c4223fe5cc06c833d6e6075527eb80c1"
+    },
+    {
+      "bytes": 26348,
+      "path": "public/audio/heroes/forest-hero-徐晃/voice-signature.ogg",
+      "sha256": "7af612c298dea366d764b0add27a5472ffd4b8d5ed3c501d692afb5358bc5769"
+    },
+    {
+      "bytes": 113138,
+      "path": "audio/generated/heroes/forest-hero-徐晃/voice-source/victory.aiff",
+      "sha256": "92998b4b4d6e15c126779d73423648a2a338f58ec575b3a586acf65fee49ffc8"
+    },
+    {
+      "bytes": 158326,
+      "path": "audio/generated/heroes/forest-hero-徐晃/wav/voice-victory.wav",
+      "sha256": "73d82afd61c1050939f074baa5b18957fd6dba9380d97407093adb3b193548e0"
+    },
+    {
+      "bytes": 25142,
+      "path": "public/audio/heroes/forest-hero-徐晃/voice-victory.ogg",
+      "sha256": "8902702f77fe65bf081f3dcc946edcdca589414632fecbcf305073448e2af539"
+    },
+    {
+      "bytes": 113138,
+      "path": "audio/generated/heroes/forest-hero-徐晃/voice-source/death.aiff",
+      "sha256": "b9ba8b14df2e2378a1ce94feb89885ce163620301a8ac3cd8f741bd68fc6c019"
+    },
+    {
+      "bytes": 158326,
+      "path": "audio/generated/heroes/forest-hero-徐晃/wav/voice-death.wav",
+      "sha256": "84ab5a8d0b73b2618a3ab0c6476bff894da64c3e3249963ebe27072c524b0192"
+    },
+    {
+      "bytes": 25142,
+      "path": "public/audio/heroes/forest-hero-徐晃/voice-death.ogg",
+      "sha256": "7afcc29c38f91555183e124bf896086a8a004e520856813b20841685be7eb101"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3701,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Eddy (Chinese (China mainland))",
+    "postprocess": "highpass=f=85,lowpass=f=8000,acompressor=threshold=-17dB:ratio=2:attack=16:release=160",
+    "rate": 170,
+    "style": "tactical"
+  }
+}

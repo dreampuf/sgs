@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:黄盖.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:黄盖",
+  "kingdom": "wu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "aged timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13306,
+  "style": "aged"
+}

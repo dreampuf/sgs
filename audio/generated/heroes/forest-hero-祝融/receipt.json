@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "forest:hero:祝融",
+  "inputSha256": "aa98e4c77aae4732bcca5af86598f839662ecd80a12cedb6fe7149ecd115bf03",
+  "outputs": [
+    {
+      "bytes": 11004,
+      "path": "audio/generated/heroes/forest-hero-祝融/theme-score.json",
+      "sha256": "0dc25cb7a80fef523932c1b7cbcf8fe04b9d7308a52db21426a4ad6d4e11baa5"
+    },
+    {
+      "bytes": 296,
+      "path": "audio/generated/heroes/forest-hero-祝融/signature-envelope.json",
+      "sha256": "ad3d036c3530cf5310689fe0b0ba291a5afeb03e998b8d1ad0e9081fbed543b6"
+    },
+    {
+      "bytes": 683,
+      "path": "audio/generated/heroes/forest-hero-祝融/voice-script.json",
+      "sha256": "16f46d4e368b82cdcde1dff1fc2dc5c028cc71053095f478d21e2aa5dc85abb0"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/forest-hero-祝融/wav/theme.wav",
+      "sha256": "63f7441f076e54b618b448b236f964dfe8891d6d8150fa4ff8f17fd84ad31090"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/forest-hero-祝融/wav/signature.wav",
+      "sha256": "150fda29a54080fa7a02f0b2c4efd5fea707c21e700028c71131a2cf72b4de1a"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/forest-hero-祝融/theme.ogg",
+      "sha256": "9bbc2826c591883ba316dab398112d24fd00f30d3771b73b82f9dc9f0f74f952"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/forest-hero-祝融/signature.ogg",
+      "sha256": "859a302c8b9a8d70d29868a81e4c4fdeffe40e9adebac47e2c803364adec0f98"
+    },
+    {
+      "bytes": 110304,
+      "path": "audio/generated/heroes/forest-hero-祝融/voice-source/signature.aiff",
+      "sha256": "b141668089ed785a27026e5738d4c0c74ef7948d9475f4c38c91bb7ea8f9347b"
+    },
+    {
+      "bytes": 154214,
+      "path": "audio/generated/heroes/forest-hero-祝融/wav/voice-signature.wav",
+      "sha256": "a5358eb14935626b91930d721e2e666286d564309e341355769c3166d2d7bc59"
+    },
+    {
+      "bytes": 24539,
+      "path": "public/audio/heroes/forest-hero-祝融/voice-signature.ogg",
+      "sha256": "e07cb5710441aad5499dcb714374d23f8493b791c7c5a2b5ae54c7190fa2ada8"
+    },
+    {
+      "bytes": 112888,
+      "path": "audio/generated/heroes/forest-hero-祝融/voice-source/victory.aiff",
+      "sha256": "35efd58152fa11db02b51331b8c150c5bfe2a3f62df7758df5c54e687bc224fe"
+    },
+    {
+      "bytes": 157964,
+      "path": "audio/generated/heroes/forest-hero-祝融/wav/voice-victory.wav",
+      "sha256": "6b02e5886d41e5a3cddeeeb8127e057eecd66993e38023b2afb72b94ac6f5661"
+    },
+    {
+      "bytes": 25142,
+      "path": "public/audio/heroes/forest-hero-祝融/voice-victory.ogg",
+      "sha256": "16c6dc76e52bfb2a3938fafb208e105fc89aba88d8504c6ec3c9fca36d72e222"
+    },
+    {
+      "bytes": 96956,
+      "path": "audio/generated/heroes/forest-hero-祝融/voice-source/death.aiff",
+      "sha256": "4aee5ddb501eb929398fddcf1925edc808bc2bc22b2121f555af6a8a10c69103"
+    },
+    {
+      "bytes": 134842,
+      "path": "audio/generated/heroes/forest-hero-祝融/wav/voice-death.wav",
+      "sha256": "288a1377525e9528030f587ce1eb6bc9ad37cda29d2d3f4347f3b9596c44d231"
+    },
+    {
+      "bytes": 21524,
+      "path": "public/audio/heroes/forest-hero-祝融/voice-death.ogg",
+      "sha256": "5ef7201cc79aed215f963b9d25e01aee35840015aba3a425328b2b2b6e6c8663"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3704,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Tingting",
+    "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+    "rate": 180,
+    "style": "fierce"
+  }
+}

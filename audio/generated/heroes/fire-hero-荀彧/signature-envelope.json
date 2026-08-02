@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.fire:hero:荀彧.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "fire:hero:荀彧",
+  "kingdom": "wei",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "tactical timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13602,
+  "style": "tactical"
+}

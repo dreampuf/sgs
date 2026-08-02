@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:郭嘉",
+  "heroName": "郭嘉",
+  "inspiration": "借鉴《三国演义》中郭嘉料敌、遗计定辽东的谋士形象，台词为原创改写。",
+  "lines": {
+    "death": "此身先去，遗策尚存。",
+    "signature": "天机虽远，我已先知。",
+    "victory": "算定胜负，不劳强攻。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180,aecho=0.8:0.18:55:0.1",
+  "rate": 155,
+  "schemaVersion": 1,
+  "style": "mystical",
+  "voice": "Eddy (Chinese (China mainland))"
+}

@@ -1,0 +1,20 @@
+{
+  "assetId": "card.wine",
+  "durationSeconds": 0.76,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "low liquid body",
+    "rising bubbles"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.4,
+    "pitchHz": 220,
+    "weight": 0.38
+  },
+  "recipe": "liquid",
+  "schemaVersion": 1,
+  "seed": 1209,
+  "specSha256": "34dfbf6f481ff613d0b7442f8a00967d7222f36298cff925141a1ba5f6ce77dc",
+  "title": "酒"
+}

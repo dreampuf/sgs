@@ -10,7 +10,112 @@ var sgs = sgs || {};
         cardByElement = new WeakMap();
 
     var element = function(value) {
-        return value && value.jquery ? value[0] : value;
+        return value && !value.nodeType && typeof value.length == 'number'
+            ? value[0]
+            : value;
+    };
+
+    var query = function(selector, root) {
+        return (root || document).querySelector(selector);
+    };
+    var queryAll = function(selector, root) {
+        return Array.from((root || document).querySelectorAll(selector));
+    };
+    var create = function(markup) {
+        var template = document.createElement('template');
+        template.innerHTML = markup.trim();
+        return template.content.firstElementChild;
+    };
+    var style = function(target, property, value) {
+        if(!target || !target.style) return target;
+        if(typeof property == 'string') {
+            target.style[property] = value;
+        } else {
+            Object.keys(property).forEach(function(key) {
+                var next = property[key];
+                target.style[key] = typeof next == 'number' &&
+                    key != 'opacity' && key != 'zIndex' &&
+                    key != 'fontWeight' && key != 'lineHeight'
+                    ? next + 'px'
+                    : String(next);
+            });
+        }
+        return target;
+    };
+    var attrs = function(target, values) {
+        if(!target) return target;
+        Object.keys(values).forEach(function(name) {
+            var value = values[name];
+            if(value === null || value === undefined) {
+                target.removeAttribute(name);
+            } else {
+                target.setAttribute(name, String(value));
+            }
+        });
+        return target;
+    };
+    var append = function(parent, child) {
+        if(typeof child == 'string') {
+            parent.insertAdjacentHTML('beforeend', child);
+        } else if(child) {
+            parent.append(child);
+        }
+        return child;
+    };
+    var offset = function(target) {
+        if(!target) return null;
+        var rect = target.getBoundingClientRect();
+        return {
+            left: rect.left + window.scrollX,
+            top: rect.top + window.scrollY
+        };
+    };
+
+    sgs.dom = {
+        one: query,
+        all: queryAll,
+        create: create,
+        style: style,
+        attrs: attrs,
+        append: append,
+        empty: function(target) {
+            if(target) target.replaceChildren();
+            return target;
+        },
+        remove: function(target) {
+            if(target) target.remove();
+        },
+        text: function(target, value) {
+            if(target) target.textContent = value == null ? '' : String(value);
+            return target;
+        },
+        html: function(target, value) {
+            if(target) target.innerHTML = value;
+            return target;
+        },
+        show: function(target, display) {
+            if(target) target.style.display = display || 'block';
+            return target;
+        },
+        hide: function(target) {
+            if(target) target.style.display = 'none';
+            return target;
+        },
+        offset: offset,
+        width: function(target) {
+            return target ? target.getBoundingClientRect().width : 0;
+        },
+        height: function(target) {
+            return target ? target.getBoundingClientRect().height : 0;
+        },
+        delegate: function(root, eventType, selector, listener) {
+            root.addEventListener(eventType, function(event) {
+                var target = event.target && event.target.closest(selector);
+                if(target && root.contains(target)) {
+                    listener.call(target, event);
+                }
+            });
+        }
     };
 
     sgs.view = {

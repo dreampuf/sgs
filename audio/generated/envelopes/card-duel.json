@@ -1,0 +1,20 @@
+{
+  "assetId": "card.duel",
+  "durationSeconds": 0.88,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "alternating metal strikes",
+    "low impact"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.72,
+    "pitchHz": 132,
+    "weight": 0.84
+  },
+  "recipe": "duel",
+  "schemaVersion": 1,
+  "seed": 1210,
+  "specSha256": "9d335ce48533730618f8dca892b09b596655700376e444058b7a002959b5e2ae",
+  "title": "决斗"
+}

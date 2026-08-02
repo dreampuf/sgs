@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "sampleRate": 32000,
+  "sfx": [
+    {
+      "id": "system.ui-click",
+      "title": "界面点击",
+      "seed": 1101,
+      "durationMs": 90,
+      "recipe": "ui",
+      "params": { "pitch": 780, "brightness": 0.45, "weight": 0.18 }
+    },
+    {
+      "id": "system.your-turn",
+      "title": "轮到玩家",
+      "seed": 1102,
+      "durationMs": 720,
+      "recipe": "signal",
+      "params": { "pitch": 523.25, "brightness": 0.58, "weight": 0.32 }
+    },
+    {
+      "id": "card.draw",
+      "title": "摸牌",
+      "seed": 1201,
+      "durationMs": 310,
+      "recipe": "card",
+      "params": { "pitch": 860, "brightness": 0.62, "weight": 0.16 }
+    },
+    {
+      "id": "card.discard",
+      "title": "弃牌",
+      "seed": 1202,
+      "durationMs": 360,
+      "recipe": "card",
+      "params": { "pitch": 420, "brightness": 0.35, "weight": 0.3 }
+    },
+    {
+      "id": "card.play",
+      "title": "通用出牌",
+      "seed": 1203,
+      "durationMs": 420,
+      "recipe": "card",
+      "params": { "pitch": 620, "brightness": 0.52, "weight": 0.28 }
+    },
+    {
+      "id": "card.slash",
+      "title": "杀",
+      "seed": 1204,
+      "durationMs": 540,
+      "recipe": "slash",
+      "params": { "pitch": 180, "brightness": 0.68, "weight": 0.68 }
+    },
+    {
+      "id": "card.fire-slash",
+      "title": "火杀",
+      "seed": 1205,
+      "durationMs": 680,
+      "recipe": "fire",
+      "params": { "pitch": 150, "brightness": 0.78, "weight": 0.72 }
+    },
+    {
+      "id": "card.thunder-slash",
+      "title": "雷杀",
+      "seed": 1206,
+      "durationMs": 720,
+      "recipe": "thunder",
+      "params": { "pitch": 105, "brightness": 0.82, "weight": 0.78 }
+    },
+    {
+      "id": "card.jink",
+      "title": "闪",
+      "seed": 1207,
+      "durationMs": 420,
+      "recipe": "metal",
+      "params": { "pitch": 880, "brightness": 0.86, "weight": 0.26 }
+    },
+    {
+      "id": "card.peach",
+      "title": "桃",
+      "seed": 1208,
+      "durationMs": 820,
+      "recipe": "heal",
+      "params": { "pitch": 392, "brightness": 0.58, "weight": 0.28 }
+    },
+    {
+      "id": "card.wine",
+      "title": "酒",
+      "seed": 1209,
+      "durationMs": 760,
+      "recipe": "liquid",
+      "params": { "pitch": 220, "brightness": 0.4, "weight": 0.38 }
+    },
+    {
+      "id": "card.duel",
+      "title": "决斗",
+      "seed": 1210,
+      "durationMs": 880,
+      "recipe": "duel",
+      "params": { "pitch": 132, "brightness": 0.72, "weight": 0.84 }
+    },
+    {
+      "id": "card.savage-assault",
+      "title": "南蛮入侵",
+      "seed": 1211,
+      "durationMs": 1200,
+      "recipe": "horde",
+      "params": { "pitch": 82, "brightness": 0.42, "weight": 0.94 }
+    },
+    {
+      "id": "card.archery-attack",
+      "title": "万箭齐发",
+      "seed": 1212,
+      "durationMs": 1050,
+      "recipe": "arrows",
+      "params": { "pitch": 230, "brightness": 0.82, "weight": 0.62 }
+    },
+    {
+      "id": "card.amazing-grace",
+      "title": "五谷丰登",
+      "seed": 1213,
+      "durationMs": 1050,
+      "recipe": "bells",
+      "params": { "pitch": 440, "brightness": 0.7, "weight": 0.34 }
+    },
+    {
+      "id": "card.nullification",
+      "title": "无懈可击",
+      "seed": 1214,
+      "durationMs": 820,
+      "recipe": "nullify",
+      "params": { "pitch": 330, "brightness": 0.88, "weight": 0.48 }
+    },
+    {
+      "id": "card.lightning",
+      "title": "闪电",
+      "seed": 1215,
+      "durationMs": 1350,
+      "recipe": "thunder",
+      "params": { "pitch": 62, "brightness": 0.76, "weight": 1 }
+    },
+    {
+      "id": "card.fire-attack",
+      "title": "火攻",
+      "seed": 1216,
+      "durationMs": 980,
+      "recipe": "fire",
+      "params": { "pitch": 118, "brightness": 0.9, "weight": 0.86 }
+    },
+    {
+      "id": "card.iron-chain",
+      "title": "铁索连环",
+      "seed": 1217,
+      "durationMs": 860,
+      "recipe": "chain",
+      "params": { "pitch": 520, "brightness": 0.76, "weight": 0.7 }
+    },
+    {
+      "id": "card.equip",
+      "title": "装备",
+      "seed": 1218,
+      "durationMs": 620,
+      "recipe": "metal",
+      "params": { "pitch": 260, "brightness": 0.58, "weight": 0.68 }
+    },
+    {
+      "id": "combat.damage",
+      "title": "普通伤害",
+      "seed": 1301,
+      "durationMs": 560,
+      "recipe": "impact",
+      "params": { "pitch": 92, "brightness": 0.42, "weight": 0.92 }
+    },
+    {
+      "id": "combat.fire-damage",
+      "title": "火焰伤害",
+      "seed": 1302,
+      "durationMs": 820,
+      "recipe": "fire",
+      "params": { "pitch": 90, "brightness": 0.84, "weight": 0.94 }
+    },
+    {
+      "id": "combat.thunder-damage",
+      "title": "雷电伤害",
+      "seed": 1303,
+      "durationMs": 920,
+      "recipe": "thunder",
+      "params": { "pitch": 54, "brightness": 0.72, "weight": 0.96 }
+    },
+    {
+      "id": "combat.recover",
+      "title": "恢复体力",
+      "seed": 1304,
+      "durationMs": 920,
+      "recipe": "heal",
+      "params": { "pitch": 349.23, "brightness": 0.66, "weight": 0.42 }
+    },
+    {
+      "id": "system.judgment",
+      "title": "判定翻牌",
+      "seed": 1401,
+      "durationMs": 1040,
+      "recipe": "judgment",
+      "params": { "pitch": 146.83, "brightness": 0.56, "weight": 0.78 }
+    },
+    {
+      "id": "skill.activate",
+      "title": "发动技能",
+      "seed": 1402,
+      "durationMs": 760,
+      "recipe": "signal",
+      "params": { "pitch": 293.66, "brightness": 0.74, "weight": 0.5 }
+    },
+    {
+      "id": "combat.death",
+      "title": "角色阵亡",
+      "seed": 1403,
+      "durationMs": 1650,
+      "recipe": "death",
+      "params": { "pitch": 73.42, "brightness": 0.28, "weight": 1 }
+    }
+  ],
+  "music": [
+    {
+      "id": "music.menu",
+      "title": "乱世卷首",
+      "seed": 2101,
+      "bpm": 80,
+      "bars": 8,
+      "rootMidi": 50,
+      "scale": [0, 2, 5, 7, 9],
+      "progression": [0, 3, 1, 4, 0, 2, 3, 4],
+      "palette": "court",
+      "energy": 0.34,
+      "loop": true
+    },
+    {
+      "id": "music.identity",
+      "title": "身份暗涌",
+      "seed": 2102,
+      "bpm": 96,
+      "bars": 8,
+      "rootMidi": 45,
+      "scale": [0, 2, 3, 7, 10],
+      "progression": [0, 3, 2, 4, 0, 1, 3, 4],
+      "palette": "battle",
+      "energy": 0.68,
+      "loop": true
+    },
+    {
+      "id": "music.story.wei",
+      "title": "魏 · 军令如山",
+      "seed": 2201,
+      "bpm": 96,
+      "bars": 8,
+      "rootMidi": 45,
+      "scale": [0, 2, 3, 7, 10],
+      "progression": [0, 3, 4, 2, 0, 1, 3, 4],
+      "palette": "wei",
+      "energy": 0.62,
+      "adaptiveGroup": "battle-96-a",
+      "loop": true
+    },
+    {
+      "id": "music.story.shu",
+      "title": "蜀 · 山河同心",
+      "seed": 2202,
+      "bpm": 96,
+      "bars": 8,
+      "rootMidi": 45,
+      "scale": [0, 2, 3, 7, 10],
+      "progression": [0, 3, 4, 2, 0, 1, 3, 4],
+      "palette": "shu",
+      "energy": 0.55,
+      "adaptiveGroup": "battle-96-a",
+      "loop": true
+    },
+    {
+      "id": "music.story.wu",
+      "title": "吴 · 江东潮生",
+      "seed": 2203,
+      "bpm": 96,
+      "bars": 8,
+      "rootMidi": 45,
+      "scale": [0, 2, 3, 7, 10],
+      "progression": [0, 3, 4, 2, 0, 1, 3, 4],
+      "palette": "wu",
+      "energy": 0.52,
+      "adaptiveGroup": "battle-96-a",
+      "loop": true
+    },
+    {
+      "id": "music.story.qun",
+      "title": "群 · 风雷并起",
+      "seed": 2204,
+      "bpm": 96,
+      "bars": 8,
+      "rootMidi": 45,
+      "scale": [0, 2, 3, 7, 10],
+      "progression": [0, 3, 4, 2, 0, 1, 3, 4],
+      "palette": "qun",
+      "energy": 0.76,
+      "adaptiveGroup": "battle-96-a",
+      "loop": true
+    },
+    {
+      "id": "music.opening",
+      "title": "列阵",
+      "seed": 2300,
+      "bpm": 96,
+      "bars": 8,
+      "rootMidi": 45,
+      "scale": [0, 2, 3, 7, 10],
+      "progression": [0, 3, 4, 2, 0, 1, 3, 4],
+      "palette": "opening",
+      "energy": 0.52,
+      "adaptiveGroup": "battle-96-a",
+      "loop": true
+    },
+    {
+      "id": "music.battle",
+      "title": "鏖兵",
+      "seed": 2301,
+      "bpm": 96,
+      "bars": 8,
+      "rootMidi": 45,
+      "scale": [0, 2, 3, 7, 10],
+      "progression": [0, 3, 4, 2, 0, 1, 3, 4],
+      "palette": "battle",
+      "energy": 0.64,
+      "adaptiveGroup": "battle-96-a",
+      "loop": true
+    },
+    {
+      "id": "music.advantage",
+      "title": "乘势",
+      "seed": 2302,
+      "bpm": 96,
+      "bars": 8,
+      "rootMidi": 45,
+      "scale": [0, 2, 3, 7, 10],
+      "progression": [0, 3, 4, 2, 0, 1, 3, 4],
+      "palette": "advantage",
+      "energy": 0.76,
+      "adaptiveGroup": "battle-96-a",
+      "loop": true
+    },
+    {
+      "id": "music.dominant",
+      "title": "破阵",
+      "seed": 2303,
+      "bpm": 96,
+      "bars": 8,
+      "rootMidi": 45,
+      "scale": [0, 2, 3, 7, 10],
+      "progression": [0, 3, 4, 2, 0, 1, 3, 4],
+      "palette": "dominant",
+      "energy": 0.94,
+      "adaptiveGroup": "battle-96-a",
+      "loop": true
+    },
+    {
+      "id": "music.disadvantage",
+      "title": "困局",
+      "seed": 2304,
+      "bpm": 96,
+      "bars": 8,
+      "rootMidi": 45,
+      "scale": [0, 2, 3, 7, 10],
+      "progression": [0, 3, 4, 2, 0, 1, 3, 4],
+      "palette": "disadvantage",
+      "energy": 0.42,
+      "adaptiveGroup": "battle-96-a",
+      "loop": true
+    },
+    {
+      "id": "music.critical",
+      "title": "命悬一线",
+      "seed": 2305,
+      "bpm": 96,
+      "bars": 8,
+      "rootMidi": 45,
+      "scale": [0, 2, 3, 7, 10],
+      "progression": [0, 3, 4, 2, 0, 1, 3, 4],
+      "palette": "critical",
+      "energy": 0.58,
+      "adaptiveGroup": "battle-96-a",
+      "loop": true
+    },
+    {
+      "id": "music.comeback",
+      "title": "逆转",
+      "seed": 2306,
+      "bpm": 96,
+      "bars": 8,
+      "rootMidi": 45,
+      "scale": [0, 2, 3, 7, 10],
+      "progression": [0, 3, 4, 2, 0, 1, 3, 4],
+      "palette": "comeback",
+      "energy": 0.88,
+      "adaptiveGroup": "battle-96-a",
+      "loop": true
+    },
+    {
+      "id": "music.victory",
+      "title": "旌旗凯旋",
+      "seed": 2401,
+      "bpm": 92,
+      "bars": 2,
+      "rootMidi": 50,
+      "scale": [0, 2, 4, 7, 9],
+      "progression": [0, 3],
+      "palette": "triumph",
+      "energy": 0.82,
+      "loop": false
+    },
+    {
+      "id": "music.defeat",
+      "title": "孤城暮色",
+      "seed": 2402,
+      "bpm": 64,
+      "bars": 2,
+      "rootMidi": 45,
+      "scale": [0, 2, 3, 7, 8],
+      "progression": [0, 2],
+      "palette": "mourning",
+      "energy": 0.28,
+      "loop": false
+    }
+  ]
+}

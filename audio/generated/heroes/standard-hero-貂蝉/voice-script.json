@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:貂蝉",
+  "heroName": "貂蝉",
+  "inspiration": "借鉴《三国演义》中连环计、月下焚香与离间董吕，台词为原创改写。",
+  "lines": {
+    "death": "连环虽成，身世终如浮萍。",
+    "signature": "一舞乱心，两雄自斗。",
+    "victory": "月色如旧，权臣已除。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=100,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 164,
+  "schemaVersion": 1,
+  "style": "graceful",
+  "voice": "Tingting"
+}

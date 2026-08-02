@@ -219,6 +219,78 @@ describe("registry-driven skills", () => {
     expect(targetedAtP2).toEqual([]);
   });
 
+  test("card-producing skills apply 空城 before offering targets", () => {
+    const registry = createStandardRegistry();
+    let state = createGameState({
+      seed: 61,
+      players: [
+        {
+          id: "p1",
+          identity: "lord",
+          heroDefinitionId: standardHeroId("刘备"),
+          maxHp: 4,
+          skillIds: [standardSkillId("激将")]
+        },
+        {
+          id: "p2",
+          heroDefinitionId: standardHeroId("诸葛亮"),
+          maxHp: 3,
+          skillIds: [standardSkillId("空城")]
+        },
+        {
+          id: "p3",
+          heroDefinitionId: standardHeroId("曹操"),
+          maxHp: 4,
+          hand: [STANDARD_CARD.jink]
+        }
+      ]
+    });
+    const jijiangTargets = getLegalActions(state, registry)
+      .flatMap((action) =>
+        action.type === "activate-skill" &&
+          action.skillId === standardSkillId("激将")
+          ? [action.targetIds]
+          : []
+      );
+    expect(jijiangTargets).not.toContainEqual(["p2"]);
+    expect(jijiangTargets).toContainEqual(["p3"]);
+
+    state = createGameState({
+      seed: 62,
+      players: [
+        {
+          id: "p1",
+          heroDefinitionId: standardHeroId("貂蝉"),
+          maxHp: 3,
+          skillIds: [standardSkillId("离间")],
+          hand: [STANDARD_CARD.jink]
+        },
+        {
+          id: "p2",
+          heroDefinitionId: standardHeroId("诸葛亮"),
+          maxHp: 3,
+          skillIds: [standardSkillId("空城")]
+        },
+        {
+          id: "p3",
+          heroDefinitionId: standardHeroId("曹操"),
+          maxHp: 4,
+          hand: [STANDARD_CARD.jink]
+        }
+      ]
+    });
+    const lijianTargets = getLegalActions(state, registry)
+      .flatMap((action) =>
+        action.type === "activate-skill" &&
+          action.skillId === standardSkillId("离间")
+          ? [action.targetIds]
+          : []
+      );
+    // 空城 may be ordered to use Duel, but cannot be the Duel target.
+    expect(lijianTargets).toContainEqual(["p2", "p3"]);
+    expect(lijianTargets).not.toContainEqual(["p3", "p2"]);
+  });
+
   test("马术 and 奇才 feed one shared target-set service", () => {
     const registry = createStandardRegistry();
     const state = createGameState({

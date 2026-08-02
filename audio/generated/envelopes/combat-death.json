@@ -1,0 +1,21 @@
+{
+  "assetId": "combat.death",
+  "durationSeconds": 1.65,
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "layers": [
+    "descending low body",
+    "dark gong",
+    "air tail"
+  ],
+  "normalizedParameters": {
+    "brightness": 0.28,
+    "pitchHz": 73.42,
+    "weight": 1
+  },
+  "recipe": "death",
+  "schemaVersion": 1,
+  "seed": 1403,
+  "specSha256": "925e8ca14c61ff554ac18c3068faa40bd8f70b28577cbd5a4e35541da066b709",
+  "title": "角色阵亡"
+}

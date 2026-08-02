@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "wind:hero:夏侯渊",
+  "inputSha256": "40e0929b2565595e22006467e22eb677a4508fae4ff15d78f69f7d7c09f32d24",
+  "outputs": [
+    {
+      "bytes": 11009,
+      "path": "audio/generated/heroes/wind-hero-夏侯渊/theme-score.json",
+      "sha256": "96a5107edd9df2f7d0cfd24cc0678a5b9494544714abda42728a5168d43ddf04"
+    },
+    {
+      "bytes": 298,
+      "path": "audio/generated/heroes/wind-hero-夏侯渊/signature-envelope.json",
+      "sha256": "3a14bf3a72815d00cffd30a3a45c2404b7236931847af36d8f4b77a7d0da7694"
+    },
+    {
+      "bytes": 711,
+      "path": "audio/generated/heroes/wind-hero-夏侯渊/voice-script.json",
+      "sha256": "e36a1b4b514e9c5c6baab791d7a1d4b813cc8d8184398c90985f571c25bf1030"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/wind-hero-夏侯渊/wav/theme.wav",
+      "sha256": "45eebaab1e4f8a173c0196f7db700652da8bbfe26598612fadf1265bbf125899"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/wind-hero-夏侯渊/wav/signature.wav",
+      "sha256": "4075ebd71059d17e5f317e67d238cf3896852c6e0ce1f837838100ee2a3b9d7b"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/wind-hero-夏侯渊/theme.ogg",
+      "sha256": "9f454eebabb2cd37aa30be4658949714083830b41e6de323847976637c37cfc5"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/wind-hero-夏侯渊/signature.ogg",
+      "sha256": "f589ea28659b5c3d119d0a10cb00bed3b91c3c00e3d051d5d9e60d1d238e150a"
+    },
+    {
+      "bytes": 125846,
+      "path": "audio/generated/heroes/wind-hero-夏侯渊/voice-source/signature.aiff",
+      "sha256": "e810e529b4764c9c3d6faadc49db647a0f1988e636fcbbb5cdbbbc6480c475bb"
+    },
+    {
+      "bytes": 176768,
+      "path": "audio/generated/heroes/wind-hero-夏侯渊/wav/voice-signature.wav",
+      "sha256": "85d81fe7cbc0f3731cdad2ec13094626eb0dc4c6c7063e0067aa2fbebe32002b"
+    },
+    {
+      "bytes": 28157,
+      "path": "public/audio/heroes/wind-hero-夏侯渊/voice-signature.ogg",
+      "sha256": "ae4089ba40abe65e887b8a24c6b1f2fcc923164f5b1d305b4a1183719de2ebf0"
+    },
+    {
+      "bytes": 111012,
+      "path": "audio/generated/heroes/wind-hero-夏侯渊/voice-source/victory.aiff",
+      "sha256": "26f830750fd2f18b3ffa4b10bf4b52dbc06e10930cf82d975a0c7dad1ec445b1"
+    },
+    {
+      "bytes": 155240,
+      "path": "audio/generated/heroes/wind-hero-夏侯渊/wav/voice-victory.wav",
+      "sha256": "75fc48f18e9cb1fba9d18ee12c75948fdf3db4d6c4888783989927efc40ed8d9"
+    },
+    {
+      "bytes": 24740,
+      "path": "public/audio/heroes/wind-hero-夏侯渊/voice-victory.ogg",
+      "sha256": "e348e586266d4255a436eaa9080a39e21010241a5a9b354270b7348897fac459"
+    },
+    {
+      "bytes": 108904,
+      "path": "audio/generated/heroes/wind-hero-夏侯渊/voice-source/death.aiff",
+      "sha256": "759cacaed639c052ff3ad31f217bbd69e85585d813ba653d2f4ee5ae1f89a164"
+    },
+    {
+      "bytes": 152182,
+      "path": "audio/generated/heroes/wind-hero-夏侯渊/wav/voice-death.wav",
+      "sha256": "7797a3f38755dfb2260ae28b52a0ce2a1c61caf449f329a4b594daa09173f607"
+    },
+    {
+      "bytes": 24338,
+      "path": "public/audio/heroes/wind-hero-夏侯渊/voice-death.ogg",
+      "sha256": "ef80b9cdf439075057742f4271af29120b8e9715dae1bf5d02fdbe9265cb4e08"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3501,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Rocko (Chinese (China mainland))",
+    "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+    "rate": 180,
+    "style": "fierce"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "assetId": "music.critical",
+  "command": "npm run audio:generate -- --id music.critical",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "b8772d89a7e7256f07d4ab5fabfa3a695304049aca4a6d9df11c0add1c2ae750",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 28622,
+      "path": "audio/generated/scores/music-critical.json",
+      "sha256": "888ab6859183dec853b779405fe9beb7abea150f726b91c68071e4884f2b30e7"
+    },
+    {
+      "bytes": 2560044,
+      "path": "audio/generated/wav/music/music-critical.wav",
+      "sha256": "7860a8d6412cd3b6244aa79aaf4efe91f4a33a2008a6e4c2b2576b37d9783015"
+    },
+    {
+      "bytes": 238787,
+      "path": "public/audio/music/music-critical.ogg",
+      "sha256": "9800037336500b8ea000001db73900561e1ebf5af675338c09ca1b8b82fc7ae0"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2305,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "b3d5cafe126cb0cc846bdf9d07f0765dab3a4f79eabe4c08c3bf35a0c18f1d7c",
+  "title": "命悬一线"
+}

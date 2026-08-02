@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "forest:hero:祝融",
+  "heroName": "祝融",
+  "inspiration": "借鉴《三国演义》中祝融夫人飞刀、巨象与南中女将形象，台词为原创改写。",
+  "lines": {
+    "death": "大王，祝融不能再战。",
+    "signature": "烈刃飞出，巨象随行。",
+    "victory": "南中女儿，亦可冠三军。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Tingting"
+}

@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:司马懿",
+  "heroName": "司马懿",
+  "inspiration": "借鉴《三国演义》中隐忍待时、与诸葛亮斗智的形象，台词为原创改写。",
+  "lines": {
+    "death": "棋局未终，奈何先退。",
+    "signature": "天命可测，更可改写。",
+    "victory": "忍到最后，才是赢家。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180,aecho=0.8:0.18:55:0.1",
+  "rate": 155,
+  "schemaVersion": 1,
+  "style": "mystical",
+  "voice": "Eddy (Chinese (China mainland))"
+}

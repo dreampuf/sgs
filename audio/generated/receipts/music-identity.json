@@ -1,0 +1,31 @@
+{
+  "assetId": "music.identity",
+  "command": "npm run audio:generate -- --id music.identity",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "6f9d9a3dae06fe652ada3e3337dd414e069c7e7bf7c87c3691e093b42c65c34b",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 29162,
+      "path": "audio/generated/scores/music-identity.json",
+      "sha256": "7766670ff08a4f4fd574d4ab43343f41d1fd4349762b0a0b6e0abc4599cbbc36"
+    },
+    {
+      "bytes": 2560044,
+      "path": "audio/generated/wav/music/music-identity.wav",
+      "sha256": "5eb96c39fc4c4bd2d5078f11e0826f945f1c092816eafc9c1c8df6939e60f323"
+    },
+    {
+      "bytes": 279894,
+      "path": "public/audio/music/music-identity.ogg",
+      "sha256": "3dfd2733427ccc841276aa48f95e66d83a12cb2c0f806c4770556fbdd95aca47"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2102,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "4ac40feaab7a9971d1bb1ce75be6fb9848cbc4665a490b41c993eb042067452d",
+  "title": "身份暗涌"
+}

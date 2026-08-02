@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:黄月英.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:黄月英",
+  "kingdom": "shu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "graceful timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13207,
+  "style": "graceful"
+}

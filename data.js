@@ -1,11 +1,6 @@
 var sgs = sgs || {};
 sgs.PLAYER_NUM = 4;
 sgs.DEFAULT_AI_LV = 1;
-sgs.AI_LEVELS = {
-    0: { name: "简单", description: "偏随机，保留基础防御。" },
-    1: { name: "普通", description: "按身份关系选择目标并保留关键牌。" },
-    2: { name: "困难", description: "结合身份、血量、手牌和武将定位进行策略决策。" }
-};
 sgs.DELAY = 1000;
 
 sgs.CARD_MAGIC_RANGE_MAPPING = {
@@ -586,41 +581,224 @@ sgs.PATTERN_IMG_MAPPING = {
     3: "img/system/pattern/spade.png",
 };
 
-sgs.SOUND_FILE_MAPPING = {
-    "card": {
-        "杀": { 0: "sound/card/female/slash.ogg", 1: "sound/card/male/slash.ogg" },
-        "闪": { 0: "sound/card/female/jink.ogg", 1: "sound/card/male/jink.ogg" },
-        "桃": { 0: "sound/card/common/peach.ogg", 1: "sound/card/common/peach.ogg" },
-        "决斗": { 0: "sound/card/female/duel.ogg", 1: "sound/card/male/duel.ogg" },
-        "闪电": { 0: "sound/card/female/lightning.ogg", 1: "sound/card/male/lightning.ogg" },
-        "五谷丰登": { 0: "sound/card/female/amazing_grace.ogg", 1: "sound/card/male/amazing_grace.ogg" },
-        "无懈可击": { 0: "sound/card/female/nullification.ogg", 1: "sound/card/male/nullification.ogg" },
-        "南蛮入侵": { 0: "sound/card/female/savage_assault.ogg", 1: "sound/card/male/savage_assault.ogg" },
-        "万箭齐发": { 0: "sound/card/female/archery_attack.ogg", 1: "sound/card/male/archery_attack.ogg" },
-        "借刀杀人": { 0: "sound/card/female/collateral.ogg", 1: "sound/card/male/collateral.ogg" },
-        "过河拆桥": { 0: "sound/card/female/dismantlement.ogg", 1: "sound/card/male/dismantlement.ogg" },
-        "无中生有": { 0: "sound/card/female/ex_nihilo.ogg", 1: "sound/card/male/ex_nihilo.ogg" },
-        "桃园结义": { 0: "sound/card/female/god_salvation.ogg", 1: "sound/card/male/god_salvation.ogg" },
-        "乐不思蜀": { 0: "sound/card/female/indulgence.ogg", 1: "sound/card/male/indulgence.ogg" },
-        "顺手牵羊": { 0: "sound/card/female/snatch.ogg", 1: "sound/card/male/snatch.ogg" },
+sgs.CARD_EXPLANATION_MAPPING = {
+    "杀": {
+        category: "基本牌",
+        target: "攻击范围内的一名其他角色",
+        description: "出牌阶段使用。目标需使用一张【闪】，否则受到你造成的1点普通伤害。每个出牌阶段限使用一次。"
     },
-    "equipment": {
-        0: "sound/card/common/equip.ogg",
-        1: "sound/card/common/equip.ogg",
-        2: "sound/card/common/horse.ogg",
-        3: "sound/card/common/horse.ogg"
+    "火杀": {
+        category: "基本牌",
+        target: "攻击范围内的一名其他角色",
+        description: "按【杀】使用和响应；造成的伤害为火焰伤害，可触发铁索连环传导。每个出牌阶段限使用一次。"
     },
-    "death": {
-        
+    "雷杀": {
+        category: "基本牌",
+        target: "攻击范围内的一名其他角色",
+        description: "按【杀】使用和响应；造成的伤害为雷电伤害，可触发铁索连环传导。每个出牌阶段限使用一次。"
     },
-    "damage": {
-        "common": "sound/system/injure2.ogg",
+    "闪": {
+        category: "基本牌",
+        target: "响应牌",
+        description: "当你成为【杀】的目标时使用，抵消该【杀】对你的效果。"
     },
+    "桃": {
+        category: "基本牌",
+        target: "受伤的自己；濒死时可救援",
+        description: "出牌阶段对受伤的自己使用，或在角色濒死求桃时使用，令其回复1点体力。"
+    },
+    "酒": {
+        category: "基本牌",
+        target: "自己",
+        description: "出牌阶段使用，本回合下一张【杀】造成的伤害+1，每回合限一次；濒死时可对自己使用并回复1点体力。"
+    },
+    "五谷丰登": {
+        category: "普通锦囊",
+        target: "所有存活角色",
+        description: "亮出等同于存活角色数的牌；从使用者开始，每名角色依次选择并获得其中一张。"
+    },
+    "桃园结义": {
+        category: "普通锦囊",
+        target: "所有存活角色",
+        description: "所有受伤角色各回复1点体力。"
+    },
+    "南蛮入侵": {
+        category: "普通锦囊",
+        target: "所有其他角色",
+        description: "每名目标需打出一张【杀】，否则受到你造成的1点普通伤害。"
+    },
+    "万箭齐发": {
+        category: "普通锦囊",
+        target: "所有其他角色",
+        description: "每名目标需打出一张【闪】，否则受到你造成的1点普通伤害。"
+    },
+    "决斗": {
+        category: "普通锦囊",
+        target: "一名其他角色",
+        description: "由目标开始，双方轮流打出一张【杀】；首先不能打出【杀】的一方受到另一方造成的1点普通伤害。"
+    },
+    "无中生有": {
+        category: "普通锦囊",
+        target: "自己",
+        description: "摸两张牌。"
+    },
+    "顺手牵羊": {
+        category: "普通锦囊",
+        target: "距离1以内、区域内有牌的一名其他角色",
+        description: "获得目标角色手牌区、装备区或判定区里的一张牌；选择手牌时牌面保持隐藏。"
+    },
+    "过河拆桥": {
+        category: "普通锦囊",
+        target: "区域内有牌的一名其他角色",
+        description: "弃置目标角色手牌区、装备区或判定区里的一张牌；选择手牌时牌面保持隐藏，不需要额外支付自己的牌。"
+    },
+    "借刀杀人": {
+        category: "普通锦囊",
+        target: "装备武器的一名角色及其可攻击的另一名角色",
+        description: "令第一名目标对第二名目标使用一张【杀】；其若不如此做，你获得其武器。"
+    },
+    "无懈可击": {
+        category: "普通锦囊",
+        target: "响应牌",
+        description: "在锦囊牌生效前使用，抵消该锦囊对指定目标的效果；可以响应另一张【无懈可击】。"
+    },
+    "乐不思蜀": {
+        category: "延时锦囊",
+        target: "一名其他角色",
+        description: "置入目标判定区。其判定阶段进行判定：若结果不为红桃，跳过本回合出牌阶段；然后弃置此牌。"
+    },
+    "闪电": {
+        category: "延时锦囊",
+        target: "自己",
+        description: "置入自己的判定区。判定为黑桃2至9时受到3点雷电伤害并弃置；否则移动到下一名角色的判定区。"
+    },
+    "兵粮寸断": {
+        category: "延时锦囊",
+        target: "距离1以内的一名其他角色",
+        description: "置入目标判定区。其判定阶段进行判定：若结果不为梅花，跳过本回合摸牌阶段；然后弃置此牌。"
+    },
+    "铁索连环": {
+        category: "普通锦囊",
+        target: "一至两名角色，或重铸",
+        description: "令目标的横置状态翻转；处于横置状态的角色受到属性伤害时，伤害会依次传导。也可以重铸：弃置此牌并摸一张牌。"
+    },
+    "火攻": {
+        category: "普通锦囊",
+        target: "一名有手牌的其他角色",
+        description: "目标展示一张手牌；你可以弃置一张与展示牌花色相同的手牌，对其造成1点火焰伤害。"
+    },
+    "诸葛连弩": {
+        category: "装备牌·武器",
+        target: "自己；攻击范围1",
+        description: "锁定技，你在出牌阶段使用【杀】没有次数限制。"
+    },
+    "雌雄双股剑": {
+        category: "装备牌·武器",
+        target: "自己；攻击范围2",
+        description: "你使用【杀】指定异性角色后，可令其选择：弃置一张手牌，或令你摸一张牌。"
+    },
+    "青釭剑": {
+        category: "装备牌·武器",
+        target: "自己；攻击范围2",
+        description: "锁定技，你使用【杀】指定目标后，无视其防具效果。"
+    },
+    "青龙偃月刀": {
+        category: "装备牌·武器",
+        target: "自己；攻击范围3",
+        description: "当你使用的【杀】被【闪】抵消时，你可以对同一目标再使用一张【杀】。"
+    },
+    "丈八蛇矛": {
+        category: "装备牌·武器",
+        target: "自己；攻击范围3",
+        description: "你可以将两张手牌当一张【杀】使用或打出。"
+    },
+    "贯石斧": {
+        category: "装备牌·武器",
+        target: "自己；攻击范围4",
+        description: "当你使用的【杀】被【闪】抵消时，你可以弃置两张牌，令此【杀】仍造成伤害。"
+    },
+    "方天画戟": {
+        category: "装备牌·武器",
+        target: "自己；攻击范围5",
+        description: "你使用最后一张手牌作为【杀】时，可以额外选择至多两名目标。"
+    },
+    "麒麟弓": {
+        category: "装备牌·武器",
+        target: "自己；攻击范围5",
+        description: "你使用【杀】对目标造成伤害后，可以弃置其装备区里的一张坐骑牌。"
+    },
+    "寒冰剑": {
+        category: "装备牌·武器",
+        target: "自己；攻击范围2",
+        description: "当你使用【杀】将造成伤害时，可以防止此伤害，改为弃置目标至多两张牌。"
+    },
+    "古锭刀": {
+        category: "装备牌·武器",
+        target: "自己；攻击范围2",
+        description: "锁定技，你使用【杀】对没有手牌的目标造成的伤害+1。"
+    },
+    "朱雀羽扇": {
+        category: "装备牌·武器",
+        target: "自己；攻击范围4",
+        description: "你可以将一张普通【杀】当【火杀】使用。"
+    },
+    "八卦阵": {
+        category: "装备牌·防具",
+        target: "自己",
+        description: "当你需要使用或打出【闪】时，可以进行判定；若结果为红色，视为你使用或打出一张【闪】。"
+    },
+    "仁王盾": {
+        category: "装备牌·防具",
+        target: "自己",
+        description: "锁定技，黑色【杀】对你无效。"
+    },
+    "藤甲": {
+        category: "装备牌·防具",
+        target: "自己",
+        description: "锁定技，普通【杀】、【南蛮入侵】和【万箭齐发】对你无效；你受到的火焰伤害+1。"
+    },
+    "白银狮子": {
+        category: "装备牌·防具",
+        target: "自己",
+        description: "锁定技，你每次受到的伤害至多为1；当此牌离开你的装备区时，若你已受伤，回复1点体力。"
+    },
+    "绝影": {
+        category: "装备牌·防御坐骑",
+        target: "自己",
+        description: "其他角色计算与你的距离时+1。"
+    },
+    "的卢": {
+        category: "装备牌·防御坐骑",
+        target: "自己",
+        description: "其他角色计算与你的距离时+1。"
+    },
+    "爪黄飞电": {
+        category: "装备牌·防御坐骑",
+        target: "自己",
+        description: "其他角色计算与你的距离时+1。"
+    },
+    "骅骝": {
+        category: "装备牌·防御坐骑",
+        target: "自己",
+        description: "其他角色计算与你的距离时+1。"
+    },
+    "赤兔": {
+        category: "装备牌·进攻坐骑",
+        target: "自己",
+        description: "你计算与其他角色的距离时-1。"
+    },
+    "大宛": {
+        category: "装备牌·进攻坐骑",
+        target: "自己",
+        description: "你计算与其他角色的距离时-1。"
+    },
+    "紫骍": {
+        category: "装备牌·进攻坐骑",
+        target: "自己",
+        description: "你计算与其他角色的距离时-1。"
+    }
 };
-/* 当前仓库未包含 sound/ 素材。关闭请求可避免每次动画产生 404；
- * 补齐音频文件后将此值改为 true 即可恢复。 */
-sgs.SOUND_ENABLED = false;
-    
+
 sgs.SKILL_EXPLANATION_MAPPING = {
     "护驾": "主公技，当你需要使用（或打出）一张【闪】时，你可以发动护驾。所有魏势力角色按行动顺序依次选择是否打出一张【闪】“提供”给你（视为由你使用或打出），直到有一名角色或没有任何角色决定如此做时为止",
     "奸雄": "你可以立即获得对你造成伤害的牌",

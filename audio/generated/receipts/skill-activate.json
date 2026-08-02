@@ -1,0 +1,31 @@
+{
+  "assetId": "skill.activate",
+  "command": "npm run audio:generate -- --id skill.activate",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "2e0e5bfff3cf407446a61b4340493d061a8c05ba3ff402c3e1bffae09e56fdc3",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 527,
+      "path": "audio/generated/envelopes/skill-activate.json",
+      "sha256": "1d7641d630bd4da53b512b9d1e29bdbb16038bd5bda52f4c21caa50699832f6c"
+    },
+    {
+      "bytes": 48684,
+      "path": "audio/generated/wav/sfx/skill-activate.wav",
+      "sha256": "9e3c2cf98584409f09655700c29b42b71383949a6fa356fdd3e83254439e4aac"
+    },
+    {
+      "bytes": 8517,
+      "path": "public/audio/sfx/skill-activate.ogg",
+      "sha256": "05402a73e4a97239223a8d69c771d05275ee7bc9edd2d1abe5fff5da32243e25"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1402,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "7d041a8f34367f863734c70b6e65bb791b73c2394ee3ad76d6e7ddf7a050b678",
+  "title": "发动技能"
+}

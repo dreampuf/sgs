@@ -5,7 +5,8 @@ import type {
 } from "../../core/registry";
 import {
   createStandardHeroDefinitions,
-  createStandardSkillDefinitions
+  createStandardSkillDefinitions,
+  standardSkillId
 } from "./heroes";
 import {
   STANDARD_WORKFLOW,
@@ -274,6 +275,7 @@ const amazingGrace: CardDefinition = {
   active: true,
   implementation: "complete",
   target: { type: "none" },
+  tags: ["resolution:per-target-nullification"],
   program: {
     steps: [{
       type: "run-workflow",
@@ -1032,6 +1034,40 @@ function createStandardResolutionRules(): NonNullable<
   ContentPack["resolutionRules"]
 > {
   return [
+    {
+      id: "standard:resolution:kongcheng",
+      priority: -200,
+      match: { tags: ["response:slash"] },
+      scope: "each-target",
+      operation: {
+        type: "exclude-target-with-skills",
+        skillIds: [standardSkillId("空城")],
+        ownerHandEmpty: true
+      }
+    },
+    {
+      id: "standard:resolution:kongcheng-duel",
+      priority: -200,
+      match: { tags: ["targeting:duel"] },
+      scope: "each-target",
+      operation: {
+        type: "exclude-target-with-skills",
+        skillIds: [standardSkillId("空城")],
+        ownerHandEmpty: true
+      }
+    },
+    {
+      id: "standard:resolution:qianxun",
+      priority: -200,
+      match: {
+        definitionIds: [STANDARD_CARD.snatch, STANDARD_CARD.indulgence]
+      },
+      scope: "each-target",
+      operation: {
+        type: "exclude-target-with-skills",
+        skillIds: [standardSkillId("谦逊")]
+      }
+    },
     {
       id: "standard:resolution:slash-defense",
       priority: 100,

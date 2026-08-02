@@ -1,0 +1,31 @@
+{
+  "assetId": "card.equip",
+  "command": "npm run audio:generate -- --id card.equip",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "28589ddcc0111d36dbd0445f19ae238c5f94f54e0f78632f89bd13e4b520d44c",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 526,
+      "path": "audio/generated/envelopes/card-equip.json",
+      "sha256": "a23bbb489a339449ea7474bb0d9b7ddec6d2603e4be0254f3f397f13475b63f4"
+    },
+    {
+      "bytes": 39724,
+      "path": "audio/generated/wav/sfx/card-equip.wav",
+      "sha256": "b6975eb0885db09a690bb3ec46da5e0c134d358d194f1807412cd687b6cd7ed6"
+    },
+    {
+      "bytes": 5805,
+      "path": "public/audio/sfx/card-equip.ogg",
+      "sha256": "e79c80ab8e44ba4ae4213301edba14afbff1a094f94a44ff49778ee5769a0701"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1218,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "a6aa2639bd5f2273b63f5534cb82689f6a35fb52abe442a225de2aafd207324f",
+  "title": "装备"
+}

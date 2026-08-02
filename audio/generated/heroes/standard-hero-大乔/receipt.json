@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "standard:hero:大乔",
+  "inputSha256": "e9c9a09198765645f379f77eb515e9118d09a87e1753514115dd6aac9bc6ff1e",
+  "outputs": [
+    {
+      "bytes": 10955,
+      "path": "audio/generated/heroes/standard-hero-大乔/theme-score.json",
+      "sha256": "ff8cf7fac0d1cb2b4e3c92b3ab9121b5c7cbfcc49657aba617e64af65eaed22e"
+    },
+    {
+      "bytes": 303,
+      "path": "audio/generated/heroes/standard-hero-大乔/signature-envelope.json",
+      "sha256": "36b8fe84771214f56a9af0fde2e63e007e41f9a4af99f3a6a5fbd90af92fec1d"
+    },
+    {
+      "bytes": 671,
+      "path": "audio/generated/heroes/standard-hero-大乔/voice-script.json",
+      "sha256": "92b3a3e2fa9818211fac541a979199166ddf390a67fca756ce374ea99cafff17"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/standard-hero-大乔/wav/theme.wav",
+      "sha256": "82a1e75aa38874246016281d4e5dee7dd61f70aa3b2f83a368818625c97431e5"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/standard-hero-大乔/wav/signature.wav",
+      "sha256": "92679fa554a9ab18e969e2b1127d6aa8c92783f06214c7af4a399d861b647e34"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/standard-hero-大乔/theme.ogg",
+      "sha256": "b7dd80d7e28e91435118761d4a6a11f40ad7199a5b2796c65650695aada3ccbb"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/standard-hero-大乔/signature.ogg",
+      "sha256": "cd75e4ba6de905f4fa4a461942a833156ef3d6e36a167cc4291091e2014b5af4"
+    },
+    {
+      "bytes": 104676,
+      "path": "audio/generated/heroes/standard-hero-大乔/voice-source/signature.aiff",
+      "sha256": "a0ee1958aff31e80db67c6ae11fd7824c3f71729f42a92eccf6a702fe71beec1"
+    },
+    {
+      "bytes": 146046,
+      "path": "audio/generated/heroes/standard-hero-大乔/wav/voice-signature.wav",
+      "sha256": "6bf9203dbb7050e472df6316a0dfa2bbc67709e077decb17fd90073d39b91737"
+    },
+    {
+      "bytes": 23333,
+      "path": "public/audio/heroes/standard-hero-大乔/voice-signature.ogg",
+      "sha256": "a9d8ef65eadce627375d2fe2d5ef7cd4147a31d01cd7c567a507e99babe5777c"
+    },
+    {
+      "bytes": 103056,
+      "path": "audio/generated/heroes/standard-hero-大乔/voice-source/victory.aiff",
+      "sha256": "57165b1bb5bf52e868a4201a3845cbae2d6e28d8d78a276aef5c2d13f1cd26b0"
+    },
+    {
+      "bytes": 143694,
+      "path": "audio/generated/heroes/standard-hero-大乔/wav/voice-victory.wav",
+      "sha256": "d81edd23488ea8fdff6a734a3831354f77ab4331ba5a2e4c6a51b456c7f11ad4"
+    },
+    {
+      "bytes": 22931,
+      "path": "public/audio/heroes/standard-hero-大乔/voice-victory.ogg",
+      "sha256": "5719f0d0816868e604b4342f93d435c09cd0afc64734d92b7e0b0d8dece1a6b9"
+    },
+    {
+      "bytes": 113708,
+      "path": "audio/generated/heroes/standard-hero-大乔/voice-source/death.aiff",
+      "sha256": "5ee105c83057ba7a9caf5f9d6827cf1ea4857653bfe9d02b91fbe4cd96cce8e5"
+    },
+    {
+      "bytes": 159154,
+      "path": "audio/generated/heroes/standard-hero-大乔/wav/voice-death.wav",
+      "sha256": "2970658d9a669671b0999afa9f0d4c5b9f62af836afe69597103ffbffa6a7c1b"
+    },
+    {
+      "bytes": 25343,
+      "path": "public/audio/heroes/standard-hero-大乔/voice-death.ogg",
+      "sha256": "8b64b10ad826cf053d3123970d2674537d5716728f32748d64c509f07c6f321c"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3307,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Tingting",
+    "postprocess": "highpass=f=100,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+    "rate": 164,
+    "style": "graceful"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "wind:hero:小乔",
+  "heroName": "小乔",
+  "inspiration": "借鉴铜雀台、二乔与江东红颜的文学意象，台词为原创改写。",
+  "lines": {
+    "death": "公瑾，香魂随你而去。",
+    "signature": "一缕天香，借风而去。",
+    "victory": "春风入江，花影无恙。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=100,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 164,
+  "schemaVersion": 1,
+  "style": "graceful",
+  "voice": "Tingting"
+}

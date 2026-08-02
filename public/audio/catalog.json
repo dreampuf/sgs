@@ -1,0 +1,276 @@
+{
+  "encoding": "ogg/libopus",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "music": {
+    "music.advantage": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 8,
+      "bpm": 96,
+      "durationSeconds": 20,
+      "loop": true,
+      "title": "乘势",
+      "url": "/audio/music/music-advantage.ogg"
+    },
+    "music.battle": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 8,
+      "bpm": 96,
+      "durationSeconds": 20,
+      "loop": true,
+      "title": "鏖兵",
+      "url": "/audio/music/music-battle.ogg"
+    },
+    "music.comeback": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 8,
+      "bpm": 96,
+      "durationSeconds": 20,
+      "loop": true,
+      "title": "逆转",
+      "url": "/audio/music/music-comeback.ogg"
+    },
+    "music.critical": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 8,
+      "bpm": 96,
+      "durationSeconds": 20,
+      "loop": true,
+      "title": "命悬一线",
+      "url": "/audio/music/music-critical.ogg"
+    },
+    "music.defeat": {
+      "bars": 2,
+      "bpm": 64,
+      "durationSeconds": 7.5,
+      "loop": false,
+      "title": "孤城暮色",
+      "url": "/audio/music/music-defeat.ogg"
+    },
+    "music.disadvantage": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 8,
+      "bpm": 96,
+      "durationSeconds": 20,
+      "loop": true,
+      "title": "困局",
+      "url": "/audio/music/music-disadvantage.ogg"
+    },
+    "music.dominant": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 8,
+      "bpm": 96,
+      "durationSeconds": 20,
+      "loop": true,
+      "title": "破阵",
+      "url": "/audio/music/music-dominant.ogg"
+    },
+    "music.identity": {
+      "bars": 8,
+      "bpm": 96,
+      "durationSeconds": 20,
+      "loop": true,
+      "title": "身份暗涌",
+      "url": "/audio/music/music-identity.ogg"
+    },
+    "music.menu": {
+      "bars": 8,
+      "bpm": 80,
+      "durationSeconds": 24,
+      "loop": true,
+      "title": "乱世卷首",
+      "url": "/audio/music/music-menu.ogg"
+    },
+    "music.opening": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 8,
+      "bpm": 96,
+      "durationSeconds": 20,
+      "loop": true,
+      "title": "列阵",
+      "url": "/audio/music/music-opening.ogg"
+    },
+    "music.story.qun": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 8,
+      "bpm": 96,
+      "durationSeconds": 20,
+      "loop": true,
+      "title": "群 · 风雷并起",
+      "url": "/audio/music/music-story-qun.ogg"
+    },
+    "music.story.shu": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 8,
+      "bpm": 96,
+      "durationSeconds": 20,
+      "loop": true,
+      "title": "蜀 · 山河同心",
+      "url": "/audio/music/music-story-shu.ogg"
+    },
+    "music.story.wei": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 8,
+      "bpm": 96,
+      "durationSeconds": 20,
+      "loop": true,
+      "title": "魏 · 军令如山",
+      "url": "/audio/music/music-story-wei.ogg"
+    },
+    "music.story.wu": {
+      "adaptiveGroup": "battle-96-a",
+      "bars": 8,
+      "bpm": 96,
+      "durationSeconds": 20,
+      "loop": true,
+      "title": "吴 · 江东潮生",
+      "url": "/audio/music/music-story-wu.ogg"
+    },
+    "music.victory": {
+      "bars": 2,
+      "bpm": 92,
+      "durationSeconds": 5.217391,
+      "loop": false,
+      "title": "旌旗凯旋",
+      "url": "/audio/music/music-victory.ogg"
+    }
+  },
+  "sampleRate": 32000,
+  "schemaVersion": 1,
+  "sfx": {
+    "card.amazing-grace": {
+      "durationSeconds": 1.05,
+      "title": "五谷丰登",
+      "url": "/audio/sfx/card-amazing-grace.ogg"
+    },
+    "card.archery-attack": {
+      "durationSeconds": 1.05,
+      "title": "万箭齐发",
+      "url": "/audio/sfx/card-archery-attack.ogg"
+    },
+    "card.discard": {
+      "durationSeconds": 0.36,
+      "title": "弃牌",
+      "url": "/audio/sfx/card-discard.ogg"
+    },
+    "card.draw": {
+      "durationSeconds": 0.31,
+      "title": "摸牌",
+      "url": "/audio/sfx/card-draw.ogg"
+    },
+    "card.duel": {
+      "durationSeconds": 0.88,
+      "title": "决斗",
+      "url": "/audio/sfx/card-duel.ogg"
+    },
+    "card.equip": {
+      "durationSeconds": 0.62,
+      "title": "装备",
+      "url": "/audio/sfx/card-equip.ogg"
+    },
+    "card.fire-attack": {
+      "durationSeconds": 0.98,
+      "title": "火攻",
+      "url": "/audio/sfx/card-fire-attack.ogg"
+    },
+    "card.fire-slash": {
+      "durationSeconds": 0.68,
+      "title": "火杀",
+      "url": "/audio/sfx/card-fire-slash.ogg"
+    },
+    "card.iron-chain": {
+      "durationSeconds": 0.86,
+      "title": "铁索连环",
+      "url": "/audio/sfx/card-iron-chain.ogg"
+    },
+    "card.jink": {
+      "durationSeconds": 0.42,
+      "title": "闪",
+      "url": "/audio/sfx/card-jink.ogg"
+    },
+    "card.lightning": {
+      "durationSeconds": 1.35,
+      "title": "闪电",
+      "url": "/audio/sfx/card-lightning.ogg"
+    },
+    "card.nullification": {
+      "durationSeconds": 0.82,
+      "title": "无懈可击",
+      "url": "/audio/sfx/card-nullification.ogg"
+    },
+    "card.peach": {
+      "durationSeconds": 0.82,
+      "title": "桃",
+      "url": "/audio/sfx/card-peach.ogg"
+    },
+    "card.play": {
+      "durationSeconds": 0.42,
+      "title": "通用出牌",
+      "url": "/audio/sfx/card-play.ogg"
+    },
+    "card.savage-assault": {
+      "durationSeconds": 1.2,
+      "title": "南蛮入侵",
+      "url": "/audio/sfx/card-savage-assault.ogg"
+    },
+    "card.slash": {
+      "durationSeconds": 0.54,
+      "title": "杀",
+      "url": "/audio/sfx/card-slash.ogg"
+    },
+    "card.thunder-slash": {
+      "durationSeconds": 0.72,
+      "title": "雷杀",
+      "url": "/audio/sfx/card-thunder-slash.ogg"
+    },
+    "card.wine": {
+      "durationSeconds": 0.76,
+      "title": "酒",
+      "url": "/audio/sfx/card-wine.ogg"
+    },
+    "combat.damage": {
+      "durationSeconds": 0.56,
+      "title": "普通伤害",
+      "url": "/audio/sfx/combat-damage.ogg"
+    },
+    "combat.death": {
+      "durationSeconds": 1.65,
+      "title": "角色阵亡",
+      "url": "/audio/sfx/combat-death.ogg"
+    },
+    "combat.fire-damage": {
+      "durationSeconds": 0.82,
+      "title": "火焰伤害",
+      "url": "/audio/sfx/combat-fire-damage.ogg"
+    },
+    "combat.recover": {
+      "durationSeconds": 0.92,
+      "title": "恢复体力",
+      "url": "/audio/sfx/combat-recover.ogg"
+    },
+    "combat.thunder-damage": {
+      "durationSeconds": 0.92,
+      "title": "雷电伤害",
+      "url": "/audio/sfx/combat-thunder-damage.ogg"
+    },
+    "skill.activate": {
+      "durationSeconds": 0.76,
+      "title": "发动技能",
+      "url": "/audio/sfx/skill-activate.ogg"
+    },
+    "system.judgment": {
+      "durationSeconds": 1.04,
+      "title": "判定翻牌",
+      "url": "/audio/sfx/system-judgment.ogg"
+    },
+    "system.ui-click": {
+      "durationSeconds": 0.09,
+      "title": "界面点击",
+      "url": "/audio/sfx/system-ui-click.ogg"
+    },
+    "system.your-turn": {
+      "durationSeconds": 0.72,
+      "title": "轮到玩家",
+      "url": "/audio/sfx/system-your-turn.ogg"
+    }
+  }
+}

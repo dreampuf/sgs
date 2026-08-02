@@ -1,8 +1,13 @@
 import { normalizeSeed, shuffle } from "./rng";
+import {
+  MAX_STANDARD_PLAYERS,
+  MIN_STANDARD_PLAYERS
+} from "./ruleset";
 import type {
   CardDefinitionId,
   CardSuit,
   GameState,
+  Identity,
   PlayerId,
   PlayerState,
   ZoneId
@@ -26,6 +31,7 @@ export function judgmentZone(playerId: PlayerId): ZoneId {
 
 export interface InitialPlayer {
   id: PlayerId;
+  identity?: Identity;
   heroDefinitionId: string;
   maxHp: number;
   hp?: number;
@@ -54,8 +60,15 @@ export interface CreateGameStateOptions {
 }
 
 export function createGameState(options: CreateGameStateOptions): GameState {
-  if (options.players.length < 2) {
-    throw new Error("a game requires at least two players");
+  if (
+    options.players.length < MIN_STANDARD_PLAYERS ||
+    options.players.length > MAX_STANDARD_PLAYERS
+  ) {
+    throw new Error(
+      `a game requires ${MIN_STANDARD_PLAYERS}-${
+        MAX_STANDARD_PLAYERS
+      } players`
+    );
   }
   const seed = normalizeSeed(options.seed);
   const players: Record<PlayerId, PlayerState> = {};
@@ -89,6 +102,7 @@ export function createGameState(options: CreateGameStateOptions): GameState {
     const hp = input.hp ?? input.maxHp;
     players[input.id] = {
       id: input.id,
+      ...(input.identity ? { identity: input.identity } : {}),
       heroDefinitionId: input.heroDefinitionId,
       hp,
       maxHp: input.maxHp,

@@ -1,0 +1,576 @@
+{
+  "adaptiveGroup": "battle-96-a",
+  "assetId": "music.hero.standard:hero:黄月英",
+  "bars": 4,
+  "bpm": 96,
+  "durationSeconds": 10,
+  "energy": 0.54,
+  "events": [
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 47,
+      "pan": -0.42,
+      "start": 0,
+      "stem": "harmony",
+      "velocity": 0.1786
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 50,
+      "pan": 0,
+      "start": 0,
+      "stem": "harmony",
+      "velocity": 0.1429
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 57,
+      "pan": 0.42,
+      "start": 0,
+      "stem": "harmony",
+      "velocity": 0.1429
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 35,
+      "pan": 0,
+      "start": 0,
+      "stem": "bass",
+      "velocity": 0.2718
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 35,
+      "pan": 0,
+      "start": 1.25,
+      "stem": "bass",
+      "velocity": 0.2718
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 0,
+      "stem": "percussion",
+      "velocity": 0.302
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 0.625,
+      "stem": "percussion",
+      "velocity": 0.248
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 1.25,
+      "stem": "percussion",
+      "velocity": 0.248
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 1.875,
+      "stem": "percussion",
+      "velocity": 0.248
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 59,
+      "pan": 0,
+      "start": 0,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 62,
+      "pan": 0.172,
+      "start": 0.416667,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 61,
+      "pan": 0.214,
+      "start": 0.833333,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 69,
+      "pan": 0.094,
+      "start": 1.25,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 66,
+      "pan": -0.097,
+      "start": 1.666667,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 59,
+      "pan": -0.215,
+      "start": 2.083333,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 54,
+      "pan": -0.42,
+      "start": 2.5,
+      "stem": "harmony",
+      "velocity": 0.1786
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 59,
+      "pan": 0,
+      "start": 2.5,
+      "stem": "harmony",
+      "velocity": 0.1429
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 62,
+      "pan": 0.42,
+      "start": 2.5,
+      "stem": "harmony",
+      "velocity": 0.1429
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 42,
+      "pan": 0,
+      "start": 2.5,
+      "stem": "bass",
+      "velocity": 0.2718
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 42,
+      "pan": 0,
+      "start": 3.75,
+      "stem": "bass",
+      "velocity": 0.2718
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 2.5,
+      "stem": "percussion",
+      "velocity": 0.302
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 3.125,
+      "stem": "percussion",
+      "velocity": 0.248
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 3.75,
+      "stem": "percussion",
+      "velocity": 0.248
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 4.375,
+      "stem": "percussion",
+      "velocity": 0.248
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 66,
+      "pan": -0.17,
+      "start": 2.5,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 71,
+      "pan": 0.004,
+      "start": 2.916667,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 69,
+      "pan": 0.175,
+      "start": 3.333333,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 74,
+      "pan": 0.213,
+      "start": 3.75,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 73,
+      "pan": 0.091,
+      "start": 4.166667,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 66,
+      "pan": -0.101,
+      "start": 4.583333,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 57,
+      "pan": -0.42,
+      "start": 5,
+      "stem": "harmony",
+      "velocity": 0.1786
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 61,
+      "pan": 0,
+      "start": 5,
+      "stem": "harmony",
+      "velocity": 0.1429
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 66,
+      "pan": 0.42,
+      "start": 5,
+      "stem": "harmony",
+      "velocity": 0.1429
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 45,
+      "pan": 0,
+      "start": 5,
+      "stem": "bass",
+      "velocity": 0.2718
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 45,
+      "pan": 0,
+      "start": 6.25,
+      "stem": "bass",
+      "velocity": 0.2718
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 5,
+      "stem": "percussion",
+      "velocity": 0.302
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 5.625,
+      "stem": "percussion",
+      "velocity": 0.248
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 6.25,
+      "stem": "percussion",
+      "velocity": 0.248
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 6.875,
+      "stem": "percussion",
+      "velocity": 0.248
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 69,
+      "pan": -0.216,
+      "start": 5,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 73,
+      "pan": -0.168,
+      "start": 5.416667,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 71,
+      "pan": 0.007,
+      "start": 5.833333,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 78,
+      "pan": 0.177,
+      "start": 6.25,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 74,
+      "pan": 0.212,
+      "start": 6.666667,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 69,
+      "pan": 0.087,
+      "start": 7.083333,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 50,
+      "pan": -0.42,
+      "start": 7.5,
+      "stem": "harmony",
+      "velocity": 0.1786
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 57,
+      "pan": 0,
+      "start": 7.5,
+      "stem": "harmony",
+      "velocity": 0.1429
+    },
+    {
+      "duration": 2.5,
+      "instrument": "strings",
+      "midi": 61,
+      "pan": 0.42,
+      "start": 7.5,
+      "stem": "harmony",
+      "velocity": 0.1429
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 38,
+      "pan": 0,
+      "start": 7.5,
+      "stem": "bass",
+      "velocity": 0.2718
+    },
+    {
+      "duration": 1.0625,
+      "instrument": "drone",
+      "midi": 38,
+      "pan": 0,
+      "start": 8.75,
+      "stem": "bass",
+      "velocity": 0.2718
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 7.5,
+      "stem": "percussion",
+      "velocity": 0.302
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 8.125,
+      "stem": "percussion",
+      "velocity": 0.248
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "drum",
+      "midi": 36,
+      "pan": -0.08,
+      "start": 8.75,
+      "stem": "percussion",
+      "velocity": 0.248
+    },
+    {
+      "duration": 0.21875,
+      "instrument": "wood",
+      "midi": 58,
+      "pan": 0.16,
+      "start": 9.375,
+      "stem": "percussion",
+      "velocity": 0.248
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 62,
+      "pan": -0.104,
+      "start": 7.5,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 69,
+      "pan": -0.216,
+      "start": 7.916667,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 66,
+      "pan": -0.165,
+      "start": 8.333333,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 73,
+      "pan": 0.011,
+      "start": 8.75,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 71,
+      "pan": 0.179,
+      "start": 9.166667,
+      "stem": "lead",
+      "velocity": 0.2472
+    },
+    {
+      "duration": 0.34375,
+      "instrument": "flute",
+      "midi": 62,
+      "pan": 0.211,
+      "start": 9.583333,
+      "stem": "lead",
+      "velocity": 0.2472
+    }
+  ],
+  "heroDefinitionId": "standard:hero:黄月英",
+  "motif": [
+    0,
+    2,
+    1,
+    4,
+    3,
+    0
+  ],
+  "progression": [
+    0,
+    3,
+    4,
+    2
+  ],
+  "rootMidi": 47,
+  "scale": [
+    0,
+    2,
+    3,
+    7,
+    10
+  ],
+  "schemaVersion": 1,
+  "seed": 3207,
+  "title": "黄月英·英雄主题"
+}

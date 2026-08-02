@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:甄姬.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:甄姬",
+  "kingdom": "wei",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "graceful timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13107,
+  "style": "graceful"
+}

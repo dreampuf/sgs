@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:张辽",
+  "heroName": "张辽",
+  "inspiration": "借鉴《三国演义》中逍遥津威震江东的战事，台词为原创改写。",
+  "lines": {
+    "death": "合肥之威，终有尽时。",
+    "signature": "逍遥津前，谁敢再进。",
+    "victory": "八百锐士，足破千军。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

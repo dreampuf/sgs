@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "forest:hero:贾诩",
+  "inputSha256": "39c00cc3c316826f26050cb17e38cfd28def9d0470a3ff8348b1e0fadf830424",
+  "outputs": [
+    {
+      "bytes": 10948,
+      "path": "audio/generated/heroes/forest-hero-贾诩/theme-score.json",
+      "sha256": "3e2aeb5f3b34abc7f6396f65c0e9b6738278ab0b85853ddbc25f79f0fb1f40e5"
+    },
+    {
+      "bytes": 300,
+      "path": "audio/generated/heroes/forest-hero-贾诩/signature-envelope.json",
+      "sha256": "4f77a6e0f92840efe2c47e226f9639d0eb4fed2c66c999cd710eb5ad6facc849"
+    },
+    {
+      "bytes": 743,
+      "path": "audio/generated/heroes/forest-hero-贾诩/voice-script.json",
+      "sha256": "7a1b5f20f2cb92c4bff012c8a37e21a0ecbb6c596f63cc37f7abdb529d81619d"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/forest-hero-贾诩/wav/theme.wav",
+      "sha256": "beb63ee0832ebe7f3bb63efa3e4b899cbcef35373fe76712fff5bc6f3693f8f2"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/forest-hero-贾诩/wav/signature.wav",
+      "sha256": "6fa969ce88590895dae9300a07eabe933680c34edf6a06ab17e69363f7fb2c4c"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/forest-hero-贾诩/theme.ogg",
+      "sha256": "c4f28b60ed5fdc75858e258d2906df16504498ec063ecc3f4c26653ec72e4e03"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/forest-hero-贾诩/signature.ogg",
+      "sha256": "7e629a2bdfd1cb8baa412b7d2e7c0479b089de45ddba6fbcb0fbca507d91d92c"
+    },
+    {
+      "bytes": 169840,
+      "path": "audio/generated/heroes/forest-hero-贾诩/voice-source/signature.aiff",
+      "sha256": "4b1c8c99f0008560abd973529f49bf74ec3b9682696269e799b3c517febd66ff"
+    },
+    {
+      "bytes": 244132,
+      "path": "audio/generated/heroes/forest-hero-贾诩/wav/voice-signature.wav",
+      "sha256": "d92123e02d41d42b0785130cb68b790041f45848655d83bb16bc1ca1826e38fb"
+    },
+    {
+      "bytes": 38636,
+      "path": "public/audio/heroes/forest-hero-贾诩/voice-signature.ogg",
+      "sha256": "f5707ff433847145a6ef53c425d372e1480f70f8c1b7ffbc8ee45e6e40e03917"
+    },
+    {
+      "bytes": 135264,
+      "path": "audio/generated/heroes/forest-hero-贾诩/voice-source/victory.aiff",
+      "sha256": "00e14d1f080da1375d31894b8aa170678afac4b1f2545c59c254ca0ad560ea24"
+    },
+    {
+      "bytes": 193954,
+      "path": "audio/generated/heroes/forest-hero-贾诩/wav/voice-victory.wav",
+      "sha256": "818d0adc596fd1488119a5bae94275b79c97b3fab77c9ad9e406ec9acc51b015"
+    },
+    {
+      "bytes": 30797,
+      "path": "public/audio/heroes/forest-hero-贾诩/voice-victory.ogg",
+      "sha256": "33c7542cc63c581331caf4aca304d35f72dbde2a9c31c29258b92e81303ccc57"
+    },
+    {
+      "bytes": 137382,
+      "path": "audio/generated/heroes/forest-hero-贾诩/voice-source/death.aiff",
+      "sha256": "2d17e24e898cd470eec6a29b82ddd1a364c9850f7d31c986a6c8c1132b7b9891"
+    },
+    {
+      "bytes": 197028,
+      "path": "audio/generated/heroes/forest-hero-贾诩/wav/voice-death.wav",
+      "sha256": "721863b577140d7e006dbe9d0ab5c04f57caaa17562e0eaef1ffd1adb1dd98fb"
+    },
+    {
+      "bytes": 31400,
+      "path": "public/audio/heroes/forest-hero-贾诩/voice-death.ogg",
+      "sha256": "677dee07f56290091858df469ab5075daf700dd32e20bd09238624c70f574759"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3708,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Eddy (Chinese (China mainland))",
+    "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180,aecho=0.8:0.18:55:0.1",
+    "rate": 155,
+    "style": "mystical"
+  }
+}

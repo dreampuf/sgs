@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "fire:hero:庞德",
+  "heroName": "庞德",
+  "inspiration": "借鉴《三国演义》中抬棺决战、樊城拒降的勇烈形象，台词为原创改写。",
+  "lines": {
+    "death": "宁死阵前，绝不屈膝。",
+    "signature": "棺木在后，此战只进不退。",
+    "victory": "猛进破阵，生死皆轻。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

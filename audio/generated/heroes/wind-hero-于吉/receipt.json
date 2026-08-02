@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "wind:hero:于吉",
+  "inputSha256": "f1262a674c4967c8e36ddc9ded6214a344833fa7b113902fc96413c1cc6d74cf",
+  "outputs": [
+    {
+      "bytes": 10952,
+      "path": "audio/generated/heroes/wind-hero-于吉/theme-score.json",
+      "sha256": "4d8c72e316672737fd769254da9d7e90b925a74f901ac16bb8cff3a020bd1d7d"
+    },
+    {
+      "bytes": 296,
+      "path": "audio/generated/heroes/wind-hero-于吉/signature-envelope.json",
+      "sha256": "58fbc664e1c5eb470fdd1bd02dc691fa4860bf209cec80e9033026ab1bf977e8"
+    },
+    {
+      "bytes": 717,
+      "path": "audio/generated/heroes/wind-hero-于吉/voice-script.json",
+      "sha256": "696416aa43ae6d80b9965d6e23752d725e960bab5b39fbe6605e9679b9c7cd04"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/wind-hero-于吉/wav/theme.wav",
+      "sha256": "502f4fe538c70de878046e325bcd11bfecee3d040f343a56df4b1a1cd03f4397"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/wind-hero-于吉/wav/signature.wav",
+      "sha256": "e925e3d95d0c727c06a2d5d43fdc985cc9a16911224e34f41107560cb07f298a"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/wind-hero-于吉/theme.ogg",
+      "sha256": "6859b216c542443815ffdccda551e05cb50a242bb59be0a0aa6d0820815e40b1"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/wind-hero-于吉/signature.ogg",
+      "sha256": "50001d5e3bc0aef96ad951a5e0908471be5080431ae1271b9bbfdf4100f258d9"
+    },
+    {
+      "bytes": 126500,
+      "path": "audio/generated/heroes/wind-hero-于吉/voice-source/signature.aiff",
+      "sha256": "32e4589cfe160877832f4edad5d601753af1d6e6e933095c830703a9d93e506e"
+    },
+    {
+      "bytes": 181236,
+      "path": "audio/generated/heroes/wind-hero-于吉/wav/voice-signature.wav",
+      "sha256": "6715e6fe80a5369113d13e98a6d44fc89e424843a7680c4ffd9001c54fea2068"
+    },
+    {
+      "bytes": 28760,
+      "path": "public/audio/heroes/wind-hero-于吉/voice-signature.ogg",
+      "sha256": "a34e0327eaa7e7ff649cb62f20a0038ccb13b568f013ba3fe17e8a5530869b23"
+    },
+    {
+      "bytes": 126100,
+      "path": "audio/generated/heroes/wind-hero-于吉/voice-source/victory.aiff",
+      "sha256": "85f4c44cd54147e79ab0c3613dc73ae3c0fb19dfb5de0c94f375a7bf7578af4a"
+    },
+    {
+      "bytes": 180654,
+      "path": "audio/generated/heroes/wind-hero-于吉/wav/voice-victory.wav",
+      "sha256": "592ba1b1ad090e149b1ac10a275fe9b5c6f7a67ef89c6ffb106f474063344d85"
+    },
+    {
+      "bytes": 28760,
+      "path": "public/audio/heroes/wind-hero-于吉/voice-victory.ogg",
+      "sha256": "ddac2a7dbee24d3e6077a8d4fc9f4eb4ba44f6b6218d5a2d762a687edadbb43a"
+    },
+    {
+      "bytes": 121870,
+      "path": "audio/generated/heroes/wind-hero-于吉/voice-source/death.aiff",
+      "sha256": "500ed4b4a25b6804acee0cccb914b652eae58017e7c9dca0d1b30c8174a37adf"
+    },
+    {
+      "bytes": 174516,
+      "path": "audio/generated/heroes/wind-hero-于吉/wav/voice-death.wav",
+      "sha256": "3ea304be6aa7662776512e56858e078752e1587c42f58d90066870d7f6adbfa0"
+    },
+    {
+      "bytes": 27755,
+      "path": "public/audio/heroes/wind-hero-于吉/voice-death.ogg",
+      "sha256": "80b3237006887c7a294c1e7c551dc6cd44df393bc38bead0c51f65fd1ae9ef74"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3508,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Eddy (Chinese (China mainland))",
+    "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180,aecho=0.8:0.18:55:0.1",
+    "rate": 155,
+    "style": "mystical"
+  }
+}

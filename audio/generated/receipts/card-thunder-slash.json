@@ -1,0 +1,31 @@
+{
+  "assetId": "card.thunder-slash",
+  "command": "npm run audio:generate -- --id card.thunder-slash",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "877f5736d576053c5a186b44471e3f61818835d59eca2c58ae5d29fc7a7c3a20",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 553,
+      "path": "audio/generated/envelopes/card-thunder-slash.json",
+      "sha256": "1be3833c2a121f88fdbfae2ac6f8cbefa3c95e52c8689854a6ed0df3649e5526"
+    },
+    {
+      "bytes": 46124,
+      "path": "audio/generated/wav/sfx/card-thunder-slash.wav",
+      "sha256": "65edaec21c6f79d479f3cd9664c1507ff55f881ab7a523e6e8cc5c7c6594b6f3"
+    },
+    {
+      "bytes": 6827,
+      "path": "public/audio/sfx/card-thunder-slash.ogg",
+      "sha256": "625340bc6b14df926a27b7cea91a6f1b177790d0f6c98a7da32a21f3e03a4ed0"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1206,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "1a5e49805e9f1e97435b6d40d81cdb42c11f92cf9a7ff7513de952485c36bd1d",
+  "title": "雷杀"
+}

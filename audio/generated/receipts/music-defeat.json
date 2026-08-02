@@ -1,0 +1,31 @@
+{
+  "assetId": "music.defeat",
+  "command": "npm run audio:generate -- --id music.defeat",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "4c5dd461adeca0d598ca823bb49d005f0a6e5a6cbc8d6dc61d95b00743ebf55f",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 6067,
+      "path": "audio/generated/scores/music-defeat.json",
+      "sha256": "f31c12518cf5042fdd7363513f133b3ce14197e00b9bf068f407d5501aa5b0be"
+    },
+    {
+      "bytes": 960044,
+      "path": "audio/generated/wav/music/music-defeat.wav",
+      "sha256": "c54c930814d10e4464c74b5b4f85edc6d2f3b339aa589ccd597cdc8cd9fc0129"
+    },
+    {
+      "bytes": 117387,
+      "path": "public/audio/music/music-defeat.ogg",
+      "sha256": "9e8bad53f34e3f143b5c54d80e2e02017e7f041b8b01f5407146567463b5bf37"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2402,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "52ccbe8769455ecbaf69c07fd385e3a3ebbe7a444419140ea06fc7a406f8ed72",
+  "title": "孤城暮色"
+}

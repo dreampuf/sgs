@@ -3,6 +3,7 @@ export type CardInstanceId = string;
 export type CardDefinitionId = string;
 export type ZoneId = string;
 export type EffectPlanId = string;
+export type Identity = "lord" | "loyalist" | "rebel" | "renegade";
 export type CardSuit = "diamond" | "heart" | "club" | "spade";
 export type CardMoveReason =
   | "use"
@@ -31,6 +32,7 @@ export type Phase = "judgment" | "draw" | "action" | "discard" | "finished";
 
 export interface PlayerState {
   id: PlayerId;
+  identity?: Identity;
   heroDefinitionId: string;
   hp: number;
   maxHp: number;
@@ -413,6 +415,7 @@ export interface NegatableEffect {
   cardId: CardInstanceId;
   responderIds: PlayerId[];
   negated: boolean;
+  targetId?: PlayerId;
   resolvedPlanId: EffectPlanId;
   negatedPlanId: EffectPlanId;
 }
@@ -557,6 +560,7 @@ export interface NegatableEffectDraft {
   cardId: CardInstanceId;
   responderIds: PlayerId[];
   negated: boolean;
+  targetId?: PlayerId;
   onResolved: EffectDraft[];
   onNegated?: EffectDraft[];
 }
@@ -702,6 +706,7 @@ export type DecisionContinuation =
       cardId: CardInstanceId;
       responderIds: PlayerId[];
       negated: boolean;
+      targetId?: PlayerId;
       resolvedPlanId: EffectPlanId;
       negatedPlanId: EffectPlanId;
     }

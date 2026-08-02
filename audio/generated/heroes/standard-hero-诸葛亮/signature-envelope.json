@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.standard:hero:诸葛亮.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "standard:hero:诸葛亮",
+  "kingdom": "shu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "mystical timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13206,
+  "style": "mystical"
+}

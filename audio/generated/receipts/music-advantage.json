@@ -1,0 +1,31 @@
+{
+  "assetId": "music.advantage",
+  "command": "npm run audio:generate -- --id music.advantage",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "4bf529e7b5994120b811d1f74dea003fbfbd738e3bdd5d0bb145f508807c25cc",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 32472,
+      "path": "audio/generated/scores/music-advantage.json",
+      "sha256": "ea88d7458569d23a06c8332dd8395735e30220069db1c36c6b042722e919acde"
+    },
+    {
+      "bytes": 2560044,
+      "path": "audio/generated/wav/music/music-advantage.wav",
+      "sha256": "823d0587301fe9ce14ec309115005e6e92f02d8b758633acd3a9619cd22a2dbf"
+    },
+    {
+      "bytes": 280653,
+      "path": "public/audio/music/music-advantage.ogg",
+      "sha256": "571b31dad5c8f6789f8d92fb2b4705a741e39db5c7580952d55028841994ad3a"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2302,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "a7a106408d8899896bf8545071be391a3475c6808d220ae3d1e6fd46c750a4cc",
+  "title": "乘势"
+}

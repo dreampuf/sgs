@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:大乔",
+  "heroName": "大乔",
+  "inspiration": "借鉴二乔、江东国色与乱世流离的文学意象，台词为原创改写。",
+  "lines": {
+    "death": "伯符，江水送我来寻你。",
+    "signature": "江花照影，烽火自移。",
+    "victory": "烟波平处，江东无恙。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=100,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180",
+  "rate": 164,
+  "schemaVersion": 1,
+  "style": "graceful",
+  "voice": "Tingting"
+}

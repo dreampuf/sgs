@@ -1,0 +1,31 @@
+{
+  "assetId": "music.disadvantage",
+  "command": "npm run audio:generate -- --id music.disadvantage",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "d99f071f36c75f039cd3ad986a573f199c6952212d367df249d2d19723952ba5",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 21790,
+      "path": "audio/generated/scores/music-disadvantage.json",
+      "sha256": "2b7d9aed47c4155f21091545f2891274aaeedb632c2cf57a8e76285efb592350"
+    },
+    {
+      "bytes": 2560044,
+      "path": "audio/generated/wav/music/music-disadvantage.wav",
+      "sha256": "2af5f7d9fda4df3d3748550268ac7c1c4ee3116cda021e152fcd23ca46c1a54e"
+    },
+    {
+      "bytes": 294063,
+      "path": "public/audio/music/music-disadvantage.ogg",
+      "sha256": "5a0aa794e2a46ffe0f7fc64d1d77bb3d4db18799e6de1ef853a6c4c7a92f7d21"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2304,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "eba7cc3b0f3cf99a21a5ff8796519f3904f6f135e064907b07a9b020409eb99f",
+  "title": "困局"
+}

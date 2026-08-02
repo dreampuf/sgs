@@ -1,0 +1,14 @@
+{
+  "assetId": "hero.wind:hero:周泰.signature",
+  "durationSeconds": 1.1,
+  "heroDefinitionId": "wind:hero:周泰",
+  "kingdom": "wu",
+  "layers": [
+    "kingdom root impact",
+    "hero motif flourish",
+    "fierce timbre"
+  ],
+  "schemaVersion": 1,
+  "seed": 13506,
+  "style": "fierce"
+}

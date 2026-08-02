@@ -1,0 +1,31 @@
+{
+  "assetId": "card.wine",
+  "command": "npm run audio:generate -- --id card.wine",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "9d3550650d8b88cca263780c74ed03116013de877399bfc187f2cea91d514432",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 514,
+      "path": "audio/generated/envelopes/card-wine.json",
+      "sha256": "d5c8b0e58b84946bed9aa13c12cdf052b2c623956f8e20d9639c9c696eeb190c"
+    },
+    {
+      "bytes": 48684,
+      "path": "audio/generated/wav/sfx/card-wine.wav",
+      "sha256": "ee5ccdd0189fd17d9fac44f07415e867c1c3b67197189978564f1780d4fa7fd3"
+    },
+    {
+      "bytes": 6960,
+      "path": "public/audio/sfx/card-wine.ogg",
+      "sha256": "6723d7a142345624d5d7a8c16de59f413913cc2d8854c372da1df52569594850"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1209,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "34dfbf6f481ff613d0b7442f8a00967d7222f36298cff925141a1ba5f6ce77dc",
+  "title": "酒"
+}

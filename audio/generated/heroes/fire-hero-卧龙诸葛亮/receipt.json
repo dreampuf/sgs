@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "fire:hero:卧龙诸葛亮",
+  "inputSha256": "4637185e6c37cc2a393057d98bea25c9f7e8820c4f2fc61c7f1f9dd5a7ce7b80",
+  "outputs": [
+    {
+      "bytes": 10979,
+      "path": "audio/generated/heroes/fire-hero-卧龙诸葛亮/theme-score.json",
+      "sha256": "246931bc60e56348986b8d755a1fd87db2c2abd3b414fe2b55c6e0a94ed5e3df"
+    },
+    {
+      "bytes": 314,
+      "path": "audio/generated/heroes/fire-hero-卧龙诸葛亮/signature-envelope.json",
+      "sha256": "8408f7c195d9eeabeb2b09af756f9cdff625547a44f22885bb167b3a79156521"
+    },
+    {
+      "bytes": 747,
+      "path": "audio/generated/heroes/fire-hero-卧龙诸葛亮/voice-script.json",
+      "sha256": "c31a087c733818848033b3b022f6c5f14a5dce6cac6fa20905cf22b301fbc3ce"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/fire-hero-卧龙诸葛亮/wav/theme.wav",
+      "sha256": "11c977be802b7b6884791b6cb29da711bea406d79f4b01f1c06a786a245c0ffc"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/fire-hero-卧龙诸葛亮/wav/signature.wav",
+      "sha256": "789b88072900ce1e676dd6382c45b45645e8fcac99ded3671e8261a199cb21ae"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/fire-hero-卧龙诸葛亮/theme.ogg",
+      "sha256": "c8c679d481d65aee1988edd9e757e4fe057b658d40330a9279fa7a7f3c703513"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/fire-hero-卧龙诸葛亮/signature.ogg",
+      "sha256": "52634ff990b08006c94d1585f77adf3eb5719301ef1c935fde983f7109da16e0"
+    },
+    {
+      "bytes": 123678,
+      "path": "audio/generated/heroes/fire-hero-卧龙诸葛亮/voice-source/signature.aiff",
+      "sha256": "cf86c6758dd7622727676e22170dccb760d90acff7d838e763e3d1008683be69"
+    },
+    {
+      "bytes": 177140,
+      "path": "audio/generated/heroes/fire-hero-卧龙诸葛亮/wav/voice-signature.wav",
+      "sha256": "89cea27f4d176c8a7eb575eb940a4e996454b21049c85d8f288359deb4b9f1e9"
+    },
+    {
+      "bytes": 28157,
+      "path": "public/audio/heroes/fire-hero-卧龙诸葛亮/voice-signature.ogg",
+      "sha256": "1d6aedfe47521cd6bde3fb7611332994d789d5c71d65c403ce3a3d90cffc9f40"
+    },
+    {
+      "bytes": 143442,
+      "path": "audio/generated/heroes/fire-hero-卧龙诸葛亮/voice-source/victory.aiff",
+      "sha256": "dc2fd4bf50d124e3c94756d1a6080193525d262c295c895ba81c0f447474c295"
+    },
+    {
+      "bytes": 205822,
+      "path": "audio/generated/heroes/fire-hero-卧龙诸葛亮/wav/voice-victory.wav",
+      "sha256": "6404ef73c082f7d4fa1fb47920dfe63fbd677379c106b22d2a22b3189f24e388"
+    },
+    {
+      "bytes": 32807,
+      "path": "public/audio/heroes/fire-hero-卧龙诸葛亮/voice-victory.ogg",
+      "sha256": "ddb85a42ba40917cd96a150d6a116f3745c7c049100125ae4eb75b9d69a929a1"
+    },
+    {
+      "bytes": 123270,
+      "path": "audio/generated/heroes/fire-hero-卧龙诸葛亮/voice-source/death.aiff",
+      "sha256": "38687572acd83b408cad7c78c1507b737c83cf4ba016508655ae47df08b35c3b"
+    },
+    {
+      "bytes": 176548,
+      "path": "audio/generated/heroes/fire-hero-卧龙诸葛亮/wav/voice-death.wav",
+      "sha256": "f5b4179157bd5d4c6bdc4c13469e5e1723b187c55de5be1a12a3c1554f83bbff"
+    },
+    {
+      "bytes": 28157,
+      "path": "public/audio/heroes/fire-hero-卧龙诸葛亮/voice-death.ogg",
+      "sha256": "8ca3732b9bd634cb4b35fa84b04c70790848e2eb47b90c2039f151faa7881864"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3604,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Eddy (Chinese (China mainland))",
+    "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180,aecho=0.8:0.18:55:0.1",
+    "rate": 155,
+    "style": "mystical"
+  }
+}

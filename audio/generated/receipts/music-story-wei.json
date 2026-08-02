@@ -1,0 +1,31 @@
+{
+  "assetId": "music.story.wei",
+  "command": "npm run audio:generate -- --id music.story.wei",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "d6ada5648010be7a0c2ffcdeb478f475ae0e6dc06cb064f8896f3e300e3516dd",
+  "kind": "music",
+  "outputs": [
+    {
+      "bytes": 27728,
+      "path": "audio/generated/scores/music-story-wei.json",
+      "sha256": "95b802929e0305dc759fcd95c1f3d3a0466c4b68336a9d13809424a3c5f5c37e"
+    },
+    {
+      "bytes": 2560044,
+      "path": "audio/generated/wav/music/music-story-wei.wav",
+      "sha256": "d89211ef422afa2c3943804d52077757711d9815f61cac2be75ad99f7113e568"
+    },
+    {
+      "bytes": 242956,
+      "path": "public/audio/music/music-story-wei.ogg",
+      "sha256": "cec3dc05a0484a0a7fefcc325f742f35c103adc40a2bf88fc7ca5131a2a72095"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 2201,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "2d4eee0428ab2223fc0778db2df207227dc45a703bc860fdaf766558c340b19b",
+  "title": "魏 · 军令如山"
+}

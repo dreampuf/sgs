@@ -256,6 +256,7 @@ export function dispatch(
         cardId: input.cardId,
         responderIds: [...input.responderIds],
         negated: input.negated,
+        ...(input.targetId ? { targetId: input.targetId } : {}),
         resolvedPlanId: createPlan(input.onResolved),
         negatedPlanId: createPlan(input.onNegated ?? [])
       };
@@ -563,12 +564,78 @@ export function dispatch(
   };
 
   const endGameIfDecided = (): boolean => {
-    const winnerIds = state.turnOrder.filter((id) => state.players[id]?.alive);
-    if (winnerIds.length > 1) return false;
+    const players = state.turnOrder.map((id) => state.players[id]!);
+    let winnerIds: PlayerId[] | null = null;
+    if (players.every((player) => player.identity !== undefined)) {
+      const lord = players.find((player) => player.identity === "lord");
+      const alive = players.filter((player) => player.alive);
+      const rebels = players.filter((player) => player.identity === "rebel");
+      const renegades = players.filter(
+        (player) => player.identity === "renegade"
+      );
+      if (lord && !lord.alive) {
+        const survivingRenegades = renegades.filter((player) => player.alive);
+        const soleSurvivor = alive.length === 1 ? alive[0] : undefined;
+        winnerIds =
+          renegades.length > 1 &&
+              rebels.every((player) => !player.alive) &&
+              survivingRenegades.length > 0
+            ? survivingRenegades.map((player) => player.id)
+            : soleSurvivor?.identity === "renegade"
+            ? [soleSurvivor.id]
+            : rebels.map((player) => player.id);
+      } else if (
+        rebels.every((player) => !player.alive) &&
+        renegades.every((player) => !player.alive)
+      ) {
+        winnerIds = players
+          .filter(
+            (player) =>
+              player.identity === "lord" ||
+              player.identity === "loyalist"
+          )
+          .map((player) => player.id);
+      }
+    } else {
+      const alive = players.filter((player) => player.alive);
+      if (alive.length <= 1) winnerIds = alive.map((player) => player.id);
+    }
+    if (winnerIds === null) return false;
+
+    // GameEnded is terminal. A death can be resolved from inside a larger
+    // workflow (for example, Lightning during the judgment phase), so stale
+    // frames may otherwise continue and overwrite "finished" with the next
+    // phase. Settle cards that are still in processing, then discard every
+    // continuation before emitting the terminal event.
+    for (const cardId of [...(state.zones[PROCESSING_ZONE] ?? [])]) {
+      const card = state.cards[cardId];
+      if (card?.virtual) {
+        for (const materialCardId of card.materialCardIds ?? []) {
+          if (
+            (state.zones[PROCESSING_ZONE] ?? []).includes(materialCardId)
+          ) {
+            moveCard(materialCardId, DISCARD_PILE, "resolve");
+          }
+        }
+        const processing = state.zones[PROCESSING_ZONE] ?? [];
+        const index = processing.indexOf(cardId);
+        if (index >= 0) processing.splice(index, 1);
+        delete state.cards[cardId];
+      } else {
+        moveCard(cardId, DISCARD_PILE, "resolve");
+      }
+    }
+    state.pendingDecision = null;
+    state.stack = [];
+    state.triggerQueue = [];
+    state.effectPlans = {};
     state.phase = "finished";
     if (!state.eventLog.some((event) => event.type === "GameEnded")) {
       emit({ type: "GameEnded", winnerIds });
     }
+    // Rules are allowed to observe GameEnded, but they cannot schedule play
+    // after the match has become terminal.
+    state.triggerQueue = [];
     return true;
   };
 
@@ -1041,6 +1108,7 @@ export function dispatch(
               cardId: effect.cardId,
               responderIds: effect.responderIds,
               negated: effect.negated,
+              ...(effect.targetId ? { targetId: effect.targetId } : {}),
               resolvedPlanId: effect.resolvedPlanId,
               negatedPlanId: effect.negatedPlanId
             }
@@ -1148,6 +1216,7 @@ export function dispatch(
           break;
         }
         case "draw": {
+          if (!state.players[effect.playerId]?.alive) break;
           let count = 0;
           for (let index = 0; index < effect.count; index += 1) {
             ensureDrawPile();
@@ -1177,12 +1246,46 @@ export function dispatch(
         case "place-delayed": {
           const card = state.cards[effect.cardId];
           if (!card) break;
-          card.sourcePlayerId ??= state.currentPlayerId;
-          moveCard(effect.cardId, judgmentZone(effect.playerId), "delayed");
+          let delayedCardId = effect.cardId;
+          if (card.virtual) {
+            const materialCardIds = card.materialCardIds ?? [];
+            if (materialCardIds.length !== 1) {
+              throw new Error(
+                `virtual delayed card requires one material: ${effect.cardId}`
+              );
+            }
+            const materialCardId = materialCardIds[0]!;
+            const material = state.cards[materialCardId];
+            if (!material) {
+              throw new Error(
+                `virtual delayed card has unknown material: ${materialCardId}`
+              );
+            }
+            material.definitionId = card.definitionId;
+            material.sourcePlayerId ??=
+              card.sourcePlayerId ?? state.currentPlayerId;
+            moveCard(
+              materialCardId,
+              judgmentZone(effect.playerId),
+              "delayed"
+            );
+            const processing = state.zones[PROCESSING_ZONE] ?? [];
+            const virtualIndex = processing.indexOf(effect.cardId);
+            if (virtualIndex >= 0) processing.splice(virtualIndex, 1);
+            delete state.cards[effect.cardId];
+            delayedCardId = materialCardId;
+          } else {
+            card.sourcePlayerId ??= state.currentPlayerId;
+            moveCard(
+              effect.cardId,
+              judgmentZone(effect.playerId),
+              "delayed"
+            );
+          }
           emit({
             type: "DelayedCardPlaced",
             playerId: effect.playerId,
-            cardId: effect.cardId
+            cardId: delayedCardId
           });
           break;
         }
@@ -1594,6 +1697,12 @@ export function dispatch(
                 (targetIds) =>
                   targetIds.length === 1 && targetIds[0] === targetId
               ),
+            canBeTargetedByDefinition: (definitionId, targetId) =>
+              registry.canBeTargetedByDefinition(
+                state,
+                definitionId,
+                targetId
+              ),
             distanceBetween: (sourceId, targetId) =>
               registry.distanceBetween(state, sourceId, targetId),
             attackRange: (playerId) =>
@@ -1823,19 +1932,49 @@ export function dispatch(
             ...(state.zones[judgmentZone(effect.playerId)] ?? [])
           ];
           for (const cardId of ownedCards) moveCard(cardId, DISCARD_PILE, "death");
+          const source = effect.sourceId
+            ? state.players[effect.sourceId]
+            : undefined;
+          if (source?.alive && player.identity === "rebel") {
+            pushEffects([{
+              type: "draw",
+              playerId: source.id,
+              count: 3,
+              cardId: "system:identity-reward",
+              tags: ["identity:rebel-reward"]
+            }]);
+          } else if (
+            source?.alive &&
+            source.identity === "lord" &&
+            player.identity === "loyalist"
+          ) {
+            const penaltyCards = [
+              ...(state.zones[handZone(source.id)] ?? []),
+              ...(state.zones[equipmentZone(source.id)] ?? [])
+            ];
+            for (const cardId of penaltyCards) {
+              moveCard(cardId, DISCARD_PILE, "discard");
+            }
+          }
           if (!endGameIfDecided() && effect.playerId === state.currentPlayerId) {
             finishTurn();
           }
           break;
         }
         case "cancel-card-resolution": {
-          const containsCard = (value: unknown): boolean =>
-            JSON.stringify(value).includes(effect.cardId);
-          state.stack = state.stack.filter((frame) =>
-            !containsCard(frame.effect)
-          );
+          const containsCard = (value: unknown): boolean => {
+            if (value === effect.cardId) return true;
+            if (Array.isArray(value)) return value.some(containsCard);
+            if (!value || typeof value !== "object") return false;
+            return Object.values(value).some(containsCard);
+          };
+          state.stack = state.stack.filter((frame) => {
+            if (!containsCard(frame.effect)) return true;
+            discardOwnedPlans(frame.effect);
+            return false;
+          });
           for (const [planId, plan] of Object.entries(state.effectPlans)) {
-            if (containsCard(plan)) delete state.effectPlans[planId];
+            if (containsCard(plan)) discardPlan(planId);
           }
           const card = state.cards[effect.cardId];
           if (card?.virtual) {
@@ -1906,7 +2045,8 @@ export function dispatch(
               }
             }
             const processing = state.zones[PROCESSING_ZONE] ?? [];
-            processing.splice(processing.indexOf(effect.cardId), 1);
+            const index = processing.indexOf(effect.cardId);
+            if (index >= 0) processing.splice(index, 1);
             delete state.cards[effect.cardId];
           } else if ((state.zones[PROCESSING_ZONE] ?? []).includes(effect.cardId)) {
             moveCard(effect.cardId, DISCARD_PILE, "resolve");
@@ -2012,6 +2152,9 @@ export function dispatch(
           playerId
         ),
         negated: !pending.continuation.negated,
+        ...(pending.continuation.targetId
+          ? { targetId: pending.continuation.targetId }
+          : {}),
         resolvedPlanId: pending.continuation.resolvedPlanId,
         negatedPlanId: pending.continuation.negatedPlanId
       }]);

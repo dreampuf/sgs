@@ -10,6 +10,9 @@
     background: url("../img/system/role_bg.png") no-repeat;
     box-shadow:2px 2px 2px #000;
     border-radius: 3px;
+    transform: scale(var(--seat-scale, 1));
+    transform-origin: center center;
+    transition: left 180ms ease, top 180ms ease, transform 180ms ease;
 }
 /* 玩家遮盖层 */
 .role_cover
@@ -24,6 +27,12 @@
     opacity: 0.2;
     display: none;
     z-index: 12;
+}
+.role.player_dead .role_cover
+{
+    display: block !important;
+    opacity: 0.55;
+    cursor: default;
 }
 .role.target_available
 {
@@ -68,24 +77,10 @@
 {
     float: left;
 }
-#role2
-{
-    left: 320px;
-    top: 30px;
-}
-#role1
-{
-    left: 560px;
-    top: 30px;
-}
-#role3
-{
-    left: 80px;
-    top: 240px;
-}
 /* 国家 */
 .role_country
 {
+    display:none;
     position:absolute;
     width:22px;
     height:22px;

@@ -1,0 +1,31 @@
+{
+  "assetId": "card.discard",
+  "command": "npm run audio:generate -- --id card.discard",
+  "generatorSha256": "24b0854133163fa06b48d761986e898c4fee75df93305a19c11efb4c10501dd4",
+  "generatorVersion": "sgs-procedural-audio-v1",
+  "inputHash": "13be256255219627d38958c15a0731aa46768ecc7385f418e1bdcbb95671ff50",
+  "kind": "sfx",
+  "outputs": [
+    {
+      "bytes": 515,
+      "path": "audio/generated/envelopes/card-discard.json",
+      "sha256": "017da8a3367466fa66d01860cdc5d31ff0b88445ff7ca11d9b5acd94ff65197c"
+    },
+    {
+      "bytes": 23084,
+      "path": "audio/generated/wav/sfx/card-discard.wav",
+      "sha256": "f312bf7371bba5cd56dbd520eb3aafd79ab1d9bf7b1523ea5a8e49bbcdf255bc"
+    },
+    {
+      "bytes": 3563,
+      "path": "public/audio/sfx/card-discard.ogg",
+      "sha256": "03f0d0ed7a4d33e64ba12033d704c84478fa0bda1753d44f5aae850dd9bf50cc"
+    }
+  ],
+  "publishEncoder": "libopus",
+  "schemaVersion": 1,
+  "seed": 1202,
+  "source": "audio/specs/catalog.json",
+  "specSha256": "732f869aa823bf4f1f4057c06b33e6eb536d6cff4c8986337301676dc269f461",
+  "title": "弃牌"
+}

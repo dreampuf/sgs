@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "fire:hero:典韦",
+  "heroName": "典韦",
+  "inspiration": "借鉴《三国演义》中宛城断后、双戟护主的古之恶来形象，台词为原创改写。",
+  "lines": {
+    "death": "主公快走，典韦断后。",
+    "signature": "双戟虽失，铁拳尚在。",
+    "victory": "恶来守门，贼军莫入。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

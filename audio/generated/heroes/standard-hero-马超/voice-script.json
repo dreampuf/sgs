@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:马超",
+  "heroName": "马超",
+  "inspiration": "借鉴《三国演义》中潼关追曹、锦马超与西凉铁骑形象，台词为原创改写。",
+  "lines": {
+    "death": "父仇未雪，壮志难酬。",
+    "signature": "西凉铁骑，踏破敌阵。",
+    "victory": "锦旗过处，无人可挡。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=90,lowpass=f=8500,acompressor=threshold=-20dB:ratio=3:attack=8:release=150",
+  "rate": 180,
+  "schemaVersion": 1,
+  "style": "fierce",
+  "voice": "Rocko (Chinese (China mainland))"
+}

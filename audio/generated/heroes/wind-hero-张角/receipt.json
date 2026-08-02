@@ -1,0 +1,116 @@
+{
+  "encoder": {
+    "args": [
+      "-b:a",
+      "80k",
+      "-vbr",
+      "off",
+      "-application",
+      "audio"
+    ],
+    "codec": "libopus"
+  },
+  "generatorSha256": "84659e5bbf3d3bf3d0ac1908e0846be1ea3a0631b19193c3ceb9b7c9223e2843",
+  "generatorVersion": "sgs-hero-audio-v1",
+  "heroDefinitionId": "wind:hero:张角",
+  "inputSha256": "55e77d605aff7fcde8ec329ffbdbdeba108026b0f3edcfb1e1e1eee6676ef703",
+  "outputs": [
+    {
+      "bytes": 10944,
+      "path": "audio/generated/heroes/wind-hero-张角/theme-score.json",
+      "sha256": "112b3e693be5d1df0e3e379de92908e8a08a697cabe3ad6d4827e18e99930640"
+    },
+    {
+      "bytes": 296,
+      "path": "audio/generated/heroes/wind-hero-张角/signature-envelope.json",
+      "sha256": "1ea58ceab6b3791cee61f3ea783dc3e48700b496e44cdb168709459497f6b7ff"
+    },
+    {
+      "bytes": 726,
+      "path": "audio/generated/heroes/wind-hero-张角/voice-script.json",
+      "sha256": "4ca61b8172ee76d5208ff816de5c10e6851613e5e44b49a5e8d4331a566bcf5e"
+    },
+    {
+      "bytes": 1280044,
+      "path": "audio/generated/heroes/wind-hero-张角/wav/theme.wav",
+      "sha256": "d7056764a0ed6edca88e9c92f22b461ae09da267b8c84e3840864272835a8ffe"
+    },
+    {
+      "bytes": 70444,
+      "path": "audio/generated/heroes/wind-hero-张角/wav/signature.wav",
+      "sha256": "3c514882a259d1d8459e2a16e77e6522b3d008f3c7cfebc0967024929da124ae"
+    },
+    {
+      "bytes": 101135,
+      "path": "public/audio/heroes/wind-hero-张角/theme.ogg",
+      "sha256": "ddbbdd5ca2beef86b4ce692509669cd23a3149918074f1f26579783b4f16eb4e"
+    },
+    {
+      "bytes": 11447,
+      "path": "public/audio/heroes/wind-hero-张角/signature.ogg",
+      "sha256": "2a4d095ba5973948769a459045b4ab4191e93e986dc861bf2d94b5107412c093"
+    },
+    {
+      "bytes": 126100,
+      "path": "audio/generated/heroes/wind-hero-张角/voice-source/signature.aiff",
+      "sha256": "0dbd238750388c1a1d6a3e6a22dc7a8089c9a37b270703b7df01f55729bb2209"
+    },
+    {
+      "bytes": 180654,
+      "path": "audio/generated/heroes/wind-hero-张角/wav/voice-signature.wav",
+      "sha256": "7569d61220516a7917e379b2ba5da32b27c30408a08b52b552021dddd3df8310"
+    },
+    {
+      "bytes": 28760,
+      "path": "public/audio/heroes/wind-hero-张角/voice-signature.ogg",
+      "sha256": "175874eceec60f421e4d1f3d3980de6d07465578b378e40f78e2f4ef19e59b01"
+    },
+    {
+      "bytes": 137382,
+      "path": "audio/generated/heroes/wind-hero-张角/voice-source/victory.aiff",
+      "sha256": "7d93d17e0dc8a91fdf7d8090d4ef568a3e370e0b470654419e16bb4d3c3c026f"
+    },
+    {
+      "bytes": 197028,
+      "path": "audio/generated/heroes/wind-hero-张角/wav/voice-victory.wav",
+      "sha256": "863db5a6150ff1e2371066f47140214aaca6049970007c3a2dc3ea8dc768e446"
+    },
+    {
+      "bytes": 31400,
+      "path": "public/audio/heroes/wind-hero-张角/voice-victory.ogg",
+      "sha256": "72b9793bbba7739803fd6f5a651f781cf1179104e1cd718f519fccb40618104d"
+    },
+    {
+      "bytes": 124690,
+      "path": "audio/generated/heroes/wind-hero-张角/voice-source/death.aiff",
+      "sha256": "6713563de8def35c36552098de4cdba7133fd8aef0d789c14b103f94250514b1"
+    },
+    {
+      "bytes": 178608,
+      "path": "audio/generated/heroes/wind-hero-张角/wav/voice-death.wav",
+      "sha256": "d21ab8c09ff363fe9b8098d1c1a3616d3ffb05dcaec4fccf913d23b0e8930bb1"
+    },
+    {
+      "bytes": 28358,
+      "path": "public/audio/heroes/wind-hero-张角/voice-death.ogg",
+      "sha256": "0b81025122c5b82e7464a5506ba683deccf300e1783133022ae9d599c921880e"
+    }
+  ],
+  "renderingEnvironment": {
+    "architecture": "arm64",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "osBuild": "25F80",
+    "osVersion": "26.5.1",
+    "platform": "darwin",
+    "sayPath": "/usr/bin/say"
+  },
+  "schemaVersion": 1,
+  "seed": 3507,
+  "source": "audio/specs/heroes.json",
+  "voice": {
+    "name": "Eddy (Chinese (China mainland))",
+    "postprocess": "highpass=f=75,lowpass=f=9000,acompressor=threshold=-18dB:ratio=2:attack=20:release=180,aecho=0.8:0.18:55:0.1",
+    "rate": 155,
+    "style": "mystical"
+  }
+}

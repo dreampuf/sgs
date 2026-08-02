@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:陆逊",
+  "heroName": "陆逊",
+  "inspiration": "借鉴《三国演义》中夷陵火烧连营与谦逊持重的儒将形象，台词为原创改写。",
+  "lines": {
+    "death": "江火已熄，壮志难续。",
+    "signature": "不争一时，待其自乱。",
+    "victory": "连营火起，骄兵尽破。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=85,lowpass=f=8000,acompressor=threshold=-17dB:ratio=2:attack=16:release=160",
+  "rate": 170,
+  "schemaVersion": 1,
+  "style": "tactical",
+  "voice": "Eddy (Chinese (China mainland))"
+}

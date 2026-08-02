@@ -1,0 +1,16 @@
+{
+  "heroDefinitionId": "standard:hero:黄盖",
+  "heroName": "黄盖",
+  "inspiration": "借鉴《三国演义》中苦肉计、诈降与赤壁纵火，台词为原创改写。",
+  "lines": {
+    "death": "赤壁火烈，老夫无憾。",
+    "signature": "皮肉之苦，换敌一场大火。",
+    "victory": "老卒一计，亦能焚尽强军。"
+  },
+  "originality": "Original adaptation inspired by the public-domain literary character; not copied from commercial game voice lines.",
+  "postprocess": "highpass=f=65,lowpass=f=6500,acompressor=threshold=-18dB:ratio=2:attack=25:release=220",
+  "rate": 145,
+  "schemaVersion": 1,
+  "style": "aged",
+  "voice": "Grandpa (Chinese (China mainland))"
+}
